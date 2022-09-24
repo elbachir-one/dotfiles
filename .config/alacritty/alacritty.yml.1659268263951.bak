@@ -1,0 +1,5 @@
+font:
+  normal:
+    family: terminus
+    style: Bold
+  size: 18

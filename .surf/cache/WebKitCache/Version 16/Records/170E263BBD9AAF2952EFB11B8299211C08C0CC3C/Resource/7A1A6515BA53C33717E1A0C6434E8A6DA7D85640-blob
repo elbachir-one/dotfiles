@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>tools | suckless.org software that sucks less</title>
+	<link rel="stylesheet" type="text/css" href="//suckless.org/pub/style.css"/>
+</head>
+
+<div id="header">
+	<a href="//suckless.org/"><img src="//suckless.org/logo.svg" alt=""/></a>&nbsp;
+	<a id="headerLink" href="//suckless.org/">suckless.org</a>
+	<span class="hidden"> - </span>
+	<span id="headerSubtitle">tools</span>
+</div>
+<hr class="hidden"/>
+<div id="menu">
+	<a href="//suckless.org/">home</a>
+	<a href="//dwm.suckless.org/">dwm</a>
+	<a href="//st.suckless.org/">st</a>
+	<a href="//core.suckless.org/">core</a>
+	<a href="//surf.suckless.org/">surf</a>
+	<a href="//tools.suckless.org/"><b>tools</b></a>
+	<a href="//libs.suckless.org/">libs</a>
+	<a href="//ev.suckless.org/">e.V.</a>
+	<span class="right">
+		<a href="//dl.suckless.org">download</a>
+		<a href="//git.suckless.org">source</a>
+	</span>
+</div>
+<hr class="hidden"/>
+<div id="content">
+<div id="nav">
+	<ul>
+	<li><a href="/">about</a></li>
+	<li><a href="//tools.suckless.org/9base/">9base/</a></li>
+	<li><a href="//tools.suckless.org/blind/">blind/</a></li>
+	<li><a href="//tools.suckless.org/dmenu/">dmenu/</a></li>
+	<li><a href="//tools.suckless.org/farbfeld/">farbfeld/</a></li>
+	<li><a href="//tools.suckless.org/ii/">ii/</a></li>
+	<li><a href="//tools.suckless.org/quark/">quark/</a></li>
+	<li><a href="//tools.suckless.org/scroll/">scroll/</a></li>
+	<li><a href="//tools.suckless.org/sent/"><b>sent/</b></a>
+		<ul>
+		<li><a href="//tools.suckless.org/sent/patches/">patches/</a></li>
+		</ul>
+	</li>
+	<li><a href="//tools.suckless.org/sic/">sic/</a></li>
+	<li><a href="//tools.suckless.org/slock/">slock/</a></li>
+	<li><a href="//tools.suckless.org/slstatus/">slstatus/</a></li>
+	<li><a href="//tools.suckless.org/tabbed/">tabbed/</a></li>
+	<li><a href="//tools.suckless.org/x/">x/</a></li>
+	</ul>
+</div>
+<hr class="hidden"/>
+<div id="main">
+
+<h1>sent</h1>
+<p>Simple plaintext presentation tool.</p>
+<p><a href="sent-bullets.png"><img src="sent-bullets-s.png" alt="Screenshot of sent" /></a></p>
+<p>sent does not need latex, libreoffice or any other fancy file format, it uses
+plaintext files to describe the slides and can also display images. Every
+paragraph represents a slide in the presentation. Especially for presentations
+using the <a href="https://en.wikipedia.org/wiki/Takahashi_method">Takahashi method</a>
+this is very nice and allows you to write down the presentation for a quick
+lightning talk within a few minutes.</p>
+<p>The presentation is displayed in a simple X11 window colored black on white for
+maximum contrast even if the sun shines directly onto the projected image. The
+content of each slide is automatically scaled to fit the window so you don't
+have to worry about alignment. Instead you can really focus on the content.</p>
+<h2>Dependencies</h2>
+<ul>
+<li>Xlib and Xft for building</li>
+<li><a href="//tools.suckless.org/farbfeld/">farbfeld</a> tools to use images in the
+presentations (if you don't want to use farbfeld,
+<a href="//dl.suckless.org/tools/sent-0.2.tar.gz">sent-0.2</a> was the last version with
+just png support, but may lack fixes and further improvements since its
+release)</li>
+</ul>
+<h2>Demo</h2>
+<p>To get a little demo, just type</p>
+<pre><code>make &amp;&amp; ./sent example
+</code></pre>
+<p>You can navigate with the arrow keys and quit with <code>q</code>.</p>
+<h2>(Non-)Features</h2>
+<ul>
+<li>A presentation is just a simple text file.</li>
+<li>Each paragraph represents one slide.</li>
+<li>Content is automatically scaled to fit the screen.</li>
+<li>UTF-8 is supported.</li>
+<li>Images can be displayed (no text on the same slide).</li>
+<li>Just around 1000 lines of C</li>
+<li>No different font styles (bold, italic, underline)</li>
+<li>No fancy layout options (different font sizes, different colors, …)</li>
+<li>No animations</li>
+<li>No support for automatic layouting paragraphs</li>
+<li>No export function. If you really need one, just use a shell script with
+<code>xdotool</code> and your favorite screenshot application.</li>
+<li>Slides with exuberant amount of lines or characters produce rendering glitches
+intentionally to prevent you from holding bad presentations.</li>
+</ul>
+<h2>Usage</h2>
+<p>Edit config.h to fit your needs then build again.</p>
+<pre><code>sent [FILE]
+</code></pre>
+<p>If FILE is omitted or equals <code>-</code>, stdin will be read. Produce image slides by
+prepending a <code>@</code> in front of the filename as a single paragraph. Lines starting
+with <code>#</code> will be ignored. A <code>\\` at the beginning of the line escapes </code>@<code> and
+</code>#`. A presentation file could look like this:</p>
+<pre><code>sent
+
+@nyan.png
+
+depends on
+- Xlib
+- farbfeld
+
+sent FILENAME
+one slide per paragraph
+# This is a comment and will not be part of the presentation
+\# This and the next line start with backslashes
+
+\@FILE.png
+
+thanks / questions?
+</code></pre>
+<p>A deeper example can be found in
+<a href="//git.suckless.org/sent/tree/example">this file</a> from the repository root.</p>
+<h2>Development</h2>
+<p>You can <a href="//git.suckless.org/sent">browse</a> its source code repository or get a
+copy using the following command:</p>
+<pre><code>git clone https://git.suckless.org/sent
+</code></pre>
+<h2>Download</h2>
+<ul>
+<li><a href="//dl.suckless.org/tools/sent-1.tar.gz">sent-1</a> (20170904)</li>
+</ul>
+</div>
+
+</div>
+
+</html>

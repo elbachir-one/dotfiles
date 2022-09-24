@@ -1,0 +1,358 @@
+@font-face {
+	font-family:'OpenS';
+	src: url('/assets/fonts/OpenSans-Regular-webfont.eot');
+	src: url('/assets/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/OpenSans-Regular-webfont.woff') format('woff'), url('/assets/fonts/OpenSans-Regular-webfont.ttf') format('truetype'), url('/assets/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face {
+	font-family:'FontAwesome';
+	src:url('/assets/fonts/fontawesome-webfont.eot?v=4.0.3');
+	src:url('/assets/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('/assets/fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('/assets/fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('/assets/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+	font-weight:normal;
+	font-style:normal;
+}
+
+a {
+	color:#478061;
+}
+a:hover {
+	text-decoration:none;
+	color:black;
+}
+.fa {
+	font-family:FontAwesome;
+	font-style:normal;
+	line-height:1;
+	/* SEEMS TO BE A DEPRECATED PROPERTY, BUT I'M NOT SURE */
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+.fa-lg {
+	font-size:1.3333333333333333em;
+	line-height:0.75em;
+	vertical-align:-15%;
+}
+
+.fa-list:before {
+	content:"\f03a";
+}
+.fa-gog:before {
+	content:"\f0d4";
+}
+.fa-comments:before {
+	content:"\f086";
+}
+.fa-twr:before {
+	content:"\f099";
+}
+.fa-github-alt:before {
+	content:"\f113";
+}
+.fa-paypal:before {
+	content: "\f1f4";
+}
+.fa-cog:before {
+	content:"\f013";
+}
+.fa-rss:before {
+	content:"\f143";
+}
+.fa-home:before {
+	content:"\f015";
+}
+.fa-previous:before {
+	content:"\f190";
+}
+.fa-next:before {
+	content:"\f18e";
+}
+.fa-go:before {
+	content:"\f064";
+}
+#davoid {
+	margin: 30px auto;
+	position:relative;
+	text-align:center;
+	width:174px;
+	height:143px;
+}
+#davoid .bg {
+	margin:0 auto;
+	position:relative;
+	transition:transform 2s ease;
+}
+
+#davoid .fg.standard-mode {
+    content: url(/assets/img/void_fg.png);
+}
+
+#davoid .fg {
+	position:absolute;
+	top:50%;
+	left:0;
+	right:0;
+	margin:-15px auto;
+}
+#davoid:hover .bg {
+	transform:rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+}
+img {
+	max-width: 95%;
+	margin: 30px auto;
+
+}
+img, .video {
+	display: inline;
+
+}
+#voidSearch_query.loading {
+	background-image:url(../img/loading.gif);
+	background-repeat:no-repeat;
+	background-position:center right;
+}
+
+.void-search-results {
+	padding:10px;
+	margin:left;
+}
+
+.void-search-results td,
+.void-search-results th {
+	padding:5pt;
+}
+.void-search-results td.version,
+.void-search-results td.revision,
+.void-search-results td.size {
+	padding:10px;
+	text-align:right;
+}
+
+.void-search-results td.exact {
+  background:#dff0d8;
+  font-weight:bold;
+}
+
+.void-search-results tr td {
+	color:#555;
+}
+
+.void-search-results tr:hover td {
+	color:#000;
+}
+
+.void-search-results tr:nth-child(even) {
+	background:#ddd;
+}
+
+.void-search-results tr th {
+	background:transparent !important;
+}
+#donations {
+	text-align:center;
+}
+#merchs p {
+	margin:6px 0 0;
+}
+.nav form {
+	margin-top: 1.1em;
+	padding-right: 8em;
+}
+.navbar {
+	background-color:#478061;
+	border:0;
+}
+.nav li:hover {
+	background-color: black;
+}
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
+	padding-top:50px;
+	margin-top:-40px;
+}
+.btn-green {
+	color: #fff;
+	background-color: #478061;
+	border-color: #478061;
+}
+.btn-green:hover {
+	color: #fff;
+	background-color: black;
+	border-color: black;
+}
+
+.tab-bar {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+}
+.tab-bar li {
+  padding: 1em 2em;
+  cursor: pointer;
+  border-bottom: 2px solid white;
+  transition: border-color 0.4s;
+}
+.tab-bar li:hover {
+  border-bottom: 2px solid #ddd;
+}
+.tab-bar li.active {
+  font-weight: bold;
+  border-bottom: 2px solid #478061;
+}
+@media (max-width: 500px) {
+  .tab-bar li {
+    padding: 1em;
+  }
+}
+.tab-bar li a {
+  color: inherit;
+}
+.tab-bar li a:focus {
+  text-decoration: none;
+}
+
+.split-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+.split-section h3 {
+  margin-top: 20px;
+  padding-top: 0;
+}
+.split-section > div {
+  flex: 1;
+}
+.split-section > div:first-of-type {
+  padding-right: 4rem;
+}
+@media (max-width: 600px) {
+  .split-section {
+    flex-direction: column;
+  }
+  .split-section > div:first-of-type {
+    padding-right: 0;
+  }
+}
+
+.download-device-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.download-device-title h4 {
+  margin-top: 2rem;
+}
+
+.inline-download-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #ddd;
+}
+.inline-download-links:last-of-type {
+  border-bottom: none;
+}
+.inline-download-links li {
+  margin-right: 1.5em;
+  margin-bottom: 2rem;
+}
+.inline-download-links .label-warning {
+  background-color: #fdf6e3;
+  color: #535353;
+}
+.inline-download-links .label-default {
+  background-color: #ddd;
+  color: #535353;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #ccc;
+    background-color: #222;
+  }
+  h1, h2, h3, h4, h5, h6 { color: #ccc; }
+  a {
+    color: #62b086;
+  }
+  a:hover {
+    color: #ccc;
+  }
+  hr {
+    border-top: 1px solid #888;
+  }
+  .inline-download-links, .tab-bar {
+    border-bottom: 1px solid #888;
+  }
+  .tab-bar li {
+    border-bottom: 2px solid #aaa;
+  }
+  .tab-bar li:hover {
+    border-bottom: 2px solid #62b086;
+  }
+  code {
+    background-color: inherit;
+    color: white;
+  }
+  .alert-warning {
+    font-weight: bold;
+    color: #ccc;
+    background-color: inherit;
+    border: 2px solid #295340;
+  }
+  pre {
+    background-color: #404040;
+    color: #d0d0d0;
+  }
+  .form-control {
+    background-color: inherit;
+    color: white;
+  }
+  select {
+    /* from https://github.com/kognise/water.css */
+    background: #222 url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='63' width='117' fill='%23efefef'%3E%3Cpath d='M115 2c-1-2-4-2-5 0L59 53 7 2a4 4 0 00-5 5l54 54 2 2 3-2 54-54c2-1 2-4 0-5z'/%3E%3C/svg%3E") calc(100% - 1em) 50%/1em no-repeat !important;
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 3em !important;
+  }
+  select::-ms-expand {
+    display:none;
+  }
+  .nav li:hover {
+    background-color: #222;
+  }
+  .inline-download-links .label-default, .inline-download-links .label-warning {
+    background-color: inherit;
+  }
+  .inline-download-links .label-default {
+    border: 1px solid;
+    color: #009fff;
+  }
+  .inline-download-links .label-warning {
+    border: 1px solid;
+    color: #ffd804;
+  }
+  .navbar {
+    background-color: #295340;
+  }
+  #davoid .fg.standard-mode {
+    content: url(/assets/img/void_fg_dark.png);
+  }
+  .void-search-results tr td {
+    color:#ccc;
+  }
+  .void-search-results tr:hover td {
+    color:#62b086;
+  }
+  .void-search-results td.exact {
+    background:#295340;
+  }
+  .void-search-results tr:nth-child(even) {
+    background:#111;
+  }
+}

@@ -1,0 +1,7 @@
+window:
+  opacity: 0.4
+font:
+  normal:
+    family: Noto
+    style: Bold
+  size: 18
