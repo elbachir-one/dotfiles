@@ -24,9 +24,7 @@ LIBS = $(X11LIB) $(GTKLIB) -lgthread-2.0
 # flags
 CPPFLAGS = -DVERSION=\"$(VERSION)\" -DGCR_API_SUBJECT_TO_CHANGE \
            -DLIBPREFIX=\"$(LIBPREFIX)\" -DWEBEXTDIR=\"$(LIBDIR)\" \
-           -D_DEFAULT_SOURCE \
-	   -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -lglib-2.0 \
-
+           -D_DEFAULT_SOURCE
 SURFCFLAGS = -fPIC $(INCS) $(CPPFLAGS)
 WEBEXTCFLAGS = -fPIC $(WEBEXTINC)
 
