@@ -74,4 +74,4 @@ alias l='lsd -al'
 alias ll='lsd -a'
 
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash

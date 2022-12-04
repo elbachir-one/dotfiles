@@ -41,7 +41,7 @@ nnoremap <silent> <F5> :%s/\s\+$//<cr>
 
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
 
-nnoremap n :NERDTreeToggle<CR>
+nnoremap t :NERDTreeToggle<CR>
 nnoremap f :F<CR>
 nnoremap <TAB> :bnext<CR>
 
@@ -82,6 +82,7 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neoclide/coc.nvim'
 Plug 'tpope/vim-markdown'
+Plug 'EdenEast/nightfox.nvim'
 
 call plug#end()
 
@@ -197,6 +198,7 @@ endif
 "let g:airline_theme='dark'
 
 "colore
+"colorscheme nightfox
 colorscheme gruvbox
 " colorscheme ayu
 "colorscheme molokai
