@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>dwm - dynamic window manager | suckless.org software that sucks less</title>
+	<link rel="stylesheet" type="text/css" href="//suckless.org/pub/style.css"/>
+</head>
+
+<div id="header">
+	<a href="//suckless.org/"><img src="//suckless.org/logo.svg" alt=""/></a>&nbsp;
+	<a id="headerLink" href="//suckless.org/">suckless.org</a>
+	<span class="hidden"> - </span>
+	<span id="headerSubtitle">dwm - dynamic window manager</span>
+</div>
+<hr class="hidden"/>
+<div id="menu">
+	<a href="//suckless.org/">home</a>
+	<a href="//dwm.suckless.org/"><b>dwm</b></a>
+	<a href="//st.suckless.org/">st</a>
+	<a href="//core.suckless.org/">core</a>
+	<a href="//surf.suckless.org/">surf</a>
+	<a href="//tools.suckless.org/">tools</a>
+	<a href="//libs.suckless.org/">libs</a>
+	<a href="//ev.suckless.org/">e.V.</a>
+	<span class="right">
+		<a href="//dl.suckless.org">download</a>
+		<a href="//git.suckless.org">source</a>
+	</span>
+</div>
+<hr class="hidden"/>
+<div id="content">
+<div id="nav">
+	<ul>
+	<li><a href="/"><b>about</b></a></li>
+	<li><a href="//dwm.suckless.org/customisation/">customisation/</a></li>
+	<li><a href="//dwm.suckless.org/dynamic_window_management/">dynamic window management/</a></li>
+	<li><a href="//dwm.suckless.org/faq/">faq/</a></li>
+	<li><a href="//dwm.suckless.org/multi-monitor/">multi monitor/</a></li>
+	<li><a href="//dwm.suckless.org/multi-pointer/">multi pointer/</a></li>
+	<li><a href="//dwm.suckless.org/patches/">patches/</a></li>
+	<li><a href="//dwm.suckless.org/screenshots/">screenshots/</a></li>
+	<li><a href="//dwm.suckless.org/status_monitor/">status monitor/</a></li>
+	<li><a href="//dwm.suckless.org/tutorial/">tutorial/</a></li>
+	</ul>
+</div>
+<hr class="hidden"/>
+<div id="main">
+
+<p><img src="dwm.svg" alt="dwm" /></p>
+<p>dwm is a dynamic window manager for X. It manages windows in tiled, monocle and
+floating layouts. All of the layouts can be applied dynamically, optimising the
+environment for the application in use and the task performed.</p>
+<p>In tiled layout windows are managed in a master and stacking area. The master
+area contains the window which currently needs most attention, whereas the
+stacking area contains all other windows. In monocle layout all windows are
+maximised to the screen size. In floating layout windows can be resized and
+moved freely. Dialog windows are always managed floating, regardless of the
+layout applied.</p>
+<p>Windows are grouped by tags. Each window can be tagged with one or multiple
+tags. Selecting certain tags displays all windows with these tags.</p>
+<p>Each screen contains a small status bar which displays all available tags, the
+layout, the number of visible windows, the title of the focused window, and the
+text read from the root window name property, if the screen is focused. A
+floating window is indicated with an empty square and a maximised floating
+window is indicated with a filled square before the windows title. The selected
+tags are indicated with a different color. The tags of the focused window are
+indicated with a filled square in the top left corner. The tags which are
+applied to one or more windows are indicated with an empty square in the top
+left corner.</p>
+<p>dwm draws a small customizable border around windows to indicate the focus
+state.</p>
+<p><a href="screenshots/dwm-20100318.png"><img src="screenshots/dwm-20100318s.png" alt="Screenshot" /></a></p>
+<h2>Differences</h2>
+<p>In contrast to ion, larswm, and wmii, dwm is much smaller, faster and simpler.</p>
+<ul>
+<li>dwm has no Lua integration, no 9P support, no shell-based configuration, no
+remote control, and comes without any additional tools, such as for printing
+the selection or warping the mouse.</li>
+<li>dwm is only a single binary, and its source code is intended to be kept small.</li>
+<li>dwm doesn't distinguish between layers: there is no floating or tiled layer.
+Whether or not the clients of currently selected tag(s) are in tiled layout,
+you can rearrange them on the fly. Popup and fixed-size windows are always
+floating, however.</li>
+<li>dwm is customized through editing its source code, which makes it extremely
+fast and secure - it does not process any input data which isn't known at
+compile time, except window titles and status text read from the root window's
+name. You don't have to learn Lua/sh/ruby or some weird configuration file
+format (like X resource files), beside C, to customize it for your needs: you
+only have to learn C (at least in order to edit the header file).</li>
+<li>Because dwm is customized through editing its source code, it's pointless to
+make binary packages of it. This keeps its userbase small and elitist. No
+novices asking stupid questions. There are some distributions that provide
+binary packages though.</li>
+<li>dwm reads from the root window's name to print arbitrary status text (like
+the date, load, battery charge). That's much simpler than larsremote, wmiir and
+what not...</li>
+<li>dwm creates a view for each Xinerama screen.</li>
+</ul>
+<h2>Links</h2>
+<ul>
+<li>Mailing List: <code>dev+subscribe@suckless.org</code>
+(<a href="//lists.suckless.org/dev/">Archives</a>)
+(<a href="//lists.suckless.org/dwm/">Old Archives</a>) (see
+<a href="//suckless.org/community/">community</a> for details)</li>
+<li>IRC channel: #suckless at irc.oftc.net</li>
+</ul>
+<h2>Download</h2>
+<ul>
+<li><a href="//git.suckless.org/dwm/plain/LICENSE">MIT/X Consortium license</a></li>
+<li><a href="//dl.suckless.org/dwm/dwm-6.3.tar.gz">dwm 6.3</a> (26kb) (2022-01-07)</li>
+<li>See also <a href="//tools.suckless.org/dmenu">dmenu</a></li>
+</ul>
+<h2>Support</h2>
+<p>See the <a href="//dwm.suckless.org/faq">faq</a> for the frequent questions that are
+asked. The next step is to look at the source-code and the config.h for obvious
+names, which could be related to the problem that arose. If that does not help
+to fix the problem, then there is the #suckless IRC channel and the
+mailinglist.</p>
+<p>If it is your first time using dwm, start with reading the
+<a href="//dwm.suckless.org/tutorial">tutorial</a>.</p>
+<h2>Development</h2>
+<p>You can <a href="//git.suckless.org/dwm">browse</a> its source code repository or get a copy using git with the following command:</p>
+<pre><code>git clone https://git.suckless.org/dwm
+</code></pre>
+<h2>Miscellaneous</h2>
+<ul>
+<li>Optionally you can install <a href="//tools.suckless.org/dmenu">dmenu</a> to extend dwm
+with a wmii-like menu.</li>
+<li>Wikipedia <a href="http://en.wikipedia.org/wiki/Dwm">article about dwm</a></li>
+</ul>
+<h2>Related discussion</h2>
+<ul>
+<li><a href="https://www.ghcif.de/tag/dynamic-window-manager/">https://www.ghcif.de/tag/dynamic-window-manager/</a> (German)</li>
+<li><a href="http://efazati.blog.ir/post/DWM-%D8%B1%D8%A7%D9%87%DA%A9%D8%A7%D8%B1-%D9%85%D9%86%D8%A7%D8%B3%D8%A8%DB%8C-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-%D9%BE%D9%86%D8%AC%D8%B1%D9%87-%D9%87%D8%A7-%D8%AF%D8%B1-%D9%84%DB%8C%D9%86%D9%88%DA%A9%D8%B3">dwm blog post in Persian</a></li>
+<li><a href="http://www.gambaru.de/blog/2011/12/10/elitare-fenstermanager-sind-vielleicht-doch-einfacher-zu-bedienen-als-gedacht/">http://www.gambaru.de/blog/2011/12/10/elitare-fenstermanager-sind-vielleicht-doch-einfacher-zu-bedienen-als-gedacht/</a></li>
+<li><a href="http://www.linuxjournal.com/content/going-fast-dwm">http://www.linuxjournal.com/content/going-fast-dwm</a></li>
+<li><a href="http://www.linuxgoodies.com/review_dwm.html">http://www.linuxgoodies.com/review_dwm.html</a></li>
+<li><a href="http://www.iyiz.com/20-most-simple-and-cool-x-window-managers-for-linux/">http://www.iyiz.com/20-most-simple-and-cool-x-window-managers-for-linux/</a></li>
+<li><a href="http://lbolla.wordpress.com/2010/01/08/dwm-restart/">http://lbolla.wordpress.com/2010/01/08/dwm-restart/</a></li>
+<li><a href="http://danielkaes.wordpress.com/2009/12/03/adding-a-pidgin-trayicon-to-dwm/">http://danielkaes.wordpress.com/2009/12/03/adding-a-pidgin-trayicon-to-dwm/</a></li>
+<li><a href="http://openmindlifestyle.wordpress.com/2009/11/28/howto-compile-and-configure-dwm-tiling-window-manager-on-ubuntu/">http://openmindlifestyle.wordpress.com/2009/11/28/howto-compile-and-configure-dwm-tiling-window-manager-on-ubuntu/</a></li>
+<li><a href="http://lsetc.wordpress.com/2009/11/27/gno-more-gnome/">http://lsetc.wordpress.com/2009/11/27/gno-more-gnome/</a></li>
+<li><a href="http://houst0n.wordpress.com/2009/12/20/dwm-the-dynamic-window-manager-for-solaris/">http://houst0n.wordpress.com/2009/12/20/dwm-the-dynamic-window-manager-for-solaris/</a></li>
+<li><a href="http://the-monkeymind.blogspot.com/2007/03/dwm-dynamic-window-manager-home-page-at.html">http://the-monkeymind.blogspot.com/2007/03/dwm-dynamic-window-manager-home-page-at.html</a></li>
+<li><a href="http://tonytraductor.livejournal.com/120674.html">http://tonytraductor.livejournal.com/120674.html</a></li>
+<li><a href="http://forums.debian.net/viewtopic.php?f=16&amp;t=65110">http://forums.debian.net/viewtopic.php?f=16&amp;t=65110</a></li>
+<li><a href="http://wongdev.com/blog/dwm-tags-are-not-workspaces/">http://wongdev.com/blog/dwm-tags-are-not-workspaces/</a> (<a href="https://archive.is/Fw0Mk">archive</a>)</li>
+<li><a href="http://yeuxdelibad.net/Logiciel-libre/Suckless/dwm/index.html">dwm usage and configuration page (french)</a></li>
+<li><a href="http://www.youtube.com/watch?v=GQ5s6T25jCc">http://www.youtube.com/watch?v=GQ5s6T25jCc</a></li>
+<li><a href="https://srobb.net/dwm.html">https://srobb.net/dwm.html</a></li>
+<li><a href="http://rhunter.org/blog/2012/04/17/dwm-a-tutorial-for-beginners/">http://rhunter.org/blog/2012/04/17/dwm-a-tutorial-for-beginners/</a></li>
+<li><a href="https://cannibalcandy.wordpress.com/2012/04/26/installing-and-configuring-dwm-under-ubuntu/">https://cannibalcandy.wordpress.com/2012/04/26/installing-and-configuring-dwm-under-ubuntu/</a></li>
+<li><a href="http://blog.yjl.im/2011/07/two-weeks-with-dwm.html">http://blog.yjl.im/2011/07/two-weeks-with-dwm.html</a></li>
+<li><a href="http://www.murga-linux.com/puppy/viewtopic.php?p=258224">http://www.murga-linux.com/puppy/viewtopic.php?p=258224</a></li>
+<li><a href="http://opensourceforu.com/2012/03/tiling-window-managers-getting-started-with-dwm/">http://opensourceforu.com/2012/03/tiling-window-managers-getting-started-with-dwm/</a></li>
+</ul>
+<h2>related projects</h2>
+<ul>
+<li><a href="https://awesomewm.org">awesome</a> -- dwm fork with XCB, EWMH, Lua script, Xft, D-Bus, multihead.. support</li>
+<li><a href="https://github.com/Alpt/awm/blob/master/README">awm</a> -- (old) modified dwm with workspaces and /proc like interface</li>
+<li><a href="//lists.suckless.org/dwm/0708/3085.html">bwm</a> -- (old) modified dwm with extensive mouse support</li>
+<li><a href="http://github.com/dharmatech/psilab/tree/master/cons-wm">cons-wm</a> -- minimalist wm in scheme (not tiled)</li>
+<li><a href="https://github.com/fuhsjr00/bug.n">bug.n</a> -- dwm for Windows written in AutoHotkey</li>
+<li><a href="http://www.brain-dump.org/projects/dvtm/">dvtm</a> -- virtual terminal manager (dwm on the console)</li>
+<li><a href="https://github.com/djpohly/dwl">dwl</a> -- hackable dwm for Wayland</li>
+<li><a href="http://s01.de/~gottox/index.cgi/proj_dwm">dwm-gtx</a> -- dwm branch with Xinerama support, pointer movement, different layout</li>
+<li><a href="http://0mark.unserver.de/dwm-sprinkles/">dwm-sprinkles</a> -- dwm with colorfull bar, transparency, pre-configured pertag and more</li>
+<li><a href="http://www.brain-dump.org/projects/dwm-win32/">dwm-win32</a> -- dwm ported to windows</li>
+<li><a href="http://www.rootshell.be/~polachok/code/">echinus</a> -- dwm fork with EWMH, Xft support</li>
+<li><a href="http://i3.zekjur.net/">i3</a> -- wmii fork with XCB, multihead, vertical column, command mode</li>
+<li><a href="http://www.qtile.org/">qtile</a> -- pure python wm, used ideas from dwm</li>
+<li><a href="http://www.peereboom.us/scrotwm/html/scrotwm.html">scrotwm</a> -- dwm clone with multihead, config file, restart.. support</li>
+<li><a href="http://talwm.sourceforge.net/">TAL/wm</a> -- minimal tiled wm based on dwm (discontinued)</li>
+<li><a href="http://teslawm.org/">teslawm</a> -- dwm fork with multihead, mouse, stdin commands support (was dwm-rfigura)</li>
+<li><a href="http://www.xmonad.org/">xmonad</a> -- dwm clone in haskell</li>
+</ul>
+</div>
+
+</div>
+
+</html>

@@ -1,0 +1,819 @@
+/**/voidcommits({"meta": {
+  "Cache-Control": "public, max-age=60, s-maxage=60",
+  "Vary": "Accept",
+  "ETag": "\"ebf3d8853fb193b4b7bd26a5cab2b1820fbfec9717b896c5af7009998cb0501e\"",
+  "Last-Modified": "Mon, 29 Aug 2022 11:47:37 GMT",
+  "Content-Type": "application/javascript; charset=utf-8",
+  "X-GitHub-Media-Type": "github.v3; format=json",
+  "Link": [
+    [
+      "https://api.github.com/repositories/137503503/commits?page=2&per_page=10&callback=voidcommits&sha=master",
+      {
+        "rel": "next"
+      }
+    ],
+    [
+      "https://api.github.com/repositories/137503503/commits?page=373&per_page=10&callback=voidcommits&sha=master",
+      {
+        "rel": "last"
+      }
+    ]
+  ],
+  "status": 200,
+  "X-RateLimit-Limit": "60",
+  "X-RateLimit-Remaining": "56",
+  "X-RateLimit-Reset": "1661826886",
+  "X-RateLimit-Used": "4",
+  "X-RateLimit-Resource": "core"
+}, "data": [
+  {
+    "sha": "4ee3960377a2c678d2325e854f48720cd2f6120a",
+    "node_id": "C_kwDOCDIjD9oAKDRlZTM5NjAzNzdhMmM2NzhkMjMyNWU4NTRmNDg3MjBjZDJmNjEyMGE",
+    "commit": {
+      "author": {
+        "name": "Fotios Valasiadis",
+        "email": "fvalasiad@csd.auth.gr",
+        "date": "2022-08-18T12:15:56Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "github@duncano.de",
+        "date": "2022-08-29T11:47:37Z"
+      },
+      "message": "fix minor mistake in README",
+      "tree": {
+        "sha": "d61bf72c59528dc7f319d32e538762e31764c700",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/d61bf72c59528dc7f319d32e538762e31764c700"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/4ee3960377a2c678d2325e854f48720cd2f6120a",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/4ee3960377a2c678d2325e854f48720cd2f6120a",
+    "html_url": "https://github.com/void-linux/xbps/commit/4ee3960377a2c678d2325e854f48720cd2f6120a",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/4ee3960377a2c678d2325e854f48720cd2f6120a/comments",
+    "author": {
+      "login": "fvalasiad",
+      "id": 72366635,
+      "node_id": "MDQ6VXNlcjcyMzY2NjM1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/72366635?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/fvalasiad",
+      "html_url": "https://github.com/fvalasiad",
+      "followers_url": "https://api.github.com/users/fvalasiad/followers",
+      "following_url": "https://api.github.com/users/fvalasiad/following{/other_user}",
+      "gists_url": "https://api.github.com/users/fvalasiad/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/fvalasiad/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/fvalasiad/subscriptions",
+      "organizations_url": "https://api.github.com/users/fvalasiad/orgs",
+      "repos_url": "https://api.github.com/users/fvalasiad/repos",
+      "events_url": "https://api.github.com/users/fvalasiad/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/fvalasiad/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "061f5cb2e95047d20b4147d3f3b41150ce6a325c",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/061f5cb2e95047d20b4147d3f3b41150ce6a325c",
+        "html_url": "https://github.com/void-linux/xbps/commit/061f5cb2e95047d20b4147d3f3b41150ce6a325c"
+      }
+    ]
+  },
+  {
+    "sha": "061f5cb2e95047d20b4147d3f3b41150ce6a325c",
+    "node_id": "C_kwDOCDIjD9oAKDA2MWY1Y2IyZTk1MDQ3ZDIwYjQxNDdkM2YzYjQxMTUwY2U2YTMyNWM",
+    "commit": {
+      "author": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-20T13:16:16Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-20T13:16:16Z"
+      },
+      "message": "ci: switch to full images",
+      "tree": {
+        "sha": "2b8e6e7185246e71de56d5fc6ff8c26b317c84bf",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/2b8e6e7185246e71de56d5fc6ff8c26b317c84bf"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/061f5cb2e95047d20b4147d3f3b41150ce6a325c",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEExLb7qYIR9+/zXetzM1wdF+w9bjUFAmLYACAACgkQM1wdF+w9\nbjV9Mg/8CNwxlQF9KsliahwjocW+r6ItotMwEnydIlfjpcU0Iq42alz/PU19bqo5\n+pb9X+OBvIj6Wy/ZSxYKi8EpVfYe9wFCW+d6lOp1Ay8RsGIXEaF2qY94VXDpjXUk\n8+Rda67N/KWBKyic88+XJQ38oZ3CCn+ulqxSn3cDHVT0jLTLECp5BfYHmAdD84Px\nN6DznFc7dIr1GKLW1xYbJU6K0DyrU0JKuTfA5DhjYnGzdQZwH/j19ZKKOi/NsqJ1\nUGAja1h7iZkgRlNwSiD/l06J9pn64dS2BR8uU4VrD328yVVfHHCNC+apwwbbPwwn\ntXQyJnvBhvIKxA+ifC4UfXOGJl8BFjrYFaegp2LtokJkNK0pqHgQG2S1VCztkGjG\nZ1b7Qg9CwovOgzLGDeNiF2FL9F4fcOaqvKaELsoVAY+dr5dd9E+EofojlGGJKlKn\nckdLI99DC2aEllNybTpreph+rDUxvzlpexg54H08KteSXLJZauxLNS/wQaMuheqi\ntK1tLjEDTVslmHfD7f0Kz6IjX8zEd4aw0ooKIXxt7V1xrgB4gOq2zhX1JUSb1Elv\nbMvYQuQcHeoUqd/CbczJFyjBssZs73kSndQ/w/KkGoe1pXpkK8LQuCB0bVmaFcGZ\nwqECB9puKsg+pcKlXX3tkixSXFy29G8jLMja91eB7tkiQmpZj7g=\n=LPDM\n-----END PGP SIGNATURE-----",
+        "payload": "tree 2b8e6e7185246e71de56d5fc6ff8c26b317c84bf\nparent 5210a063ec817bbbb8cdd84511634acb059458b3\nauthor Duncan Overbruck \u003cmail@duncano.de\u003e 1658322976 +0200\ncommitter Duncan Overbruck \u003cmail@duncano.de\u003e 1658322976 +0200\n\nci: switch to full images\n"
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/061f5cb2e95047d20b4147d3f3b41150ce6a325c",
+    "html_url": "https://github.com/void-linux/xbps/commit/061f5cb2e95047d20b4147d3f3b41150ce6a325c",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/061f5cb2e95047d20b4147d3f3b41150ce6a325c/comments",
+    "author": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5210a063ec817bbbb8cdd84511634acb059458b3",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/5210a063ec817bbbb8cdd84511634acb059458b3",
+        "html_url": "https://github.com/void-linux/xbps/commit/5210a063ec817bbbb8cdd84511634acb059458b3"
+      }
+    ]
+  },
+  {
+    "sha": "5210a063ec817bbbb8cdd84511634acb059458b3",
+    "node_id": "C_kwDOCDIjD9oAKDUyMTBhMDYzZWM4MTdiYmJiOGNkZDg0NTExNjM0YWNiMDU5NDU4YjM",
+    "commit": {
+      "author": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-20T13:12:47Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-20T13:12:47Z"
+      },
+      "message": "ci: fix docker images",
+      "tree": {
+        "sha": "172ef8af6f6d31a3dfd19218ab07e1e9d5866980",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/172ef8af6f6d31a3dfd19218ab07e1e9d5866980"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/5210a063ec817bbbb8cdd84511634acb059458b3",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEExLb7qYIR9+/zXetzM1wdF+w9bjUFAmLX/08ACgkQM1wdF+w9\nbjVXVA//ZFQFz8GsgPEfXBRsxhw6W10zzAPINEOrWzuO/DmbFZJstEFRhhfqI2sC\nn+R5h8g/5oZSNsXIuXgTNXIhCm5jjzWZZtolSjQgi6hgKSnm/LTMUZcwhHFgcysM\ngZLDbcZ4Fq3PdTA+NztHuRgNbhEMd1P+Adi3HeOv4FJdnUD7iP2u1GF7U0TiPiUs\nzAW/F9KA/8oopGbWLNFKuk/2YjM5IlhYMoBNJS93MUug7L2rjGqMjsy73snDB+qk\nXeQPorgql4COQfU4813rXo1c6A7tYwu8PJxmtMtgrvUYrGv3w5J3a+2fEQEvdfA0\nK/gaO8gj1221dm0gNl1aKDrCKP2uToc8VNnwxZFRqNbtpiieCwj8Vgl6h9Ed4fuF\nLdFMiSnz2nPzu5yFkHPhYiGQg5NKQ0Pznbw/meD3osKd+Zagxxs25W8ZexS2PmU1\nIb9YLxeHMqjZ/ita3PyIAQXZK15WJkExfike55vvWGdzZHeuraLWdz4HKUz/+ymz\nX5EoQP603Mb+0/T9E05UY5zPXClwc8EvwpmKtKQLRoN4aBWlTtOWhSyP9lx57Z3N\nUinOPoDaRjmsXLQnmZ9PtAhi9AwoKxGZsgCW5xiR81rN6cUwos0NWWbGW86xX1wp\ny6scZC3Bw19aarAlg9M+t2oNfdT6ffomEpcDrv1es06NgbHTads=\n=haH/\n-----END PGP SIGNATURE-----",
+        "payload": "tree 172ef8af6f6d31a3dfd19218ab07e1e9d5866980\nparent 56799d884385c6adf615af0055e04a7188df6cb1\nauthor Duncan Overbruck \u003cmail@duncano.de\u003e 1658322767 +0200\ncommitter Duncan Overbruck \u003cmail@duncano.de\u003e 1658322767 +0200\n\nci: fix docker images\n"
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/5210a063ec817bbbb8cdd84511634acb059458b3",
+    "html_url": "https://github.com/void-linux/xbps/commit/5210a063ec817bbbb8cdd84511634acb059458b3",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/5210a063ec817bbbb8cdd84511634acb059458b3/comments",
+    "author": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "56799d884385c6adf615af0055e04a7188df6cb1",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/56799d884385c6adf615af0055e04a7188df6cb1",
+        "html_url": "https://github.com/void-linux/xbps/commit/56799d884385c6adf615af0055e04a7188df6cb1"
+      }
+    ]
+  },
+  {
+    "sha": "56799d884385c6adf615af0055e04a7188df6cb1",
+    "node_id": "C_kwDOCDIjD9oAKDU2Nzk5ZDg4NDM4NWM2YWRmNjE1YWYwMDU1ZTA0YTcxODhkZjZjYjE",
+    "commit": {
+      "author": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-20T13:07:55Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-20T13:07:55Z"
+      },
+      "message": "ci: only run coverity-scan on void-linux/xbps repo",
+      "tree": {
+        "sha": "eb952dab4533007cd7c5ff95cfb0474959c57cdd",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/eb952dab4533007cd7c5ff95cfb0474959c57cdd"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/56799d884385c6adf615af0055e04a7188df6cb1",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEExLb7qYIR9+/zXetzM1wdF+w9bjUFAmLX/isACgkQM1wdF+w9\nbjXtKQ//W0sCLhet28ykgdEzkffkGPkmIkuG5hjxj3y6jHcWjU7wweHF4K3U6VI7\ncma3GBgrgFZUIy0ENjgRjX+zGPyn17iIq3I+4cgBEJdDiaaL1qi1xCnbpcUWt8ua\n387D/p2nVa2hzrqACmeccWYmq+tGTANMSiXGdOv70iAIo21SBkbDxeFKoqgyMwgY\nLBZQXwyvzJX9ODZSMR1FO3JmxMoAvQYoFp1/VoPvkzPOMizRhIihd+y0e5aHqCuH\nWZ9JHmv9jhsHILvzL1YymL60NxLNqnzn6+vkgxbJMbjfxhUHp3X9U9/vOXcMmnvP\nVA85gk9YYsmSkrNrYhcEH8It+jmwiIgw2rENZPeoc34RCBnAAdr8LZ1DHzM5tXsW\n9EmWojmU/xlcpnAnjqrUmJMdriUT3uaC2sVP/9y1vLnYNdt2pSSPq/le5mB8+L7x\nnwJpySePtKxPkcAyOXBq0lXGYZS8iDAPoEsgzlIW/L3iOUmStyA452ar3x9mJnE0\najE8+nq2I/xNWSs9PS7Me6BUJn3OTXcajB/lYjMprrWqLKKnZ/8dAS+gA1AoFF3i\nUmEpIl+ENxuyu6mJYwVoR9RwIzZ/Ne7KEvSI3hbc5b4qpmRizSQZ+NwR4wruonpl\ndDPeI4Nm4x6R0ExwsKxQ8uUiHkr1eGi76lLfmbNkeieKTSI2uK8=\n=Vs5S\n-----END PGP SIGNATURE-----",
+        "payload": "tree eb952dab4533007cd7c5ff95cfb0474959c57cdd\nparent 9dfeb8a0db0395b041919f24ad1620913af2d582\nauthor Duncan Overbruck \u003cmail@duncano.de\u003e 1658322475 +0200\ncommitter Duncan Overbruck \u003cmail@duncano.de\u003e 1658322475 +0200\n\nci: only run coverity-scan on void-linux/xbps repo\n"
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/56799d884385c6adf615af0055e04a7188df6cb1",
+    "html_url": "https://github.com/void-linux/xbps/commit/56799d884385c6adf615af0055e04a7188df6cb1",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/56799d884385c6adf615af0055e04a7188df6cb1/comments",
+    "author": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9dfeb8a0db0395b041919f24ad1620913af2d582",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/9dfeb8a0db0395b041919f24ad1620913af2d582",
+        "html_url": "https://github.com/void-linux/xbps/commit/9dfeb8a0db0395b041919f24ad1620913af2d582"
+      }
+    ]
+  },
+  {
+    "sha": "9dfeb8a0db0395b041919f24ad1620913af2d582",
+    "node_id": "C_kwDOCDIjD9oAKDlkZmViOGEwZGIwMzk1YjA0MTkxOWYyNGFkMTYyMDkxM2FmMmQ1ODI",
+    "commit": {
+      "author": {
+        "name": "Michael Aldridge",
+        "email": "aldridge.mac@gmail.com",
+        "date": "2021-03-13T10:42:40Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-20T13:06:12Z"
+      },
+      "message": "ci: update base CI images\n\nCloses: #389 [via git-merge-pr]",
+      "tree": {
+        "sha": "8b85ad23d3fd18c9f4b28d81034b1fa1729f8d8d",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/8b85ad23d3fd18c9f4b28d81034b1fa1729f8d8d"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/9dfeb8a0db0395b041919f24ad1620913af2d582",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEExLb7qYIR9+/zXetzM1wdF+w9bjUFAmLX/cQACgkQM1wdF+w9\nbjXKHRAAvGnmEsf09Gtqo+F7DxUarbKStKI8mBQ/xPfaso0XyOdG0lNFimCKlLWw\nTwlZDW0A92GE+sjD8GObOSsho3R+68GUD8mtrZIzh6ktdHHnYdju67TyTztPCHQD\nv0heMXJlbY/CxbIC2N55dyc8ZVbfEY0MC0AeV654HYuDzpUPwiBJnHwRFRjyMv53\nI0q1jSYOej+dJonQGLjQGO7P8nxkOGV2IY/wNDeyYjwGDHM1nw6ebm84Hwxg2qxD\nh+3i4fo6PQAl0ReBGRFzh9+tXX4Rkc6MixW/Qqwt7XlQ8IO0jBbea7uLfKIxfrbp\niXIp8zAFOiKMNQZeOlAUvcT2bdgERXnRF+vxbGvorGCSz6xeKhnjHeSzFRcNHdb2\nBLAE0fmqMWHDRFAVDS8OqaKalrXJ0zJzHF8JqA0nUK86kJJtO6Iww7kJiZTrK7Bc\nmXJBUsO0H4ItMP4ss52WTLrIfFN89dEf3lflUcJbhIOQh7lZpaCIYKTyf2UbFnsu\nwjiCEzgbFEYtaeWsSVn3NR921AK8JNdQ8WLz0x0zH1Z9p9DuR8YTBjHUmykSpY0Q\nOgG12/L2xgtz/pEK14gj8tD9TLE+citXy6PHqA1hI/idwh0Cx74zpXjYxexooDBx\niLnGD1pbz8Xufi7FwciNA8pXWBWp0NnQjAeZ0+r07nAwOfNiIS4=\n=buDu\n-----END PGP SIGNATURE-----",
+        "payload": "tree 8b85ad23d3fd18c9f4b28d81034b1fa1729f8d8d\nparent d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817\nauthor Michael Aldridge \u003caldridge.mac@gmail.com\u003e 1615632160 -0800\ncommitter Duncan Overbruck \u003cmail@duncano.de\u003e 1658322372 +0200\n\nci: update base CI images\n\nCloses: #389 [via git-merge-pr]\n"
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/9dfeb8a0db0395b041919f24ad1620913af2d582",
+    "html_url": "https://github.com/void-linux/xbps/commit/9dfeb8a0db0395b041919f24ad1620913af2d582",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/9dfeb8a0db0395b041919f24ad1620913af2d582/comments",
+    "author": {
+      "login": "the-maldridge",
+      "id": 2321814,
+      "node_id": "MDQ6VXNlcjIzMjE4MTQ=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2321814?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/the-maldridge",
+      "html_url": "https://github.com/the-maldridge",
+      "followers_url": "https://api.github.com/users/the-maldridge/followers",
+      "following_url": "https://api.github.com/users/the-maldridge/following{/other_user}",
+      "gists_url": "https://api.github.com/users/the-maldridge/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/the-maldridge/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/the-maldridge/subscriptions",
+      "organizations_url": "https://api.github.com/users/the-maldridge/orgs",
+      "repos_url": "https://api.github.com/users/the-maldridge/repos",
+      "events_url": "https://api.github.com/users/the-maldridge/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/the-maldridge/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817",
+        "html_url": "https://github.com/void-linux/xbps/commit/d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817"
+      }
+    ]
+  },
+  {
+    "sha": "d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817",
+    "node_id": "C_kwDOCDIjD9oAKGQ4ZDI4NGQ3YzgwYmM3ZjQ4YmIyZDY0NmI3ZTNjY2RkOWIwMDE4MTc",
+    "commit": {
+      "author": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-19T13:06:34Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-19T13:19:01Z"
+      },
+      "message": "lib/fetch: return 0 if buffer len is 0 and buf is NULL\n\nPreviously it would return -1 when xbps would download an empty files.",
+      "tree": {
+        "sha": "634da7d13361f3741d1c7d30a7a0ebad5b0f61fc",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/634da7d13361f3741d1c7d30a7a0ebad5b0f61fc"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEExLb7qYIR9+/zXetzM1wdF+w9bjUFAmLWr3UACgkQM1wdF+w9\nbjVMXg//VmqF+00CNMZ9ubGAEsVLwh7S4gDgyEb0ZPhv4V2JgCAeRr7lpVjJIy7w\nMcqfDLyX52ZIcKWrNwF6V5fWuL3SCfuUtF9lOQcPJJvwXdeCRjnMwn/KRryxMKrJ\n+7EEQzWfCpkNTJLM5Ov935LrvjuQUK1bEcjIncy2UspqB1t7k+ydfnxaa/DjMiPW\nItvNMDOB554tyWxs1T9vHnI6ZdfyKlnt5JxkGkwzQHjkrgZxtnaq9AnRxc2xXGKW\nt3lxrn6Uo06fZbJbkoYmIdXKPCUTydWawPlfKfFP2or3MLTFifJw88fJECRa6JDY\nsvFwJo9YYeGuj4+j/oa93SDEMmiyYq9QaJmSNIMB2cb8iDsekBxRwbImu+625Xby\ng6h2OgqcC2ftzG7kMAKrqBhv2BY7nSfwJUS80X6pQ5sCJFfJuTpL8mXehindEiJy\ntL1PhDwVklPq+WJJ6+pbnnojlGapaBpVvQdaXa2lR79WCVVZBIZi2BLW26Ar3fSf\nojNdgYYDpjzFMvNJfjj3agTASn9rMxqjoBJD9XfP6rRWbl3RLvnGIDinjM9gpmcl\nI8g3JEzQe9kQ4eBV7jVL5wpK83Ji3We3/wf0yhGaFTOH8uAOp8IgjQArOkJcuBEj\nAcvy+91jvJLRRd7Wozk/9nK1hn5gaZp0YmVJvKEIfh9lPENQobs=\n=LSjj\n-----END PGP SIGNATURE-----",
+        "payload": "tree 634da7d13361f3741d1c7d30a7a0ebad5b0f61fc\nparent 93186276eeedfbbec6135790080d3e83abfd52dc\nauthor Duncan Overbruck \u003cmail@duncano.de\u003e 1658235994 +0200\ncommitter Duncan Overbruck \u003cmail@duncano.de\u003e 1658236741 +0200\n\nlib/fetch: return 0 if buffer len is 0 and buf is NULL\n\nPreviously it would return -1 when xbps would download an empty files.\n"
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817",
+    "html_url": "https://github.com/void-linux/xbps/commit/d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/d8d284d7c80bc7f48bb2d646b7e3ccdd9b001817/comments",
+    "author": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "93186276eeedfbbec6135790080d3e83abfd52dc",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/93186276eeedfbbec6135790080d3e83abfd52dc",
+        "html_url": "https://github.com/void-linux/xbps/commit/93186276eeedfbbec6135790080d3e83abfd52dc"
+      }
+    ]
+  },
+  {
+    "sha": "93186276eeedfbbec6135790080d3e83abfd52dc",
+    "node_id": "C_kwDOCDIjD9oAKDkzMTg2Mjc2ZWVlZGZiYmVjNjEzNTc5MDA4MGQzZTgzYWJmZDUyZGM",
+    "commit": {
+      "author": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-19T12:50:29Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-07-19T12:50:29Z"
+      },
+      "message": "lib/fetch: don't abort connect(2) attempts on EINVAL",
+      "tree": {
+        "sha": "d689a1f927299ad1b2105239a10e9aed71afe555",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/d689a1f927299ad1b2105239a10e9aed71afe555"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/93186276eeedfbbec6135790080d3e83abfd52dc",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEExLb7qYIR9+/zXetzM1wdF+w9bjUFAmLWqJUACgkQM1wdF+w9\nbjW1VRAAmZMJATl5oJ7WAJFS0kFEZ0ot1oU+2ZbFaZIHLZ2bp+hkrQqiaaTi87BD\nxNx2fjVwVkhBWzc9Bdeh3PxFhQjPb2w3NfB/u0ccpnzUHLU3+95l1RQfRh3q3X+6\nobIMY5ttXkuj0VOjaHhVekMmPiN22/t9SdVRvQ0q1nS31/8FlRSBpJ3jXaZEzCZn\nKMReZbwoa7Ky2i+8XkZW7ohUWfYCp43+PWoIRuQLFBL3MWxayc7kb40Q+0UUNppy\niRR5GT1zG4CnKPbnkEI4ZLVUgug+7U3wYVF3HxBGCENQTXVPRsc0qfQim0s7n6eu\nFLWdY30Hxsftp0feS5gvdIzTRsRj3UEutraTaRuBIzjZEPP8V2IP1GrAQifxMRoR\n63SLDNsi16/ifGVx0cbS32aI7Cv/rzYVWN76VFxBliLwASqFEQHmP1qTtbwf5W2T\n0zTaFTypEo2VqkiBFIldTZHilMi023muDXml1BYPr1LJMdk9MZv51/Nzt6L9xcWT\n7JVwsBdkKTJALmIizcKvJuWvx7sqKkuRRLDElv9p0PljWo3Dst/TkHGrKzQIGQk3\npV2i1FdLJgSW6x7i2oaPYfjj0R9wL9bKHrXvz8AmRnR2CBRNzKSWTa5p+Btshmg1\n+WrPPIcZYDHxx1nSt9plbrqr/kyha/rA3lHEvJZYnDr7867mYOw=\n=aPS9\n-----END PGP SIGNATURE-----",
+        "payload": "tree d689a1f927299ad1b2105239a10e9aed71afe555\nparent b5954c80db5d7fba2b0635e758126c4d949edbb3\nauthor Duncan Overbruck \u003cmail@duncano.de\u003e 1658235029 +0200\ncommitter Duncan Overbruck \u003cmail@duncano.de\u003e 1658235029 +0200\n\nlib/fetch: don't abort connect(2) attempts on EINVAL\n"
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/93186276eeedfbbec6135790080d3e83abfd52dc",
+    "html_url": "https://github.com/void-linux/xbps/commit/93186276eeedfbbec6135790080d3e83abfd52dc",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/93186276eeedfbbec6135790080d3e83abfd52dc/comments",
+    "author": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "b5954c80db5d7fba2b0635e758126c4d949edbb3",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/b5954c80db5d7fba2b0635e758126c4d949edbb3",
+        "html_url": "https://github.com/void-linux/xbps/commit/b5954c80db5d7fba2b0635e758126c4d949edbb3"
+      }
+    ]
+  },
+  {
+    "sha": "b5954c80db5d7fba2b0635e758126c4d949edbb3",
+    "node_id": "C_kwDOCDIjD9oAKGI1OTU0YzgwZGI1ZDdmYmEyYjA2MzVlNzU4MTI2YzRkOTQ5ZWRiYjM",
+    "commit": {
+      "author": {
+        "name": "Piotr Wójcik",
+        "email": "chocimier@tlen.pl",
+        "date": "2022-07-02T20:37:08Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "github@duncano.de",
+        "date": "2022-07-03T21:41:10Z"
+      },
+      "message": "lib/fetch: reuse http connection\n\nWith HTTP 1.1 persistent connection is default and Connection\nheader is not sent.\nBefore patch, for every file, including 512b signature, there was\ndone dns query, tls handshake etc.",
+      "tree": {
+        "sha": "297b8ca89eb919c432c592ffe78b2aa95def1f92",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/297b8ca89eb919c432c592ffe78b2aa95def1f92"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/b5954c80db5d7fba2b0635e758126c4d949edbb3",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/b5954c80db5d7fba2b0635e758126c4d949edbb3",
+    "html_url": "https://github.com/void-linux/xbps/commit/b5954c80db5d7fba2b0635e758126c4d949edbb3",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/b5954c80db5d7fba2b0635e758126c4d949edbb3/comments",
+    "author": {
+      "login": "Chocimier",
+      "id": 2065803,
+      "node_id": "MDQ6VXNlcjIwNjU4MDM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2065803?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Chocimier",
+      "html_url": "https://github.com/Chocimier",
+      "followers_url": "https://api.github.com/users/Chocimier/followers",
+      "following_url": "https://api.github.com/users/Chocimier/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Chocimier/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Chocimier/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Chocimier/subscriptions",
+      "organizations_url": "https://api.github.com/users/Chocimier/orgs",
+      "repos_url": "https://api.github.com/users/Chocimier/repos",
+      "events_url": "https://api.github.com/users/Chocimier/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Chocimier/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "48556b7089af12b83324cf9b6bc84f473b15cd86",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/48556b7089af12b83324cf9b6bc84f473b15cd86",
+        "html_url": "https://github.com/void-linux/xbps/commit/48556b7089af12b83324cf9b6bc84f473b15cd86"
+      }
+    ]
+  },
+  {
+    "sha": "48556b7089af12b83324cf9b6bc84f473b15cd86",
+    "node_id": "C_kwDOCDIjD9oAKDQ4NTU2YjcwODlhZjEyYjgzMzI0Y2Y5YjZiYzg0ZjQ3M2IxNWNkODY",
+    "commit": {
+      "author": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-06-21T20:39:38Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "mail@duncano.de",
+        "date": "2022-06-21T20:39:46Z"
+      },
+      "message": ".github/workflows: sync repos after updating xbps",
+      "tree": {
+        "sha": "5d9c83e4e41ecc3a05cad3021518d918af259750",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/5d9c83e4e41ecc3a05cad3021518d918af259750"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/48556b7089af12b83324cf9b6bc84f473b15cd86",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCgAdFiEExLb7qYIR9+/zXetzM1wdF+w9bjUFAmKyLKIACgkQM1wdF+w9\nbjUT1g//QlylOIJWqliGMsYHaDkVigc7tUQLNwZ4Jrw9G/7kAI4yf7CSrkT1aqET\nDSiS5wg+rlAtYPI0ri3aN+ZRKORHOvTQtRg1j63TCqgaKXAmVj2rv7CAq0arJYmr\nMNubQn1m6po/rwcFykzBQFegKjBg3ZytvYw29zZKFOFvTOQ7xs7j/zdGd8mcs9RN\nKbZQlRckQy+e/67S5PfXMz52PV4+/KCI9Mne/WI61RGjh3sineIYWRhZ07dz/hGD\nXVr/HJl6DpkyyE2ZfVObZ2nTUG2R1NUqqeOZRoDU8XLvkdVRtYhowFUVud2B8rYD\nNSXnWPfY19m6sHzpOWrMCVRJvkA/Rsd1SeJdCD7/N71cxpq5/R1LdoT0AXd0+wXv\nEUNfGPcTYLFdjZp8Fb6A38M9V6R5/9gpgssmE2qyOmvT6mDfNFRBLIW2Lmz4JByH\nPT8IACm+jG0eOKm81fR/qoIlFooGRBjmEgi0wBB6X/Ti8/Rx81p9u12OTWbUNAOI\nAZMLHiwk6+6PAa9E3UmeRdSwFAsY5UUrZHw69xkOzbfrb+runL6MadiwbQJN1ri0\nD2OKp560HShn1bXhSKAA3BiSJVHY1ytEcjhQpNw/UrRvlYd/TziiiOVGV4yLaeWi\nSCcyN1Kd5U4oitw9drlstS4i0SzRGkv2NoQKclriHOR6rWUtPsk=\n=XRKF\n-----END PGP SIGNATURE-----",
+        "payload": "tree 5d9c83e4e41ecc3a05cad3021518d918af259750\nparent d744b4b2381fb6df6f206bab2adb2e778c0e748d\nauthor Duncan Overbruck \u003cmail@duncano.de\u003e 1655843978 +0200\ncommitter Duncan Overbruck \u003cmail@duncano.de\u003e 1655843986 +0200\n\n.github/workflows: sync repos after updating xbps\n"
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/48556b7089af12b83324cf9b6bc84f473b15cd86",
+    "html_url": "https://github.com/void-linux/xbps/commit/48556b7089af12b83324cf9b6bc84f473b15cd86",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/48556b7089af12b83324cf9b6bc84f473b15cd86/comments",
+    "author": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d744b4b2381fb6df6f206bab2adb2e778c0e748d",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/d744b4b2381fb6df6f206bab2adb2e778c0e748d",
+        "html_url": "https://github.com/void-linux/xbps/commit/d744b4b2381fb6df6f206bab2adb2e778c0e748d"
+      }
+    ]
+  },
+  {
+    "sha": "d744b4b2381fb6df6f206bab2adb2e778c0e748d",
+    "node_id": "C_kwDOCDIjD9oAKGQ3NDRiNGIyMzgxZmI2ZGY2ZjIwNmJhYjJhZGIyZTc3OGMwZTc0OGQ",
+    "commit": {
+      "author": {
+        "name": "Piotr Wójcik",
+        "email": "chocimier@tlen.pl",
+        "date": "2021-12-08T21:51:23Z"
+      },
+      "committer": {
+        "name": "Duncan Overbruck",
+        "email": "github@duncano.de",
+        "date": "2022-06-21T13:40:45Z"
+      },
+      "message": "xbps-install: exclude hold packages from total download size",
+      "tree": {
+        "sha": "668dad471d969f8e9d5f30f7d907a41aeca186d4",
+        "url": "https://api.github.com/repos/void-linux/xbps/git/trees/668dad471d969f8e9d5f30f7d907a41aeca186d4"
+      },
+      "url": "https://api.github.com/repos/void-linux/xbps/git/commits/d744b4b2381fb6df6f206bab2adb2e778c0e748d",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/void-linux/xbps/commits/d744b4b2381fb6df6f206bab2adb2e778c0e748d",
+    "html_url": "https://github.com/void-linux/xbps/commit/d744b4b2381fb6df6f206bab2adb2e778c0e748d",
+    "comments_url": "https://api.github.com/repos/void-linux/xbps/commits/d744b4b2381fb6df6f206bab2adb2e778c0e748d/comments",
+    "author": {
+      "login": "Chocimier",
+      "id": 2065803,
+      "node_id": "MDQ6VXNlcjIwNjU4MDM=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2065803?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Chocimier",
+      "html_url": "https://github.com/Chocimier",
+      "followers_url": "https://api.github.com/users/Chocimier/followers",
+      "following_url": "https://api.github.com/users/Chocimier/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Chocimier/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Chocimier/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Chocimier/subscriptions",
+      "organizations_url": "https://api.github.com/users/Chocimier/orgs",
+      "repos_url": "https://api.github.com/users/Chocimier/repos",
+      "events_url": "https://api.github.com/users/Chocimier/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Chocimier/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "Duncaen",
+      "id": 2813151,
+      "node_id": "MDQ6VXNlcjI4MTMxNTE=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2813151?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Duncaen",
+      "html_url": "https://github.com/Duncaen",
+      "followers_url": "https://api.github.com/users/Duncaen/followers",
+      "following_url": "https://api.github.com/users/Duncaen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Duncaen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Duncaen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Duncaen/subscriptions",
+      "organizations_url": "https://api.github.com/users/Duncaen/orgs",
+      "repos_url": "https://api.github.com/users/Duncaen/repos",
+      "events_url": "https://api.github.com/users/Duncaen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Duncaen/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d3b55df51b81a303e0d1054ef824f414b73bd6f7",
+        "url": "https://api.github.com/repos/void-linux/xbps/commits/d3b55df51b81a303e0d1054ef824f414b73bd6f7",
+        "html_url": "https://github.com/void-linux/xbps/commit/d3b55df51b81a303e0d1054ef824f414b73bd6f7"
+      }
+    ]
+  }
+]})

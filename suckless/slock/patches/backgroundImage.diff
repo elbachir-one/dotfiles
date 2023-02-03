@@ -1,0 +1,148 @@
+From 1c5a5383a1cf3351fe9c80a21cfbc98c5ec4355d Mon Sep 17 00:00:00 2001
+From: Yan Doroshenko <yan1994doroshenko@gmail.com>
+Date: Fri, 18 Mar 2022 12:28:13 +0100
+Subject: [PATCH] Provide a way to set a background image
+
+---
+ config.def.h |  5 ++++-
+ config.mk    |  2 +-
+ slock.c      | 50 +++++++++++++++++++++++++++++++++++++++++++++++---
+ 3 files changed, 52 insertions(+), 5 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 9855e21..eb88b3d 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -1,6 +1,6 @@
+ /* user and group to drop privileges to */
+ static const char *user  = "nobody";
+-static const char *group = "nogroup";
++static const char *group = "nobody";
+
+ static const char *colorname[NUMCOLS] = {
+ 	[INIT] =   "black",     /* after initialization */
+@@ -10,3 +10,6 @@ static const char *colorname[NUMCOLS] = {
+
+ /* treat a cleared input like a wrong password (color) */
+ static const int failonclear = 1;
++
++/* Background image path, should be available to the user above */
++static const char* background_image = "";
+diff --git a/config.mk b/config.mk
+index 74429ae..987819e 100644
+--- a/config.mk
++++ b/config.mk
+@@ -12,7 +12,7 @@ X11LIB = /usr/X11R6/lib
+
+ # includes and libs
+ INCS = -I. -I/usr/include -I${X11INC}
+-LIBS = -L/usr/lib -lc -lcrypt -L${X11LIB} -lX11 -lXext -lXrandr
++LIBS = -L/usr/lib -lc -lcrypt -L${X11LIB} -lX11 -lXext -lXrandr -lImlib2
+
+ # flags
+ CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE -DHAVE_SHADOW_H
+diff --git a/slock.c b/slock.c
+index 5ae738c..345a279 100644
+--- a/slock.c
++++ b/slock.c
+@@ -18,6 +18,7 @@
+ #include <X11/keysym.h>
+ #include <X11/Xlib.h>
+ #include <X11/Xutil.h>
++#include <Imlib2.h>
+
+ #include "arg.h"
+ #include "util.h"
+@@ -35,6 +36,7 @@ struct lock {
+ 	int screen;
+ 	Window root, win;
+ 	Pixmap pmap;
++	Pixmap bgmap;
+ 	unsigned long colors[NUMCOLS];
+ };
+
+@@ -46,6 +48,8 @@ struct xrandr {
+
+ #include "config.h"
+
++Imlib_Image image;
++
+ static void
+ die(const char *errstr, ...)
+ {
+@@ -190,9 +194,10 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
+ 			color = len ? INPUT : ((failure || failonclear) ? FAILED : INIT);
+ 			if (running && oldc != color) {
+ 				for (screen = 0; screen < nscreens; screen++) {
+-					XSetWindowBackground(dpy,
+-					                     locks[screen]->win,
+-					                     locks[screen]->colors[color]);
++                                        if (locks[screen]->bgmap)
++                                                XSetWindowBackgroundPixmap(dpy, locks[screen]->win, locks[screen]->bgmap);
++                                        else
++                                                XSetWindowBackground(dpy, locks[screen]->win, locks[screen]->colors[0]);
+ 					XClearWindow(dpy, locks[screen]->win);
+ 				}
+ 				oldc = color;
+@@ -235,6 +240,17 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
+ 	lock->screen = screen;
+ 	lock->root = RootWindow(dpy, lock->screen);
+
++        if(image)
++        {
++            lock->bgmap = XCreatePixmap(dpy, lock->root, DisplayWidth(dpy, lock->screen), DisplayHeight(dpy, lock->screen), DefaultDepth(dpy, lock->screen));
++            imlib_context_set_display(dpy);
++            imlib_context_set_visual(DefaultVisual(dpy, lock->screen));
++            imlib_context_set_colormap(DefaultColormap(dpy, lock->screen));
++            imlib_context_set_drawable(lock->bgmap);
++            imlib_render_image_on_drawable(0, 0);
++            imlib_free_image();
++        }
++
+ 	for (i = 0; i < NUMCOLS; i++) {
+ 		XAllocNamedColor(dpy, DefaultColormap(dpy, lock->screen),
+ 		                 colorname[i], &color, &dummy);
+@@ -251,6 +267,8 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
+ 	                          CopyFromParent,
+ 	                          DefaultVisual(dpy, lock->screen),
+ 	                          CWOverrideRedirect | CWBackPixel, &wa);
++        if(lock->bgmap)
++          XSetWindowBackgroundPixmap(dpy, lock->win, lock->bgmap);
+ 	lock->pmap = XCreateBitmapFromData(dpy, lock->win, curs, 8, 8);
+ 	invisible = XCreatePixmapCursor(dpy, lock->pmap, lock->pmap,
+ 	                                &color, &color, 0, 0);
+@@ -355,6 +373,32 @@ main(int argc, char **argv) {
+ 	if (setuid(duid) < 0)
+ 		die("slock: setuid: %s\n", strerror(errno));
+
++	/* Load picture */
++        Imlib_Image buffer = imlib_load_image(background_image);
++	imlib_context_set_image(buffer);
++        int background_image_width = imlib_image_get_width();
++        int background_image_height = imlib_image_get_height();
++
++        /* Create an image to be rendered */
++	Screen *scr = ScreenOfDisplay(dpy, DefaultScreen(dpy));
++	image = imlib_create_image(scr->width, scr->height);
++        imlib_context_set_image(image);
++
++        /* Fill the image for every X monitor */
++        XRRMonitorInfo	*monitors;
++        int number_of_monitors;
++        monitors = XRRGetMonitors(dpy, RootWindow(dpy, XScreenNumberOfScreen(scr)), True, &number_of_monitors);
++
++        int i;
++        for (i = 0; i < number_of_monitors; i++) {
++            imlib_blend_image_onto_image(buffer, 0, 0, 0, background_image_width, background_image_height, monitors[i].x, monitors[i].y, monitors[i].width, monitors[i].height);
++        }
++
++        /* Clean up */
++        imlib_context_set_image(buffer);
++        imlib_free_image();
++        imlib_context_set_image(image);
++
+ 	/* check for Xrandr support */
+ 	rr.active = XRRQueryExtension(dpy, &rr.evbase, &rr.errbase);
+
+--
+2.35.1

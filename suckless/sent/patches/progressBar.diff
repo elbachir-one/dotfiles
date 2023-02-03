@@ -1,0 +1,79 @@
+From 2be4210944d97ddb158feee601ec85c016de0872 Mon Sep 17 00:00:00 2001
+From: Randoragon <randoragongamedev@gmail.com>
+Date: Tue, 19 Jan 2021 10:17:47 +0100
+Subject: [PATCH] Add toggle colorscheme functionality
+
+This patch is meant to be applied on top of the "inverted colors" patch
+(https://tools.suckless.org/sent/patches/inverted-colors/). It creates a
+new binding, "i", that lets you toggle between two colorschemes during
+presentation.
+---
+ config.def.h |  1 +
+ sent.1       |  2 ++
+ sent.c       | 18 ++++++++++++++++++
+ 3 files changed, 21 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index ccea9a6..c72afc5 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -52,6 +52,7 @@ static Shortcut shortcuts[] = {
+ 	{ XK_n,           advance,        {.i = +1} },
+ 	{ XK_p,           advance,        {.i = -1} },
+ 	{ XK_r,           reload,         {0} },
++	{ XK_i,           togglescm,      {0} },
+ };
+ 
+ static Filter filters[] = {
+diff --git a/sent.1 b/sent.1
+index f74d583..a7564a8 100644
+--- a/sent.1
++++ b/sent.1
+@@ -44,6 +44,8 @@ Reload the slides. Only works on file input.
+ Go to next slide, if existent.
+ .It Sy Left | Backspace | h | k | Up | Prior | p
+ Go to previous slide, if existent.
++.It Sy i
++Toggle colorschemes.
+ .El
+ .El
+ .Sh FORMAT
+diff --git a/sent.c b/sent.c
+index 7053ab3..d29fc35 100644
+--- a/sent.c
++++ b/sent.c
+@@ -107,6 +107,7 @@ static void xdraw();
+ static void xhints();
+ static void xinit();
+ static void xloadfonts();
++static void togglescm();
+ 
+ static void bpress(XEvent *);
+ static void cmessage(XEvent *);
+@@ -613,6 +614,23 @@ xinit()
+ 	XSync(xw.dpy, False);
+ }
+ 
++void
++togglescm()
++{
++    if (use_inverted_colors) {
++        free(sc);
++        sc = drw_scm_create(d, colors, 2);
++        use_inverted_colors = 0;
++    } else {
++        sc = drw_scm_create(d, inverted_colors, 2);
++        use_inverted_colors = 1;
++    }
++    drw_setscheme(d, sc);
++       XSetWindowBackground(xw.dpy, xw.win, sc[ColBg].pixel);
++    xdraw();
++}
++
++
+ void
+ xloadfonts()
+ {
+-- 
+2.30.0
+

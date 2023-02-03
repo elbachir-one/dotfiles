@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>st - simple terminal | suckless.org software that sucks less</title>
+	<link rel="stylesheet" type="text/css" href="//suckless.org/pub/style.css"/>
+</head>
+
+<div id="header">
+	<a href="//suckless.org/"><img src="//suckless.org/logo.svg" alt=""/></a>&nbsp;
+	<a id="headerLink" href="//suckless.org/">suckless.org</a>
+	<span class="hidden"> - </span>
+	<span id="headerSubtitle">st - simple terminal</span>
+</div>
+<hr class="hidden"/>
+<div id="menu">
+	<a href="//suckless.org/">home</a>
+	<a href="//dwm.suckless.org/">dwm</a>
+	<a href="//st.suckless.org/"><b>st</b></a>
+	<a href="//core.suckless.org/">core</a>
+	<a href="//surf.suckless.org/">surf</a>
+	<a href="//tools.suckless.org/">tools</a>
+	<a href="//libs.suckless.org/">libs</a>
+	<a href="//ev.suckless.org/">e.V.</a>
+	<span class="right">
+		<a href="//dl.suckless.org">download</a>
+		<a href="//git.suckless.org">source</a>
+	</span>
+</div>
+<hr class="hidden"/>
+<div id="content">
+<div id="nav">
+	<ul>
+	<li><a href="/">about</a></li>
+	<li><a href="//st.suckless.org/goals/">goals/</a></li>
+	<li><a href="//st.suckless.org/patches/"><b>patches/</b></a>
+		<ul>
+		<li><a href="//st.suckless.org/patches/alpha/">alpha/</a></li>
+		<li><a href="//st.suckless.org/patches/alpha_focus_highlight/">alpha focus highlight/</a></li>
+		<li><a href="//st.suckless.org/patches/anygeometry/">anygeometry/</a></li>
+		<li><a href="//st.suckless.org/patches/anysize/">anysize/</a></li>
+		<li><a href="//st.suckless.org/patches/autocomplete/">autocomplete/</a></li>
+		<li><a href="//st.suckless.org/patches/background_image/">background image/</a></li>
+		<li><a href="//st.suckless.org/patches/blinking_cursor/">blinking cursor/</a></li>
+		<li><a href="//st.suckless.org/patches/bold-is-not-bright/">bold is not bright/</a></li>
+		<li><a href="//st.suckless.org/patches/boxdraw/">boxdraw/</a></li>
+		<li><a href="//st.suckless.org/patches/charoffsets/">charoffsets/</a></li>
+		<li><a href="//st.suckless.org/patches/clipboard/">clipboard/</a></li>
+		<li><a href="//st.suckless.org/patches/colors_at_launch/">colors at launch/</a></li>
+		<li><a href="//st.suckless.org/patches/colorschemes/">colorschemes/</a></li>
+		<li><a href="//st.suckless.org/patches/copyurl/">copyurl/</a></li>
+		<li><a href="//st.suckless.org/patches/csi_22_23/">csi 22 23/</a></li>
+		<li><a href="//st.suckless.org/patches/cyberpunk-neon/">cyberpunk neon/</a></li>
+		<li><a href="//st.suckless.org/patches/cyclefonts/">cyclefonts/</a></li>
+		<li><a href="//st.suckless.org/patches/defaultfontsize/">defaultfontsize/</a></li>
+		<li><a href="//st.suckless.org/patches/delkey/">delkey/</a></li>
+		<li><a href="//st.suckless.org/patches/desktopentry/">desktopentry/</a></li>
+		<li><a href="//st.suckless.org/patches/disable_bold_italic_fonts/">disable bold italic fonts/</a></li>
+		<li><a href="//st.suckless.org/patches/dracula/">dracula/</a></li>
+		<li><a href="//st.suckless.org/patches/dynamic-cursor-color/">dynamic cursor color/</a></li>
+		<li><a href="//st.suckless.org/patches/externalpipe/">externalpipe/</a></li>
+		<li><a href="//st.suckless.org/patches/externalpipe-signal/">externalpipe signal/</a></li>
+		<li><a href="//st.suckless.org/patches/fix_ime/">fix ime/</a></li>
+		<li><a href="//st.suckless.org/patches/fix_keyboard_input/">fix keyboard input/</a></li>
+		<li><a href="//st.suckless.org/patches/font2/">font2/</a></li>
+		<li><a href="//st.suckless.org/patches/fullscreen/">fullscreen/</a></li>
+		<li><a href="//st.suckless.org/patches/glyph_wide_support/">glyph wide support/</a></li>
+		<li><a href="//st.suckless.org/patches/gradient/">gradient/</a></li>
+		<li><a href="//st.suckless.org/patches/gruvbox/">gruvbox/</a></li>
+		<li><a href="//st.suckless.org/patches/gruvbox-material/">gruvbox material/</a></li>
+		<li><a href="//st.suckless.org/patches/hidecursor/">hidecursor/</a></li>
+		<li><a href="//st.suckless.org/patches/invert/">invert/</a></li>
+		<li><a href="//st.suckless.org/patches/iso14755/">iso14755/</a></li>
+		<li><a href="//st.suckless.org/patches/keyboard_select/">keyboard select/</a></li>
+		<li><a href="//st.suckless.org/patches/ligatures/">ligatures/</a></li>
+		<li><a href="//st.suckless.org/patches/line_snap_delimiter/">line snap delimiter/</a></li>
+		<li><a href="//st.suckless.org/patches/moonfly/">moonfly/</a></li>
+		<li><a href="//st.suckless.org/patches/nano_shortcuts_support/">nano shortcuts support/</a></li>
+		<li><a href="//st.suckless.org/patches/netwmicon/">netwmicon/</a></li>
+		<li><a href="//st.suckless.org/patches/newterm/">newterm/</a></li>
+		<li><a href="//st.suckless.org/patches/nobadweight/">nobadweight/</a></li>
+		<li><a href="//st.suckless.org/patches/nordtheme/">nordtheme/</a></li>
+		<li><a href="//st.suckless.org/patches/open_copied_url/">open copied url/</a></li>
+		<li><a href="//st.suckless.org/patches/openbsd/">openbsd/</a></li>
+		<li><a href="//st.suckless.org/patches/palettes/">palettes/</a></li>
+		<li><a href="//st.suckless.org/patches/relativeborder/">relativeborder/</a></li>
+		<li><a href="//st.suckless.org/patches/right_click_to_plumb/">right click to plumb/</a></li>
+		<li><a href="//st.suckless.org/patches/rightclickpaste/">rightclickpaste/</a></li>
+		<li><a href="//st.suckless.org/patches/scrollback/">scrollback/</a></li>
+		<li><a href="//st.suckless.org/patches/selectionbg-alpha/">selectionbg alpha/</a></li>
+		<li><a href="//st.suckless.org/patches/selectioncolors/">selectioncolors/</a></li>
+		<li><a href="//st.suckless.org/patches/solarized/">solarized/</a></li>
+		<li><a href="//st.suckless.org/patches/spoiler/">spoiler/</a></li>
+		<li><a href="//st.suckless.org/patches/swapmouse/">swapmouse/</a></li>
+		<li><a href="//st.suckless.org/patches/sync/">sync/</a></li>
+		<li><a href="//st.suckless.org/patches/themed_cursor/">themed cursor/</a></li>
+		<li><a href="//st.suckless.org/patches/title_parsing_fix/">title parsing fix/</a></li>
+		<li><a href="//st.suckless.org/patches/undercurl/">undercurl/</a></li>
+		<li><a href="//st.suckless.org/patches/universcroll/">universcroll/</a></li>
+		<li><a href="//st.suckless.org/patches/vertcenter/">vertcenter/</a></li>
+		<li><a href="//st.suckless.org/patches/vim_browse/">vim browse/</a></li>
+		<li><a href="//st.suckless.org/patches/visualbell/">visualbell/</a></li>
+		<li><a href="//st.suckless.org/patches/visualbell2/">visualbell2/</a></li>
+		<li><a href="//st.suckless.org/patches/w3m/">w3m/</a></li>
+		<li><a href="//st.suckless.org/patches/workingdir/">workingdir/</a></li>
+		<li><a href="//st.suckless.org/patches/xclearwin/">xclearwin/</a></li>
+		<li><a href="//st.suckless.org/patches/xrandrfontsize/">xrandrfontsize/</a></li>
+		<li><a href="//st.suckless.org/patches/xresources/">xresources/</a></li>
+		<li><a href="//st.suckless.org/patches/xresources-with-reload-signal/">xresources with reload signal/</a></li>
+		<li><a href="//st.suckless.org/patches/xtheme/">xtheme/</a></li>
+		</ul>
+	</li>
+	<li><a href="//st.suckless.org/screenshots/">screenshots/</a></li>
+	</ul>
+</div>
+<hr class="hidden"/>
+<div id="main">
+
+<h1>patches</h1>
+<p>For instructions on how to submit and format patches, take a look at the
+<a href="//suckless.org/hacking">hacking guidelines</a>.</p>
+</div>
+
+</div>
+
+</html>

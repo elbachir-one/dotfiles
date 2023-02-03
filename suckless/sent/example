@@ -1,0 +1,60 @@
+Hello Everyone
+
+My System and Other Programs.
+
+The System:
+        - Windows XP
+        - Windows Vista
+        - Windows 7
+        - Ubuntu (12 and 13)
+        - Arch Linux
+        - Artix Linux (OpenRC and Runit)
+        - Void Linux
+
+@images/void.jpg
+
+Programs i use every day.
+       > The suckless tools:
+             => DWM
+             => ST
+             => Dmenu
+             => Surf
+             => Slock
+             => Sent
+
+@images/suckless.png
+
+       > Other Programs:
+             => Zathura
+             => Scrot
+             => Feh
+             => Vim or Nvim
+             => ffmpeg
+             => mpv and mpd & ncmpcpp
+             => Alacritty
+             => w3m
+             => tmux
+
+=> fzf
+=> QuteBrowser
+=> yt-dlp
+=> ytfzf
+=> nnn
+=> lsd
+=> clipmenu
+=> newsboat
+=> aria2
+
+Some Dependencies.
+  - nerd-fonts-ttf
+  - terminus-font
+  - harfbuzz-devel
+  - gst-libav
+  - gcr
+  - gstreamer
+  - alsa-utils
+  - nodejs
+  - picom
+  - libXrandr-devel
+
+The END

@@ -1,0 +1,27 @@
+From b3f14ecf0d08d02658d228522c0859acdbc9ec8e Mon Sep 17 00:00:00 2001
+From: Aurel Weinhold <aurel@weinhold.org>
+Date: Tue, 5 Oct 2021 15:35:29 +0200
+Subject: [PATCH] Always attach at bottom of stack
+
+Attach the new window at the bottom of the tiling stack. It should still
+be put at the top of the select stack and the z-stack.
+---
+ dwl.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/dwl.c b/dwl.c
+index 6303c25f..fd911b92 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -1303,7 +1303,11 @@ mapnotify(struct wl_listener *listener, void *data)
+ 	}
+
+ 	/* Insert this client into client lists. */
+-	wl_list_insert(&clients, &c->link);
++	if (clients.prev)
++		// tile at the bottom
++		wl_list_insert(clients.prev, &c->link);
++	else
++		wl_list_insert(&clients, &c->link);
+ 	wl_list_insert(&fstack, &c->flink);
+ 	wl_list_insert(&stack, &c->slink);

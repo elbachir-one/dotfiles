@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns# article: http://ogp.me/ns/article#">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Enter the void</title>
+
+		<meta property="og:title" content="Enter the void">
+		
+		<meta property="og:description" content="Welcome to the Void">
+		
+		<meta property="og:site_name" content="Void Linux">
+		<meta property="og:image:url" content="/assets/img/voidlogo.png">
+		<meta property="og:image:alt" content="Void Linux Logo">
+		<meta name="theme-color" content="#478061">
+
+		<link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/assets/css/screen.css">
+		<link rel="stylesheet" href="/assets/css/misc.css">
+		<link href='/assets/css/font-ubuntu.css' rel='stylesheet' type='text/css'>
+		
+		<link rel="alternate" type="application/atom+xml" title="Void Linux News feed" href="/atom.xml" />
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+		<script src="/assets/js/tabbar.js"></script>
+	</head>
+	<body role="document">
+		<nav class="navbar navbar-default navbar-inverse navbar-sticky" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#void-collapsed-navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-right navbar-collapse" id="void-collapsed-navbar">
+					<ul class="nav navbar-nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="/news/">News</a></li>
+						<li><a href="/download/">Download</a></li>
+						<li><a href="/packages/">Packages</a></li>
+						<li><a href="/acknowledgments/">Acknowledgments</a></li>
+						<li><a href="https://docs.voidlinux.org">Documentation</a></li>
+						<li><a href="https://man.voidlinux.org/">Manual Pages</a></li>
+						<li><a href="https://github.com/void-linux">GitHub</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+	<div class="col-md-3">
+		<div id="davoid">
+			
+			<img class="bg img-responsive standard-mode" alt="void logo" src="/assets/img/void_bg.png">
+			<img class="fg img-responsive standard-mode" alt="void logo">
+			
+		</div>
+	</div>
+	<div class="col-md-9">
+		<h2>The Void (Linux) distribution</h2>
+		<p>
+		Void is a general purpose operating system, based on the monolithic <a href="https://www.kernel.org">Linux</a> kernel. Its package system allows you to quickly install, update and remove software; software is provided in binary packages or can be built directly from sources with the help of the XBPS source packages collection.
+		</p>
+		<p>It is available for a variety of platforms. Software packages can be built natively or cross compiled through the <a href="https://github.com/void-linux/void-packages">XBPS source packages collection</a>.
+		</p>
+		<p>Follow us on <a href="https://twitter.com/voidlinux" title="Void on Twitter">Twitter</a>, visit the <a href="ircs://irc.libera.chat/#voidlinux">#voidlinux</a> IRC channel on <a href="https://libera.chat">libera.chat</a>, and join the <a href="https://www.reddit.com/r/voidlinux/">Void Linux subreddit</a>.
+		</p>
+		<p>Visit the <a href="https://build.voidlinux.org/console" title="Void builder">Void build server console</a> for package build status updates.
+		</p>
+		<p>Contribute to the Void Linux project by <a href="https://github.com/void-linux/void-packages/blob/master/CONTRIBUTING.md">adding and updating packages</a> and <a href="https://github.com/void-linux/void-docs/blob/master/CONTRIBUTING.md">extending the documentation</a>. More information can be found <a href="https://docs.voidlinux.org/contributing/index.html">in the Handbook</a>.
+		</p>
+	</div>
+</div>
+<hr>
+<div class="container">
+        <div class="row">
+                <div class="col-md-4">
+                        <h3>Not a fork!</h3>
+                        <p>Void Linux is an independent distribution, developed entirely by volunteers.</p>
+			<p>Unlike trillions of other existing distros, Void is not a modification of an existing distribution.  Void's package manager and build system have been written from scratch.</p>
+		</div>
+                <div class="col-md-4">
+                        <h3>Stable rolling release</h3>
+			<p>Void focuses on stability, rather than on being bleeding-edge. Install once, update routinely and safely.</p>
+			<p>Thanks to our <a href="https://build.voidlinux.org">continuous build system</a>, new software is built into binary packages as soon as the changes are pushed to the <em>void-packages</em> repository.</p>
+		</div>
+		<div class="col-md-4">
+			<h3>runit</h3>
+			<p>We use <a href="http://smarden.org/runit/">runit</a> as the init system and service supervisor.</p>
+			<p>runit is a simple and effective approach to initialize the system with reliable service supervision. Refer to the <a href="https://docs.voidlinux.org/config/services/index.html">Void Handbook</a> for an introduction.</p>
+		</div>
+	</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h3>C library diversity</h3>
+				<p>Void Linux supports both the <a href="http://musl.libc.org/">musl</a> and <a href="https://www.gnu.org/software/libc/">GNU</a> libc implementations, patching incompatible software when necessary and working with upstream developers to improve the correctness and portability of their projects.</p>
+			</div>
+                <div class="col-md-4">
+                        <h3>XBPS</h3>
+			<p><a href="https://github.com/void-linux/xbps">xbps</a> is the native system package manager, written from scratch with a <em>2-clause BSD</em> license.</p>
+			<p><em>XBPS</em> allows you to quickly install/update/remove software in your system and features detection of <em>incompatible shared libraries</em> and <em>dependencies</em> while updating or removing packages (among others). Refer to the Handbook for <a href="https://docs.voidlinux.org/xbps/index.html">an overview</a>.</p>
+		</div>
+		<div class="col-md-4">
+			<h3>xbps-src</h3>
+			<p><a href="https://github.com/void-linux/void-packages">xbps-src</a> is the xbps package builder, written from scratch with a <em>2-clause BSD</em> license.</p>
+			<p>This builds the software in <em>containers</em> through the use of <em>Linux namespaces</em>, providing isolation of processes and bind mounts (among others). No root required!</p>
+			<p>Additionally, xbps-src can build natively or cross compile for the target machine, and supports multiple <em>C libraries</em> (glibc and musl currently).</p>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-4">
+		<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<script>
+		theme = "light"
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme="dark"
+		document.write('<a class="twitter-timeline" data-theme="' + theme + '" data-chrome="noborders noscrollbar transparent" width="520" height="300" href="https://twitter.com/VoidLinux">Tweets by VoidLinux</a>')
+		</script>
+		</div>
+		<div class="col-md-4">
+			<h3>void-packages changes <span class="rssdev"><a href="https://github.com/void-linux/void-packages/commits/master.atom" title="Subscribe to void-packages"><i class="fa fa-rss fa-lg"></i></a></span></h3>
+			<script src="/assets/js/voidcommits.js"></script>
+			<script src="https://api.github.com/repos/void-linux/void-packages/commits?page=1&amp;per_page=10&amp;callback=voidcommits&amp;sha=master"></script>
+		</div>
+		<div class="col-md-4">
+			<h3>xbps changes <span class="rssdev"><a href="https://github.com/void-linux/xbps/commits/master.atom" title="Subscribe to xbps"><i class="fa fa-rss fa-lg"></i></a></span></h3>
+			<script src="/assets/js/voidcommits.js"></script>
+			<script src="https://api.github.com/repos/void-linux/xbps/commits?page=1&amp;per_page=10&amp;callback=voidcommits&amp;sha=master"></script>
+		</div>
+	</div>
+	<hr>
+	<div class="page-header">
+		<h2>Recent news <a href="/atom.xml" title="Subscribe to the news"><i class="fa fa-rss fa-lg"></i></a></h2>
+	</div>
+	<div class="row">
+			
+			<div class="col-md-10">
+				<h4>May 27, 2022</h4>
+				<h3><a href="/news/2022/05/default-mirror.html">New Mirror Default</a></h3>
+				<p>The default mirror has been updated to
+https://repo-default.voidlinux.org.  If you wish to specify a mirror
+that is nearer to you geographically you can find the full list of
+currently active mirrors here:
+<a href="https://docs.voidlinux.org/xbps/repositories/mirrors/index.html">https://docs.voidlinux.org/xbps/repositories/mirrors/index.html</a>.</p>
+
+			</div>
+			
+			<div class="col-md-10">
+				<h4>October 03, 2021</h4>
+				<h3><a href="/news/2021/10/mirror-retirement.html">US Mirror Retirement</a></h3>
+				<p>The alpha.us.repo.voidlinux.org mirror has been retired.  Users should
+switch to https://repo-us.voidlinux.org for continued service out of
+the central US.  As part of the switch the US tier one mirror has
+gained TLS, and is running on a more reliable host.</p>
+
+<p>All contributors with in-flight PRs should rebase to ensure that the
+latest URL is reflected in your branch’s CI configuration.</p>
+
+
+			</div>
+			
+	</div>
+</div>
+
+			
+			<div class="container col-md-8 col-md-offset-2">
+				<hr>
+				<footer class="footer">
+					<p class="text-center">Copyright 2022 <a href="https://github.com/orgs/void-linux/people">VoidLinux contributors</a></p>
+					<p class="text-center">Copyright 2008-2018 <a href="https://gitlab.com/xtraeme">Juan RP</a> and contributors</p>
+					<p class="text-center">Linux&#174; is a registered trademark of Linus Torvalds (<a href="https://www.linuxfoundation.org/programs/legal/trademark/attribution">info</a>)</p>
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>

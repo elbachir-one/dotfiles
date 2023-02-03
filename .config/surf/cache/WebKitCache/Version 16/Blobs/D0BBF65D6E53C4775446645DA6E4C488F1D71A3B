@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>surf | suckless.org software that sucks less</title>
+	<link rel="stylesheet" type="text/css" href="//suckless.org/pub/style.css"/>
+</head>
+
+<div id="header">
+	<a href="//suckless.org/"><img src="//suckless.org/logo.svg" alt=""/></a>&nbsp;
+	<a id="headerLink" href="//suckless.org/">suckless.org</a>
+	<span class="hidden"> - </span>
+	<span id="headerSubtitle">surf</span>
+</div>
+<hr class="hidden"/>
+<div id="menu">
+	<a href="//suckless.org/">home</a>
+	<a href="//dwm.suckless.org/">dwm</a>
+	<a href="//st.suckless.org/">st</a>
+	<a href="//core.suckless.org/">core</a>
+	<a href="//surf.suckless.org/"><b>surf</b></a>
+	<a href="//tools.suckless.org/">tools</a>
+	<a href="//libs.suckless.org/">libs</a>
+	<a href="//ev.suckless.org/">e.V.</a>
+	<span class="right">
+		<a href="//dl.suckless.org">download</a>
+		<a href="//git.suckless.org">source</a>
+	</span>
+</div>
+<hr class="hidden"/>
+<div id="content">
+<div id="nav">
+	<ul>
+	<li><a href="/">about</a></li>
+	<li><a href="//surf.suckless.org/files/">files/</a></li>
+	<li><a href="//surf.suckless.org/patches/"><b>patches/</b></a>
+		<ul>
+		<li><a href="//surf.suckless.org/patches/aria2/">aria2/</a></li>
+		<li><a href="//surf.suckless.org/patches/autoopen/">autoopen/</a></li>
+		<li><a href="//surf.suckless.org/patches/bookmarking/">bookmarking/</a></li>
+		<li><a href="//surf.suckless.org/patches/cachedir/">cachedir/</a></li>
+		<li><a href="//surf.suckless.org/patches/chromebar/">chromebar/</a></li>
+		<li><a href="//surf.suckless.org/patches/chromekeys/">chromekeys/</a></li>
+		<li><a href="//surf.suckless.org/patches/clipboard-instead-of-primary/">clipboard instead of primary/</a></li>
+		<li><a href="//surf.suckless.org/patches/dlconsole/">dlconsole/</a></li>
+		<li><a href="//surf.suckless.org/patches/download/">download/</a></li>
+		<li><a href="//surf.suckless.org/patches/externalpipe/">externalpipe/</a></li>
+		<li><a href="//surf.suckless.org/patches/externalpipe-signal/">externalpipe signal/</a></li>
+		<li><a href="//surf.suckless.org/patches/fifo/">fifo/</a></li>
+		<li><a href="//surf.suckless.org/patches/history/">history/</a></li>
+		<li><a href="//surf.suckless.org/patches/homepage/"><b>homepage/</b></a></li>
+		<li><a href="//surf.suckless.org/patches/instapaper/">instapaper/</a></li>
+		<li><a href="//surf.suckless.org/patches/keycodes/">keycodes/</a></li>
+		<li><a href="//surf.suckless.org/patches/middle-click-plumb/">middle click plumb/</a></li>
+		<li><a href="//surf.suckless.org/patches/modal/">modal/</a></li>
+		<li><a href="//surf.suckless.org/patches/multijs/">multijs/</a></li>
+		<li><a href="//surf.suckless.org/patches/navigation-history/">navigation history/</a></li>
+		<li><a href="//surf.suckless.org/patches/notifications/">notifications/</a></li>
+		<li><a href="//surf.suckless.org/patches/omnibar/">omnibar/</a></li>
+		<li><a href="//surf.suckless.org/patches/playexternal/">playexternal/</a></li>
+		<li><a href="//surf.suckless.org/patches/popup-on-gesture/">popup on gesture/</a></li>
+		<li><a href="//surf.suckless.org/patches/proxyconfig/">proxyconfig/</a></li>
+		<li><a href="//surf.suckless.org/patches/quit-hotkey/">quit hotkey/</a></li>
+		<li><a href="//surf.suckless.org/patches/scroll-faster/">scroll faster/</a></li>
+		<li><a href="//surf.suckless.org/patches/searchengines/">searchengines/</a></li>
+		<li><a href="//surf.suckless.org/patches/short-title/">short title/</a></li>
+		<li><a href="//surf.suckless.org/patches/sitejs/">sitejs/</a></li>
+		<li><a href="//surf.suckless.org/patches/smoothscrolling-via-GTK3/">smoothscrolling via GTK3/</a></li>
+		<li><a href="//surf.suckless.org/patches/spacesearch/">spacesearch/</a></li>
+		<li><a href="//surf.suckless.org/patches/startgo/">startgo/</a></li>
+		<li><a href="//surf.suckless.org/patches/unicode-in-dmenu/">unicode in dmenu/</a></li>
+		<li><a href="//surf.suckless.org/patches/url-filtering/">url filtering/</a></li>
+		<li><a href="//surf.suckless.org/patches/useragent/">useragent/</a></li>
+		<li><a href="//surf.suckless.org/patches/web-search/">web search/</a></li>
+		<li><a href="//surf.suckless.org/patches/xdg/">xdg/</a></li>
+		<li><a href="//surf.suckless.org/patches/zoommtg-handler/">zoommtg handler/</a></li>
+		</ul>
+	</li>
+	<li><a href="//surf.suckless.org/screenshots/">screenshots/</a></li>
+	<li><a href="//surf.suckless.org/stylesheets/">stylesheets/</a></li>
+	</ul>
+</div>
+<hr class="hidden"/>
+<div id="main">
+
+<h1>Homepage</h1>
+<h2>Description</h2>
+<p>This patch allows you to set a homepage to be loaded when you have not set a uri.</p>
+<h2>Download</h2>
+<ul>
+<li><a href="surf-2.0-homepage.diff">surf-2.0-homepage.diff</a> (0.6k) (20180104)</li>
+</ul>
+<h2>Author</h2>
+<ul>
+<li>Matthew Bauer <a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#109;&#106;&#98;&#97;&#117;&#101;&#114;&#57;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#109;&#106;&#98;&#97;&#117;&#101;&#114;&#57;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a></li>
+<li>Henrique Lengler <a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#108;&#101;&#110;&#103;&#64;&#111;&#112;&#101;&#110;&#109;&#97;&#105;&#108;&#98;&#111;&#120;&#46;&#111;&#114;&#103;">&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#108;&#101;&#110;&#103;&#64;&#111;&#112;&#101;&#110;&#109;&#97;&#105;&#108;&#98;&#111;&#120;&#46;&#111;&#114;&#103;</a></li>
+<li>Ivan Tham <a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#112;&#105;&#99;&#107;&#102;&#105;&#114;&#101;&#64;&#114;&#105;&#115;&#101;&#117;&#112;&#46;&#110;&#101;&#116;">&#112;&#105;&#99;&#107;&#102;&#105;&#114;&#101;&#64;&#114;&#105;&#115;&#101;&#117;&#112;&#46;&#110;&#101;&#116;</a></li>
+<li>thatlittlegit <a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#112;&#101;&#114;&#115;&#111;&#110;&#97;&#108;&#64;&#116;&#104;&#97;&#116;&#108;&#105;&#116;&#116;&#108;&#101;&#103;&#105;&#116;&#46;&#116;&#107;">&#112;&#101;&#114;&#115;&#111;&#110;&#97;&#108;&#64;&#116;&#104;&#97;&#116;&#108;&#105;&#116;&#116;&#108;&#101;&#103;&#105;&#116;&#46;&#116;&#107;</a></li>
+</ul>
+</div>
+
+</div>
+
+</html>

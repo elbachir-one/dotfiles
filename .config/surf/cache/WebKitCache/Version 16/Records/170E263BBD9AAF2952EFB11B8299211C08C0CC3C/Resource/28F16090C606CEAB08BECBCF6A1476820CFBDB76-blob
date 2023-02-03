@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>tools | suckless.org software that sucks less</title>
+	<link rel="stylesheet" type="text/css" href="//suckless.org/pub/style.css"/>
+</head>
+
+<div id="header">
+	<a href="//suckless.org/"><img src="//suckless.org/logo.svg" alt=""/></a>&nbsp;
+	<a id="headerLink" href="//suckless.org/">suckless.org</a>
+	<span class="hidden"> - </span>
+	<span id="headerSubtitle">tools</span>
+</div>
+<hr class="hidden"/>
+<div id="menu">
+	<a href="//suckless.org/">home</a>
+	<a href="//dwm.suckless.org/">dwm</a>
+	<a href="//st.suckless.org/">st</a>
+	<a href="//core.suckless.org/">core</a>
+	<a href="//surf.suckless.org/">surf</a>
+	<a href="//tools.suckless.org/"><b>tools</b></a>
+	<a href="//libs.suckless.org/">libs</a>
+	<a href="//ev.suckless.org/">e.V.</a>
+	<span class="right">
+		<a href="//dl.suckless.org">download</a>
+		<a href="//git.suckless.org">source</a>
+	</span>
+</div>
+<hr class="hidden"/>
+<div id="content">
+<div id="nav">
+	<ul>
+	<li><a href="/">about</a></li>
+	<li><a href="//tools.suckless.org/9base/">9base/</a></li>
+	<li><a href="//tools.suckless.org/blind/">blind/</a></li>
+	<li><a href="//tools.suckless.org/dmenu/">dmenu/</a></li>
+	<li><a href="//tools.suckless.org/farbfeld/"><b>farbfeld/</b></a>
+		<ul>
+		<li><a href="//tools.suckless.org/farbfeld/examples/">examples/</a></li>
+		<li><a href="//tools.suckless.org/farbfeld/faq/">faq/</a></li>
+		</ul>
+	</li>
+	<li><a href="//tools.suckless.org/ii/">ii/</a></li>
+	<li><a href="//tools.suckless.org/quark/">quark/</a></li>
+	<li><a href="//tools.suckless.org/scroll/">scroll/</a></li>
+	<li><a href="//tools.suckless.org/sent/">sent/</a></li>
+	<li><a href="//tools.suckless.org/sic/">sic/</a></li>
+	<li><a href="//tools.suckless.org/slock/">slock/</a></li>
+	<li><a href="//tools.suckless.org/slstatus/">slstatus/</a></li>
+	<li><a href="//tools.suckless.org/tabbed/">tabbed/</a></li>
+	<li><a href="//tools.suckless.org/x/">x/</a></li>
+	</ul>
+</div>
+<hr class="hidden"/>
+<div id="main">
+
+<p><img src="farbfeld.svg" alt="farbfeld" /></p>
+<p>farbfeld is a lossless image format which is easy to parse, pipe and compress.
+It has the following format:</p>
+<pre><code>╔════════╤═════════════════════════════════════════════════════════╗
+║ Bytes  │ Description                                             ║
+╠════════╪═════════════════════════════════════════════════════════╣
+║ 8      │ &quot;farbfeld&quot; magic value                                  ║
+╟────────┼─────────────────────────────────────────────────────────╢
+║ 4      │ 32-Bit BE unsigned integer (width)                      ║
+╟────────┼─────────────────────────────────────────────────────────╢
+║ 4      │ 32-Bit BE unsigned integer (height)                     ║
+╟────────┼─────────────────────────────────────────────────────────╢
+║ [2222] │ 4x16-Bit BE unsigned integers [RGBA] / pixel, row-major ║
+╚════════╧═════════════════════════════════════════════════════════╝
+</code></pre>
+<p>The RGB-data should be sRGB for best interoperability and not
+alpha-premultiplied.</p>
+<h2>Dependencies</h2>
+<ul>
+<li><a href="http://www.libpng.org/pub/png/libpng.html">libpng</a> - for png conversions</li>
+<li><a href="http://libjpeg-turbo.virtualgl.org/">libjpeg-turbo</a> - for jpg conversions</li>
+</ul>
+<h2>Development</h2>
+<p>You can <a href="//git.suckless.org/farbfeld">browse</a> its source code repository or get
+a copy using the following command:</p>
+<pre><code>git clone https://git.suckless.org/farbfeld
+</code></pre>
+<h2>Download</h2>
+<ul>
+<li><a href="//dl.suckless.org/farbfeld/farbfeld-1.tar.gz">farbfeld-1</a> (2016-01-06)</li>
+<li><a href="//dl.suckless.org/farbfeld/farbfeld-2.tar.gz">farbfeld-2</a> (2016-03-14)</li>
+<li><a href="//dl.suckless.org/farbfeld/farbfeld-3.tar.gz">farbfeld-3</a> (2017-04-14)</li>
+<li><a href="//dl.suckless.org/farbfeld/farbfeld-4.tar.gz">farbfeld-4</a> (2018-04-11)</li>
+</ul>
+<p>Also make sure to check your package manager. The following distributions
+provide packages:</p>
+<ul>
+<li><a href="https://pkgs.alpinelinux.org/package/edge/community/x86_64/farbfeld">Alpine Linux</a></li>
+<li><a href="https://aur.archlinux.org/packages/farbfeld">Arch Linux (AUR)</a></li>
+<li><a href="https://packages.debian.org/farbfeld">Debian</a></li>
+<li><a href="https://svnweb.freebsd.org/ports/head/graphics/farbfeld/">FreeBSD</a></li>
+<li><a href="https://packages.gentoo.org/packages/media-gfx/farbfeld">Gentoo</a></li>
+<li><a href="https://github.com/NixOS/nixpkgs/tree/master/pkgs/development/libraries/farbfeld">NixOS</a></li>
+<li><a href="http://ports.su/graphics/farbfeld">OpenBSD</a></li>
+<li><a href="https://packages.ubuntu.com/farbfeld">Ubuntu</a></li>
+<li><a href="https://github.com/void-linux/void-packages/tree/master/srcpkgs/farbfeld">Void Linux</a></li>
+</ul>
+<h2>Implementations</h2>
+<ul>
+<li><a href="https://crates.io/crates/image">image</a> Rust crate for image processing</li>
+<li><a href="https://sourceforge.net/projects/enlightenment/files/imlib2-src/">imlib2</a> library (implies support in feh,
+w3m, giblib, sxiv, conky, magicpoint, scrot, libcaca, etc.)</li>
+<li><a href="https://git.codemadness.org/lel/">lel</a> farbfeld image viewer</li>
+<li><a href="//tools.suckless.org/sent/">sent</a> presentation tool</li>
+<li><a href="https://github.com/sirjofri/ff-tools">ff-tools</a> image filter/generator collection</li>
+<li><a href="https://github.com/sirjofri/ffmk">ffmk</a> makefile-based farbfeld mixer</li>
+<li><a href="https://github.com/hullerob/go.farbfeld">Go encoder/decoder</a></li>
+<li><a href="https://github.com/ender672/farbfeld-resize">resize</a> image filter</li>
+<li><a href="https://github.com/erik/gamut">gamut</a> image filter collection</li>
+<li><a href="https://github.com/ids1024/gimp-farbfeld">gimp-farbfeld</a> gimp plug-in</li>
+<li><a href="https://web.archive.org/web/20211205013032/http://zzo38computer.org/fossil/farbfeld.ui/index">farbfeld utilities</a> huge collection of image filters</li>
+<li><a href="https://gitlab.com/link2xt/ff2sixel">ff2sixel</a> farbfeld image viewer for SIXEL terminals</li>
+<li><a href="https://git.codemadness.org/xscreenshot/file/README.html">xscreenshot</a> screen capture tool</li>
+</ul>
+<h2>Author</h2>
+<ul>
+<li>Laslo Hunhold (dev@frign.de)</li>
+</ul>
+<p>Please contact me when you find information that could be added to this page.</p>
+</div>
+
+</div>
+
+</html>
