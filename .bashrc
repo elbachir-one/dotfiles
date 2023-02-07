@@ -72,6 +72,7 @@ alias i='sudo xbps-install -S'
 alias c='sudo xbps-remove -o && sudo xbps-remove -O'
 alias l='lsd -al'
 alias ll='lsd -a'
+alias lb='lsblk'
 
 
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
