@@ -74,6 +74,16 @@ alias d='sudo xbps-remove'
 alias l='lsd -al'
 alias ll='lsd -a'
 alias lb='lsblk'
+alias m='mpv'
+#
+alias yl='yt-dlp -F'
+alias y='yt-dlp'
+alias ya='yt-dlp -f 140'
+alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --merge-output-format mp4'
 
-
+# For recording.
+#
+alias ff="ffmpeg -framerate 20 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
+#
+#
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
