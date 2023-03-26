@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "ProFont Windows Nerd Font:pixelsize=26:antialias=true:autohint=true";
+static char *font = "ProFont Windows Nerd Font:pixelsize=20:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
 	"Ubuntu Mono:pixelsize=16:antialias=true:autohint=true"

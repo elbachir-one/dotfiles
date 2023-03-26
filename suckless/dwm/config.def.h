@@ -13,7 +13,7 @@ static const int topbar 		          = 1;      /* 0 means bottom bar */
 static const int user_bh 		          = 1;      /* 2 is the default spacing around the bar's font */
 static const int vertpad 		          = 4;      /* vertical padding of bar */
 static const int sidepad 		          = 14;     /* horizontal padding of bar */
-static const char *fonts[] 		        = {"terminus:style=Bold:size=22"};
+static const char *fonts[] 		        = {"terminus:style=Bold:size=16"};
 static const char dmenufont[] 		    = "terminus:style=Bold:size=18";
 static const char col_gray1[] 		    = "#000000";
 static const char col_gray2[] 		    = "#444444";
@@ -102,7 +102,7 @@ static char dmenumon[2]	            = "0"; /* component of dmenucmd, manipulated
 static const char *dmenucmd[]       = { "dmenu_run", NULL };
 static const char *termcmd[]        = { "st", NULL };
 static const char *clipcmd[]        = { "clipmenu", NULL };
-static const char *hcmd[]           = { "st", "-e", "htop", NULL };
+static const char *hcmd[]           = { "st", "-e", "htop", "-t", NULL };
 static const char *rancmd[]         = { "st", "-e", "ranger", NULL };
 static const char *lockcmd[]        = { "slock", NULL };
 static const char *screcmd[]        = { "scrot", "/home/sh/Images/shots/shot-%Y-%T-screenshot.jpg", NULL };
@@ -150,13 +150,13 @@ static Key keys[] = {
     {MODKEY | Mod4Mask, 			          XK_0, 		        togglegaps, 	    {0}},
     {MODKEY | Mod4Mask | ShiftMask, 		XK_0, 		        defaultgaps, 	    {0}},
     {MODKEY | ShiftMask | ControlMask,	XK_y, 		        incrihgaps, 	    {.i = +1}},
-    {MODKEY, 					                  XK_o, 		        incrihgaps, 	    {.i = -1}},
+    {MODKEY | ControlMask, 					                  XK_o, 		        incrihgaps, 	    {.i = -1}},
     {MODKEY | ControlMask, 			        XK_y, 		        incrivgaps, 	    {.i = +1}},
     {MODKEY | ControlMask, 			        XK_o, 	          incrivgaps, 	    {.i = -1}},
     {MODKEY | Mod4Mask, 			          XK_y, 		        incrohgaps, 	    {.i = +1}},
     {MODKEY | Mod4Mask, 			          XK_o, 		        incrohgaps, 	    {.i = -1}},
     {MODKEY | ControlMask | ShiftMask,  XK_y, 		        incrovgaps, 	    {.i = +1}},
-    {MODKEY | ShiftMask, 			          XK_o, 		        incrovgaps, 	    {.i = -1}},
+    {MODKEY | ShiftMask | ControlMask, 			          XK_o, 		        incrovgaps, 	    {.i = -1}},
     {MODKEY, 					                  XK_Return, 	      zoom, 		        {0}},
     {MODKEY, 					                  XK_Tab, 	        view, 		        {0}},
     {MODKEY | ShiftMask, 			          XK_c, 		        killclient, 	    {0}},

@@ -75,6 +75,7 @@ alias l='lsd -al'
 alias ll='lsd -a'
 alias lb='lsblk'
 alias m='mpv'
+alias htop='htop -t'
 #
 alias yl='yt-dlp -F'
 alias y='yt-dlp'
@@ -83,7 +84,8 @@ alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -
 
 # For recording.
 #
-alias ff="ffmpeg -framerate 20 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
+alias ff="ffmpeg -framerate 16 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
 #
 #
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias lc='colorls -lA --sd'

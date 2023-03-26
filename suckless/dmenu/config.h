@@ -7,7 +7,7 @@ static const unsigned int border_width = 0;
 
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
-	"ProFont Windows Nerd Font:style=Bold:size=26"
+	"ProFont Windows Nerd Font:style=Bold:size=22"
 };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static const char *colors[SchemeLast][2] = {
