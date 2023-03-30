@@ -85,6 +85,7 @@ alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -
 # For recording.
 #
 alias ff="ffmpeg -framerate 16 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
+alias rec="ffmpeg -framerate 18 -f x11grab -video_size 1920x1080 -i :0.0 -preset ultrafast -crf 12 Output.mkv"
 #
 #
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash

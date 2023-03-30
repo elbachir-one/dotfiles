@@ -8,7 +8,7 @@
 static char *font = "ProFont Windows Nerd Font:pixelsize=20:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-	"Ubuntu Mono:pixelsize=16:antialias=true:autohint=true"
+	"Noto Color Emoji:size=20",
 	"Hack Nerd Font Mono:pixelsize=16:antialias=true:autohint=true",
 };
 
@@ -112,7 +112,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.4;
+float alpha = 0.6;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
