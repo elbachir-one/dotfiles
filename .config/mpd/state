@@ -1,16 +1,43 @@
-sw_volume: 32
+sw_volume: 10
 audio_device_state:1:mpd alsamixer-output
 audio_device_state:1:toggle_visualizer
 state: pause
-current: 0
-time: 21.808000
+current: 20
+time: 260.328000
 random: 0
-repeat: 0
+repeat: 1
 single: 0
 consume: 0
 crossfade: 0
 mixrampdb: 0.000000
 mixrampdelay: -1.000000
 playlist_begin
-0:b.m4a
+0:Pauli Hausmann - Iron Fable Extended [FT4QifimCzM].m4a
+1:Lumidelic - Magic Garden (2018 Rework) [Q2aQiM3fj-Q].m4a
+2:Machis Ke Tiliya Jara Ke [ihXoz2Ku_8E].m4a
+3:March of the Hares - Nathan Moore.mp3
+4:No Filter - NEFFEX.mp3
+5:piano-rat.m4a
+6:Progressive Minimal Techno Mix 2022 _ Mixed by C A V E E . _ 'BRIDGE TO THE GREEN' Set. [IB64_AWIUgk].m4a
+7:Pyar Ke Rista [UJVZbe2A9FU].m4a
+8:Richard Durand & Christian Burns - Almost Home [M9SeeidLKoo].m4a
+9:Steen Chorchendorff Jorgensen - Clouds Drifting in Time [Full Album] [1Zs_MBFEzWM].m4a
+10:Taras Bazeev - Balloon [Y_AeN5mPeTg].m4a
+11:templeOS-tuns.m4a
+12:Vale Vale - ALOK x Free Fire - Canción oficial Free Fire World Series 2019 [VSQrcrH8NeY].m4a
+13:VOCAL TRANCE - Zetandel & Tiff Lacey - Higher Ground (Costa & Aurosonic Remix) [RNM] + LYRICS [ILGxpbs1cms].m4a
+14:INOSSI - Awaken (Official) [mQLeMfRLIG8].m4a
+15:b.m4a
+16:bat.m4a
+17:Blue Day - Freedom Trail Studio.mp3
+18:Best Highlight Song RUOK Free Fire ❤  (No Copyright) [mHnaQ812YjY].m4a
+19:almost-home.m4a
+20:celebration-8564.mp3
+21:Arise by KAINA ｜ KM [O1-RkGeCTIQ].m4a
+22:brutalK.m4a
+23:dj-Zulu.m4a
+24:Downloads  Instagram Install instaloader [oAnJX_uxlR4].m4a
+25:Dj Quicksilver & Dag - Zulu [4TPeZ9XA4OI].m4a
+26:Costa Mee - A Moment With You (Original Mix) [FRx7jmmAuMQ].m4a
+27:Hello titties  -) [HozN3Z9BBhs].m4a
 playlist_end

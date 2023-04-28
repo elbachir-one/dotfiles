@@ -3,11 +3,18 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#PS1='[\u@\h \W]\$ '
-export BROWSER="chromium"
-export EDITOR="vim"
+alias ls='lsd --color=auto'
+alias s='source ~/.bashrc'
+alias vim='nvim'
+alias lvim='/home/sh/.local/bin/lvim'
+bind 'set completion-ignore-case on'
+#
 
-# New bash prompt:
+export TERMINAL='st'
+export BROWSER='chromium'
+export EDITOR='vim'
+
+#PS1='[\u@\h \W]\$ '
 # get current branch in git repo
 function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
@@ -55,6 +62,32 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="\[\e[31m\]\w\[\e[m\]\[\e[36m\]\`parse_git_branch\`\[\e[m\] \[\e[35m\]\\$\[\e[m\] "
+export PS1="[\[\e[36m\]\W\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 
-alias u="sudo xbps-install -Su"
+alias p='sudo poweroff'
+alias r='sudo reboot'
+alias mi='sudo make clean install'
+alias q='xbps-query -Rs'
+alias u='sudo xbps-install -Su'
+alias i='sudo xbps-install -S'
+alias c='sudo xbps-remove -o && sudo xbps-remove -O'
+alias d='sudo xbps-remove'
+alias l='lsd -al'
+alias ll='lsd -a'
+alias lb='lsblk'
+alias m='mpv'
+alias htop='htop -t'
+#
+alias yl='yt-dlp -F'
+alias y='yt-dlp'
+alias ya='yt-dlp -f 140'
+alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --merge-output-format mp4'
+
+# For recording.
+#
+alias ff="ffmpeg -framerate 16 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
+alias rec="ffmpeg -framerate 20 -f x11grab -video_size 1920x1080 -i :0.0 -preset ultrafast -crf 10 Output.mkv"
+#
+#
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias lc='colorls -lA --sd'

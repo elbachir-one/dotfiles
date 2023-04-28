@@ -42,7 +42,8 @@ nnoremap <silent> <F5> :%s/\s\+$//<cr>
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
 
 nnoremap t :NERDTreeToggle<CR>
-nnoremap f :F<CR>
+nnoremap f :FZF<CR>
+nnoremap ff :Files<CR>
 nnoremap <TAB> :bnext<CR>
 
 set undofile
@@ -51,7 +52,7 @@ set undodir=/tmp
 vnoremap <C-c> "+y
 map <C-v> "+v
 
-let mapleader =","
+let mapleader ="!"
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -62,11 +63,13 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/goyo.vim'
@@ -82,7 +85,6 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neoclide/coc.nvim'
 Plug 'tpope/vim-markdown'
-Plug 'EdenEast/nightfox.nvim'
 
 call plug#end()
 
@@ -93,10 +95,7 @@ set nohlsearch
 set clipboard+=unnamedplus
 
 " Some basics:
-	nnoremap c "_c
 	set nocompatible
-	filetype plugin on
-syntax on
 	set encoding=utf-8
 	set number relativenumber
 " Enable autocompletion:
@@ -109,9 +108,6 @@ syntax on
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
 	map <leader>o :setlocal spell! spelllang=en_us<CR>
-
-" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
 
 " Nerd tree
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -198,8 +194,10 @@ endif
 "let g:airline_theme='dark'
 
 "colore
-"colorscheme nightfox
-colorscheme gruvbox
+"colorscheme gruvbox
+"colorscheme tokyonight-storm
+colorscheme tokyonight-night
+"colorscheme github_*
 " colorscheme ayu
 "colorscheme molokai
 "colorscheme kolor
@@ -411,3 +409,6 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+"
+"
