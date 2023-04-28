@@ -116,7 +116,7 @@ static const char *up[]             = { "amixer", "set", "Master", "10%+", NULL 
 static const char *mut[]            = { "amixer", "set", "Master", "toggle", NULL };
 static const char *down[]           = { "amixer", "set", "Master", "10%-", NULL };
 static const char scratchpadname[]  = "scratchpad";
-static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "122x30", NULL };
+static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "108x30", NULL };
 
 static Key keys[] = {
     /* modifier                     		 key            function               argument */
