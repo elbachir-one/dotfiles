@@ -7,8 +7,12 @@ If you want to install my stuff, there are some dependences needed for everting 
 
 ### For Void Linux.
 
-``` sudo xbps-isntall -Sy nerd-fonts-ttf feh xorg libXft-devel libX11-devel libXinerama-devel lsd mpv mpd ncmpcpp zathura neovim vim gvim newsboat picom alacritty lxappearance alsa-utils htop tmux ranger qutebrowser chromium ffmpeg rsync ueberzug mediainfo base-devel clang yt-dlp clipmenu wget curl tree nodejs jq fzf terminus-font scrot ninja networkmanager linux-lts harfbuzz-devel git cmake bash-completion ```
+```sh
+sudo xbps-install -Sy nerd-fonts-ttf feh xorg libXft-devel libX11-devel libXinerama-devel lsd mpv mpd ncmpcpp zathura neovim vim gvim newsboat picom alacritty lxappearance alsa-utils htop tmux ranger qutebrowser chromium ffmpeg rsync ueberzug mediainfo base-devel clang yt-dlp clipmenu wget curl tree nodejs jq fzf terminus-font scrot ninja networkmanager linux-lts harfbuzz-devel git cmake bash-completion
+```
 
 ### For FreeBSD.
 
-``` doas pkg install nerd-fonts feh xorg mpv neovim vim git picom tmux chromium yt-dlp terminus-font bash ```
+```sh
+doas pkg install nerd-fonts feh xorg mpv neovim vim git picom tmux chromium yt-dlp terminus-font bash
+```
