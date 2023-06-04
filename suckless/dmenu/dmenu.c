@@ -729,7 +729,7 @@ setup(void)
 
 		mw = MIN(MAX(max_textw() + promptw, 100), info[i].width);
 		x = info[i].x_org + ((info[i].width  - mw) / 2);
-		y = info[i].y_org + ((info[i].height - mh) / 2);
+		y = info[i].y_org + ((info[i].height - mh) / 4);
 		XFree(info);
 	} else
 #endif

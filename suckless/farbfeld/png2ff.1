@@ -1,0 +1,38 @@
+.Dd 2018-04-11
+.Dt PNG2FF 1
+.Os suckless.org
+.Sh NAME
+.Nm png2ff
+.Nd convert PNG to farbfeld
+.Sh SYNOPSIS
+.Nm
+.Sh DESCRIPTION
+.Nm
+reads a PNG image from stdin, converts it to
+.Xr farbfeld 5
+and writes the result to stdout.
+.Pp
+In case of an error
+.Nm
+writes a diagnostic message to stderr.
+.Sh EXIT STATUS
+.Bl -tag -width Ds
+.It 0
+Image processed successfully.
+.It 1
+An error occurred.
+.El
+.Sh EXAMPLES
+$
+.Nm
+< image.png > image.ff
+.Pp
+$
+.Nm
+< image.png | bzip2 > image.ff.bz2
+.Sh SEE ALSO
+.Xr 2ff 1 ,
+.Xr bzip2 1 ,
+.Xr farbfeld 5
+.Sh AUTHORS
+.An Laslo Hunhold Aq Mt dev@frign.de

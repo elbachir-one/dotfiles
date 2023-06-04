@@ -1,0 +1,177 @@
+.Dd 2018-04-11
+.Dt FARBFELD 5
+.Os suckless.org
+.Sh NAME
+.Nm farbfeld
+.Nd suckless image format
+.Sh DESCRIPTION
+.Nm
+is a
+.Em lossless
+image format which is easy to parse, pipe and compress.
+It has the following format:
+.Bd -literal -offset left
+BYTES    DESCRIPTION
+8        "farbfeld" magic value
+4        32-Bit BE unsigned integer (width)
+4        32-Bit BE unsigned integer (height)
+[2222]   4*16-Bit BE unsigned integers [RGBA] / pixel, row-major
+.Ed
+.Pp
+The RGB-data should be sRGB for best interoperability and not
+alpha-premultiplied.
+.Sh USAGE
+.Nm
+provides the tools
+.Xr 2ff 1 ,
+.Xr jpg2ff 1 ,
+.Xr png2ff 1
+and
+.Xr ff2jpg 1 ,
+.Xr ff2pam 1 ,
+.Xr ff2png 1 ,
+.Xr ff2ppm 1
+to
+.Em convert
+to and from farbfeld images respectively.
+.Pp
+.Xr bzip2 1
+is recommended for
+.Em compression ,
+giving results comparable with PNG for photographs and much better results
+for other image types.
+.sp
+The
+.Em file extension
+is ".ff" and compression extensions shall be
+appended (e.g. ".ff.bz2").
+.Sh MOTIVATION
+.Nm
+was created because the author was not satisfied with the boilerplate
+and inherent complexity involved in handling common image formats
+(PNG, JPEG, GIF,...), having to rely on bloated libraries while not being
+able to focus on the task at hand for a given image processing problem.
+.Sh EXAMPLES
+The following code listing
+.Em invert.c
+is a ready-to-use color inverter with all necessary error handling and
+reporting. This program can be integrated into a farbfeld pipeline as
+follows:
+.Pp
+$ png2ff < image.png | invert | ff2png > image-inverted.png
+.Pp
+It shall be noted here that due to the simplicity of the format no
+external libraries are needed to handle the farbfeld image data. The
+0BSD-License gives you the freedom to throw away the license block and
+just use the code as you wish. Happy hacking!
+.Bd -literal -offset left
+/*
+ * 0BSD-License
+ *
+ * (c) 2017 Laslo Hunhold <dev@frign.de>
+ *
+ * Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ * AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ * PERFORMANCE OF THIS SOFTWARE.
+ */
+#include <arpa/inet.h>
+
+#include <errno.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
+#define LEN(x) (sizeof (x) / sizeof *(x))
+
+static void
+invert(uint16_t rgba[4])
+{
+	rgba[0] = UINT16_MAX - rgba[0];
+	rgba[1] = UINT16_MAX - rgba[1];
+	rgba[2] = UINT16_MAX - rgba[2];
+}
+
+int
+main(int argc, char *argv[])
+{
+	uint32_t hdr[4], width, height, i, j, k;
+	uint16_t rgba[4];
+
+	/* arguments */
+	if (argc != 1) {
+		fprintf(stderr, "usage: %s\\n", argv[0]);
+		return 1;
+	}
+
+	/* read header */
+	if (fread(hdr, sizeof(*hdr), LEN(hdr), stdin) != LEN(hdr)) {
+		goto readerr;
+	}
+	if (memcmp("farbfeld", hdr, sizeof("farbfeld") - 1)) {
+		fprintf(stderr, "%s: invalid magic value\\n", argv[0]);
+		return 1;
+	}
+	width = ntohl(hdr[2]);
+	height = ntohl(hdr[3]);
+
+	/* write data */
+	if (fwrite(hdr, sizeof(*hdr), LEN(hdr), stdout) != 4) {
+		goto writerr;
+	}
+
+	for (i = 0; i < height; i++) {
+		for (j = 0; j < width; j++) {
+			if (fread(rgba, sizeof(*rgba), LEN(rgba),
+			          stdin) != LEN(rgba)) {
+				goto readerr;
+			}
+			for (k = 0; k < 4; k++) {
+				rgba[k] = ntohs(rgba[k]);
+			}
+
+			invert(rgba);
+
+			for (k = 0; k < 4; k++) {
+				rgba[k] = htons(rgba[k]);
+			}
+			if (fwrite(rgba, sizeof(*rgba), LEN(rgba),
+			           stdout) != LEN(rgba)) {
+				goto writerr;
+			}
+		}
+	}
+
+	/* clean up */
+	if (fclose(stdout)) {
+		fprintf(stderr, "%s: fclose: %s\\n", argv[0],
+		        strerror(errno));
+		return 1;
+	}
+
+	return 0;
+readerr:
+	fprintf(stderr, "%s: fread: Unexpected EOF\\n", argv[0]);
+	return 1;
+writerr:
+	fprintf(stderr, "%s: fwrite: %s\\n", argv[0], strerror(errno));
+	return 1;
+}
+.Ed
+.Sh SEE ALSO
+.Xr 2ff 1 ,
+.Xr ff2jpg 1 ,
+.Xr ff2pam 1 ,
+.Xr ff2png 1 ,
+.Xr ff2ppm 1 ,
+.Xr jpg2ff 1 ,
+.Xr png2ff 1
+.Sh AUTHORS
+.An Laslo Hunhold Aq Mt dev@frign.de

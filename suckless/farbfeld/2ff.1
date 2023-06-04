@@ -1,0 +1,45 @@
+.Dd 2018-04-11
+.Dt 2FF 1
+.Os suckless.org
+.Sh NAME
+.Nm 2ff
+.Nd convert image to farbfeld
+.Sh SYNOPSIS
+.Nm
+.Sh DESCRIPTION
+.Nm
+reads an image from stdin, converts it to
+.Xr farbfeld 5
+and writes the result to stdout.
+.Pp
+.Nm
+is a wrapper script around the farbfeld conversion tools
+with a fallback to obtaining a PNG using
+.Xr ImageMagick 1
+and passing it through
+.Xr png2ff 1 .
+.Pp
+In case of an error
+.Nm
+writes a diagnostic message to stderr.
+.Sh EXIT STATUS
+.Bl -tag -width Ds
+.It 0
+Image processed successfully.
+.It 1
+An error occurred.
+.El
+.Sh EXAMPLES
+$
+.Nm
+< image.* > image.ff
+.Pp
+$
+.Nm
+< image.* | bzip2 > image.ff.bz2
+.Sh SEE ALSO
+.Xr bzip2 1 ,
+.Xr ImageMagick 1 ,
+.Xr farbfeld 5
+.Sh AUTHORS
+.An Laslo Hunhold Aq Mt dev@frign.de

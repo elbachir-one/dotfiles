@@ -1,0 +1,46 @@
+.Dd 2018-04-11
+.Dt FF2PPM 1
+.Os suckless.org
+.Sh NAME
+.Nm ff2ppm
+.Nd convert farbfeld to PPM
+.Sh SYNOPSIS
+.Nm
+.Op Fl b Ar colour
+.Sh DESCRIPTION
+.Nm
+reads a
+.Xr farbfeld 5
+image from stdin, converts it to PPM (16-Bit RGB P6 binary format) and
+writes the result to stdout.
+.Pp
+In case of an error
+.Nm
+writes a diagnostic message to stderr.
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl b Ar colour
+Blend the transparent colours with
+.Ar colour
+specified as rgb, rrggbb or rrrrggggbbbb. The default is fff.
+.El
+.Sh EXIT STATUS
+.Bl -tag -width Ds
+.It 0
+Image processed successfully.
+.It 1
+An error occurred.
+.El
+.Sh EXAMPLES
+$
+.Nm
+< image.ff > image.ppm
+.Pp
+$ bunzip2 < image.ff.bz2 |
+.Nm
+-b 0f0 > image.ppm
+.Sh SEE ALSO
+.Xr bzip2 1 ,
+.Xr farbfeld 5
+.Sh AUTHORS
+.An Hiltjo Posthuma Aq Mt hiltjo@codemadness.org

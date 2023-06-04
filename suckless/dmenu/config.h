@@ -7,21 +7,21 @@ static const unsigned int border_width = 0;
 
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
-	"ProFont Windows Nerd Font:style=Bold:size=22",
-	"Noto Color Emoji:size=22"
+	"ProFont Windows Nerd Font:style=Bold:size=18",
+	"Noto Color Emoji:size=18"
 };
-static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
+static const char *prompt                = NULL;      /* -p  option; prompt to the left of input field */
 static const char *colors[SchemeLast][2] = {
 	/*     fg         bg       */
 	[SchemeNorm] = { "#dddfff", "#000000" },
-	[SchemeSel] = { "#f8f8f2", "#202020" },
-	[SchemeOut] = { "#000000", "#00ffff" },
+	[SchemeSel]  = { "#f8f8f2", "#202020" },
+	[SchemeOut]  = { "#000000", "#00ffff" },
 };
 
 static const unsigned int alphas[SchemeLast][2] = {
 	[SchemeNorm] = { OPAQUE, alpha },
-	[SchemeSel] = { OPAQUE, alpha },
-	[SchemeOut] = { OPAQUE, alpha },
+	[SchemeSel]  = { OPAQUE, alpha },
+	[SchemeOut]  = { OPAQUE, alpha },
 };
 
 /* -l and -g options; controls number of lines and columns in grid if > 0 */

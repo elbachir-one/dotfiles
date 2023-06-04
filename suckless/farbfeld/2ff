@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# arguments
+if [ "$#" -ne 0 ]; then
+	echo "usage: $0" >&2
+	exit 1
+fi
+
+# write input into temporary file
+TMP=$(mktemp)
+trap 'rm "$TMP"' EXIT
+cat > "$TMP"
+
+# determine the mime-type
+if [ "$(dd if="$TMP" bs=1 count=8 2>/dev/null | tr -d '\0')" = "farbfeld" ]; then
+	cat "$TMP"
+else
+	MIME=$(file -ib "$TMP" | cut -d ";" -f 1)
+
+	case "$MIME" in
+	image/png)
+		png2ff < "$TMP"
+		;;
+	image/jpeg)
+		jpg2ff < "$TMP"
+		;;
+	*)
+		convert "$TMP" png:- | png2ff
+		;;
+	esac
+fi
+
+# errors
+if [ $? -ne 0 ]; then
+	exit 1
+else
+	exit 0
+fi

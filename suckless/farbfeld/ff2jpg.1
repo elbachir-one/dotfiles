@@ -1,0 +1,54 @@
+.Dd 2018-04-11
+.Dt FF2JPG 1
+.Os suckless.org
+.Sh NAME
+.Nm ff2jpg
+.Nd convert farbfeld to JPG
+.Sh SYNOPSIS
+.Nm
+.Op Fl b Ar colour
+.Op Fl o
+.Op Fl q Ar quality
+.Sh DESCRIPTION
+.Nm
+reads a
+.Xr farbfeld 5
+image from stdin, converts it to JPG (8-bit RGB) and writes the result to
+stdout.
+.Pp
+In case of an error
+.Nm
+writes a diagnostic message to stderr.
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl b Ar colour
+Blend the transparent colours with
+.Ar colour
+specified as rgb, rrggbb or rrrrggggbbbb. The default is fff.
+.It Fl o
+Optimize the Huffman table, which reduces the file size but takes longer.
+.It Fl q Ar quality
+Set the output
+.Ar quality
+ranging from 0 to 100. The default is 85.
+.El
+.Sh EXIT STATUS
+.Bl -tag -width Ds
+.It 0
+Image processed successfully.
+.It 1
+An error occurred.
+.El
+.Sh EXAMPLES
+$
+.Nm
+< image.ff > image.jpg
+.Pp
+$ bunzip2 < image.ff.bz2 |
+.Nm
+-b 0f0 -q 90 > image.jpg
+.Sh SEE ALSO
+.Xr bzip2 1 ,
+.Xr farbfeld 5
+.Sh AUTHORS
+.An Hiltjo Posthuma Aq Mt hiltjo@codemadness.org
