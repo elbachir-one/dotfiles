@@ -1,0 +1,25 @@
+#!/bin/bash
+
+search="https://duckduckgo.com/?q="
+youtube_search="https://www.youtube.com/results?search_query="
+devdocs_search="https://devdocs.io/#q="
+
+options=("Web Search" "youTube" "devDocs")
+selected_option=$(printf '%s\n' "${options[@]}" | dmenu -p "󱘶 ")
+
+if [[ "$selected_option" == "Web Search" ]]; then
+    search_engine=$search
+elif [[ "$selected_option" == "youTube" ]]; then
+    search_engine=$youtube_search
+elif [[ "$selected_option" == "devDocs" ]]; then
+    search_engine=$devdocs_search
+else
+    exit 0
+fi
+
+query=$(echo "" | dmenu -p "Search The Void:")
+
+if [[ -n $query ]]; then
+    url="$search_engine$(echo $query | sed -e 's/ /+/g')"
+    echo $url | xargs xdg-open
+fi
