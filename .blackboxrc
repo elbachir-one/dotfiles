@@ -1,0 +1,34 @@
+session.screen0.slit.placement:	CenterRight
+session.screen0.slit.direction:	Vertical
+session.screen0.slit.onTop:	False
+session.screen0.slit.autoHide:	False
+session.screen0.toolbar.onTop:	False
+session.screen0.toolbar.autoHide:	False
+session.screen0.toolbar.placement:	BottomCenter
+session.screen0.toolbar.widthPercent:	66
+session.screen0.enableToolbar:	True
+session.screen0.workspaces:	4
+session.screen0.workspaceNames:	Workspace 1,Workspace 2,Workspace 3,Workspace 4
+session.screen0.strftimeFormat:	%I:%M %p
+session.colPlacementDirection:	TopToBottom
+session.changeWorkspaceWithMouseWheel:	True
+session.placementIgnoresShaded:	True
+session.edgeSnapThreshold:	0
+session.doubleClickInterval:	250
+session.styleFile:	/usr/share/blackbox/styles/Minimal
+session.toolbarActionsWithMouseWheel:	True
+session.focusModel:	ClickToFocus
+session.maximumColors:	0
+session.focusNewWindows:	True
+session.rowPlacementDirection:	LeftToRight
+session.opaqueMove:	True
+session.opaqueResize:	True
+session.windowPlacement:	CenterPlacement
+session.disableBindingsWithScrollLock:	False
+session.focusLastWindow:	True
+session.fullMaximization:	False
+session.shadeWindowWithMouseWheel:	True
+session.autoRaiseDelay:	400
+session.windowSnapThreshold:	0
+session.menuFile:	/usr/share/blackbox/menu
+session.imageDither:	NoDither

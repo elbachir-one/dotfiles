@@ -15,11 +15,11 @@ static const int vertpad              = 4;      /* vertical padding of bar */
 static const int sidepad              = 10;     /* horizontal padding of bar */
 static const char *fonts[]            = {"terminus:style=Bold:size=14"};
 static const char dmenufont[]         = "terminus:style=Bold:size=18";
-static const char col_gray1[]         = "#000000";
+static const char col_gray1[]         = "#ffffff";
 static const char col_gray2[]         = "#444444";
-static const char col_gray3[]         = "#dddfff";
-static const char col_gray4[]         = "#ffffff";
-static const char col_cyan[]          = "#202020";
+static const char col_gray3[]         = "#f91010";
+static const char col_gray4[]         = "#140b05";
+static const char col_cyan[]          = "#fc9505";
 static const unsigned int baralpha    = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]        = {
@@ -37,7 +37,7 @@ static const unsigned int alphas[][3] = {
 static const char *tags[] 	      = {"", "", "", "", "", "", "", "", ""};
 static const char *alttags[] 	      = {"", "", "", "", "", "", "", "", ""};
 
-static const unsigned int ulinepad 	= 5; /* horizontal padding between the underline and tag */
+static const unsigned int ulinepad 	= 4; /* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke 	= 0; /* thickness / height of the underline */
 static const unsigned int ulinevoffset 	= 0; /* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0; /* 1 to show underline on all tags, 0 for just the active ones */
@@ -47,20 +47,20 @@ static const Rule rules[]               = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-   /* class                 instance    title               tagsMask  isfloating    isterminal      noswallow       monitor */
+    /* class     			  instance    title          tagsMask isfloating isterminal   noswallow   monitor
+     */
     {"obs",                   NULL,     NULL, 		     1 << 7, 	False, 		0, 	        0, 	      -1},
     {"Surf", 		      NULL,     NULL, 		     1 << 3, 	False, 		0, 	        0, 	      -1},
     {"Virt-manager", 	      NULL,     NULL, 		     1 << 8, 	False, 		0, 	       -1, 	      -1},
     {"Chromium", 	      NULL,     NULL, 		     1 << 1, 	False, 		0, 	       -1, 	      -1},
     {"Transmission-gtk",      NULL,     NULL, 		     1 << 5, 	False, 		0, 	       -1, 	      -1},
     {"Gimp", 		      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1,  	      -1},
-    {"kdenlive", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1,  	      -1},
     {"st",                    NULL,     "ranger", 	     1 << 6, 	False, 	    	0, 	       -1, 	      -1},
     {"st",                    NULL,     "ncmpcpp", 	     1 << 6, 	False, 	    	0, 	       -1, 	      -1},
     {"st",                    NULL,     "htop", 	     1 << 5, 	False, 		0, 	       -1,  	      -1},
     {"qutebrowser", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1, 	      -1},
     {"st",                    NULL,     NULL, 		        0,        0, 	        1, 	        1, 	      -1},
-    {"Alacritty", 	      NULL,     NULL, 		     1 << 2,      0, 	        1, 	        1, 	      -1},
+    {"Alacritty", 	      NULL,     NULL, 		        0,        0, 	        1, 	        1, 	      -1},
     {NULL, 	              NULL,     "Event Tester", 	0,        0, 	        0, 	        1, 	      -1}, /* xev */
 };
 
@@ -72,7 +72,7 @@ static const int lockfullscreen     = 1;    /* 1 will force focus on the fullscr
 
 static const Layout layouts[]       = {
     /* symbol     arrange function */
-    {"", tile}, /* first entry is default */
+    {"[]=", tile}, /* first entry is default */
     {"><>", NULL}, /* no layout function means floating behavior */
     {"[M]", monocle},
 };

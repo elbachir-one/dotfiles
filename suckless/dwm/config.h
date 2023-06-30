@@ -47,20 +47,20 @@ static const Rule rules[]               = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-    /* class     			  instance    title          tagsMask isfloating isterminal   noswallow   monitor
-     */
+   /* class                 instance    title               tagsMask  isfloating    isterminal      noswallow       monitor */
     {"obs",                   NULL,     NULL, 		     1 << 7, 	False, 		0, 	        0, 	      -1},
     {"Surf", 		      NULL,     NULL, 		     1 << 3, 	False, 		0, 	        0, 	      -1},
     {"Virt-manager", 	      NULL,     NULL, 		     1 << 8, 	False, 		0, 	       -1, 	      -1},
     {"Chromium", 	      NULL,     NULL, 		     1 << 1, 	False, 		0, 	       -1, 	      -1},
     {"Transmission-gtk",      NULL,     NULL, 		     1 << 5, 	False, 		0, 	       -1, 	      -1},
     {"Gimp", 		      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1,  	      -1},
+    {"kdenlive", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1,  	      -1},
     {"st",                    NULL,     "ranger", 	     1 << 6, 	False, 	    	0, 	       -1, 	      -1},
     {"st",                    NULL,     "ncmpcpp", 	     1 << 6, 	False, 	    	0, 	       -1, 	      -1},
     {"st",                    NULL,     "htop", 	     1 << 5, 	False, 		0, 	       -1,  	      -1},
     {"qutebrowser", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1, 	      -1},
     {"st",                    NULL,     NULL, 		        0,        0, 	        1, 	        1, 	      -1},
-    {"Alacritty", 	      NULL,     NULL, 		        0,        0, 	        1, 	        1, 	      -1},
+    {"Alacritty", 	      NULL,     NULL, 		     1 << 2,      0, 	        1, 	        1, 	      -1},
     {NULL, 	              NULL,     "Event Tester", 	0,        0, 	        0, 	        1, 	      -1}, /* xev */
 };
 
@@ -72,7 +72,7 @@ static const int lockfullscreen     = 1;    /* 1 will force focus on the fullscr
 
 static const Layout layouts[]       = {
     /* symbol     arrange function */
-    {"[]=", tile}, /* first entry is default */
+    {"", tile}, /* first entry is default */
     {"><>", NULL}, /* no layout function means floating behavior */
     {"[M]", monocle},
 };
