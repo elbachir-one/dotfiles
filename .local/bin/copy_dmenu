@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Get the clipboard history from copyq
+items=$(copyq read)
+
+# Use dmenu to select an item
+selected=$(echo "$items" | dmenu -l 10)
+
+# If an item was selected, paste it
+if [[ -n "$selected" ]]; then
+    echo -n "$selected" | copyq write
+    copyq select 0
+    copyq paste
+fi
