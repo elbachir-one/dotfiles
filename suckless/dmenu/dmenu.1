@@ -4,8 +4,6 @@ dmenu \- dynamic menu
 .SH SYNOPSIS
 .B dmenu
 .RB [ \-bfiv ]
-.RB [ \-g
-.IR columns ]
 .RB [ \-l
 .IR lines ]
 .RB [ \-m
@@ -42,6 +40,9 @@ which lists programs in the user's $PATH and runs the result in their $SHELL.
 .B \-b
 dmenu appears at the bottom of the screen.
 .TP
+.B \-c
+dmenu appears centered on the screen.
+.TP
 .B \-f
 dmenu grabs the keyboard before reading stdin if not reading from a tty. This
 is faster, but will lock up X until stdin reaches end\-of\-file.
@@ -49,11 +50,8 @@ is faster, but will lock up X until stdin reaches end\-of\-file.
 .B \-i
 dmenu matches menu items case insensitively.
 .TP
-.BI \-g " columns"
-dmenu lists items in a grid with the given number of columns.
-.TP
 .BI \-l " lines"
-dmenu lists items in a grid with the given number of lines.
+dmenu lists items vertically, with the given number of lines.
 .TP
 .BI \-m " monitor"
 dmenu is displayed on the monitor number supplied. Monitor numbers are starting

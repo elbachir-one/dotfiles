@@ -1,0 +1,108 @@
+From b34d318bfed8557f2a1e53fc523b8ecff7c79374 Mon Sep 17 00:00:00 2001
+From: Eyal Seelig <eyal.seelig@gmail.com>
+Date: Fri, 23 Jul 2021 18:31:11 +0300
+Subject: [PATCH] Added support for RTL languages, such as Hebrew, Arabic, and
+ Farsi, using the FriBiDi library
+
+---
+ config.mk |  8 ++++++--
+ dmenu.c   | 29 +++++++++++++++++++++++++++--
+ 2 files changed, 33 insertions(+), 4 deletions(-)
+
+diff --git a/config.mk b/config.mk
+index 05d5a3e..eefd0ae 100644
+--- a/config.mk
++++ b/config.mk
+@@ -8,6 +8,8 @@ MANPREFIX = $(PREFIX)/share/man
+ X11INC = /usr/X11R6/include
+ X11LIB = /usr/X11R6/lib
+
++BDINC = /usr/include/fribidi
++
+ # Xinerama, comment if you don't want it
+ XINERAMALIBS  = -lXinerama
+ XINERAMAFLAGS = -DXINERAMA
+@@ -18,9 +20,11 @@ FREETYPEINC = /usr/include/freetype2
+ # OpenBSD (uncomment)
+ #FREETYPEINC = $(X11INC)/freetype2
+
++BDLIBS = -lfribidi
++
+ # includes and libs
+-INCS = -I$(X11INC) -I$(FREETYPEINC)
+-LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS)
++INCS = -I$(X11INC) -I$(FREETYPEINC) -I$(BDINC)
++LIBS = -L$(X11LIB) -lX11 $(XINERAMALIBS) $(FREETYPELIBS) $(BDLIBS)
+
+ # flags
+ CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700 -D_POSIX_C_SOURCE=200809L -DVERSION=\"$(VERSION)\" $(XINERAMAFLAGS)
+diff --git a/dmenu.c b/dmenu.c
+index 65f25ce..389916b 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -16,6 +16,8 @@
+ #endif
+ #include <X11/Xft/Xft.h>
+
++#include <fribidi.h>
++
+ #include "drw.h"
+ #include "util.h"
+
+@@ -35,6 +37,7 @@ struct item {
+ };
+
+ static char text[BUFSIZ] = "";
++static char fribidi_text[BUFSIZ] = "";
+ static char *embed;
+ static int bh, mw, mh;
+ static int inputw = 0, promptw;
+@@ -113,6 +116,26 @@ cistrstr(const char *s, const char *sub)
+ 	return NULL;
+ }
+
++static void
++apply_fribidi(char *str)
++{
++  FriBidiStrIndex len = strlen(str);
++  FriBidiChar logical[BUFSIZ];
++  FriBidiChar visual[BUFSIZ];
++  FriBidiParType base = FRIBIDI_PAR_ON;
++  FriBidiCharSet charset;
++  fribidi_boolean result;
++
++  fribidi_text[0] = 0;
++  if (len>0)
++  {
++    charset = fribidi_parse_charset("UTF-8");
++    len = fribidi_charset_to_unicode(charset, str, len, logical);
++    result = fribidi_log2vis(logical, len, &base, visual, NULL, NULL, NULL);
++    len = fribidi_unicode_to_charset(charset, visual, len, fribidi_text);
++  }
++}
++
+ static int
+ drawitem(struct item *item, int x, int y, int w)
+ {
+@@ -123,7 +146,8 @@ drawitem(struct item *item, int x, int y, int w)
+ 	else
+ 		drw_setscheme(drw, scheme[SchemeNorm]);
+
+-	return drw_text(drw, x, y, w, bh, lrpad / 2, item->text, 0);
++	apply_fribidi(item->text);
++	return drw_text(drw, x, y, w, bh, lrpad / 2, fribidi_text, 0);
+ }
+
+ static void
+@@ -143,7 +167,8 @@ drawmenu(void)
+ 	/* draw input field */
+ 	w = (lines > 0 || !matches) ? mw - x : inputw;
+ 	drw_setscheme(drw, scheme[SchemeNorm]);
+-	drw_text(drw, x, 0, w, bh, lrpad / 2, text, 0);
++	apply_fribidi(text);
++	drw_text(drw, x, 0, w, bh, lrpad / 2, fribidi_text, 0);
+
+ 	curpos = TEXTW(text) - TEXTW(&text[cursor]);
+ 	if ((curpos += lrpad / 2 - 1) < w) {
+--
+2.32.0
