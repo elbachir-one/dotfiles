@@ -7,7 +7,8 @@ static int centered = 1;                    /* -c option; centers dmenu on scree
 static int min_width = 700;                    /* minimum width when centered */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
-	"Monofur Nerd Font:style=Bold:size=14"
+	"Monofur Nerd Font:style=Bold:size=14",
+	"Noto Color Emoji:size=14"
 };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static const char *colors[SchemeLast][2] = {

@@ -3,16 +3,19 @@
 search="https://duckduckgo.com/?q="
 youtube_search="https://www.youtube.com/results?search_query="
 devdocs_search="https://devdocs.io/#q="
+github_search="https://github.com/search?q="
 
-options=("Web Search" "youTube" "devDocs")
-selected_option=$(printf '%s\n' "${options[@]}" | dmenu -p "󱘶 ")
+options=("webSearch" "youTube" "devDocs" "gitHub")
+selected_option=$(printf '%s\n' "${options[@]}" | dmenu -p "<U+F1636> ")
 
 if [[ "$selected_option" == "Web Search" ]]; then
     search_engine=$search
-elif [[ "$selected_option" == "youTube" ]]; then
+elif [[ "$selected_option" == "YouTube" ]]; then
     search_engine=$youtube_search
-elif [[ "$selected_option" == "devDocs" ]]; then
+elif [[ "$selected_option" == "DevDocs" ]]; then
     search_engine=$devdocs_search
+elif [[ "$selected_option" == "GitHub" ]]; then
+    search_engine=$github_search
 else
     exit 0
 fi
