@@ -48,7 +48,7 @@ static const Rule rules[]               = {
      *	WM_NAME(STRING) = title
      */
    /* class                 instance    title               tagsMask  isfloating    isterminal      noswallow       monitor */
-    {"Discord", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1, 	      -1},
+    {"discord", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1, 	      -1},
     {"obs",                   NULL,     NULL, 		     1 << 7, 	False, 		0, 	        0, 	      -1},
     {"Surf", 		      NULL,     NULL, 		     1 << 3, 	False, 		0, 	        0, 	      -1},
     {"Virt-manager", 	      NULL,     NULL, 		     1 << 8, 	False, 		0, 	       -1, 	      -1},
