@@ -1,0 +1,20 @@
+image: freebsd/latest
+packages:
+    - devel/evdev-proto
+    - devel/meson
+    - devel/pkgconf
+    - graphics/cairo
+    - graphics/wayland
+    - graphics/wayland-protocols
+    - x11-toolkits/pango
+sources:
+    - https://git.sr.ht/~raphi/somebar
+tasks:
+    - setup: |
+        cd somebar
+        meson build --fatal-meson-warnings
+        cp src/config.def.hpp src/config.hpp
+    - build: |
+        cd somebar/build
+        ninja
+        sudo ninja install

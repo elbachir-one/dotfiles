@@ -37,6 +37,16 @@ config.load_autoconfig(False)
 #   - never: Don't accept cookies at all.
 config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 
+# Add Bloking:
+c.content.blocking.adblock.lists = [
+        "https://easylist.to/easylist/easylist.txt",
+        "https://easylist.to/easylist/easyprivacy.txt"
+        ]
+#
+config.set("fileselect.handler", "external")
+config.set("fileselect.single_file.command", ['alacritty', '--class', 'ranger,ranger', '-e', 'ranger', '--choosefile', '{}'])
+config.set("fileselect.multiple_files.command", ['alacritty', '--class', 'ranger,ranger', '-e', 'ranger', '--choosefile', '{}'])
+
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
 # including IndexedDB, DOM storage, filesystem API, service workers, and

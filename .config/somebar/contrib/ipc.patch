@@ -1,0 +1,506 @@
+Replaces somebar's channel to dwl from stdin to a wayland extension.
+
+Normally, somebar reads dwl's state by reading from stdin. This requires
+that somebar is started from dwl, and does not allow sending commands back
+to dwl.
+
+This patch replaces this channel with a wayland protocol extension. somebar
+can use this protocol extension to observe and update the dwl window management
+state.
+
+Important! dwl must have the wayland-ipc patch applied for this to work!
+https://git.sr.ht/~raphi/dwl/blob/master/patches/wayland-ipc.patch
+diff --git a/protocols/meson.build b/protocols/meson.build
+index 7bd222b..5752608 100644
+--- a/protocols/meson.build
++++ b/protocols/meson.build
+@@ -15,6 +15,7 @@ wayland_xmls = [
+ 	wl_protocol_dir + '/stable/xdg-shell/xdg-shell.xml',
+ 	wl_protocol_dir + '/unstable/xdg-output/xdg-output-unstable-v1.xml',
+ 	'wlr-layer-shell-unstable-v1.xml',
++	'net-tapesoftware-dwl-wm-unstable-v1.xml',
+ ]
+ wayland_sources = [
+ 	wayland_scanner_code.process(wayland_xmls),
+diff --git a/protocols/net-tapesoftware-dwl-wm-unstable-v1.xml b/protocols/net-tapesoftware-dwl-wm-unstable-v1.xml
+new file mode 100644
+index 0000000..390f5a1
+--- /dev/null
++++ b/protocols/net-tapesoftware-dwl-wm-unstable-v1.xml
+@@ -0,0 +1,164 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<protocol name="net_tapesoftware_dwl_wm_unstable_v1">
++	<copyright>
++		Copyright (c) 2021 Raphael Robatsch
++
++		Permission is hereby granted, free of charge, to any person obtaining a
++		copy of this software and associated documentation files (the
++		"Software"), to deal in the Software without restriction, including
++		without limitation the rights to use, copy, modify, merge, publish,
++		distribute, sublicense, and/or sell copies of the Software, and to
++		permit persons to whom the Software is furnished to do so, subject to
++		the following conditions:
++
++		The above copyright notice and this permission notice (including the
++		next paragraph) shall be included in all copies or substantial portions
++		of the Software.
++
++		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++		OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++		MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
++		IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
++		CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
++		TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
++		SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++	</copyright>
++
++	<interface name="znet_tapesoftware_dwl_wm_v1" version="1">
++		<description summary="control the dwl state">
++			This interface is exposed as a global in the wl_registry.
++
++			Clients can use this protocol to receive updates of the window manager
++			state (active tags, active layout, and focused window).
++			Clients can also control this state.
++
++			After binding, the client will receive the available tags and layouts
++			with the 'tag' and 'layout' events. These can be used in subsequent
++			dwl_wm_monitor_v1.set_tags/set_layout requests, and to interpret the
++			dwl_wm_monitor_v1.layout/tag events.
++		</description>
++
++		<request name="release" type="destructor">
++			<description summary="release dwl_wm">
++				This request indicates that the client will not use the dwl_wm
++				object any more. Objects that have been created through this instance
++				are not affected.
++			</description>
++		</request>
++
++		<request name="get_monitor">
++			<description summary="gets a dwl monitor from an output">
++				Gets a dwl monitor for the specified output. The window manager
++				state on the output can be controlled using the monitor.
++			</description>
++			<arg name="id" type="new_id" interface="znet_tapesoftware_dwl_wm_monitor_v1" />
++			<arg name="output" type="object" interface="wl_output" />
++		</request>
++
++		<event name="tag">
++			<description summary="announces the presence of a tag">
++				This event is sent immediately after binding.
++				A roundtrip after binding guarantees that the client has received all tags.
++			</description>
++			<arg name="name" type="string"/>
++		</event>
++
++		<event name="layout">
++			<description summary="announces the presence of a layout">
++				This event is sent immediately after binding.
++				A roundtrip after binding guarantees that the client has received all layouts.
++			</description>
++			<arg name="name" type="string"/>
++		</event>
++	</interface>
++
++	<interface name="znet_tapesoftware_dwl_wm_monitor_v1" version="1">
++		<description summary="control one monitor">
++			Observes and controls one monitor.
++
++			Events are double-buffered: Clients should cache all events and only
++			redraw themselves once the 'frame' event is sent.
++
++			Requests are not double-buffered: The compositor will update itself
++			immediately.
++		</description>
++
++		<enum name="tag_state">
++			<entry name="none" value="0" summary="no state"/>
++			<entry name="active" value="1" summary="tag is active"/>
++			<entry name="urgent" value="2" summary="tag has at least one urgent client"/>
++		</enum>
++
++		<request name="release" type="destructor">
++			<description summary="release dwl_monitor">
++				This request indicates that the client is done with this dwl_monitor.
++				All further requests are ignored.
++			</description>
++		</request>
++
++		<event name="selected">
++			<description summary="updates the selected state of the monitor">
++				If 'selected' is nonzero, this monitor is the currently selected one.
++			</description>
++			<arg name="selected" type="uint"/>
++		</event>
++
++		<event name="tag">
++			<description summary="updates the state of one tag">
++				Announces the update of a tag. num_clients and focused_client can be
++				used to draw client indicators.
++			</description>
++			<arg name="tag" type="uint" summary="index of a tag received by the dwl_wm_v1.tag event." />
++			<arg name="state" type="uint" enum="tag_state"/>
++			<arg name="num_clients" type="uint" summary="number of clients on this tag"/>
++			<arg name="focused_client" type="int" summary="out of num_clients. -1 if there is no focused client"/>
++		</event>
++
++		<event name="layout">
++			<description summary="updates the selected layout">
++				Announces the update of the selected layout.
++			</description>
++			<arg name="layout" type="uint" summary="index of a layout received by the dwl_wm_v1.layout event."/>
++		</event>
++
++		<event name="title">
++			<description summary="updates the focused client">
++				Announces the update of the selected client.
++			</description>
++			<arg name="title" type="string"/>
++		</event>
++
++		<event name="frame">
++			<description summary="end of status update sequence">
++				Sent after all other events belonging to the status update has been sent.
++				Clients should redraw themselves now.
++			</description>
++		</event>
++
++		<request name="set_tags">
++			<description summary="sets the active tags on this monitor.">
++				Changes are applied immediately.
++			</description>
++			<arg name="tagmask" type="uint" summary="bitmask of the tags that should be set."/>
++			<arg name="toggle_tagset" type="uint"/>
++		</request>
++
++		<request name="set_client_tags">
++			<description summary="updates the tags of the focused client.">
++				tags are updated as follows:
++				new_tags = (current_tags AND and_tags) XOR xor_tags
++
++				Changes are applied immediately.
++			</description>
++			<arg name="and_tags" type="uint"/>
++			<arg name="xor_tags" type="uint"/>
++		</request>
++
++		<request name="set_layout">
++			<description summary="sets the active layout on this monitor.">
++				Changes are applied immediately.
++			</description>
++			<arg name="layout" type="uint" summary="index of a layout received by the dwl_wm_v1.layout event."/>
++		</request>
++	</interface>
++</protocol>
+diff --git a/src/common.hpp b/src/common.hpp
+index c905358..9b62a94 100644
+--- a/src/common.hpp
++++ b/src/common.hpp
+@@ -10,6 +10,7 @@
+ #include <cairo/cairo.h>
+ #include <pango/pango.h>
+ #include "wlr-layer-shell-unstable-v1-client-protocol.h"
++#include "net-tapesoftware-dwl-wm-unstable-v1-client-protocol.h"
+ 
+ struct Color {
+ 	Color() {}
+@@ -38,7 +39,14 @@ extern wl_display* display;
+ extern wl_compositor* compositor;
+ extern wl_shm* shm;
+ extern zwlr_layer_shell_v1* wlrLayerShell;
++extern std::vector<std::string> tagNames;
++extern std::vector<std::string> layoutNames;
+ 
++void view(Monitor& m, const Arg& arg);
++void toggleview(Monitor& m, const Arg& arg);
++void setlayout(Monitor& m, const Arg& arg);
++void tag(Monitor& m, const Arg& arg);
++void toggletag(Monitor& m, const Arg& arg);
+ void spawn(Monitor&, const Arg& arg);
+ void setCloexec(int fd);
+ [[noreturn]] void die(const char* why);
+@@ -65,6 +73,7 @@ WL_DELETER(wl_output, wl_output_release_checked);
+ WL_DELETER(wl_pointer, wl_pointer_release);
+ WL_DELETER(wl_seat, wl_seat_release);
+ WL_DELETER(wl_surface, wl_surface_destroy);
++WL_DELETER(znet_tapesoftware_dwl_wm_monitor_v1, znet_tapesoftware_dwl_wm_monitor_v1_release);
+ WL_DELETER(zwlr_layer_surface_v1, zwlr_layer_surface_v1_destroy);
+ 
+ WL_DELETER(cairo_t, cairo_destroy);
+diff --git a/src/config.def.hpp b/src/config.def.hpp
+index 40a8c95..a9560cb 100644
+--- a/src/config.def.hpp
++++ b/src/config.def.hpp
+@@ -16,12 +16,11 @@ constexpr ColorScheme colorInactive = {Color(0xbb, 0xbb, 0xbb), Color(0x22, 0x22
+ constexpr ColorScheme colorActive = {Color(0xee, 0xee, 0xee), Color(0x00, 0x55, 0x77)};
+ constexpr const char* termcmd[] = {"foot", nullptr};
+ 
+-static std::vector<std::string> tagNames = {
+-	"1", "2", "3",
+-	"4", "5", "6",
+-	"7", "8", "9",
+-};
+-
+ constexpr Button buttons[] = {
++	{ ClkTagBar,       BTN_LEFT,   view,       {0} },
++	{ ClkTagBar,       BTN_RIGHT,  tag,        {0} },
++	{ ClkTagBar,       BTN_MIDDLE, toggletag,  {0} },
++	{ ClkLayoutSymbol, BTN_LEFT,   setlayout,  {.ui = 0} },
++	{ ClkLayoutSymbol, BTN_RIGHT,  setlayout,  {.ui = 2} },
+ 	{ ClkStatusText,   BTN_RIGHT,  spawn,      {.v = termcmd} },
+ };
+diff --git a/src/main.cpp b/src/main.cpp
+index 6274959..01be870 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -3,7 +3,6 @@
+ 
+ #include <algorithm>
+ #include <cstdio>
+-#include <sstream>
+ #include <list>
+ #include <optional>
+ #include <utility>
+@@ -21,8 +20,8 @@
+ #include "wlr-layer-shell-unstable-v1-client-protocol.h"
+ #include "xdg-output-unstable-v1-client-protocol.h"
+ #include "xdg-shell-client-protocol.h"
++#include "net-tapesoftware-dwl-wm-unstable-v1-client-protocol.h"
+ #include "common.hpp"
+-#include "config.hpp"
+ #include "bar.hpp"
+ #include "line_buffer.hpp"
+ 
+@@ -34,6 +33,7 @@ struct Monitor {
+ 	bool desiredVisibility {true};
+ 	bool hasData;
+ 	uint32_t tags;
++	wl_unique_ptr<znet_tapesoftware_dwl_wm_monitor_v1> dwlMonitor;
+ };
+ 
+ struct SeatPointer {
+@@ -54,8 +54,6 @@ static void updatemon(Monitor &mon);
+ static void onReady();
+ static void setupStatusFifo();
+ static void onStatus();
+-static void onStdin();
+-static void handleStdin(const std::string& line);
+ static void updateVisibility(const std::string& name, bool(*updater)(bool));
+ static void onGlobalAdd(void*, wl_registry* registry, uint32_t name, const char* interface, uint32_t version);
+ static void onGlobalRemove(void*, wl_registry* registry, uint32_t name);
+@@ -67,6 +65,9 @@ wl_display* display;
+ wl_compositor* compositor;
+ wl_shm* shm;
+ zwlr_layer_shell_v1* wlrLayerShell;
++znet_tapesoftware_dwl_wm_v1* dwlWm;
++std::vector<std::string> tagNames;
++std::vector<std::string> layoutNames;
+ static xdg_wm_base* xdgWmBase;
+ static zxdg_output_manager_v1* xdgOutputManager;
+ static wl_surface* cursorSurface;
+@@ -85,6 +86,26 @@ static int statusFifoFd {-1};
+ static int statusFifoWriter {-1};
+ static bool quitting {false};
+ 
++void view(Monitor& m, const Arg& arg)
++{
++	znet_tapesoftware_dwl_wm_monitor_v1_set_tags(m.dwlMonitor.get(), arg.ui, 1);
++}
++void toggleview(Monitor& m, const Arg& arg)
++{
++	znet_tapesoftware_dwl_wm_monitor_v1_set_tags(m.dwlMonitor.get(), m.tags ^ arg.ui, 0);
++}
++void setlayout(Monitor& m, const Arg& arg)
++{
++	znet_tapesoftware_dwl_wm_monitor_v1_set_layout(m.dwlMonitor.get(), arg.ui);
++}
++void tag(Monitor& m, const Arg& arg)
++{
++	znet_tapesoftware_dwl_wm_monitor_v1_set_client_tags(m.dwlMonitor.get(), 0, arg.ui);
++}
++void toggletag(Monitor& m, const Arg& arg)
++{
++	znet_tapesoftware_dwl_wm_monitor_v1_set_client_tags(m.dwlMonitor.get(), ~0, arg.ui);
++}
+ void spawn(Monitor&, const Arg& arg)
+ {
+ 	if (fork() == 0) {
+@@ -189,11 +210,62 @@ static const struct wl_seat_listener seatListener = {
+ 	.name = [](void*, wl_seat*, const char* name) { }
+ };
+ 
++static const struct znet_tapesoftware_dwl_wm_v1_listener dwlWmListener = {
++	.tag = [](void*, znet_tapesoftware_dwl_wm_v1*, const char* name) {
++		tagNames.push_back(name);
++	},
++	.layout = [](void*, znet_tapesoftware_dwl_wm_v1*, const char* name) {
++		layoutNames.push_back(name);
++	},
++};
++
++static const struct znet_tapesoftware_dwl_wm_monitor_v1_listener dwlWmMonitorListener {
++	.selected = [](void* mv, znet_tapesoftware_dwl_wm_monitor_v1*, uint32_t selected) {
++		auto mon = static_cast<Monitor*>(mv);
++		if (selected) {
++			selmon = mon;
++		} else if (selmon == mon) {
++			selmon = nullptr;
++		}
++		mon->bar.setSelected(selected);
++	},
++	.tag = [](void* mv, znet_tapesoftware_dwl_wm_monitor_v1*, uint32_t tag, uint32_t state, uint32_t numClients, int32_t focusedClient) {
++		auto mon = static_cast<Monitor*>(mv);
++		int tagState = TagState::None;
++		if (state & ZNET_TAPESOFTWARE_DWL_WM_MONITOR_V1_TAG_STATE_ACTIVE)
++			tagState |= TagState::Active;
++		if (state & ZNET_TAPESOFTWARE_DWL_WM_MONITOR_V1_TAG_STATE_URGENT)
++			tagState |= TagState::Urgent;
++		mon->bar.setTag(tag, tagState, numClients, focusedClient);
++		uint32_t mask = 1 << tag;
++		if (tagState & TagState::Active) {
++			mon->tags |= mask;
++		} else {
++			mon->tags &= ~mask;
++		}
++	},
++	.layout = [](void* mv, znet_tapesoftware_dwl_wm_monitor_v1*, uint32_t layout) {
++		auto mon = static_cast<Monitor*>(mv);
++		mon->bar.setLayout(layoutNames[layout]);
++	},
++	.title = [](void* mv, znet_tapesoftware_dwl_wm_monitor_v1*, const char* title) {
++		auto mon = static_cast<Monitor*>(mv);
++		mon->bar.setTitle(title);
++	},
++	.frame = [](void* mv, znet_tapesoftware_dwl_wm_monitor_v1*) {
++		auto mon = static_cast<Monitor*>(mv);
++		mon->hasData = true;
++		updatemon(*mon);
++	}
++};
++
+ void setupMonitor(uint32_t name, wl_output* output) {
+ 	auto& monitor = monitors.emplace_back(Monitor {name, {}, wl_unique_ptr<wl_output> {output}});
+ 	monitor.bar.setStatus(lastStatus);
+ 	auto xdgOutput = zxdg_output_manager_v1_get_xdg_output(xdgOutputManager, monitor.wlOutput.get());
+ 	zxdg_output_v1_add_listener(xdgOutput, &xdgOutputListener, &monitor);
++	monitor.dwlMonitor.reset(znet_tapesoftware_dwl_wm_v1_get_monitor(dwlWm, monitor.wlOutput.get()));
++	znet_tapesoftware_dwl_wm_monitor_v1_add_listener(monitor.dwlMonitor.get(), &dwlWmMonitorListener, &monitor);
+ }
+ 
+ void updatemon(Monitor& mon)
+@@ -219,6 +291,7 @@ void onReady()
+ 	requireGlobal(shm, "wl_shm");
+ 	requireGlobal(wlrLayerShell, "zwlr_layer_shell_v1");
+ 	requireGlobal(xdgOutputManager, "zxdg_output_manager_v1");
++	requireGlobal(dwlWm, "znet_tapesoftware_dwl_wm_v1");
+ 	setupStatusFifo();
+ 	wl_display_roundtrip(display); // roundtrip so we receive all dwl tags etc.
+ 
+@@ -226,7 +299,6 @@ void onReady()
+ 	for (auto output : uninitializedOutputs) {
+ 		setupMonitor(output.first, output.second);
+ 	}
+-	wl_display_roundtrip(display); // wait for xdg_output names before we read stdin
+ }
+ 
+ bool createFifo(std::string path)
+@@ -273,68 +345,6 @@ void setupStatusFifo()
+ 	}
+ }
+ 
+-static LineBuffer<512> stdinBuffer;
+-static void onStdin()
+-{
+-	auto res = stdinBuffer.readLines(
+-		[](void* p, size_t size) { return read(0, p, size); },
+-		[](char* p, size_t size) { handleStdin({p, size}); });
+-	if (res == 0) {
+-		quitting = true;
+-	}
+-}
+-
+-static void handleStdin(const std::string& line)
+-{
+-	// this parses the lines that dwl sends in printstatus()
+-	std::string monName, command;
+-	auto stream = std::istringstream {line};
+-	stream >> monName >> command;
+-	if (!stream.good()) {
+-		return;
+-	}
+-	auto mon = std::find_if(begin(monitors), end(monitors), [&](const Monitor& mon) {
+-		return mon.xdgName == monName;
+-	});
+-	if (mon == end(monitors))
+-		return;
+-	if (command == "title") {
+-		auto title = std::string {};
+-		stream >> std::ws;
+-		std::getline(stream, title);
+-		mon->bar.setTitle(title);
+-	} else if (command == "selmon") {
+-		uint32_t selected;
+-		stream >> selected;
+-		mon->bar.setSelected(selected);
+-		if (selected) {
+-			selmon = &*mon;
+-		} else if (selmon == &*mon) {
+-			selmon = nullptr;
+-		}
+-	} else if (command == "tags") {
+-		uint32_t occupied, tags, clientTags, urgent;
+-		stream >> occupied >> tags >> clientTags >> urgent;
+-		for (auto i=0u; i<tagNames.size(); i++) {
+-			auto tagMask = 1 << i;
+-			int state = TagState::None;
+-			if (tags & tagMask)
+-				state |= TagState::Active;
+-			if (urgent & tagMask)
+-				state |= TagState::Urgent;
+-			mon->bar.setTag(i, state, occupied & tagMask ? 1 : 0, clientTags & tagMask ? 0 : -1);
+-		}
+-		mon->tags = tags;
+-	} else if (command == "layout") {
+-		auto layout = std::string {};
+-		stream >> std::ws;
+-		std::getline(stream, layout);
+-		mon->bar.setLayout(layout);
+-	}
+-	mon->hasData = true;
+-	updatemon(*mon);
+-}
+-
+ const std::string prefixStatus = "status ";
+ const std::string prefixShow = "show ";
+ const std::string prefixHide = "hide ";
+@@ -409,6 +419,10 @@ void onGlobalAdd(void*, wl_registry* registry, uint32_t name, const char* interf
+ 		xdg_wm_base_add_listener(xdgWmBase, &xdgWmBaseListener, nullptr);
+ 		return;
+ 	}
++	if (reg.handle(dwlWm, znet_tapesoftware_dwl_wm_v1_interface, 1)) {
++		znet_tapesoftware_dwl_wm_v1_add_listener(dwlWm, &dwlWmListener, nullptr);
++		return;
++	}
+ 	if (wl_seat* wlSeat; reg.handle(wlSeat, wl_seat_interface, 7)) {
+ 		auto& seat = seats.emplace_back(Seat {name, wl_unique_ptr<wl_seat> {wlSeat}});
+ 		wl_seat_add_listener(wlSeat, &seatListener, &seat);
+@@ -522,10 +536,6 @@ int main(int argc, char* argv[])
+ 		.fd = displayFd,
+ 		.events = POLLIN,
+ 	});
+-	pollfds.push_back({
+-		.fd = STDIN_FILENO,
+-		.events = POLLIN,
+-	});
+ 	if (fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK) < 0) {
+ 		diesys("fcntl F_SETFL");
+ 	}
+@@ -550,8 +560,6 @@ int main(int argc, char* argv[])
+ 						ev.events = POLLIN;
+ 						waylandFlush();
+ 					}
+-				} else if (ev.fd == STDIN_FILENO && (ev.revents & POLLIN)) {
+-					onStdin();
+ 				} else if (ev.fd == statusFifoFd && (ev.revents & POLLIN)) {
+ 					onStatus();
+ 				} else if (ev.fd == signalSelfPipe[0] && (ev.revents & POLLIN)) {

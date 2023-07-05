@@ -1,0 +1,157 @@
+# speedwm status module configuration
+#
+# This shell script which acts as a configuration file should be configured in /bin/sh compatible syntax. For best compatibility, I suggest that you only use POSIX compliant shell. No bash, no fish and no zsh. Of course if /bin/sh is Bash then you don't strictly NEED to keep it POSIX compliant.
+#
+# You can however use if statements, case, variables, shell commands, cat << EOF, etc.
+#
+# To apply these changes, simply restart the status bar.
+
+# General settings
+SEPARATOR=" " # Separator to use. Alternative separators: "❰", "<", "|"
+
+# Status bar modules
+# Set to true/false to enable/disable.
+# Keep in mind, if the dependencies are not installed, then they will not be used regardless of what the option is set to.
+ENABLE_ITEM1=true # Enable RAM usage (true/false)
+ENABLE_ITEM2=true # Enable Time (HH:MM) (true/false)
+ENABLE_ITEM3=true # Enable Date (DD/MM/YY) (true/false)
+ENABLE_ITEM4=true # Enable Volume/Mute status (<perc>%) (true/false)
+ENABLE_ITEM5=true # Enable Weather (true/false)
+ENABLE_ITEM6=true # Enable Network Traffic (<num> kb/s (true/false)
+ENABLE_ITEM7=true # Enable dfmpeg status (true/false)
+ENABLE_ITEM8=true # Enable CPU temp (true/false)
+ENABLE_ITEM9=true # Enable music status (true/false)
+ENABLE_ITEM10=false # Enable newsboat unread (true/false)
+ENABLE_ITEM11=true # Enable battery percentage and charging status (true/false)
+ENABLE_ITEM12=true # Enable unread email status (true/false)
+
+# Status bar module icons
+# Make sure dwm supports this icon/glyph.
+ITEM1_ICON=" " # Icon for ITEM1
+ITEM2_ICON=" " # Icon for ITEM2
+ITEM3_ICON=" " # Icon for ITEM3
+ITEM4_ICON="  " # Icon for ITEM4
+ITEM5_ICON="摒 " # Icon for ITEM5
+ITEM6_ICON="  " # Icon for ITEM6
+ITEM7_ICON="  " # Icon for ITEM7
+ITEM8_ICON=" " # Icon for ITEM8
+ITEM9_ICON=" " # Icon for ITEM9
+ITEM10_ICON=" " # Icon for ITEM10
+ITEM11_ICON=" " # Icon for ITEM11
+ITEM12_ICON=" " # Icon for ITEM12
+
+# Status bar module separators
+ITEM1_SEPARATOR="$SEPARATOR" # Separator for ITEM1
+ITEM2_SEPARATOR="$SEPARATOR" # Separator for ITEM2
+ITEM3_SEPARATOR="$SEPARATOR" # Separator for ITEM3
+ITEM4_SEPARATOR="$SEPARATOR" # Separator for ITEM4
+ITEM5_SEPARATOR="$SEPARATOR" # Separator for ITEM5
+ITEM6_SEPARATOR="$SEPARATOR" # Separator for ITEM6
+ITEM7_SEPARATOR="$SEPARATOR" # Separator for ITEM7
+ITEM8_SEPARATOR="$SEPARATOR" # Separator for ITEM8
+ITEM9_SEPARATOR="$SEPARATOR" # Separator for ITEM9
+ITEM10_SEPARATOR="$SEPARATOR" # Separator for ITEM10
+ITEM11_SEPARATOR="$SEPARATOR" # Separator for ITEM11
+ITEM12_SEPARATOR="$SEPARATOR" # Separator for ITEM12
+
+# RAM format
+# Format to display the RAM status in
+#
+# @u - Used RAM
+# @t - Total RAM
+#
+# Example: @u/@t
+ITEM1_FORMAT="@u/@t"
+
+# Time format
+# Format to display the time in
+#
+# @h - Hour
+# @m - Minute
+# @s - Second
+#
+# Example: @h:@m
+ITEM2_FORMAT="@h:@m"
+
+# Date format
+# Format to display the date in
+#
+# @d - Day
+# @m - Month
+# @y - Year
+#
+# Example: @d/@m/@y
+ITEM3_FORMAT="@d/@m/@y"
+
+ITEM4_SHOW_MUTE="false" # Show mute status (true/false)
+ITEM4_MUTE_TEXT="(Muted)" # Text to display when muted (text)
+
+ITEM4_ICON_100=" " # Icon when volume is at 100 or higher.
+ITEM4_ICON_75="墳 " # Icon when volume is at 75 or lower.
+ITEM4_ICON_50="奔" # Icon when volume is at 50 or lower.
+ITEM4_ICON_25="奄" # Icon when volume is at 25 or lower.
+ITEM4_ICON_0="婢 " # Icon when volume is at 0.
+ITEM4_ICON_MUTED="婢 " # Icon when muted.
+
+# Weather icon
+#
+# Icon to display depending on the weather.
+#
+ITEM5_SUNNY_ICON="滛 " # Icon for when it's sunny and life's good.
+ITEM5_WINDY_ICON="煮 " # Icon for when it's windy.
+ITEM5_CLOUDY_ICON="   " # Icon for when it's cloudy.
+ITEM5_FOGGY_ICON="敖 " # Icon for when it's foggy.
+ITEM5_RAIN_ICON="歹 " # Icon for when it's raining.
+ITEM5_SNOW_ICON="流 " # Icon for when it's snowing.
+ITEM5_STORM_ICON="朗 " # Icon for when there's a storm.
+ITEM5_HAIL_ICON="晴 " # Icon for when it's hailing.
+
+# Net format
+# Format to display the transmitted/received bytes in
+#
+# @t - Transmitted
+# @r - Received
+#
+# Example: @t kb/s
+ITEM6_FORMAT="@t kb/s"
+
+ITEM7_RECORDING_TEXT="Recording" # Text to display when recording (text)
+
+ITEM8_FORMAT_CELSIUS="true" # Format temperature in Celsius (true/false)
+
+ITEM9_BACKEND="auto" # Backend for the music status (cmus/mocp/auto)
+
+# Music format
+# Format to display the music status in
+#
+# @a - Artist
+# @t - Title
+# @g - Genre
+# @ab - Album
+# @tt - Total time
+# @te - Time elapsed
+#
+# Example: @a - @t from @ab (@g) [@te/@tt]
+ITEM9_FORMAT="@a - @t from @ab (@g) [@te/@tt]"
+
+ITEM10_TEXT="unread articles!" # Text to display next to unread article count (text)
+
+# Battery module options
+ITEM11_SHOW_CHARGING_STATUS=true # Show 'Charging', 'Not charging' or 'Fully charged' status after the percentage. (true/false)
+ITEM11_DISCHARGING_TEXT="Not charging" # Text when not charging (text)
+ITEM11_CHARGING_TEXT="Charging" # Text when charging (text)
+ITEM11_FULL_TEXT="Fully charged" # Text when fully charged (text)
+
+# Icons that will be printed depending on your percentage.
+ITEM11_ICON_CHARGING="  " # Icon when your battery is charging. Yay!
+ITEM11_ICON_FULL="   " # Icon when your battery is full.
+ITEM11_ICON_75="   " # Icon when you have 75% battery left or less.
+ITEM11_ICON_50="   " # Icon when you have 50% battery left or less.
+ITEM11_ICON_25="   " # Icon when you have 25% battery left or less.
+ITEM11_ICON_5="   " # Icon when you have 5% battery left or less.
+
+# Email module options
+ITEM12_UNREAD_TEXT="unread emails!" # Text to display next to email count.
+ITEM12_EMAIL_DIR="/home/sh/.local/share/mail" # Email directory. Default will work if you use mutt-wizard.
+
+# For the rest of the options, see status.h.

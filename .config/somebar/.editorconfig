@@ -1,0 +1,5 @@
+root = true
+
+[*]
+indent_style = tab
+indent_brace_style = K&R

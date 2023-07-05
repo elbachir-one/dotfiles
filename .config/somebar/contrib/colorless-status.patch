@@ -1,0 +1,15 @@
+From: medanisjbara anis2834133766619@gmail.com
+Date: Mon, 14 Nov 2022 10:28:00
+Description: sets the color of status component to inactive
+diff --git a/src/bar.cpp b/src/bar.cpp
+index fab5a8f..aebe28b 100644
+--- a/src/bar.cpp
++++ b/src/bar.cpp
+@@ -266,6 +266,7 @@ void Bar::renderStatus()
+ 	cairo_fill(_painter);
+ 
+ 	_x = start;
++	setColorScheme(colorInactive);
+ 	renderComponent(_statusCmp);
+ }
+ 

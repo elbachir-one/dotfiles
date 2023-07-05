@@ -1,0 +1,54 @@
+From: medanisjbara anis2834133766619@gmail.com
+Date: Mon, 15 Nov 2022 08:16:00
+Description: lets config.h customize indicators sizes
+diff --git a/src/bar.cpp b/src/bar.cpp
+index fab5a8f..c0e070c 100644
+--- a/src/bar.cpp
++++ b/src/bar.cpp
+@@ -247,11 +247,11 @@ void Bar::renderTags()
+ 		renderComponent(tag.component);
+ 		auto indicators = std::min(tag.numClients, static_cast<int>(_bufs->height/2));
+ 		for (auto ind = 0; ind < indicators; ind++) {
+-			auto w = ind == tag.focusedClient ? 7 : 1;
++			auto w = ind == tag.focusedClient ? indprops.focused_width : indprops.width;
+ 			cairo_move_to(_painter, tag.component.x, ind*2+0.5);
+ 			cairo_rel_line_to(_painter, w, 0);
+ 			cairo_close_path(_painter);
+-			cairo_set_line_width(_painter, 1);
++			cairo_set_line_width(_painter, ind == tag.focusedClient ? indprops.focused_height : indprops.height);
+ 			cairo_stroke(_painter);
+ 		}
+ 	}
+diff --git a/src/common.hpp b/src/common.hpp
+index aed4480..acdca1b 100644
+--- a/src/common.hpp
++++ b/src/common.hpp
+@@ -34,6 +34,13 @@ struct Button {
+ 	const Arg arg;
+ };
+ 
++struct IndicatorProps {
++  int width;
++  int height;
++  int focused_width;
++  int focused_height;
++};
++
+ extern wl_display* display;
+ extern wl_compositor* compositor;
+ extern wl_shm* shm;
+diff --git a/src/config.def.hpp b/src/config.def.hpp
+index 40a8c95..d51fee8 100644
+--- a/src/config.def.hpp
++++ b/src/config.def.hpp
+@@ -25,3 +25,10 @@ static std::vector<std::string> tagNames = {
+ constexpr Button buttons[] = {
+ 	{ ClkStatusText,   BTN_RIGHT,  spawn,      {.v = termcmd} },
+ };
++
++constexpr IndicatorProps indprops = {
++	5, /* unfocused indicator width  */
++	5, /* unfocused indicator height */
++	7, /*  focused indicator width   */
++	1  /*  focused indicator height  */
++};

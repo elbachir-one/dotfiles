@@ -1,0 +1,55 @@
+.TH somebar 1 somebar\-1.0
+.SH NAME
+somebar \- dwm-like bar for dwl
+.SH SYNOPSIS
+.B somebar
+.RB [ \-h ]
+.RB [ \-v ]
+.RB [ \-s
+.IR path ]
+.RB [ \-c
+.IR command
+arguments... ]
+.SH DESCRIPTION
+somebar is a status bar for dwl, visually and functionally resembling the
+dwm bar.
+.SH USAGE
+You must start somebar using dwl's `-s` flag, e.g. `dwl -s somebar`.
+
+Somebar can be controlled by writing to $XDG_RUNTIME_DIR/somebar-0, or the path
+defined by the `-s` argument. The following commands are supported:
+.TP
+.B status TEXT
+Updates the status bar
+.TP
+.B hide MONITOR
+Hides somebar on the specified monitor
+.TP
+.B show MONITOR
+Shows somebar on the specified monitor
+.TP
+.B toggle MONITOR
+Toggles somebar on the specified monitor
+.P
+MONITOR is an zxdg_output_v1 name, which can be determined e.g. using `weston-info`.
+Additionally, MONITOR can be `all` (all monitors) or `selected` (the monitor with focus).
+
+Commands can be sent either by writing to the file name above, or equivalently by calling
+somebar with the `-c` argument. For example: `somebar -c toggle all`. This is recommended
+for shell scripts, as there is no race-free way to write to a file only if it exists.
+.SH OPTIONS
+.TP
+.B \-h
+Displays a short help text and exits
+.TP
+.B \-v
+Displays version information and exits
+.TP
+.B \-s
+Sets the path to the somebar control FIFO. The default value is
+$XDG_RUNTIME_DIR/somebar-0
+.TP
+.B \-c
+Sends a command to the control FIFO. See the USAGE section.
+.SH BUGS
+Send bug reports to ~raphi/public-inbox@lists.sr.ht

@@ -1,0 +1,91 @@
+# spmenu_run default configuration file
+#
+# This is the configuration file for the run launcher spmenu comes with.
+# It is not the configuration file for spmenu, see ~/.config/spmenu/spmenu.conf for that.
+#
+# spmenu_run also runs these functions:
+#
+# 'run_pre_func' before spawning spmenu.
+# 'run_post_func' after spawning spmenu, selected item passed as an argument.
+# 'desktop_pre_func' before spawning spmenu.
+# 'desktop_post_func' after spawning spmenu, selected item passed as an argument.
+# 'fm_pre_func' before spawning spmenu.
+# 'fm_post_func' after spawning spmenu, selected item passed as an argument.
+# 'fm_pre_list_func' right before listing out files.
+# 'fm_post_list_func' right after listing out files.
+# 'fm_dir_func' before changing directory to the selected directory.
+# 'fm_line_func' for each line in ls output, the line is passed as an argument, including SGR colors.
+# 'read_man' when reading a man page, selected item passed as an argument.
+#
+# You may create those functions below.
+#
+# For example, to implement a basic history file:
+#
+# run_post_func() {
+#   rm -f /tmp/spmenu_entryhist; printf "$1\n" >> /tmp/spmenu_entryhist
+# }
+#
+# You can use anything POSIX compliant shells and Bash support, as well as programs available on the system.
+
+# misc software
+TERMINAL="${TERMINAL:-st -e}" # Terminal commands are spawned in
+BROWSER="${BROWSER:-xdg-open}" # Web browser, for URLs
+TORRENT="${TORRENT:-qbittorrent}" # Torrent client, for magnet links
+PDF_READER="${PDF_READER:-zathura}" # PDF reader, for file management
+EDITOR="${EDITOR:-nvim}" # Editor, used to open documents
+PLAYER="${PLAYER:-mpv}" # Player, used to play audio/video
+GENERIC="${GENERIC:-$TERMINAL -e $EDITOR}" # Generic, used to open unknown files
+WEB_GREP="http:|https:|www[.]" # Needs to be in grep -E syntax
+MAGNET_GREP="magnet:?" # Needs to be in grep -E syntax
+HISTORY="${XDG_CACHE_HOME:-$HOME/.cache/}/spmenu_run.hist" # History file, spmenu (meaning your user) must have permission to read and write to it.
+
+# run launcher options
+RUNLAUNCHER="${RUNLAUNCHER:-spmenu}" # Run launcher to use
+RUNLAUNCHER_RUN_ARGS="" # Extra rguments passed to $RUNLAUNCHER when using the run launcher
+RUNLAUNCHER_DESKTOP_ARGS="" # Extra rguments passed to $RUNLAUNCHER when using the .desktop launcher
+RUNLAUNCHER_FM_ARGS="--lines 40" # Extra arguments passed to $RUNLAUNCHER when using the file manager
+RUNLAUNCHER_HELP_ARGS="" # Extra arguments passed to $RUNLAUNCHER when using the help
+DMENU_COMPAT="false" # Enable dmenu compatibility (true/false)
+
+# sorting
+SORT_BY_NUMBER="true" # Sort by numbers
+SORT_IN_REVERSE="true" # Sort in reverse
+SORT_BY_RECENT="false" # Sort by recent
+SORT_ARGS="" # Extra arguments passed to the sort command.
+
+# keywords
+HIDDEN_KEYWORDS="spmenu" # Keywords that will be ignored, needs to be in grep -vE syntax.
+KEYWORDS="" # Keywords that will be matched, needs to be in grep -E syntax.
+
+# misc
+STDOUT="false" # Print to stdout and exit (true/false)
+DISPLAY_DUPLICATES="false" # Display duplicates or not
+DEFAULT_FEATURE="run" # spmenu_run default feature (run/fm/desktop/help)
+HELP_COLOR="#FFFF00"
+
+# .desktop options
+DESKTOP_DIR="${DESTDIR}${PREFIX}/share/applications" # Directories for .desktop entries
+ICON_DIR="${DESTDIR}${PREFIX}/share/icons/hicolor ${DESTDIR}${PREFIX}/share/pixmaps" # Directories for icons defined in the entries
+TEMPORARY_DIR="$CONFDIR/spmenu/run/cache" # Directory used to store cached entries
+AUTOREFRESH="false" # Refresh (clear) cache if there are more entries available than cached. May cause cache to be cleared every time in some cases. (true/false)
+IMAGE="true" # Display images (true/false)
+DISPLAY_DESCRIPTION="true" # Display description (true/false)"
+DESCRIPTION_COLOR="#999888" # Description text color
+LOGFILE="/tmp/spmenu_run.log" # Log file
+TITLEFILE="${TITLEFILE:-${XDG_CACHE_HOME:-$HOME/.cache}/.title}" # File containing the different titles to display.
+DESCFILE="${DESCFILE:-${XDG_CACHE_HOME:-$HOME/.cache}/.desc}" # File containing the description to display
+EXECFILE="${EXECFILE:-${XDG_CACHE_HOME:-$HOME/.cache}/.exec}" # File containing the different executables to run.
+ICONFILE="${ICONFILE:-${XDG_CACHE_HOME:-$HOME/.cache}/.icon}" # File containing the paths to the icons to display.
+FILEFILE="${FILEFILE:-${XDG_CACHE_HOME:-$HOME/.cache}/.file}" # File containing the path to the .desktop entries.
+
+# file management
+DEFAULT_DIRECTORY="$(pwd)" # Directory to start -fm if none is specified.
+LS_ARGS="${LS_ARGS:- --color=always}" # Arguments passed to /bin/ls
+USE_FULL_PATH="true" # Return full path (true/false)
+
+# function to read the man page in spmenu
+read_man() {
+    man "$1" | \
+    col -b | \
+    ${RUNLAUNCHER:-spmenu} --lines 40 --columns 1 -p "man $1"
+}

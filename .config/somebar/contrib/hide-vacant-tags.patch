@@ -1,0 +1,54 @@
+From: medanisjbara anis2834133766619@gmail.com
+Date: Mon, 14 Nov 2022 22:52:00
+Description: somebar equivalent of https://dwm.suckless.org/patches/hide_vacant_tags
+diff --git a/src/bar.cpp b/src/bar.cpp
+index fab5a8f..38e7b5f 100644
+--- a/src/bar.cpp
++++ b/src/bar.cpp
+@@ -240,13 +240,36 @@ void Bar::render()
+ 
+ void Bar::renderTags()
+ {
++	// Check if all tags are active (Mod+0)
++	bool allActive = true;
+ 	for (auto &tag : _tags) {
++		if (tag.state & TagState::Active){
++			if (!allActive){
++				allActive = true;
++				break;
++			}
++			allActive = false;
++		}
++	}
++
++	bool renderThis;
++	for (auto &tag : _tags) {
++		renderThis = false;
+ 		setColorScheme(
+ 			tag.state & TagState::Active ? colorActive : colorInactive,
+ 			tag.state & TagState::Urgent);
+-		renderComponent(tag.component);
++		// Reder active tag if it's the only one active
++		if (!allActive && tag.state & TagState::Active)
++			renderThis = true;
+ 		auto indicators = std::min(tag.numClients, static_cast<int>(_bufs->height/2));
+ 		for (auto ind = 0; ind < indicators; ind++) {
++			// render tags having indicators
++			if (tag.focusedClient == -1)
++				renderThis = true;
++			// render tags having the focused client
++			if (tag.focusedClient == 0){
++				renderThis = true;
++			}
+ 			auto w = ind == tag.focusedClient ? 7 : 1;
+ 			cairo_move_to(_painter, tag.component.x, ind*2+0.5);
+ 			cairo_rel_line_to(_painter, w, 0);
+@@ -254,6 +277,8 @@ void Bar::renderTags()
+ 			cairo_set_line_width(_painter, 1);
+ 			cairo_stroke(_painter);
+ 		}
++		if (renderThis)
++			renderComponent(tag.component);
+ 	}
+ }
+ 

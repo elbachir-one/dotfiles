@@ -1,0 +1,15 @@
+From: Sam Nystrom <samuel.l.nystrom@gmail.com>
+Date: Sat, 4 Mar 2023 17:38:12 -0500
+Description: disable window title
+diff --git a/src/bar.cpp b/src/bar.cpp
+index 507ce62..1b6f771 100644
+--- a/src/bar.cpp
++++ b/src/bar.cpp
+@@ -227,7 +227,6 @@ void Bar::render()
+ 	renderTags();
+ 	setColorScheme(_selected ? colorActive : colorInactive);
+ 	renderComponent(_layoutCmp);
+-	renderComponent(_titleCmp);
+ 	renderStatus();
+ 
+ 	_painter = nullptr;

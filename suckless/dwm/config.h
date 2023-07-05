@@ -54,9 +54,10 @@ static const Rule rules[]               = {
     {"Virt-manager", 	      NULL,     NULL, 		     1 << 8, 	False, 		0, 	       -1, 	      -1},
     {"Chromium", 	      NULL,     NULL, 		     1 << 1, 	False, 		0, 	       -1, 	      -1},
     {"Transmission-gtk",      NULL,     NULL, 		     1 << 5, 	False, 		0, 	       -1, 	      -1},
-    {"Gimp", 		      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1,  	      -1},
+    {"Gimp", 		      NULL,     NULL, 		     1 << 5, 	False, 		0, 	       -1,  	      -1},
     {"kdenlive", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1,  	      -1},
     {"st",                    NULL,     "ranger", 	     1 << 6, 	False, 	    	0, 	       -1, 	      -1},
+    {"st",                    NULL,     "cava", 	     1 << 6, 	False, 	    	0, 	       -1, 	      -1},
     {"st",                    NULL,     "ncmpcpp", 	     1 << 6, 	False, 	    	0, 	       -1, 	      -1},
     {"st",                    NULL,     "htop", 	     1 << 5, 	False, 		0, 	       -1,  	      -1},
     {"qutebrowser", 	      NULL,     NULL, 		     1 << 3, 	False, 		0, 	       -1, 	      -1},
@@ -111,6 +112,7 @@ static const char *screcmd[]        = { "scrot", "/home/sh/Images/shots/shot-%Y-
 static const char *virtcmd[]        = { "virt-manager", NULL };
 static const char *chrocmd[]        = { "chromium", NULL };
 static const char *boatcmd[]        = { "st", "-e", "newsboat", NULL };
+static const char *cacmd[]          = { "st", "-e", "cava", NULL };
 static const char *ytcmd[]          = { "ytfzf", "-D", NULL };
 static const char *ytdcmd[]         = { "ytfzf", "-d", "-D", NULL };
 static const char *flamcmd[]        = { "flameshot", "gui", NULL };
@@ -126,6 +128,7 @@ static const char *dowcmd[]         = { "dow", NULL };
 static Key keys[] = {
 /* modifier                                               key                          function                  argument */
     {MODKEY,                                              XK_a, 		        spawn, 		        {.v = alcmd}},
+    {MODKEY,                                              XK_c, 		        spawn, 		        {.v = cacmd}},
     {MODKEY,                                              XK_x, 		        spawn, 		        {.v = dowcmd}},
     {MODKEY,                                              XK_y, 		        spawn, 		        {.v = ytcmd}},
     {MODKEY, 					          XK_d, 		        spawn, 		        {.v = ytdcmd}},

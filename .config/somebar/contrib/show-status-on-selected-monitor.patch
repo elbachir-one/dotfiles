@@ -1,0 +1,43 @@
+From 1ca4603b79e888980fb46d5dc6aa0d6f8afa2b3c Mon Sep 17 00:00:00 2001
+From: Ben Collerson <benc@benc.cc>
+Date: Mon, 28 Nov 2022 13:22:16 +1000
+Subject: [PATCH] show status on selected monitor
+
+---
+ src/bar.cpp  | 7 ++++++-
+ src/main.cpp | 1 +
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/src/bar.cpp b/src/bar.cpp
+index 507ce62..f962927 100644
+--- a/src/bar.cpp
++++ b/src/bar.cpp
+@@ -156,7 +156,12 @@ void Bar::setTitle(const std::string& title)
+ }
+ void Bar::setStatus(const std::string& status)
+ {
+-	_statusCmp.setText(status);
++	if (_selected) {
++		_statusCmp.setText(status);
++	}
++	else {
++		_statusCmp.setText("");
++	}
+ }
+ 
+ void Bar::invalidate()
+diff --git a/src/main.cpp b/src/main.cpp
+index 6274959..c6fd401 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -307,6 +307,7 @@ static void handleStdin(const std::string& line)
+ 		uint32_t selected;
+ 		stream >> selected;
+ 		mon->bar.setSelected(selected);
++		mon->bar.setStatus(lastStatus);
+ 		if (selected) {
+ 			selmon = &*mon;
+ 		} else if (selmon == &*mon) {
+-- 
+2.38.1
+

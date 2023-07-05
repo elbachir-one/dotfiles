@@ -1,0 +1,37 @@
+[global]
+	icon_theme = Papirus-Dark
+	enable_recursive_icon_lookup = true
+    frame_width = 0
+    monitor = 0
+    follow = keyboard
+    transparency = 40
+    font = "Symbols Nerd Font, Monofur Nerd Font"
+    format = "<b>%s</b>\n%b"
+    alignment = center
+	indicate_hidden = yes
+	shrink = no
+	padding = 10
+	horizontal_padding = 10
+	separator_height = 2
+	separator_color = "#202020"
+	sort = yes
+	min_icon_size = 48
+	max_icon_size = 96
+
+[base16_low]
+    msg_urgency = low
+    background = "#191724"
+    foreground = "#ffffff"
+    timeout = 3
+
+[base16_normal]
+    msg_urgency = normal
+    background = "#26233a"
+    foreground = "#ffffff"
+    timeout = 5
+
+[base16_high]
+    msg_urgency = critical
+    background = "#eb6f92"
+    foreground = "#ffffff"
+    timeout = 10
