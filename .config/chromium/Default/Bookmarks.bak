@@ -1,0 +1,300 @@
+{
+   "checksum": "451f94184acc3d7b8c906bc9da85437c",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13328396325444116",
+            "date_last_used": "13328415920072598",
+            "guid": "443ddd47-3956-42d0-9d66-294bef0fec3b",
+            "id": "5",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "MEGA",
+            "type": "url",
+            "url": "https://mega.nz/fm/XgNVSaBI"
+         }, {
+            "date_added": "13328396331170724",
+            "date_last_used": "13332817633791647",
+            "guid": "e2cc7a17-d092-4d7a-9808-713cb0e49505",
+            "id": "6",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/"
+         }, {
+            "date_added": "13328396549523381",
+            "date_last_used": "0",
+            "guid": "db1e41b7-89b6-41dc-a8c5-55e173762b58",
+            "id": "7",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "GitHub - garabik/grc: generic colouriser",
+            "type": "url",
+            "url": "https://github.com/garabik/grc"
+         }, {
+            "date_added": "13328404017062257",
+            "date_last_used": "0",
+            "guid": "645d7bff-cdf0-4e1e-bf3d-cd440fefe561",
+            "id": "9",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "New chat",
+            "type": "url",
+            "url": "https://chat.openai.com/"
+         }, {
+            "date_added": "13328406796758527",
+            "date_last_used": "0",
+            "guid": "25524299-f950-4e0f-91a1-a1c6eb936324",
+            "id": "11",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "GitHub - newmanls/rofi-themes-collection: Themes Collection for Rofi Launcher",
+            "type": "url",
+            "url": "https://github.com/newmanls/rofi-themes-collection"
+         }, {
+            "date_added": "13328414527017919",
+            "date_last_used": "13330193861916483",
+            "guid": "51166fdf-f46c-4277-ae3e-8564bde023db",
+            "id": "12",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "downthecrop (downthecrop) · GitHub",
+            "type": "url",
+            "url": "https://github.com/downthecrop"
+         }, {
+            "date_added": "13328746974002923",
+            "date_last_used": "0",
+            "guid": "d8859573-ba37-4a1a-a92d-1f11c5ef1e5a",
+            "id": "14",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "software that sucks less | suckless.org software that sucks less",
+            "type": "url",
+            "url": "http://suckless.org/"
+         }, {
+            "date_added": "13329179669852043",
+            "date_last_used": "0",
+            "guid": "09e66a20-5a91-4df9-ac2e-c1e424eabb12",
+            "id": "16",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "can not find file itab.h · Issue #105 · vmt/udis86 · GitHub",
+            "type": "url",
+            "url": "https://github.com/vmt/udis86/issues/105"
+         }, {
+            "date_added": "13329486611349610",
+            "date_last_used": "0",
+            "guid": "79d1c214-0d3d-450b-91d7-d87c48ba276d",
+            "id": "18",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Download music, movies, games, software! The Pirate Bay - The galaxy's most resilient BitTorrent site",
+            "type": "url",
+            "url": "https://thepiratebay0.org/"
+         }, {
+            "date_added": "13329503444376928",
+            "date_last_used": "13329926290952117",
+            "guid": "2fe7cceb-1a78-4a26-9ab2-2597d5b9e195",
+            "id": "19",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Reddit - Dive into anything",
+            "type": "url",
+            "url": "https://www.reddit.com/"
+         }, {
+            "date_added": "13329625489886211",
+            "date_last_used": "0",
+            "guid": "1b9ab1ec-e6df-4d4e-9268-02b2b4928252",
+            "id": "21",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Trending vim color schemes | vimcolorschemes",
+            "type": "url",
+            "url": "https://vimcolorschemes.com/"
+         }, {
+            "date_added": "13329826027814270",
+            "date_last_used": "0",
+            "guid": "c946fae6-6455-4f67-9fa0-5f2f5cde6b1c",
+            "id": "23",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "The Official Home of YIFY Movies Torrent Download - YTS",
+            "type": "url",
+            "url": "https://yts.mx/"
+         }, {
+            "date_added": "13329920175042804",
+            "date_last_used": "0",
+            "guid": "99215691-f862-4c6e-baee-2c60f38f474c",
+            "id": "25",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "GitHub - alexanderjeurissen/ranger_devicons: Ranger plugin that adds file glyphs / icon support to Ranger",
+            "type": "url",
+            "url": "https://github.com/alexanderjeurissen/ranger_devicons"
+         }, {
+            "date_added": "13330176311522075",
+            "date_last_used": "0",
+            "guid": "fd5c6157-177f-43dc-9d0c-e68c35895aba",
+            "id": "27",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "TokyVideo - Follow your favs",
+            "type": "url",
+            "url": "https://www.tokyvideo.com/"
+         }, {
+            "date_added": "13330455711658692",
+            "date_last_used": "0",
+            "guid": "d2cf0f5f-e8db-492d-bb17-94f8ded3eea8",
+            "id": "29",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Latest Wallpapers - wallhaven.cc",
+            "type": "url",
+            "url": "https://wallhaven.cc/latest"
+         }, {
+            "date_added": "13330619543130193",
+            "date_last_used": "0",
+            "guid": "1a0f589e-e91e-4e6b-9b62-0bdf91731960",
+            "id": "31",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "iawia002/lux: 👾 Fast and simple video download library and CLI tool written in Go",
+            "type": "url",
+            "url": "https://github.com/iawia002/lux"
+         }, {
+            "date_added": "13331611556303915",
+            "date_last_used": "0",
+            "guid": "1adb4b23-cd54-49dd-b2be-6ce300771e1e",
+            "id": "33",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Home ⚡ Zig Programming Language",
+            "type": "url",
+            "url": "https://ziglang.org/"
+         }, {
+            "date_added": "13331611578426786",
+            "date_last_used": "0",
+            "guid": "ac144c94-2566-4b34-80c9-19b327ecc361",
+            "id": "34",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "The Go Programming Language",
+            "type": "url",
+            "url": "https://go.dev/"
+         }, {
+            "date_added": "13332114228169582",
+            "date_last_used": "0",
+            "guid": "fc92fb48-545e-4a5e-a1c6-bbdae189d73c",
+            "id": "36",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Offline — DevDocs",
+            "type": "url",
+            "url": "https://devdocs.io/offline"
+         }, {
+            "date_added": "13332115063495040",
+            "date_last_used": "0",
+            "guid": "3422704e-f8f3-4361-ba59-f1065fefbbfd",
+            "id": "37",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Learn Go | Boot.dev",
+            "type": "url",
+            "url": "https://boot.dev/course/3b39d0f6-f944-4f1b-832d-a1daba32eda4/9e6acea2-8081-404d-9c34-3b5f677fa580/224252be-adc9-452f-8ed0-0b305b25d0cb"
+         }, {
+            "date_added": "13332291968650265",
+            "date_last_used": "0",
+            "guid": "e4f174f7-00e5-40f4-b8d1-50717bba62d2",
+            "id": "39",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "WhatsApp",
+            "type": "url",
+            "url": "https://web.whatsapp.com/"
+         }, {
+            "date_added": "13332594971766915",
+            "date_last_used": "0",
+            "guid": "6dafc4e7-d903-4044-9557-f53b517e913d",
+            "id": "41",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Free Grammar Checker - QuillBot AI",
+            "type": "url",
+            "url": "https://quillbot.com/grammar-check"
+         }, {
+            "date_added": "13332715798710991",
+            "date_last_used": "0",
+            "guid": "cade8914-2d73-4490-9d12-5fda1b1c3a41",
+            "id": "43",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "VimGolf - real Vim ninjas count every keystroke!",
+            "type": "url",
+            "url": "https://www.vimgolf.com/"
+         }, {
+            "date_added": "13332972575352026",
+            "date_last_used": "0",
+            "guid": "55b6a6eb-3d0d-4004-b8ba-1f85ffb4f379",
+            "id": "45",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Awesome Wallpapers - wallhaven.cc",
+            "type": "url",
+            "url": "https://wallhaven.cc/"
+         } ],
+         "date_added": "13328396288320475",
+         "date_last_used": "0",
+         "date_modified": "13332972575352026",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13328396288320480",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13328396288320485",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
