@@ -1,0 +1,172 @@
+diff --git a/config.def.h b/config.def.h
+index 1edb647..47b616d 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -12,6 +12,7 @@ static const char *colors[SchemeLast][2] = {
+ 	[SchemeNorm] = { "#bbbbbb", "#222222" },
+ 	[SchemeSel] = { "#eeeeee", "#005577" },
+ 	[SchemeOut] = { "#000000", "#00ffff" },
++	[SchemeHp]  = { "#bbbbbb", "#333333" }
+ };
+ /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
+ static unsigned int lines      = 0;
+diff --git a/dmenu.c b/dmenu.c
+index 571bc35..d5265e9 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -26,14 +26,16 @@
+ #define TEXTW(X)              (drw_fontset_getwidth(drw, (X)) + lrpad)
+
+ /* enums */
+-enum { SchemeNorm, SchemeSel, SchemeOut, SchemeLast }; /* color schemes */
++enum { SchemeNorm, SchemeSel, SchemeHp, SchemeOut, SchemeLast }; /* color schemes */
+
+ struct item {
+ 	char *text;
+ 	struct item *left, *right;
+-	int out;
++	int out, hp;
+ };
+
++static const char **hpitems = NULL;
++static int hplength = 0;
+ static char text[BUFSIZ] = "";
+ static char *embed;
+ static int bh, mw, mh;
+@@ -65,6 +67,29 @@ textw_clamp(const char *str, unsigned int n)
+ 	return MIN(w, n);
+ }
+
++static int
++str_compar(const void *s0_in, const void *s1_in)
++{
++	const char *s0 = *(const char **)s0_in;
++	const char *s1 = *(const char **)s1_in;
++	return fstrncmp == strncasecmp ? strcasecmp(s0, s1) : strcmp(s0, s1);
++}
++
++static void
++parse_hpitems(char *src)
++{
++	int n = 0;
++	char *t;
++
++	for (t = strtok(src, ","); t; t = strtok(NULL, ",")) {
++		if (hplength + 1 >= n) {
++			if (!(hpitems = realloc(hpitems, (n += 8) * sizeof *hpitems)))
++				die("Unable to realloc %zu bytes\n", n * sizeof *hpitems);
++		}
++		hpitems[hplength++] = t;
++	}
++}
++
+ static void
+ appenditem(struct item *item, struct item **list, struct item **last)
+ {
+@@ -107,6 +132,7 @@ cleanup(void)
+ 	for (i = 0; items && items[i].text; ++i)
+ 		free(items[i].text);
+ 	free(items);
++	free(hpitems);
+ 	drw_free(drw);
+ 	XSync(dpy, False);
+ 	XCloseDisplay(dpy);
+@@ -135,6 +161,8 @@ drawitem(struct item *item, int x, int y, int w)
+ {
+ 	if (item == sel)
+ 		drw_setscheme(drw, scheme[SchemeSel]);
++	else if (item->hp)
++		drw_setscheme(drw, scheme[SchemeHp]);
+ 	else if (item->out)
+ 		drw_setscheme(drw, scheme[SchemeOut]);
+ 	else
+@@ -236,7 +264,7 @@ match(void)
+ 	char buf[sizeof text], *s;
+ 	int i, tokc = 0;
+ 	size_t len, textsize;
+-	struct item *item, *lprefix, *lsubstr, *prefixend, *substrend;
++	struct item *item, *lhpprefix, *lprefix, *lsubstr, *hpprefixend, *prefixend, *substrend;
+
+ 	strcpy(buf, text);
+ 	/* separate input text into tokens to be matched individually */
+@@ -245,7 +273,7 @@ match(void)
+ 			die("cannot realloc %zu bytes:", tokn * sizeof *tokv);
+ 	len = tokc ? strlen(tokv[0]) : 0;
+
+-	matches = lprefix = lsubstr = matchend = prefixend = substrend = NULL;
++	matches = lhpprefix = lprefix = lsubstr = matchend = hpprefixend = prefixend = substrend = NULL;
+ 	textsize = strlen(text) + 1;
+ 	for (item = items; item && item->text; item++) {
+ 		for (i = 0; i < tokc; i++)
+@@ -253,14 +281,24 @@ match(void)
+ 				break;
+ 		if (i != tokc) /* not all tokens match */
+ 			continue;
+-		/* exact matches go first, then prefixes, then substrings */
++		/* exact matches go first, then prefixes with high priority, then prefixes, then substrings */
+ 		if (!tokc || !fstrncmp(text, item->text, textsize))
+ 			appenditem(item, &matches, &matchend);
++		else if (item->hp && !fstrncmp(tokv[0], item->text, len))
++			appenditem(item, &lhpprefix, &hpprefixend);
+ 		else if (!fstrncmp(tokv[0], item->text, len))
+ 			appenditem(item, &lprefix, &prefixend);
+ 		else
+ 			appenditem(item, &lsubstr, &substrend);
+ 	}
++	if (lhpprefix) {
++		if (matches) {
++			matchend->right = lhpprefix;
++			lhpprefix->left = matchend;
++		} else
++			matches = lhpprefix;
++		matchend = hpprefixend;
++	}
+ 	if (lprefix) {
+ 		if (matches) {
+ 			matchend->right = lprefix;
+@@ -552,6 +590,9 @@ readstdin(void)
+ 	char buf[sizeof text], *p;
+ 	size_t i, size = 0;
+
++	if (hpitems && hplength > 0)
++		qsort(hpitems, hplength, sizeof *hpitems, str_compar);
++
+ 	/* read each line from stdin and add it to the item list */
+ 	for (i = 0; fgets(buf, sizeof buf, stdin); i++) {
+ 		if (i + 1 >= size / sizeof *items)
+@@ -562,6 +603,11 @@ readstdin(void)
+ 		if (!(items[i].text = strdup(buf)))
+ 			die("cannot strdup %zu bytes:", strlen(buf) + 1);
+ 		items[i].out = 0;
++		p = hpitems == NULL ? NULL : bsearch(
++			&items[i].text, hpitems, hplength, sizeof *hpitems,
++			str_compar
++		);
++		items[i].hp = p != NULL;
+ 	}
+ 	if (items)
+ 		items[i].text = NULL;
+@@ -711,7 +757,8 @@ static void
+ usage(void)
+ {
+ 	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+-	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
++	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n"
++	      "             [-hb color] [-hf color] [-hp items]\n", stderr);
+ 	exit(1);
+ }
+
+@@ -752,8 +799,14 @@ main(int argc, char *argv[])
+ 			colors[SchemeSel][ColBg] = argv[++i];
+ 		else if (!strcmp(argv[i], "-sf"))  /* selected foreground color */
+ 			colors[SchemeSel][ColFg] = argv[++i];
++		else if (!strcmp(argv[i], "-hb"))  /* high priority background color */
++			colors[SchemeHp][ColBg] = argv[++i];
++		else if (!strcmp(argv[i], "-hf")) /* low priority background color */
++			colors[SchemeHp][ColFg] = argv[++i];
+ 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
+ 			embed = argv[++i];
++		else if (!strcmp(argv[i], "-hp"))
++			parse_hpitems(argv[++i]);
+ 		else
+ 			usage();
