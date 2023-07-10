@@ -1,3 +1,4 @@
+
 highlight Comment cterm=italic
 highlight CursorLine ctermbg=Black cterm=NONE
 highlight CursorLineNr ctermbg=Black cterm=bold ctermfg=Green
@@ -15,13 +16,17 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 "
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " Better tabbing
 vnoremap < <gv
 vnoremap > >gv
+
 " Emmet shortcut
 let g:user_emmet_mode='n'
 let g:user_emmet_leader_key=','
+
 map <F8> :setlocal spell! spelllang=en_gb<CR>
+
 set title
 set ruler
 set showmatch
@@ -35,16 +40,17 @@ set splitright
 set cursorline
 set cursorcolumn
 set backupcopy=yes
+set bg=dark
 
 set diffopt+=iwhite " Ignore whitespace whilst diffing
 nnoremap <silent> <F5> :%s/\s\+$//<cr>
 
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
 
-nnoremap t :NERDTreeToggle<CR>
-nnoremap f :FZF<CR>
-nnoremap ff :Files<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :Files<CR>
 nnoremap <TAB> :bnext<CR>
+nnoremap <C-s> :vsplit<CR>
 
 set undofile
 set undodir=/tmp
@@ -63,6 +69,8 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'ray-x/go.nvim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -80,15 +88,16 @@ Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-Plug 'fatih/vim-go', { 'tag': '*' }
+"Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neoclide/coc.nvim'
 Plug 'tpope/vim-markdown'
+Plug 'fcpg/vim-farout'
+Plug 'fcpg/vim-fahrenheit'
 
 call plug#end()
 
-set bg=dark
 set go=a
 set mouse=a
 set nohlsearch
@@ -196,7 +205,10 @@ endif
 "colore
 "colorscheme gruvbox
 "colorscheme tokyonight-storm
-colorscheme tokyonight-night
+"colorscheme tokyonight-night
+"colorscheme farout
+colorscheme fahrenheit
+"colorscheme PaperColor
 "colorscheme github_*
 " colorscheme ayu
 "colorscheme molokai
@@ -235,10 +247,10 @@ let g:airline_left_sep = ''
  let g:airline_symbols.paste = '∥'
  let g:airline_symbols.whitespace = 'Ξ'
 
- let g:airline_theme='kolor'
+"let g:airline_theme='kolor'
 "let g:airline_theme='dark'
 "let g:airline_theme='badwolf'
-"let g:airline_theme='ravenpower'
+let g:airline_theme='ravenpower'
 "let g:airline_theme='simple'
 "let g:airline_theme='term'
 "let g:airline_theme='ubaryd'
@@ -365,18 +377,18 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocActionAsync('format')
