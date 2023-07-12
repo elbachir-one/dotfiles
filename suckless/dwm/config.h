@@ -123,7 +123,7 @@ static const char scratchpadname[]  = "scratchpad";
 static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "108x30", NULL };
 static const char *alcmd[]          = { "alacritty", NULL };
 static const char *searchcmd[]      = { "search", NULL };
-static const char *dowcmd[]         = { "dow", NULL };
+static const char *dowcmd[]         = { "down", NULL };
 
 static Key keys[] = {
 /* modifier                                               key                          function                  argument */
