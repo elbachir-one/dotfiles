@@ -1,6 +1,5 @@
 picom &
 #alacritty &
-dis &
 st &
 clipmenud &
 slstatus &
