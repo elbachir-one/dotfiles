@@ -97,6 +97,7 @@ alias m='mpv'
 alias htop='htop -t'
 alias d='diff -u'
 alias t='tty-clock -cC 5'
+alias vim='nvim'
 
 # Git Stuff:
 
