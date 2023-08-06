@@ -125,3 +125,4 @@ alias rec="ffmpeg -framerate 24 -f x11grab -video_size 1920x1080 -i :0.0+1366,0 
 #
 
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#figlet -c -f ANSI_Shadow.flf "Void/runit" -t | lolcat
