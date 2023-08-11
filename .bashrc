@@ -98,7 +98,8 @@ alias htop='htop -t'
 alias d='diff -u'
 alias t='tty-clock -cC 5'
 alias vim='nvim'
-
+alias neofetch='neofetch --ascii ascii.txt | lolcat'
+#alias insta='instaloader --login one_to_mini :saved --no-metadata-json --no-video-thumbnail'
 # Git Stuff:
 
 alias gt='git clone'
