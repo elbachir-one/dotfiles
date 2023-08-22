@@ -16,6 +16,7 @@ export BROWSER='chromium'
 export EDITOR='nvim'
 export XDG_RUNTIME_DIR='/tmp/runtime-dir/'
 export PATH="$HOME/.local/bin:$PATH"
+#export PATH="/usr/bin:$PATH"
 
 #PS1='[\u@\h \W]\$ '
 # get current branch in git repo
@@ -99,6 +100,9 @@ alias d='diff -u'
 alias t='tty-clock -cC 5'
 alias vim='nvim'
 alias neofetch='neofetch --ascii ascii.txt | lolcat'
+alias feh='feh -B dark'
+alias ufetch='ufetch | lolcat'
+alias cmatrix='cmatrix | lolcat'
 #alias insta='instaloader --login one_to_mini :saved --no-metadata-json --no-video-thumbnail'
 # Git Stuff:
 

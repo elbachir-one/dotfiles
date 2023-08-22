@@ -9,7 +9,7 @@ static const int swallowfloating       = 0;        /* 1 means swallow floating w
 static const int showbar               = 1;        /* 0 means no bar */
 static const int topbar                = 1;        /* 0 means bottom bar */
 static const int user_bh               = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
-static const int vertpad               = 4;       /* vertical padding of bar */
+static const int vertpad               = 2;       /* vertical padding of bar */
 static const int sidepad               = 4;       /* horizontal padding of bar */
 static const char *fonts[]             = { "terminus:style=Bold:size=14" };
 static const char dmenufont[]          = "monospace:size=10";
@@ -113,7 +113,7 @@ static const char *termcmd[]        = { "st", NULL };
 static const char *clipcmd[]        = { "clipmenu", NULL };
 static const char *rancmd[]         = { "st", "-e", "ranger", NULL };
 static const char *lockcmd[]        = { "slock", NULL };
-static const char *screcmd[]        = { "scrot", "/home/sh/Images/shots/shot-%Y-%m-%d-%H-%M-%S.jpg", NULL };
+static const char *screcmd[]        = { "scrot", "/home/sh/Images/ScreenShots/shot-%Y-%m-%d-%H-%M-%S.jpg", NULL };
 static const char *virtcmd[]        = { "virt-manager", NULL };
 static const char *chrocmd[]        = { "chromium", NULL };
 static const char *boatcmd[]        = { "st", "-e", "newsboat", NULL };
@@ -201,7 +201,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
