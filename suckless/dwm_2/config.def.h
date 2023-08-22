@@ -182,6 +182,7 @@ static Key keys[] = {
     {0, 					          XK_F2, 		        spawn, 		        {.v = down}},
     {0, 					          XK_F4, 		        spawn, 		        {.v = mut}},
     {MODKEY | ShiftMask, 			          XK_q,             		quit, 		        {0}},
+    {MODKEY|ControlMask,                                  XK_f,                         togglefullscr,          {0} },
   	TAGKEYS( 			                  XK_ampersand, 		        0)
 	TAGKEYS( 			                  XK_eacute, 			        1)
 	TAGKEYS( 			                  XK_quotedbl, 			        2)

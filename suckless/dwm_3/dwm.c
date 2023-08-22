@@ -29,7 +29,6 @@
 #include "drw.h"
 #include "util.h"
 
-/* macros */
 #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
 #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
@@ -49,7 +48,6 @@
 #define GAP_TOGGLE 100
 #define GAP_RESET  0
 
-/* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
@@ -140,7 +138,6 @@ typedef struct {
 	int monitor;
 } Rule;
 
-/* function declarations */
 static void applyrules(Client *c);
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
 static void arrange(Monitor *m);
@@ -214,6 +211,7 @@ static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void togglefullscr(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
@@ -245,7 +243,6 @@ static Client *swallowingclient(Window w);
 static Client *termforwin(const Client *c);
 static pid_t winpid(Window w);
 
-/* variables */
 static const char autostartblocksh[] = "autostart_blocking.sh";
 static const char autostartsh[] = "autostart.sh";
 static const char broken[] = "broken";
@@ -292,7 +289,6 @@ static Visual *visual;
 static int depth;
 static Colormap cmap;
 
-/* configuration, allows nested code to access above variables */
 #include "config.h"
 
 struct Pertag {
@@ -307,10 +303,8 @@ struct Pertag {
 	int gappx[LENGTH(tags) + 1]; /* gaps for each tag */
 };
 
-/* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 
-/* function implementations */
 void
 applyrules(Client *c)
 {
@@ -360,7 +354,6 @@ applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
 	int baseismin;
 	Monitor *m = c->mon;
 
-	/* set minimum possible */
 	*w = MAX(1, *w);
 	*h = MAX(1, *h);
 	if (interact) {
@@ -389,13 +382,11 @@ applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
 	if (resizehints || c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
 		if (!c->hintsvalid)
 			updatesizehints(c);
-		/* see last two sentences in ICCCM 4.1.2.3 */
 		baseismin = c->basew == c->minw && c->baseh == c->minh;
 		if (!baseismin) { /* temporarily remove base dimensions */
 			*w -= c->basew;
 			*h -= c->baseh;
 		}
-		/* adjust for aspect limits */
 		if (c->mina > 0 && c->maxa > 0) {
 			if (c->maxa < (float)*w / *h)
 				*w = *h * c->maxa + 0.5;
@@ -406,12 +397,10 @@ applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
 			*w -= c->basew;
 			*h -= c->baseh;
 		}
-		/* adjust for increment value */
 		if (c->incw)
 			*w -= *w % c->incw;
 		if (c->inch)
 			*h -= *h % c->inch;
-		/* restore base dimensions */
 		*w = MAX(*w + c->basew, c->minw);
 		*h = MAX(*h + c->baseh, c->minh);
 		if (c->maxw)
@@ -503,7 +492,6 @@ unswallow(Client *c)
 	free(c->swallowing);
 	c->swallowing = NULL;
 
-	/* unfullscreen the client */
 	setfullscreen(c, 0);
 	updatetitle(c);
 	arrange(c->mon);
@@ -524,7 +512,6 @@ buttonpress(XEvent *e)
 	XButtonPressedEvent *ev = &e->xbutton;
 
 	click = ClkRootWin;
-	/* focus monitor if necessary */
 	if ((m = wintomon(ev->window)) && m != selmon) {
 		unfocus(selmon->sel, 1);
 		selmon = m;
@@ -536,7 +523,6 @@ buttonpress(XEvent *e)
 		for(c = m->clients; c; c=c->next)
 			occ |= c->tags;
 		do {
-			/* Do not reserve space for vacant tags */
 			if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
 				continue;
 			x += TEXTW(tags[i]);
@@ -566,7 +552,6 @@ void
 checkotherwm(void)
 {
 	xerrorxlib = XSetErrorHandler(xerrorstart);
-	/* this causes an error if some other window manager is running */
 	XSelectInput(dpy, DefaultRootWindow(dpy), SubstructureRedirectMask);
 	XSync(dpy, False);
 	XSetErrorHandler(xerror);
@@ -663,7 +648,6 @@ configurenotify(XEvent *e)
 	XConfigureEvent *ev = &e->xconfigure;
 	int dirty;
 
-	/* TODO: updategeom handling sucks, needs to be simplified */
 	if (ev->window == root) {
 		dirty = (sw != ev->width || sh != ev->height);
 		sw = ev->width;
@@ -836,7 +820,6 @@ drawbar(Monitor *m)
 	if (!m->showbar)
 		return;
 
-	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
@@ -850,7 +833,6 @@ drawbar(Monitor *m)
 	}
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
-		/* Do not draw vacant tags */
 		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
 			continue;
 		w = TEXTW(tags[i]);
@@ -948,7 +930,6 @@ focus(Client *c)
 	drawbars();
 }
 
-/* there are some broken focus acquiring clients needing extra handling */
 void
 focusin(XEvent *e)
 {
@@ -1103,7 +1084,6 @@ grabkeys(void)
 			return;
 		for (k = start; k <= end; k++)
 			for (i = 0; i < LENGTH(keys); i++)
-				/* skip modifier codes, we do that ourselves */
 				if (keys[i].keysym == syms[(k - start) * skip])
 					for (j = 0; j < LENGTH(modifiers); j++)
 						XGrabKey(dpy, k,
@@ -1557,7 +1537,6 @@ void
 run(void)
 {
 	XEvent ev;
-	/* main event loop */
 	XSync(dpy, False);
 	while (running && !XNextEvent(dpy, &ev))
 		if (handler[ev.type])
@@ -1574,15 +1553,10 @@ runautostart(void)
 	struct stat sb;
 
 	if ((home = getenv("HOME")) == NULL)
-		/* this is almost impossible */
 		return;
 
-	/* if $XDG_DATA_HOME is set and not empty, use $XDG_DATA_HOME/dwm,
-	 * otherwise use ~/.local/share/dwm as autostart script directory
-	 */
 	xdgdatahome = getenv("XDG_DATA_HOME");
 	if (xdgdatahome != NULL && *xdgdatahome != '\0') {
-		/* space for path segments, separators and nul */
 		pathpfx = ecalloc(1, strlen(xdgdatahome) + strlen(dwmdir) + 2);
 
 		if (sprintf(pathpfx, "%s/%s", xdgdatahome, dwmdir) <= 0) {
@@ -1590,7 +1564,6 @@ runautostart(void)
 			return;
 		}
 	} else {
-		/* space for path segments, separators and nul */
 		pathpfx = ecalloc(1, strlen(home) + strlen(localshare)
 		                     + strlen(dwmdir) + 3);
 
@@ -1600,11 +1573,7 @@ runautostart(void)
 		}
 	}
 
-	/* check if the autostart script directory exists */
 	if (! (stat(pathpfx, &sb) == 0 && S_ISDIR(sb.st_mode))) {
-		/* the XDG conformant path does not exist or is no directory
-		 * so we try ~/.dwm instead
-		 */
 		char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(dwmdir) + 3);
 		if(pathpfx_new == NULL) {
 			free(pathpfx);
@@ -1618,7 +1587,6 @@ runautostart(void)
 		}
 	}
 
-	/* try the blocking script first */
 	path = ecalloc(1, strlen(pathpfx) + strlen(autostartblocksh) + 2);
 	if (sprintf(path, "%s/%s", pathpfx, autostartblocksh) <= 0) {
 		free(path);
@@ -1628,7 +1596,6 @@ runautostart(void)
 	if (access(path, X_OK) == 0)
 		system(path);
 
-	/* now the non-blocking script */
 	if (sprintf(path, "%s/%s", pathpfx, autostartsh) <= 0) {
 		free(path);
 		free(pathpfx);
@@ -1796,7 +1763,6 @@ setlayout(const Arg *arg)
 		drawbar(selmon);
 }
 
-/* arg > 1.0 will set mfact absolutely */
 void
 setmfact(const Arg *arg)
 {
@@ -1819,16 +1785,13 @@ setup(void)
 	Atom utf8string;
 	struct sigaction sa;
 
-	/* do not transform children into zombies when they terminate */
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_NOCLDSTOP | SA_NOCLDWAIT | SA_RESTART;
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGCHLD, &sa, NULL);
 
-	/* clean up any zombies (inherited from .xinitrc etc) immediately */
 	while (waitpid(-1, NULL, WNOHANG) > 0);
 
-	/* init screen */
 	screen = DefaultScreen(dpy);
 	sw = DisplayWidth(dpy, screen);
 	sh = DisplayHeight(dpy, screen);
@@ -1843,7 +1806,6 @@ setup(void)
 	vp = (topbar == 1) ? vertpad : - vertpad;
 	updategeom();
 
-	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
 	wmatom[WMProtocols] = XInternAtom(dpy, "WM_PROTOCOLS", False);
 	wmatom[WMDelete] = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
@@ -1859,18 +1821,14 @@ setup(void)
 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
 	netatom[NetClientInfo] = XInternAtom(dpy, "_NET_CLIENT_INFO", False);
-	/* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
-	/* init appearance */
 	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i], alphas[i], 3);
-	/* init bars */
 	updatebars();
 	updatestatus();
-	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
 		PropModeReplace, (unsigned char *) &wmcheckwin, 1);
@@ -1878,12 +1836,10 @@ setup(void)
 		PropModeReplace, (unsigned char *) "dwm", 3);
 	XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32,
 		PropModeReplace, (unsigned char *) &wmcheckwin, 1);
-	/* EWMH support per view */
 	XChangeProperty(dpy, root, netatom[NetSupported], XA_ATOM, 32,
 		PropModeReplace, (unsigned char *) netatom, NetLast);
 	XDeleteProperty(dpy, root, netatom[NetClientList]);
 	XDeleteProperty(dpy, root, netatom[NetClientInfo]);
-	/* select events */
 	wa.cursor = cursor[CurNormal]->cursor;
 	wa.event_mask = SubstructureRedirectMask|SubstructureNotifyMask
 		|ButtonPressMask|PointerMotionMask|EnterWindowMask
@@ -1917,13 +1873,11 @@ showhide(Client *c)
 			c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
 			c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
 		}
-		/* show clients top down */
 		XMoveWindow(dpy, c->win, c->x, c->y);
 		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
 			resize(c, c->x, c->y, c->w, c->h, 0);
 		showhide(c->snext);
 	} else {
-		/* hide clients bottom up */
 		showhide(c->snext);
 		XMoveWindow(dpy, c->win, WIDTH(c) * -2, c->y);
 	}
@@ -2077,6 +2031,13 @@ togglescratch(const Arg *arg)
 }
 
 void
+togglefullscr(const Arg *arg)
+{
+  if(selmon->sel)
+    setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+}
+
+void
 toggletag(const Arg *arg)
 {
 	unsigned int newtags;
@@ -2106,14 +2067,12 @@ toggleview(const Arg *arg)
 			selmon->pertag->curtag = 0;
 		}
 
-		/* test if the user did not select the same tag */
 		if (!(newtagset & 1 << (selmon->pertag->curtag - 1))) {
 			selmon->pertag->prevtag = selmon->pertag->curtag;
 			for (i = 0; !(newtagset & 1 << i); i++) ;
 			selmon->pertag->curtag = i + 1;
 		}
 
-		/* apply settings for this view */
 		selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag];
 		selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag];
 		selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
@@ -2263,7 +2222,6 @@ updategeom(void)
 		XineramaScreenInfo *unique = NULL;
 
 		for (n = 0, m = mons; m; m = m->next, n++);
-		/* only consider unique geometries as separate screens */
 		unique = ecalloc(nn, sizeof(XineramaScreenInfo));
 		for (i = 0, j = 0; i < nn; i++)
 			if (isuniquegeom(unique, j, &info[i]))
@@ -2271,7 +2229,6 @@ updategeom(void)
 		XFree(info);
 		nn = j;
 
-		/* new monitors if nn > n */
 		for (i = n; i < nn; i++) {
 			for (m = mons; m && m->next; m = m->next);
 			if (m)
@@ -2292,7 +2249,6 @@ updategeom(void)
 				m->mh = m->wh = unique[i].height;
 				updatebarpos(m);
 			}
-		/* removed monitors if n > nn */
 		for (i = nn; i < n; i++) {
 			for (m = mons; m && m->next; m = m->next);
 			while ((c = m->clients)) {
@@ -2350,7 +2306,6 @@ updatesizehints(Client *c)
 	XSizeHints size;
 
 	if (!XGetWMNormalHints(dpy, c->win, &size, &msize))
-		/* size is uninitialized, ensure that size.flags aren't used */
 		size.flags = PSize;
 	if (size.flags & PBaseSize) {
 		c->basew = size.base_width;
@@ -2633,9 +2588,6 @@ wintomon(Window w)
 	return selmon;
 }
 
-/* There's no way to check accesses to destroyed windows, thus those cases are
- * ignored (especially on UnmapNotify's). Other types of errors call Xlibs
- * default error handler, which may call exit. */
 int
 xerror(Display *dpy, XErrorEvent *ee)
 {
@@ -2660,8 +2612,6 @@ xerrordummy(Display *dpy, XErrorEvent *ee)
 	return 0;
 }
 
-/* Startup Error handler to check if another window manager
- * is already running. */
 int
 xerrorstart(Display *dpy, XErrorEvent *ee)
 {

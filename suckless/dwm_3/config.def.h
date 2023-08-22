@@ -146,6 +146,7 @@ static const Key keys[] = {
 	{MODKEY,                    XK_d, 		        spawn, 		        {.v = ytdcmd}},
 	{MODKEY,                    XK_f, 		        spawn, 		        {.v = searchcmd}},
 	{MODKEY | ShiftMask,        XK_f, 		        spawn, 		        {.v = flamcmd}},
+	{MODKEY | ControlMask,      XK_f,                       togglefullscr,          {0} },
 	{MODKEY | ShiftMask,        XK_n, 		        spawn, 		        {.v = boatcmd}},
 	{MODKEY | ShiftMask,        XK_l, 		        spawn, 		        {.v = lockcmd}},
 	{MODKEY | ShiftMask,        XK_s, 		        spawn, 		        {.v = screcmd}},
