@@ -1,7 +1,17 @@
-diff -up dwm-6.3/dwm.c dwm-6.3-attachbottom/dwm.c
---- dwm-6.3/dwm.c	2022-01-07 12:42:18.000000000 +0100
-+++ dwm-6.3-attachbottom/dwm.c	2022-08-17 22:14:41.813809073 +0200
-@@ -147,6 +147,7 @@ static int applysizehints(Client *c, int
+From eea05f94baf707114ea882e8755520ba30d73cb2 Mon Sep 17 00:00:00 2001
+From: Szabolcs Szucs <contact@szabolcsszucs.com>
+Date: Sat, 26 Dec 2020 21:17:40 +0100
+Subject: [PATCH] attachbottom patch
+
+---
+ dwm.c | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/dwm.c b/dwm.c
+index 664c527..7ee3566 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -147,6 +147,7 @@ static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interac
  static void arrange(Monitor *m);
  static void arrangemon(Monitor *m);
  static void attach(Client *c);
@@ -9,10 +19,11 @@ diff -up dwm-6.3/dwm.c dwm-6.3-attachbottom/dwm.c
  static void attachstack(Client *c);
  static void buttonpress(XEvent *e);
  static void checkotherwm(void);
-@@ -408,6 +409,15 @@ attach(Client *c)
+@@ -407,6 +408,15 @@ attach(Client *c)
+ 	c->mon->clients = c;
  }
  
- void
++void
 +attachbottom(Client *c)
 +{
 +	Client **tc;
@@ -21,11 +32,10 @@ diff -up dwm-6.3/dwm.c dwm-6.3-attachbottom/dwm.c
 +	*tc = c;
 +}
 +
-+void
+ void
  attachstack(Client *c)
  {
- 	c->snext = c->mon->stack;
-@@ -1066,7 +1076,7 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1063,7 +1073,7 @@ manage(Window w, XWindowAttributes *wa)
  		c->isfloating = c->oldstate = trans != None || c->isfixed;
  	if (c->isfloating)
  		XRaiseWindow(dpy, c->win);
@@ -34,7 +44,7 @@ diff -up dwm-6.3/dwm.c dwm-6.3-attachbottom/dwm.c
  	attachstack(c);
  	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
  		(unsigned char *) &(c->win), 1);
-@@ -1421,7 +1431,7 @@ sendmon(Client *c, Monitor *m)
+@@ -1418,7 +1428,7 @@ sendmon(Client *c, Monitor *m)
  	detachstack(c);
  	c->mon = m;
  	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
@@ -43,7 +53,7 @@ diff -up dwm-6.3/dwm.c dwm-6.3-attachbottom/dwm.c
  	attachstack(c);
  	focus(NULL);
  	arrange(NULL);
-@@ -1903,7 +1913,7 @@ updategeom(void)
+@@ -1900,7 +1910,7 @@ updategeom(void)
  					m->clients = c->next;
  					detachstack(c);
  					c->mon = mons;
@@ -52,3 +62,6 @@ diff -up dwm-6.3/dwm.c dwm-6.3-attachbottom/dwm.c
  					attachstack(c);
  				}
  				if (m == selmon)
+-- 
+2.29.2
+

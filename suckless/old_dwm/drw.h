@@ -20,9 +20,9 @@ typedef struct {
 	Display *dpy;
 	int screen;
 	Window root;
-    Visual *visual;
-    unsigned int depth;
-    Colormap cmap;
+	Visual *visual;
+	unsigned int depth;
+	Colormap cmap;
 	Drawable drawable;
 	GC gc;
 	Clr *scheme;

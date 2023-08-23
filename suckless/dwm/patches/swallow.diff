@@ -1,7 +1,7 @@
-From f0cdf40e0a7126838d051eb84d84b91421b771d6 Mon Sep 17 00:00:00 2001
-From: 0x1bi <ben@0x1bi.net>
-Date: Fri, 11 Dec 2020 10:16:25 -0500
-Subject: [PATCH] fix swallow for openbsd
+From 0cf9a007511f7dfd7dd94171b172562ebac9b6d5 Mon Sep 17 00:00:00 2001
+From: Tom Schwindl <schwindl@posteo.de>
+Date: Sat, 10 Sep 2022 12:51:09 +0200
+Subject: [PATCH] 6.3 swallow patch
 
 ---
  config.def.h |   9 +-
@@ -10,7 +10,7 @@ Subject: [PATCH] fix swallow for openbsd
  3 files changed, 237 insertions(+), 10 deletions(-)
 
 diff --git a/config.def.h b/config.def.h
-index 1c0b587..fe51476 100644
+index 061ad662f82a..0b2b8ffd30d5 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -3,6 +3,7 @@
@@ -37,13 +37,13 @@ index 1c0b587..fe51476 100644
  
  /* layout(s) */
 diff --git a/config.mk b/config.mk
-index 7084c33..ff9e508 100644
+index 81c493ef4aff..52d1ebf30bec 100644
 --- a/config.mk
 +++ b/config.mk
-@@ -19,10 +19,11 @@ FREETYPELIBS = -lfontconfig -lXft
- FREETYPEINC = /usr/include/freetype2
+@@ -20,10 +20,11 @@ FREETYPEINC = /usr/include/freetype2
  # OpenBSD (uncomment)
  #FREETYPEINC = ${X11INC}/freetype2
+ #MANPREFIX = ${PREFIX}/man
 +#KVMLIB = -lkvm
  
  # includes and libs
@@ -54,7 +54,7 @@ index 7084c33..ff9e508 100644
  # flags
  CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
 diff --git a/dwm.c b/dwm.c
-index 664c527..0b20086 100644
+index e5efb6a22806..e68294b6b679 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -40,6 +40,12 @@
@@ -71,7 +71,7 @@ index 664c527..0b20086 100644
  #include "drw.h"
  #include "util.h"
 @@ -92,9 +98,11 @@ struct Client {
- 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
  	int bw, oldbw;
  	unsigned int tags;
 -	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
@@ -123,7 +123,7 @@ index 664c527..0b20086 100644
  			c->isfloating = r->isfloating;
  			c->tags |= r->tags;
  			for (m = mons; m && m->num != r->monitor; m = m->next);
-@@ -414,6 +434,53 @@ attachstack(Client *c)
+@@ -416,6 +436,53 @@ attachstack(Client *c)
  	c->mon->stack = c;
  }
  
@@ -177,7 +177,7 @@ index 664c527..0b20086 100644
  void
  buttonpress(XEvent *e)
  {
-@@ -653,6 +720,9 @@ destroynotify(XEvent *e)
+@@ -656,6 +723,9 @@ destroynotify(XEvent *e)
  
  	if ((c = wintoclient(ev->window)))
  		unmanage(c, 1);
@@ -187,7 +187,7 @@ index 664c527..0b20086 100644
  }
  
  void
-@@ -1018,12 +1088,13 @@ killclient(const Arg *arg)
+@@ -1022,12 +1092,13 @@ killclient(const Arg *arg)
  void
  manage(Window w, XWindowAttributes *wa)
  {
@@ -202,15 +202,15 @@ index 664c527..0b20086 100644
  	/* geometry */
  	c->x = c->oldx = wa->x;
  	c->y = c->oldy = wa->y;
-@@ -1038,6 +1109,7 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1042,6 +1113,7 @@ manage(Window w, XWindowAttributes *wa)
  	} else {
  		c->mon = selmon;
  		applyrules(c);
 +		term = termforwin(c);
  	}
  
- 	if (c->x + WIDTH(c) > c->mon->mx + c->mon->mw)
-@@ -1074,6 +1146,8 @@ manage(Window w, XWindowAttributes *wa)
+ 	if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
+@@ -1076,6 +1148,8 @@ manage(Window w, XWindowAttributes *wa)
  	c->mon->sel = c;
  	arrange(c->mon);
  	XMapWindow(dpy, c->win);
@@ -219,7 +219,7 @@ index 664c527..0b20086 100644
  	focus(NULL);
  }
  
-@@ -1768,6 +1842,20 @@ unmanage(Client *c, int destroyed)
+@@ -1763,6 +1837,20 @@ unmanage(Client *c, int destroyed)
  	Monitor *m = c->mon;
  	XWindowChanges wc;
  
@@ -240,7 +240,7 @@ index 664c527..0b20086 100644
  	detach(c);
  	detachstack(c);
  	if (!destroyed) {
-@@ -1782,9 +1870,12 @@ unmanage(Client *c, int destroyed)
+@@ -1778,9 +1866,12 @@ unmanage(Client *c, int destroyed)
  		XUngrabServer(dpy);
  	}
  	free(c);
@@ -256,7 +256,7 @@ index 664c527..0b20086 100644
  }
  
  void
-@@ -2047,6 +2138,136 @@ view(const Arg *arg)
+@@ -2044,6 +2135,136 @@ view(const Arg *arg)
  	arrange(selmon);
  }
  
@@ -393,7 +393,7 @@ index 664c527..0b20086 100644
  Client *
  wintoclient(Window w)
  {
-@@ -2138,10 +2359,12 @@ main(int argc, char *argv[])
+@@ -2133,10 +2354,12 @@ main(int argc, char *argv[])
  		fputs("warning: no locale support\n", stderr);
  	if (!(dpy = XOpenDisplay(NULL)))
  		die("dwm: cannot open display");
@@ -408,5 +408,5 @@ index 664c527..0b20086 100644
  #endif /* __OpenBSD__ */
  	scan();
 -- 
-2.28.0
+2.37.2
 
