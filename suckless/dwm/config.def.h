@@ -49,6 +49,17 @@ static Sp scratchpads[] = {
 	{"spcava",      spcmd5},
 };
 
+static const char *const autostart[] = {
+	"st", NULL,
+	"/home/sh/.fehbg", NULL,
+	"picom", NULL,
+	"slstatus", NULL,
+	"mpd", NULL,
+	"dunst", NULL,
+	"clipmenud", NULL,
+	NULL /* terminate */
+};
+
 /* tagging */
 static const char *tags[] = {"", "", "", "", "", "", "", "", ""};
 static const Rule rules[] = {
