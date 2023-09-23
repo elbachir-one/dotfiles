@@ -30,4 +30,18 @@ cd grc/
 ./install.sh
 cd
 sudo cp /etc/profile.d/grc.sh /etc/
+sudo xbps-remove -Oy && sudo xbps-remove -oy
+sudo xbps-reconfigure -f linux-lts
+sudo xbps-reconfigure -fa
+fc-cache -fv
+sudo sv down dhcpcd
+sudo ln -s /etc/sv/NetworkManager /var/service/
+sudo ln -s /etc/sv/dbus /var/service/
+sudo ln -s /etc/sv/libvirtd /var/service/
+sudo ln -s /etc/sv/virtlogd /var/service/
+sudo rm /var/service/agetty-tty3
+sudo rm /var/service/agetty-tty4
+sudo rm /var/service/agetty-tty5
+sudo rm /var/service/agetty-tty6
+sudo rm /var/service/wpa_supplicant
 sudo reboot
