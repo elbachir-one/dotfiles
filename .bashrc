@@ -105,6 +105,7 @@ alias neofetch='neofetch --ascii ascii.txt | lolcat'
 alias feh='feh -B dark'
 alias ufetch='ufetch | lolcat'
 alias cmatrix='cmatrix | lolcat'
+alias grep='ugrep'
 #alias insta='instaloader --login one_to_mini :saved --no-metadata-json --no-video-thumbnail'
 # Git Stuff:
 
