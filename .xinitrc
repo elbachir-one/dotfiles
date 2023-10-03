@@ -6,7 +6,6 @@ xrandr --output LVDS1 --primary --mode 1366x768 --pos 0x312 --rotate normal --ou
 #slstatus &
 #./.fehbg &
 while true; do
-	dwm >/dev/null 2>&1
+    dwm >/dev/null 2>&1
 done
 #
-exec dwm
