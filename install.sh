@@ -44,7 +44,7 @@ sudo rm /var/service/agetty-tty5
 sudo rm /var/service/agetty-tty6
 sudo rm /var/service/wpa_supplicant
 sudo rm /var/service/dhcpcd
-sudo sed -i 's/GRUB_TIMEOUUT=5/GRUB_TIMEOUUT=0/' /etc/default/grub
+sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
 sudo sed -i 's/GETTY_ARGS="--noclear"/GETTY_ARGS="--noclear --autologin sh"/' /etc/runit/runsvdir/current/agetty-tty1/conf
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo reboot
