@@ -20,7 +20,7 @@ static Parameter defconfig[ParameterLast] = {
 	[Certificate]         =       { { .i = 0 },     },
 	[CaretBrowsing]       =       { { .i = 0 },     },
 	[CookiePolicies]      =       { { .v = "@Aa" }, },
-	[DarkMode]            =       { { .i = 0 },     },
+	[DarkMode]            =       { { .i = 1 },     },
 	[DefaultCharset]      =       { { .v = "UTF-8" }, },
 	[DiskCache]           =       { { .i = 1 },     },
 	[DNSPrefetch]         =       { { .i = 0 },     },
