@@ -1,17 +1,17 @@
 {
     "no_systray": false,
-    "timeout": 2.5,
+    "timeout": 3.0,
     "recent_thr": 0.1,
     "compr_cnt": 3,
     "ignore": [],
     "position": "fixed",
     "persist": false,
     "window": null,
-    "font_desc": "Sans Bold",
+    "font_desc": "Monofur Nerd Font 10",
     "font_size": "medium",
     "font_color": "white",
     "bg_color": "black",
-    "opacity": 0.3,
+    "opacity": 0.7,
     "key_mode": "composed",
     "bak_mode": "baked",
     "mods_mode": "normal",
@@ -20,12 +20,12 @@
     "vis_shift": false,
     "vis_space": true,
     "geometry": [
-        1552,
-        69,
-        354,
-        92
+        3044,
+        1000,
+        241,
+        69
     ],
-    "screen": 0,
+    "screen": 1,
     "start_disabled": false,
     "mouse": false,
     "button_hide_duration": 1

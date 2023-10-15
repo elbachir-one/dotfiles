@@ -42,8 +42,8 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Triste-Orange</name>
-    <titleLayout>NLIMC</titleLayout>
+    <name>Vermello</name>
+    <titleLayout>IMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
       N: window icon
@@ -259,10 +259,9 @@
       <action name="FocusToBottom"/>
       <action name="Unfocus"/>
     </keybind>
-
     <keybind key="A-p">
       <action name="Execute">
-      <command>rofi -show drun</command>
+        <command>rofi -show drun</command>
       </action>
     </keybind>
     <keybind key="A-space">

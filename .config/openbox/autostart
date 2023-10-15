@@ -1,0 +1,4 @@
+xrandr -s 1366x768 &
+tint2 &
+feh --bg-fill wall/Purpull.jpg &
+picom --no-vsync &

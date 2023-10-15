@@ -109,7 +109,7 @@ alias grep='ugrep'
 #alias insta='instaloader --login one_to_mini :saved --no-metadata-json --no-video-thumbnail'
 # Git Stuff:
 
-alias gt='git clone'
+alias gt='git clone --depth=1'
 alias gs='git status'
 alias gm='git commit -m'
 alias gc='git clean'
@@ -129,6 +129,8 @@ alias yt='yt-dlp yt-dlp --skip-download --write-thumbnail'
 #
 alias ff="ffmpeg -framerate 16 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
 alias rec="ffmpeg -framerate 24 -f x11grab -video_size 1920x1080 -i :0.0+1366,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
+alias f="ffmpeg -framerate 24 -f x11grab -video_size 1366x768 -i :0.0+0,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
+alias cam="ffplay -f v4l2 -framerate 29 -video_size 1280x720 /dev/video0"
 #
 #
 

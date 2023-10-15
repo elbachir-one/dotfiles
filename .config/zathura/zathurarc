@@ -1,1 +1,10 @@
-include catppuccin-mocha
+set recolor true
+set default-bg '#RGB:background#'
+set default-fg '#RGB:foreground#'
+set recolor-lightcolor '#RGB:background#'
+set recolor-darkcolor '#RGB:foreground#'
+set statusbar-bg '#RGB:highlight#'
+set statusbar-fg '#RGB:foreground#'
+set inputbar-bg '#RGB:background#'
+set inputbar-fg '#RGB:foreground#'
+set font 'Fantasque Sans Mono normal 12'
