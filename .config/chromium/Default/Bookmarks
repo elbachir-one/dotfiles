@@ -1,10 +1,10 @@
 {
-   "checksum": "eab4ef67eeccf09787a018e2f18e5f05",
+   "checksum": "fa3163031bc1344763755adfea307e6c",
    "roots": {
       "bookmark_bar": {
          "children": [ {
             "date_added": "13328396325444116",
-            "date_last_used": "13328415920072598",
+            "date_last_used": "13335181424068036",
             "guid": "443ddd47-3956-42d0-9d66-294bef0fec3b",
             "id": "5",
             "meta_info": {
@@ -15,7 +15,7 @@
             "url": "https://mega.nz/fm/XgNVSaBI"
          }, {
             "date_added": "13328396331170724",
-            "date_last_used": "13332817633791647",
+            "date_last_used": "13341692152931965",
             "guid": "e2cc7a17-d092-4d7a-9808-713cb0e49505",
             "id": "6",
             "meta_info": {
@@ -26,7 +26,7 @@
             "url": "https://www.youtube.com/"
          }, {
             "date_added": "13328396549523381",
-            "date_last_used": "0",
+            "date_last_used": "13338502542567764",
             "guid": "db1e41b7-89b6-41dc-a8c5-55e173762b58",
             "id": "7",
             "meta_info": {
@@ -70,7 +70,7 @@
             "url": "https://github.com/downthecrop"
          }, {
             "date_added": "13328746974002923",
-            "date_last_used": "0",
+            "date_last_used": "13336454859298592",
             "guid": "d8859573-ba37-4a1a-a92d-1f11c5ef1e5a",
             "id": "14",
             "meta_info": {
@@ -92,7 +92,7 @@
             "url": "https://github.com/vmt/udis86/issues/105"
          }, {
             "date_added": "13329486611349610",
-            "date_last_used": "0",
+            "date_last_used": "13338222778197550",
             "guid": "79d1c214-0d3d-450b-91d7-d87c48ba276d",
             "id": "18",
             "meta_info": {
@@ -125,7 +125,7 @@
             "url": "https://vimcolorschemes.com/"
          }, {
             "date_added": "13329826027814270",
-            "date_last_used": "0",
+            "date_last_used": "13339949856806429",
             "guid": "c946fae6-6455-4f67-9fa0-5f2f5cde6b1c",
             "id": "23",
             "meta_info": {
@@ -158,7 +158,7 @@
             "url": "https://www.tokyvideo.com/"
          }, {
             "date_added": "13330455711658692",
-            "date_last_used": "0",
+            "date_last_used": "13340129232875156",
             "guid": "d2cf0f5f-e8db-492d-bb17-94f8ded3eea8",
             "id": "29",
             "meta_info": {
@@ -202,7 +202,7 @@
             "url": "https://go.dev/"
          }, {
             "date_added": "13332114228169582",
-            "date_last_used": "0",
+            "date_last_used": "13335185691885846",
             "guid": "fc92fb48-545e-4a5e-a1c6-bbdae189d73c",
             "id": "36",
             "meta_info": {
@@ -277,10 +277,1281 @@
             "name": "catppuccin/cava: 📢 Soothing pastel theme for Cava",
             "type": "url",
             "url": "https://github.com/catppuccin/cava"
+         }, {
+            "date_added": "13335181477482901",
+            "date_last_used": "0",
+            "guid": "5da0e084-8830-4fbb-844e-f88250fd10d3",
+            "id": "49",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "GitHub",
+            "type": "url",
+            "url": "https://github.com/"
+         }, {
+            "date_added": "13335181810418293",
+            "date_last_used": "0",
+            "guid": "c06e1158-3ae4-488a-8414-ba884db613fa",
+            "id": "50",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Enter the void",
+            "type": "url",
+            "url": "https://voidlinux.org/"
+         }, {
+            "date_added": "13335265468338670",
+            "date_last_used": "0",
+            "guid": "01cb2237-9cf4-4404-9bfd-c74817f34570",
+            "id": "52",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "How to Create and Use Swap File on Linux",
+            "type": "url",
+            "url": "https://itsfoss.com/create-swap-file-linux/"
+         }, {
+            "date_added": "13335983197020099",
+            "date_last_used": "0",
+            "guid": "2fe29267-3813-4c53-b6a7-29657a043f46",
+            "id": "54",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Add another language to keyboard. : voidlinux",
+            "type": "url",
+            "url": "https://www.reddit.com/r/voidlinux/comments/15li7zq/add_another_language_to_keyboard/"
+         }, {
+            "date_added": "13336023884308261",
+            "date_last_used": "0",
+            "guid": "cdc50107-2224-453a-820d-b403c0894afc",
+            "id": "56",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Instagram",
+            "type": "url",
+            "url": "https://www.instagram.com/"
+         }, {
+            "date_added": "13336050045549595",
+            "date_last_used": "0",
+            "guid": "07048f57-71c4-46e5-8d3f-2afd015cd155",
+            "id": "58",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "JSON Query to accounts/login/: Could not find \"window._sharedData\" in html response. [retrying; skip with ^C] · Issue #2044 · instaloader/instaloader",
+            "type": "url",
+            "url": "https://github.com/instaloader/instaloader/issues/2044"
+         }, {
+            "date_added": "13336050060763425",
+            "date_last_used": "0",
+            "guid": "b370dbdb-b84b-445a-a840-47d009b7c94e",
+            "id": "59",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Troubleshooting — Instaloader documentation",
+            "type": "url",
+            "url": "https://instaloader.github.io/troubleshooting.html"
+         }, {
+            "date_added": "13336354784394586",
+            "date_last_used": "0",
+            "guid": "49bd825e-9c7b-4231-a31c-88fd7d71b7ab",
+            "id": "61",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Google Images",
+            "type": "url",
+            "url": "https://images.google.com/"
+         }, {
+            "date_added": "13336432610601175",
+            "date_last_used": "0",
+            "guid": "b60e68f1-6784-4093-8c0f-9f47c7484c28",
+            "id": "63",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "nakst/gf: A GDB frontend for Linux.",
+            "type": "url",
+            "url": "https://github.com/nakst/gf"
+         }, {
+            "date_added": "13336432642580436",
+            "date_last_used": "0",
+            "guid": "d209cf9f-2c33-41d2-afa9-8cfefe346594",
+            "id": "64",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "wravoc/harden-freebsd: Impements a broad, cohesive group of hardening settings for FreeBSD. Any directive can be set, re-set, for administering, tuning, and jails. Zenbleed workaround, Downfall info.",
+            "type": "url",
+            "url": "https://github.com/wravoc/harden-freebsd"
+         }, {
+            "date_added": "13336440750565470",
+            "date_last_used": "0",
+            "guid": "8c818960-3d49-499b-9c99-8ebb0e5c38f4",
+            "id": "65",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "cococry/Ragnar: Minimal, flexible & user-friendly X tiling window manager",
+            "type": "url",
+            "url": "https://github.com/cococry/Ragnar"
+         }, {
+            "date_added": "13336441153489483",
+            "date_last_used": "0",
+            "guid": "69738ea3-1f8b-460f-b18e-6d4475de0ce9",
+            "id": "66",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "How to Automatically Log User Into Local Console on Boot in FreeBSD | Mimar",
+            "type": "url",
+            "url": "https://www.mimar.rs/blog/how-to-automatically-log-user-into-local-console-on-boot-in-freebsd"
+         }, {
+            "date_added": "13336441181535105",
+            "date_last_used": "0",
+            "guid": "b327528c-22be-4bb3-8fad-cb52cac64f2a",
+            "id": "67",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "busyloop/lolcat: Rainbows and unicorns!",
+            "type": "url",
+            "url": "https://github.com/busyloop/lolcat"
+         }, {
+            "date_added": "13336441416485862",
+            "date_last_used": "0",
+            "guid": "3c1b3d8b-5071-4bd7-bf6e-7f9a2f09e508",
+            "id": "68",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "iptv-org/iptv: Collection of publicly available IPTV channels from all over the world",
+            "type": "url",
+            "url": "https://github.com/iptv-org/iptv#playlists"
+         }, {
+            "date_added": "13336441714481322",
+            "date_last_used": "0",
+            "guid": "d3725d3e-d5d4-41fe-920f-bfca9be9c15a",
+            "id": "69",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "budlabs/typiskt: touchtyping training in the terminal",
+            "type": "url",
+            "url": "https://github.com/budlabs/typiskt"
+         }, {
+            "date_added": "13336441785946148",
+            "date_last_used": "0",
+            "guid": "090bd8c4-fe55-4156-a66d-fb959d11ad51",
+            "id": "70",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "jaylesworth/voidsplash: Minimal boot splash for runit",
+            "type": "url",
+            "url": "https://github.com/jaylesworth/voidsplash"
+         }, {
+            "date_added": "13336449388601749",
+            "date_last_used": "0",
+            "guid": "a9a94d73-e2cb-4fbd-a65e-5ce8894fe8b9",
+            "id": "72",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "davidarrieta/dotfiles: My dotfiles managed by GNU Stow - Arch, i3-gaps, bspwm, ncmpcpp, (neo)vim, zsh etc.",
+            "type": "url",
+            "url": "https://github.com/davidarrieta/dotfiles"
+         }, {
+            "date_added": "13336449500129543",
+            "date_last_used": "0",
+            "guid": "c1967d59-07f8-48d5-9e31-36da56823dc0",
+            "id": "73",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "potamides/dotfiles: My personal dotfiles for most of the programs I use on a daily basis.",
+            "type": "url",
+            "url": "https://github.com/potamides/dotfiles"
+         }, {
+            "date_added": "13336453647928584",
+            "date_last_used": "0",
+            "guid": "48add9f8-08cd-452f-acd7-2189d4e81383",
+            "id": "74",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "miasma.nvim/extras/miasma.yml at main · xero/miasma.nvim",
+            "type": "url",
+            "url": "https://github.com/xero/miasma.nvim/blob/main/extras/miasma.yml"
+         }, {
+            "date_added": "13337360367851165",
+            "date_last_used": "0",
+            "guid": "3ca4f6cb-2c94-4b62-9613-6461e55cb98a",
+            "id": "76",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Home - Chess.com",
+            "type": "url",
+            "url": "https://www.chess.com/home"
+         }, {
+            "date_added": "13337634715504212",
+            "date_last_used": "0",
+            "guid": "27cad168-0743-41de-8916-eb7425f1cca5",
+            "id": "78",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Unix & Linux Stack Exchange",
+            "type": "url",
+            "url": "https://unix.stackexchange.com/"
+         }, {
+            "date_added": "13337969993612599",
+            "date_last_used": "0",
+            "guid": "3d9e052b-67e7-4001-877c-5ec9d30a5f89",
+            "id": "80",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "BuildBot: Void Linux",
+            "type": "url",
+            "url": "https://build.voidlinux.org/waterfall"
+         }, {
+            "date_added": "13338250804382572",
+            "date_last_used": "0",
+            "guid": "6298ecd0-9e1d-4b30-b55d-6d04a021bb6d",
+            "id": "82",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "KolibriOS official site",
+            "type": "url",
+            "url": "http://www.kolibrios.org/en/index.htm"
+         }, {
+            "date_added": "13338566926368814",
+            "date_last_used": "0",
+            "guid": "677fdfdc-6cde-48be-9f7a-7eefe74a7fb5",
+            "id": "84",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Limine",
+            "type": "url",
+            "url": "https://limine-bootloader.org/"
+         }, {
+            "date_added": "13338660169998855",
+            "date_last_used": "0",
+            "guid": "d4b24131-9a69-4704-a084-72216918b0fb",
+            "id": "86",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Download jhalfs",
+            "type": "url",
+            "url": "https://linuxfromscratch.org/alfs/download.html"
+         }, {
+            "date_added": "13339118456132060",
+            "date_last_used": "13341018349395304",
+            "guid": "9224e4d5-0262-4e9c-a133-514fe273891e",
+            "id": "88",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Stockfish - Analyze your chess game online - Woochess-Let's chess",
+            "type": "url",
+            "url": "https://woochess.com/en/analysis"
+         }, {
+            "date_added": "13339373328732302",
+            "date_last_used": "0",
+            "guid": "10e009c9-c540-4cdd-a923-39b226ff3567",
+            "id": "90",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Monkeytype | A minimalistic, customizable typing test",
+            "type": "url",
+            "url": "https://monkeytype.com/"
+         }, {
+            "date_added": "13339373941856997",
+            "date_last_used": "0",
+            "guid": "247c980c-6d73-4c21-9cfd-3db620f14bca",
+            "id": "91",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "TypeRacer - Play Typing Games and Race Friends",
+            "type": "url",
+            "url": "https://play.typeracer.com/"
+         }, {
+            "date_added": "13339513732313666",
+            "date_last_used": "0",
+            "guid": "3b8db073-9369-4a04-abc8-f73653e2158f",
+            "id": "93",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "😋 Get Emoji — All Emojis to ✂️ Copy and 📋 Paste 👌",
+            "type": "url",
+            "url": "https://getemoji.com/"
+         }, {
+            "date_added": "13339587313762489",
+            "date_last_used": "0",
+            "guid": "f958d9b2-9e8a-4d6b-acad-16663820803c",
+            "id": "95",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Porn Gifs and Porn Pics | RedGIFs",
+            "type": "url",
+            "url": "https://www.redgifs.com/"
+         }, {
+            "date_added": "13339806718134567",
+            "date_last_used": "0",
+            "guid": "f8f3fa0a-bb15-426d-900e-51702bf57bce",
+            "id": "97",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Andrey0189/qtile-rice: My Qtile configuration files",
+            "type": "url",
+            "url": "https://github.com/Andrey0189/qtile-rice"
+         }, {
+            "date_added": "13339849488772835",
+            "date_last_used": "0",
+            "guid": "2c1cec56-2a4c-4820-8df9-b9969ed7f009",
+            "id": "99",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Yareev's schmonz.com",
+            "type": "url",
+            "url": "https://schmonz.com/"
+         }, {
+            "date_added": "13339888811007101",
+            "date_last_used": "0",
+            "guid": "22eda8a8-dd21-4075-a391-d792248607fe",
+            "id": "100",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "schmonz/package-builders: VM run scripts and some pkgsrc automation",
+            "type": "url",
+            "url": "https://github.com/schmonz/package-builders"
+         }, {
+            "date_added": "13339945082374040",
+            "date_last_used": "0",
+            "guid": "599606f2-5dcf-415a-b540-cd4366ebf696",
+            "id": "102",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Izder456/dotfiles: My OpenBSD Dotfiles",
+            "type": "url",
+            "url": "https://github.com/Izder456/dotfiles"
+         }, {
+            "date_added": "13339945148340387",
+            "date_last_used": "0",
+            "guid": "31a2bcb3-81bc-4f15-a712-1a3c295b06e4",
+            "id": "103",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "The Slackware Linux Project",
+            "type": "url",
+            "url": "http://www.slackware.com/"
+         }, {
+            "date_added": "13339945224430409",
+            "date_last_used": "0",
+            "guid": "d3219ea8-6ec0-420d-b719-69ccfbfa79db",
+            "id": "104",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "bibjaw99/workstation",
+            "type": "url",
+            "url": "https://github.com/bibjaw99/workstation"
+         }, {
+            "date_added": "13339945996918458",
+            "date_last_used": "0",
+            "guid": "23f275b6-8057-48ca-af5c-e34f6b847021",
+            "id": "105",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "KatieUmbra/rose-pine-dots: Rose Pine Dotfiles, neovim config: https://github.com/KatieUmbra/Neovim",
+            "type": "url",
+            "url": "https://github.com/KatieUmbra/rose-pine-dots"
+         }, {
+            "date_added": "13339947215165785",
+            "date_last_used": "0",
+            "guid": "2bfe7eaa-b944-4e97-b7c8-0ffa3d40bbfc",
+            "id": "106",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "savar95x/dotfiles: my . files",
+            "type": "url",
+            "url": "https://github.com/savar95x/dotfiles/tree/main"
+         }, {
+            "date_added": "13339947231325945",
+            "date_last_used": "0",
+            "guid": "46f0c4c5-7a71-41b2-9064-7673da8b02e7",
+            "id": "107",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "siduck/chadwm: Making dwm as beautiful as possible!",
+            "type": "url",
+            "url": "https://github.com/siduck/chadwm"
+         }, {
+            "date_added": "13339947278060798",
+            "date_last_used": "0",
+            "guid": "36a08051-4f3d-40e6-b19b-aad8aeeebb52",
+            "id": "108",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "eterna8/dotfiles: dotfiles for my arch i3 gaps ricing.",
+            "type": "url",
+            "url": "https://github.com/eterna8/dotfiles/tree/main"
+         }, {
+            "date_added": "13339947393168329",
+            "date_last_used": "0",
+            "guid": "c2341ecf-14ed-4ad8-873f-6a65ba0e8a46",
+            "id": "109",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Axenide/Dotfiles: .'s",
+            "type": "url",
+            "url": "https://github.com/Axenide/Dotfiles/tree/main"
+         }, {
+            "date_added": "13339947517311123",
+            "date_last_used": "0",
+            "guid": "2acd8e74-db58-4828-9682-d9781f2daa9d",
+            "id": "110",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Swordfish90/cool-retro-term: A good looking terminal emulator which mimics the old cathode display...",
+            "type": "url",
+            "url": "https://github.com/Swordfish90/cool-retro-term"
+         }, {
+            "date_added": "13339947771377199",
+            "date_last_used": "0",
+            "guid": "e9fc7b44-6d05-49da-a0a6-d04140e1054e",
+            "id": "111",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "nordic-dots/dot-files at main · 0xfrian/nordic-dots",
+            "type": "url",
+            "url": "https://github.com/0xfrian/nordic-dots/tree/main/dot-files"
+         }, {
+            "date_added": "13339947783501312",
+            "date_last_used": "0",
+            "guid": "398ae88d-7df8-48b8-870a-c864b8062d67",
+            "id": "112",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "limine-bootloader/limine: Modern, advanced, portable, multiprotocol bootloader.",
+            "type": "url",
+            "url": "https://github.com/limine-bootloader/limine"
+         }, {
+            "date_added": "13339947807344327",
+            "date_last_used": "0",
+            "guid": "95c1a424-a26c-4bd0-806e-4596d298ce8c",
+            "id": "113",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "The EFI Boot Stub — The Linux Kernel documentation",
+            "type": "url",
+            "url": "https://docs.kernel.org/admin-guide/efi-stub.html"
+         }, {
+            "date_added": "13339947856577859",
+            "date_last_used": "0",
+            "guid": "14541191-959a-4d0a-80fc-e8bf0a8f6c1c",
+            "id": "114",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "renerocksai/gpt4all.zig: ZIG build for a terminal-based chat client for an assistant-style large language model with ~800k GPT-3.5-Turbo Generations based on LLaMa",
+            "type": "url",
+            "url": "https://github.com/renerocksai/gpt4all.zig"
+         }, {
+            "date_added": "13339947883637831",
+            "date_last_used": "0",
+            "guid": "1ea6e624-4ec3-4a6f-821e-af68e28b37dc",
+            "id": "115",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Programmeter/dotfiles: My dotfiles for i3 window manager",
+            "type": "url",
+            "url": "https://github.com/Programmeter/dotfiles"
+         }, {
+            "date_added": "13339948645482797",
+            "date_last_used": "0",
+            "guid": "56ef6636-0f16-4131-a300-3b267a3fd64d",
+            "id": "116",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "marciliocn/void-installer: Installer script as a alternative for default Void Linux installer.",
+            "type": "url",
+            "url": "https://github.com/marciliocn/void-installer"
+         }, {
+            "date_added": "13339948863677628",
+            "date_last_used": "0",
+            "guid": "ec59fe32-a022-4c18-a1bd-75ab53b6b654",
+            "id": "117",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "SILIZ4/dotfiles: Various configuration files for Linux softwares",
+            "type": "url",
+            "url": "https://github.com/SILIZ4/dotfiles"
+         }, {
+            "date_added": "13340147684996300",
+            "date_last_used": "0",
+            "guid": "67ddcd1e-fe83-40c7-a24f-e8579272c5d4",
+            "id": "119",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "orw/dotfiles/.config at master · s0la/orw",
+            "type": "url",
+            "url": "https://github.com/s0la/orw/tree/master/dotfiles/.config"
+         }, {
+            "date_added": "13340161334857903",
+            "date_last_used": "0",
+            "guid": "c1e09c47-1dc2-40f8-9e6f-1bd32580c3fa",
+            "id": "120",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Downloads | Smokin' Guns",
+            "type": "url",
+            "url": "https://www.smokin-guns.org/downloads"
+         }, {
+            "date_added": "13340304707963849",
+            "date_last_used": "0",
+            "guid": "04b13335-79a7-49ee-b051-03d21eee7f76",
+            "id": "122",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Axenide/Dotfiles: .'s",
+            "type": "url",
+            "url": "https://github.com/Axenide/Dotfiles"
+         }, {
+            "date_added": "13340453964553564",
+            "date_last_used": "0",
+            "guid": "9c3c7837-8a62-4314-85c2-b66584b3f945",
+            "id": "124",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "VirusTotal - Home",
+            "type": "url",
+            "url": "https://www.virustotal.com/gui/home/url"
+         }, {
+            "date_added": "13340458976251736",
+            "date_last_used": "0",
+            "guid": "cba42eb3-085d-4832-a4d4-d3bb44a71a86",
+            "id": "125",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "grapheme · PyPI",
+            "type": "url",
+            "url": "https://pypi.org/project/grapheme/"
+         }, {
+            "date_added": "13340458979357419",
+            "date_last_used": "0",
+            "guid": "6d9505af-b440-4246-968a-5939bd7ac945",
+            "id": "126",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "tekknolagi/libgrapheme: mirror of https://git.suckless.org/libgrapheme",
+            "type": "url",
+            "url": "https://github.com/tekknolagi/libgrapheme/tree/master"
+         }, {
+            "date_added": "13340804620695063",
+            "date_last_used": "0",
+            "guid": "e223c05c-a764-4c25-9c01-e33dab72bafb",
+            "id": "128",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Google Translate",
+            "type": "url",
+            "url": "https://translate.google.com/"
+         }, {
+            "date_added": "13340810501511806",
+            "date_last_used": "0",
+            "guid": "a8857f99-63ba-457a-817d-b9c86de8d3c6",
+            "id": "130",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Compare, Download & Develop Open Source & Business Software - SourceForge",
+            "type": "url",
+            "url": "https://sourceforge.net/"
+         }, {
+            "date_added": "13340908941050681",
+            "date_last_used": "0",
+            "guid": "728ac666-bfda-4520-abf8-bc433d5e8c33",
+            "id": "132",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "kiddae/ImageColorizer: Make any wallpaper fit any terminal colorscheme.",
+            "type": "url",
+            "url": "https://github.com/kiddae/ImageColorizer"
+         }, {
+            "date_added": "13341069927459652",
+            "date_last_used": "0",
+            "guid": "fcc3b465-326b-45ea-b829-4202368f4af0",
+            "id": "134",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "spudlyo/clipetty: Manipulate the system (clip)board with (e)macs from a (tty)",
+            "type": "url",
+            "url": "https://github.com/spudlyo/clipetty"
+         }, {
+            "date_added": "13341088239790109",
+            "date_last_used": "0",
+            "guid": "1dd1a86d-f984-4fc7-900a-afe4e2672bd1",
+            "id": "135",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "FT-Labs/picom: More than 10 unique animation supported picom fork (open window, tag change, fading ...)",
+            "type": "url",
+            "url": "https://github.com/FT-Labs/picom"
+         }, {
+            "date_added": "13341088459276790",
+            "date_last_used": "0",
+            "guid": "e9955bf3-ed62-490b-9db0-86bcc391a6a9",
+            "id": "136",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "speediegq (speediegq) / Repositories",
+            "type": "url",
+            "url": "https://github.com/speediegq?tab=repositories"
+         }, {
+            "date_added": "13341180452278555",
+            "date_last_used": "0",
+            "guid": "7df7c4ad-7da1-4e8b-80c7-f11811187b7e",
+            "id": "138",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "d1msk1y/wallpapers: My wallpaper collection",
+            "type": "url",
+            "url": "https://github.com/d1msk1y/wallpapers/tree/main"
+         }, {
+            "date_added": "13341255083392137",
+            "date_last_used": "0",
+            "guid": "8c2aa302-cf73-47ec-9f55-6ce59b1503cb",
+            "id": "140",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "drgrib/ttimer: Terminal countdown timer, written in Go",
+            "type": "url",
+            "url": "https://github.com/drgrib/ttimer"
+         }, {
+            "date_added": "13341255098158965",
+            "date_last_used": "0",
+            "guid": "524d1b5b-5bd2-42a9-b0e5-d80ea3b18290",
+            "id": "141",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "aldernero/countdown: A terminal based multi-event countdown timer",
+            "type": "url",
+            "url": "https://github.com/aldernero/countdown"
+         }, {
+            "date_added": "13341272205088853",
+            "date_last_used": "0",
+            "guid": "5bae74b1-9730-471e-ac81-44b0481088cb",
+            "id": "142",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "How to Store Dotfiles - A Bare Git Repository | Atlassian Git Tutorial",
+            "type": "url",
+            "url": "https://www.atlassian.com/git/tutorials/dotfiles"
+         }, {
+            "date_added": "13341527202215678",
+            "date_last_used": "0",
+            "guid": "bfc21d2b-729d-468c-b45a-ec0f6bcc8687",
+            "id": "144",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Inbox | alphab911@proton.me | Proton Mail",
+            "type": "url",
+            "url": "https://mail.proton.me/u/0/inbox"
+         }, {
+            "children": [ {
+               "date_added": "13341806990088103",
+               "date_last_used": "0",
+               "guid": "7ea56137-82ba-4d31-94fe-25c5be218140",
+               "id": "147",
+               "name": "dwm - dynamic window manager | suckless.org software that sucks less",
+               "type": "url",
+               "url": "https://dwm.suckless.org/patches/holdbar/"
+            }, {
+               "date_added": "13341806990092012",
+               "date_last_used": "0",
+               "guid": "1f9b80bf-8863-4b79-8dc4-b7795550b031",
+               "id": "148",
+               "name": "dwm - dynamic window manager | suckless.org software that sucks less",
+               "type": "url",
+               "url": "https://dwm.suckless.org/patches/cursorwarp/"
+            }, {
+               "date_added": "13341806990093205",
+               "date_last_used": "0",
+               "guid": "dce6b847-120b-49cf-bd17-068cb68514f8",
+               "id": "149",
+               "name": "dwm - dynamic window manager | suckless.org software that sucks less",
+               "type": "url",
+               "url": "https://dwm.suckless.org/patches/cool_autostart/"
+            }, {
+               "date_added": "13341806990094643",
+               "date_last_used": "0",
+               "guid": "6c072269-8c7b-4b75-96fd-9d01ff3caa2f",
+               "id": "150",
+               "name": "siduck/chadwm: Making dwm as beautiful as possible!",
+               "type": "url",
+               "url": "https://github.com/siduck/chadwm"
+            }, {
+               "date_added": "13341806990095501",
+               "date_last_used": "0",
+               "guid": "ebcf9f53-e80d-4b2f-91dd-f2c36f6da797",
+               "id": "151",
+               "name": "catppuccin/bat: 🦇️ Soothing pastel theme for Bat",
+               "type": "url",
+               "url": "https://github.com/catppuccin/bat"
+            }, {
+               "date_added": "13341806990103845",
+               "date_last_used": "0",
+               "guid": "19d324e4-6432-4ba4-a608-9224d424ddad",
+               "id": "152",
+               "name": "catppuccin/newsboat: 📰 Soothing pastel theme for Newsboat",
+               "type": "url",
+               "url": "https://github.com/catppuccin/newsboat"
+            }, {
+               "date_added": "13341806990104828",
+               "date_last_used": "0",
+               "guid": "888ad810-aaa7-408c-b638-1f4f581913c1",
+               "id": "153",
+               "name": "EFISTUB - ArchWiki",
+               "type": "url",
+               "url": "https://wiki.archlinux.org/title/EFISTUB"
+            }, {
+               "date_added": "13341806990106964",
+               "date_last_used": "0",
+               "guid": "52d19605-5256-4967-b867-8a3f065a7753",
+               "id": "154",
+               "name": "The EFI Boot Stub — The Linux Kernel documentation",
+               "type": "url",
+               "url": "https://docs.kernel.org/admin-guide/efi-stub.html"
+            }, {
+               "date_added": "13341806990110226",
+               "date_last_used": "0",
+               "guid": "fbd700a3-0cac-4a51-b50c-47854198b441",
+               "id": "155",
+               "name": "limine-bootloader/limine: Modern, advanced, portable, multiprotocol bootloader.",
+               "type": "url",
+               "url": "https://github.com/limine-bootloader/limine"
+            }, {
+               "date_added": "13341806990111697",
+               "date_last_used": "0",
+               "guid": "48f04bb8-40ef-4363-b7b1-24cffd8105dc",
+               "id": "156",
+               "name": "Axenide/Dotfiles: .'s",
+               "type": "url",
+               "url": "https://github.com/Axenide/Dotfiles"
+            }, {
+               "date_added": "13341806990113082",
+               "date_last_used": "0",
+               "guid": "dae51844-70cd-41bb-a9fa-d0f0311f03da",
+               "id": "157",
+               "name": "Compiling for Linux, *BSD — Godot Engine (latest) documentation in English",
+               "type": "url",
+               "url": "https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html"
+            }, {
+               "date_added": "13341806990115677",
+               "date_last_used": "0",
+               "guid": "1685b346-966e-488d-82c8-0e2290811a03",
+               "id": "158",
+               "name": "Log - slstatus - My fork of https://tools.suckless.org/slstatus/",
+               "type": "url",
+               "url": "https://git.inz.fi/slstatus/"
+            }, {
+               "date_added": "13341806990117172",
+               "date_last_used": "0",
+               "guid": "aaad8316-af77-4bdd-9bb6-901766344382",
+               "id": "159",
+               "name": "tekknolagi/libgrapheme: mirror of https://git.suckless.org/libgrapheme",
+               "type": "url",
+               "url": "https://github.com/tekknolagi/libgrapheme/tree/master"
+            }, {
+               "date_added": "13341806990118015",
+               "date_last_used": "0",
+               "guid": "1484cf52-4bba-40ad-b93c-453dcca71ac9",
+               "id": "160",
+               "name": "grapheme · PyPI",
+               "type": "url",
+               "url": "https://pypi.org/project/grapheme/"
+            }, {
+               "date_added": "13341806990118680",
+               "date_last_used": "0",
+               "guid": "4100cd51-8b41-4ac3-9a6f-4ec5cc88f00f",
+               "id": "161",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/16v96z7/i3_a_minimalistic_gruvbox_rice/"
+            }, {
+               "date_added": "13341806990119263",
+               "date_last_used": "0",
+               "guid": "f0fbafba-cf24-40e8-8d56-4dc7780e0cbe",
+               "id": "162",
+               "name": "budRich/xwmplay: Xephyr wrapper for window manager testing",
+               "type": "url",
+               "url": "https://github.com/budRich/xwmplay"
+            }, {
+               "date_added": "13341806990119833",
+               "date_last_used": "0",
+               "guid": "93e8a2a3-7168-4e63-9cac-f0244a8078a8",
+               "id": "163",
+               "name": "Chion82/ASCII_bad_apple: ASCII art video of Bad Apple",
+               "type": "url",
+               "url": "https://github.com/Chion82/ASCII_bad_apple"
+            }, {
+               "date_added": "13341806990120255",
+               "date_last_used": "0",
+               "guid": "5e576599-73d4-443b-9f3a-d6f0bc8b50fe",
+               "id": "164",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/16vxf0s/bspwm_im_a_simple_man_and_i_need_simple_stuff/"
+            }, {
+               "date_added": "13341806990120846",
+               "date_last_used": "0",
+               "guid": "955d6944-7a70-4f08-94dc-f413d88f37ed",
+               "id": "165",
+               "name": "GhilesLarbi/dotfiles: My personal dotfiles for Arch linux and BSPWM",
+               "type": "url",
+               "url": "https://github.com/GhilesLarbi/dotfiles"
+            }, {
+               "date_added": "13341806990121641",
+               "date_last_used": "0",
+               "guid": "a315e33f-df1a-4173-b7d6-f8e51659fce1",
+               "id": "166",
+               "name": "serenity/Documentation/BareMetalInstallation.md at master · SerenityOS/serenity",
+               "type": "url",
+               "url": "https://github.com/SerenityOS/serenity/blob/master/Documentation/BareMetalInstallation.md"
+            }, {
+               "date_added": "13341806990122597",
+               "date_last_used": "0",
+               "guid": "dd539367-de94-4757-9eef-781b1995a5dd",
+               "id": "167",
+               "name": "serenity/Documentation/VirtualBox.md at master · SerenityOS/serenity",
+               "type": "url",
+               "url": "https://github.com/SerenityOS/serenity/blob/master/Documentation/VirtualBox.md"
+            }, {
+               "date_added": "13341806990124050",
+               "date_last_used": "0",
+               "guid": "522ac0bf-e646-440f-be95-c8561aab7727",
+               "id": "168",
+               "name": "serenity/Documentation/RunningTests.md at master · SerenityOS/serenity",
+               "type": "url",
+               "url": "https://github.com/SerenityOS/serenity/blob/master/Documentation/RunningTests.md"
+            }, {
+               "date_added": "13341806990125786",
+               "date_last_used": "0",
+               "guid": "f8b0e14f-68fc-4944-be0e-c8635b74ae46",
+               "id": "169",
+               "name": "serenity/Documentation/SelfHostedRunners.md at master · SerenityOS/serenity",
+               "type": "url",
+               "url": "https://github.com/SerenityOS/serenity/blob/master/Documentation/SelfHostedRunners.md"
+            }, {
+               "date_added": "13341806990127511",
+               "date_last_used": "0",
+               "guid": "bff06a06-299c-4038-b54c-bc6f72a8a501",
+               "id": "170",
+               "name": "serenity/Documentation/SpiceIntegration.md at master · SerenityOS/serenity",
+               "type": "url",
+               "url": "https://github.com/SerenityOS/serenity/blob/master/Documentation/SpiceIntegration.md"
+            }, {
+               "date_added": "13341806990128887",
+               "date_last_used": "0",
+               "guid": "cad8f0f4-c6ac-4c09-b962-4fda39c9b399",
+               "id": "171",
+               "name": "serenity/Documentation/BuildInstructionsOther.md at master · SerenityOS/serenity",
+               "type": "url",
+               "url": "https://github.com/SerenityOS/serenity/blob/master/Documentation/BuildInstructionsOther.md"
+            }, {
+               "date_added": "13341806990130394",
+               "date_last_used": "0",
+               "guid": "8e734fbd-c4aa-4119-bd5c-ff74a9eb43b0",
+               "id": "172",
+               "name": "serenity/Documentation/HardwareCompatibility.md at master · SerenityOS/serenity",
+               "type": "url",
+               "url": "https://github.com/SerenityOS/serenity/blob/master/Documentation/HardwareCompatibility.md"
+            }, {
+               "date_added": "13341806990131724",
+               "date_last_used": "0",
+               "guid": "19e21ca9-591a-445b-a613-9694dce22c18",
+               "id": "173",
+               "name": "Compiling for Linux, *BSD — Godot Engine (latest) documentation in English",
+               "type": "url",
+               "url": "https://docs.godotengine.org/en/latest/contributing/development/compiling/compiling_for_linuxbsd.html"
+            }, {
+               "date_added": "13341806990133008",
+               "date_last_used": "0",
+               "guid": "2b0b109a-92d5-4654-aab9-d10aedb5dbf5",
+               "id": "174",
+               "name": "suckless/dwm-6.3/config.h at main · kars0n777/suckless",
+               "type": "url",
+               "url": "https://github.com/kars0n777/suckless/blob/main/dwm-6.3/config.h"
+            }, {
+               "date_added": "13341806990134150",
+               "date_last_used": "0",
+               "guid": "d6129323-a1d6-4cb1-9c27-c0ed71a9cc59",
+               "id": "175",
+               "name": "FT-Labs (Arda Atci)",
+               "type": "url",
+               "url": "https://github.com/FT-Labs"
+            }, {
+               "date_added": "13341806990134808",
+               "date_last_used": "0",
+               "guid": "e39f24f0-e11f-4cfa-bf4e-03e9ec0ac09a",
+               "id": "176",
+               "name": "Release LVM & Luks2 Full Disk Encryption Support. Plymouth splash screen added. · FT-Labs/phyOS-iso",
+               "type": "url",
+               "url": "https://github.com/FT-Labs/phyOS-iso/releases/tag/1.2.0-beta"
+            }, {
+               "date_added": "13341806990135392",
+               "date_last_used": "0",
+               "guid": "df142d98-e957-4e88-9546-06c05cc6da37",
+               "id": "177",
+               "name": "kiddae/ImageColorizer: Make any wallpaper fit any terminal colorscheme.",
+               "type": "url",
+               "url": "https://github.com/kiddae/ImageColorizer"
+            }, {
+               "date_added": "13341806990135939",
+               "date_last_used": "0",
+               "guid": "5b2f447d-8ab5-4a7a-88a5-c88ad44eb484",
+               "id": "178",
+               "name": "patches/tabbed/tabbed-bottomtabs-0.6-20200512-dabf6a2.diff at master · bakkeby/patches",
+               "type": "url",
+               "url": "https://github.com/bakkeby/patches/blob/master/tabbed/tabbed-bottomtabs-0.6-20200512-dabf6a2.diff"
+            }, {
+               "date_added": "13341806990136362",
+               "date_last_used": "0",
+               "guid": "171341e6-5345-4937-984e-921cb08dd2c3",
+               "id": "179",
+               "name": "speediegq/spmenu: Fancy dynamic menu for X11 and Wayland, compatible with dmenu. Mirror of https://git.speedie.site/speedie/spmenu.",
+               "type": "url",
+               "url": "https://github.com/speediegq/spmenu"
+            }, {
+               "date_added": "13341806990136785",
+               "date_last_used": "0",
+               "guid": "a2594f35-b181-420d-92b1-514c7d240ae0",
+               "id": "180",
+               "name": "speediegq/dotfiles: There's no place like ~/",
+               "type": "url",
+               "url": "https://github.com/speediegq/dotfiles"
+            }, {
+               "date_added": "13341806990137167",
+               "date_last_used": "0",
+               "guid": "1c10c9c2-8abb-4656-9340-f60454274f1b",
+               "id": "181",
+               "name": "Reddit - https://i.redd.it/tsrafvbmbesb1.png",
+               "type": "url",
+               "url": "https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Ftsrafvbmbesb1.png"
+            }, {
+               "date_added": "13341806990137693",
+               "date_last_used": "0",
+               "guid": "9644b917-b7d8-407b-b523-a62eb9133117",
+               "id": "182",
+               "name": "ivanka3006/monet: Hyprland monet dotfiles",
+               "type": "url",
+               "url": "https://github.com/ivanka3006/monet"
+            }, {
+               "date_added": "13341806990138422",
+               "date_last_used": "0",
+               "guid": "fc016be3-702d-4ea2-b58e-6d0c43196aa5",
+               "id": "183",
+               "name": "r/unixporn - the home for *NIX customization!",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/top/?t=year"
+            }, {
+               "date_added": "13341806990139490",
+               "date_last_used": "0",
+               "guid": "cbc6b670-c0a7-4860-8203-f5bdb5cd73c1",
+               "id": "184",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/yt3wjq/dwm_fell_into_the_void_lads/"
+            }, {
+               "date_added": "13341806990141234",
+               "date_last_used": "0",
+               "guid": "6feff10f-76a5-48b5-ad90-bd40c5c7d613",
+               "id": "185",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/13dm9g0/qtile_cozytile_a_cozy_qtile_rice/"
+            }, {
+               "date_added": "13341806990142410",
+               "date_last_used": "0",
+               "guid": "51a05801-4cf5-4a39-b195-88766da6c801",
+               "id": "186",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/13ryru7/gnome_nord_red_an_attempt_to_match_desktop_and/"
+            }, {
+               "date_added": "13341806990143253",
+               "date_last_used": "0",
+               "guid": "0ea6f33b-e6ab-46c1-b374-6e1371b9172a",
+               "id": "187",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/11cfas8/oc_zfxtop_fetch_top_for_gen_z_with_x/"
+            }, {
+               "date_added": "13341806990143703",
+               "date_last_used": "0",
+               "guid": "a8f3a148-1caf-4789-96d4-aa72b1594258",
+               "id": "188",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/13kw0uy/roses_are_red_hyprland_is_blue_when_the_world/"
+            }, {
+               "date_added": "13341806990144105",
+               "date_last_used": "0",
+               "guid": "212f4338-212b-45db-954f-5a854d5830b5",
+               "id": "189",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/zzvxep/grub_theme_tartarus_grub_material_gruvbox_theme/"
+            }, {
+               "date_added": "13341806990144517",
+               "date_last_used": "0",
+               "guid": "5cd3ea48-4072-4c02-bf96-2d58219d477b",
+               "id": "190",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/122jn7y/gnome_new_catpuccin_fedora_rice/"
+            }, {
+               "date_added": "13341806990144938",
+               "date_last_used": "0",
+               "guid": "6d140a49-1f27-4c5c-80e5-c545a11117fe",
+               "id": "191",
+               "name": "reddit.com/r/unixporn/comments/108wizo/hyprland_green_and_gruvbox/",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/108wizo/hyprland_green_and_gruvbox/"
+            }, {
+               "date_added": "13341806990145328",
+               "date_last_used": "0",
+               "guid": "3f326748-2202-4ffa-b9b0-3273f83902c8",
+               "id": "192",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/zo0th9/dwm_my_second_and_hopefully_my_last_rice/"
+            }, {
+               "date_added": "13341806990145920",
+               "date_last_used": "0",
+               "guid": "89d3f935-e502-4ac3-90bc-41411b60dd1e",
+               "id": "193",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/yy4oz6/dwm_i_cant_rice_anything_but_gruvbox/"
+            }, {
+               "date_added": "13341806990146688",
+               "date_last_used": "0",
+               "guid": "d3b5ec05-091c-4cef-b40b-fbb1d7451b2a",
+               "id": "194",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/110lnn4/bspwm_clean_and_minimal/"
+            }, {
+               "date_added": "13341806990147243",
+               "date_last_used": "0",
+               "guid": "ac3f46ce-e549-4345-8682-da1ccdc7c80f",
+               "id": "195",
+               "name": "unic0rn9k/dots: My dot files",
+               "type": "url",
+               "url": "https://github.com/unic0rn9k/dots"
+            }, {
+               "date_added": "13341806990148663",
+               "date_last_used": "0",
+               "guid": "c369bbcc-3710-4c03-b70b-c24be852b30b",
+               "id": "196",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/170mjvb/i3wm_my_first_ricing/"
+            }, {
+               "date_added": "13341806990149984",
+               "date_last_used": "0",
+               "guid": "a678a798-d0eb-453c-b057-991fa4937f94",
+               "id": "197",
+               "name": "Lxtharia/minegrub-theme: A Grub Theme in the style of Minecraft!",
+               "type": "url",
+               "url": "https://github.com/Lxtharia/minegrub-theme"
+            }, {
+               "date_added": "13341806990151031",
+               "date_last_used": "0",
+               "guid": "d2f96a75-2110-4c3d-ae09-deea0916715e",
+               "id": "198",
+               "name": "yshui/picom: A lightweight compositor for X11",
+               "type": "url",
+               "url": "https://github.com/yshui/picom"
+            }, {
+               "date_added": "13341806990151665",
+               "date_last_used": "0",
+               "guid": "bd59033c-2b54-47f8-9c1d-548f4b001611",
+               "id": "199",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/suckless/comments/17227n2/alsa_volume_to_speaker_character_in_slstatus/"
+            }, {
+               "date_added": "13341806990152252",
+               "date_last_used": "0",
+               "guid": "67c353b5-a514-4600-8c91-a0142561bf78",
+               "id": "200",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/1723xgd/i3_gruvbox_rice_but_its_light_this_time/"
+            }, {
+               "date_added": "13341806990153017",
+               "date_last_used": "0",
+               "guid": "2fd58dbe-0a9e-4f59-9ac7-a056e142fc2a",
+               "id": "201",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/suckless/comments/171izyo/thunar_or_any_gtk_file_browser_prompts_are_too_big/"
+            }, {
+               "date_added": "13341806990153717",
+               "date_last_used": "0",
+               "guid": "1972a3d6-98fb-4b9f-935c-bf5077bff4e0",
+               "id": "202",
+               "name": "dwm - dynamic window manager | suckless.org software that sucks less",
+               "type": "url",
+               "url": "https://dwm.suckless.org/patches/save_floats/"
+            }, {
+               "date_added": "13341806990154326",
+               "date_last_used": "0",
+               "guid": "497cee01-cc00-4a26-8a58-31f12f26b613",
+               "id": "203",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/17274o0/hyprland_first_time_trying_ags/"
+            }, {
+               "date_added": "13341806990154963",
+               "date_last_used": "0",
+               "guid": "2b0705d9-86f8-4404-ac8e-d117f21c8644",
+               "id": "204",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/17276a5/i3_just_my_regular_setup/"
+            }, {
+               "date_added": "13341806990156197",
+               "date_last_used": "0",
+               "guid": "2e541cde-ea47-4017-b886-33f9d606674f",
+               "id": "205",
+               "name": "Reddit - Dive into anything",
+               "type": "url",
+               "url": "https://www.reddit.com/r/unixporn/comments/171t7bx/awesome_my_linux_mint_rice/"
+            }, {
+               "date_added": "13341806990157593",
+               "date_last_used": "0",
+               "guid": "475d3c48-018e-4de8-bcb5-12abe53d695d",
+               "id": "206",
+               "name": "elbachir-one/phyOS-st",
+               "type": "url",
+               "url": "https://github.com/elbachir-one/phyOS-st"
+            }, {
+               "date_added": "13341806990158763",
+               "date_last_used": "0",
+               "guid": "ce46ec1a-f6d4-49f5-8a80-a2f793e622fa",
+               "id": "207",
+               "name": "yshui/picom: A lightweight compositor for X11",
+               "type": "url",
+               "url": "https://github.com/yshui/picom"
+            }, {
+               "date_added": "13341806990159995",
+               "date_last_used": "0",
+               "guid": "2f1aab50-e085-49e1-bda8-5856fdebfff0",
+               "id": "208",
+               "name": "How to Store Dotfiles - A Bare Git Repository | Atlassian Git Tutorial",
+               "type": "url",
+               "url": "https://www.atlassian.com/git/tutorials/dotfiles"
+            }, {
+               "date_added": "13341806990160773",
+               "date_last_used": "0",
+               "guid": "326f7356-fbe3-41d6-b574-0d551a501409",
+               "id": "209",
+               "name": "dwm - dynamic window manager | suckless.org software that sucks less",
+               "type": "url",
+               "url": "https://dwm.suckless.org/patches/switchtotag/"
+            }, {
+               "date_added": "13341806990161211",
+               "date_last_used": "0",
+               "guid": "cab93907-2eda-4843-ae7d-079111a8547a",
+               "id": "210",
+               "name": "thesynthax/dotfiles: My Linux Dotfiles",
+               "type": "url",
+               "url": "https://github.com/thesynthax/dotfiles"
+            }, {
+               "date_added": "13341806990161663",
+               "date_last_used": "0",
+               "guid": "65f063e6-ddf1-40c3-a346-c99d41ba1d45",
+               "id": "211",
+               "name": "New Tab",
+               "type": "url",
+               "url": "chrome://newtab/"
+            }, {
+               "date_added": "13341806990162040",
+               "date_last_used": "0",
+               "guid": "76720676-a08a-4013-aac3-d13fbdd5336b",
+               "id": "212",
+               "name": "oink/dot-files: Do whatever the heck you want with them. - dot-files - Disroot Forgejo: Brace yourself, merge conflicts ahead.",
+               "type": "url",
+               "url": "https://git.disroot.org/oink/dot-files"
+            }, {
+               "date_added": "13341806990162534",
+               "date_last_used": "0",
+               "guid": "057fdcdd-4354-4659-a342-06e58082a2af",
+               "id": "213",
+               "name": "MEGA ↑ 2%",
+               "type": "url",
+               "url": "https://mega.nz/fm/i1shyARb"
+            } ],
+            "date_added": "13341806990065273",
+            "date_last_used": "0",
+            "date_modified": "13341806990162534",
+            "guid": "a9d470ce-e2af-4980-802e-4d3b9b3794fa",
+            "id": "146",
+            "name": "New Open",
+            "type": "folder"
          } ],
          "date_added": "13328396288320475",
          "date_last_used": "0",
-         "date_modified": "13333038526406111",
+         "date_modified": "13341806990163045",
          "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
          "id": "1",
          "name": "Bookmarks bar",
