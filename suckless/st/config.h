@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#include "colors/stuck.h"
+
 /*
  * appearance
  *
@@ -113,9 +115,6 @@ unsigned int tabspaces = 4;
 /* bg opacity */
 float alpha = 0.7;
 
-// colors
-#include "colors/bright.h"
-//
 unsigned int defaultitalic = 7;
 unsigned int defaultunderline = 7;
 

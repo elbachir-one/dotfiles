@@ -1,5 +1,4 @@
 /* See LICENSE file for copyright and license details. */
-
 /*
  * appearance
  *
@@ -125,7 +124,13 @@ float alpha = 0.8;
 //#include "colors/rosepine.h"
 //#include "colors/dracula.h"
 //#include "colors/dusk.h"
-#include "colors/brigh_blue.h"
+//#include "colors/brigh_blue.h"
+//#include "colors/sunset.h"
+//#include "colors/half_light.h"
+#include "colors/solarized_dark.h"
+//#include "colors/material_dark.h"
+//#include "colors/paper_dark.h"
+//#include "colors/synthwave_alpha.h"
 
 /*
  * Default shape of cursor
