@@ -7,3 +7,7 @@ suckless/dmenu/config.h
 suckless/st/config.h
 suckless/st/st.o
 suckless/st/st
+suckless/st/x.o
+suckless/alpha/alpha
+suckless/alpha/alpha.o
+suckless/alpha/config.h

@@ -139,11 +139,13 @@ static const char *next[]           = { "mpc", "next", NULL };
 static const char *prev[]           = { "mpc", "prev", NULL };
 static const char *searchcmd[]      = { "search", NULL };
 static const char *dowcmd[]         = { "down", NULL };
+static const char *boomercmd[]      = { "boomer", NULL };
 static const Key keys[] = {
 
 	/* modifier                  key                      function                 argument */
 
 	{MODKEY,                    XK_s,  	                togglescratch,          {.ui = 0 } },
+	{MODKEY,                    XK_z,  	                spawn,                  {.v = boomercmd } },
 	{MODKEY|ShiftMask,          XK_r,	                togglescratch,          {.ui = 1 } },
 	{MODKEY,                    XK_e,	                togglescratch,          {.ui = 2 } },
 	{MODKEY,                    XK_a,	                togglescratch,          {.ui = 3 } },
