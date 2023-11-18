@@ -20,22 +20,22 @@ index 470ac86..6dfa212 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -4,7 +4,7 @@
- 
+
  include config.mk
- 
+
 -SRC = st.c x.c
 +SRC = st.c x.c boxdraw.c
  OBJ = $(SRC:.c=.o)
- 
+
  all: options st
 @@ -23,6 +23,7 @@ config.h:
- 
+
  st.o: config.h st.h win.h
  x.o: arg.h config.h st.h win.h
 +boxdraw.o: config.h st.h boxdraw_data.h
- 
+
  $(OBJ): config.h config.mk
- 
+
 diff --git a/boxdraw.c b/boxdraw.c
 new file mode 100644
 index 0000000..28a92d0
@@ -463,7 +463,7 @@ index 91ab8ca..7bb3ff7 100644
 @@ -67,6 +67,18 @@ static unsigned int blinktimeout = 800;
   */
  static unsigned int cursorthickness = 2;
- 
+
 +/*
 + * 1: render most of the lines/blocks characters without using the font for
 + *    perfect alignment between cells (U2500 - U259F except dashes/diagonals).
@@ -491,7 +491,7 @@ index f43cfd3..baa2bed 100644
 +	if (isboxdraw(u))
 +		term.line[y][x].mode |= ATTR_BOXDRAW;
  }
- 
+
  void
 diff --git a/st.h b/st.h
 index 519b9bd..07a7c66 100644
@@ -504,11 +504,11 @@ index 519b9bd..07a7c66 100644
 +	ATTR_BOXDRAW    = 1 << 11,
  	ATTR_BOLD_FAINT = ATTR_BOLD | ATTR_FAINT,
  };
- 
+
 @@ -113,6 +114,14 @@ char *xstrdup(const char *);
- 
+
  int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b);
- 
+
 +int isboxdraw(Rune);
 +ushort boxdrawindex(const Glyph *);
 +#ifdef XFT_VERSION
@@ -536,12 +536,12 @@ index 2a3bd38..bf6bbf9 100644
 +
 +	boxdraw_xinit(xw.dpy, xw.cmap, xw.draw, xw.vis);
  }
- 
+
  int
 @@ -1283,8 +1285,13 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
  			yp = winy + font->ascent;
  		}
- 
+
 -		/* Lookup character index with default font. */
 -		glyphidx = XftCharIndex(xw.dpy, font->match, rune);
 +		if (mode & ATTR_BOXDRAW) {
@@ -557,7 +557,7 @@ index 2a3bd38..bf6bbf9 100644
 @@ -1488,8 +1495,12 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
  	r.width = width;
  	XftDrawSetClipRectangles(xw.draw, winx, winy, &r, 1);
- 
+
 -	/* Render the glyphs. */
 -	XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
 +	if (base.mode & ATTR_BOXDRAW) {
@@ -566,7 +566,7 @@ index 2a3bd38..bf6bbf9 100644
 +		/* Render the glyphs. */
 +		XftDrawGlyphFontSpec(xw.draw, fg, specs, len);
 +	}
- 
+
  	/* Render underline and strikethrough. */
  	if (base.mode & ATTR_UNDERLINE) {
 @@ -1532,7 +1543,7 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
@@ -575,9 +575,8 @@ index 2a3bd38..bf6bbf9 100644
  	 */
 -	g.mode &= ATTR_BOLD|ATTR_ITALIC|ATTR_UNDERLINE|ATTR_STRUCK|ATTR_WIDE;
 +	g.mode &= ATTR_BOLD|ATTR_ITALIC|ATTR_UNDERLINE|ATTR_STRUCK|ATTR_WIDE|ATTR_BOXDRAW;
- 
+
  	if (IS_SET(MODE_REVERSE)) {
  		g.mode |= ATTR_REVERSE;
--- 
+--
 2.35.1
-

@@ -1,0 +1,77 @@
+From 580e3f386e9215707100e9ba44797701943fd927 Mon Sep 17 00:00:00 2001
+From: asparagii <michele.lambertucci1@gmail.com>
+Date: Thu, 27 Jan 2022 15:49:27 +0100
+Subject: [PATCH] st-scrollback-mouse-altscreen
+
+---
+ config.def.h | 4 ++--
+ st.c         | 5 +++++
+ st.h         | 1 +
+ x.c          | 2 ++
+ 4 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index c217315..c223706 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -176,8 +176,8 @@ static uint forcemousemod = ShiftMask;
+  */
+ static MouseShortcut mshortcuts[] = {
+ 	/* mask                 button   function        argument       release */
+-	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
+-	{ ShiftMask,            Button5, kscrolldown,    {.i = 1} },
++	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1},		0, /* !alt */ -1 },
++	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1},		0, /* !alt */ -1 },
+ 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+ 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
+ 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+diff --git a/st.c b/st.c
+index f3af82b..876a6bf 100644
+--- a/st.c
++++ b/st.c
+@@ -1060,6 +1060,11 @@ tnew(int col, int row)
+ 	treset();
+ }
+
++int tisaltscr(void)
++{
++	return IS_SET(MODE_ALTSCREEN);
++}
++
+ void
+ tswapscreen(void)
+ {
+diff --git a/st.h b/st.h
+index da36b34..e95c6f8 100644
+--- a/st.h
++++ b/st.h
+@@ -89,6 +89,7 @@ void sendbreak(const Arg *);
+ void toggleprinter(const Arg *);
+
+ int tattrset(int);
++int tisaltscr(void);
+ void tnew(int, int);
+ void tresize(int, int);
+ void tsetdirtattr(int);
+diff --git a/x.c b/x.c
+index cd96575..9274556 100644
+--- a/x.c
++++ b/x.c
+@@ -34,6 +34,7 @@ typedef struct {
+ 	void (*func)(const Arg *);
+ 	const Arg arg;
+ 	uint  release;
++	int  altscrn;  /* 0: don't care, -1: not alt screen, 1: alt screen */
+ } MouseShortcut;
+
+ typedef struct {
+@@ -455,6 +456,7 @@ mouseaction(XEvent *e, uint release)
+ 	for (ms = mshortcuts; ms < mshortcuts + LEN(mshortcuts); ms++) {
+ 		if (ms->release == release &&
+ 		    ms->button == e->xbutton.button &&
++		    (!ms->altscrn || (ms->altscrn == (tisaltscr() ? 1 : -1))) &&
+ 		    (match(ms->mod, state) ||  /* exact or forced */
+ 		     match(ms->mod, state & ~forcemousemod))) {
+ 			ms->func(&(ms->arg));
+--
+2.34.1

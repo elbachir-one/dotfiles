@@ -40,7 +40,7 @@ index 2a3bd38..f534347 100644
 @@ -739,6 +740,9 @@ cresize(int width, int height)
  	col = MAX(1, col);
  	row = MAX(1, row);
- 
+
 +	win.hborderpx = (win.w - col * win.cw) / 2;
 +	win.vborderpx = (win.h - row * win.ch) / 2;
 +
@@ -60,7 +60,7 @@ index 2a3bd38..f534347 100644
  	sizeh->min_height = win.ch + 2 * borderpx;
 @@ -1152,8 +1156,8 @@ xinit(int cols, int rows)
  	xloadcols();
- 
+
  	/* adjust fixed window geometry */
 -	win.w = 2 * borderpx + cols * win.cw;
 -	win.h = 2 * borderpx + rows * win.ch;
@@ -88,7 +88,7 @@ index 2a3bd38..f534347 100644
  	Color *fg, *bg, *temp, revfg, revbg, truefg, truebg;
  	XRenderColor colfg, colbg;
 @@ -1465,17 +1469,17 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
- 
+
  	/* Intelligent cleaning up of the borders. */
  	if (x == 0) {
 -		xclear(0, (y == 0)? 0 : winy, borderpx,
@@ -109,7 +109,7 @@ index 2a3bd38..f534347 100644
 +		xclear(winx, 0, winx + width, win.vborderpx);
 +	if (winy + win.ch >= win.vborderpx + win.th)
  		xclear(winx, winy + win.ch, winx + width, win.h);
- 
+
  	/* Clean up the region we want to draw to. */
 @@ -1569,35 +1573,35 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
  		case 3: /* Blinking Underline */
@@ -159,6 +159,5 @@ index 2a3bd38..f534347 100644
  				win.cw, 1);
  	}
  }
--- 
+--
 2.37.1
-
