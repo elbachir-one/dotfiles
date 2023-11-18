@@ -113,7 +113,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.7;
+float alpha = 0.8;
 
 unsigned int defaultitalic = 7;
 unsigned int defaultunderline = 7;
