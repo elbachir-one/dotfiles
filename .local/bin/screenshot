@@ -1,0 +1,19 @@
+#!/bin/bash
+
+IMG_PATH=/home/sh/Images/ScreenShots/
+TIME=2000
+
+prog="
+1.fullscreen
+2.section
+"
+
+cmd=$(dmenu -p 'ScreenShot' <<< "$prog")
+
+cd $IMG_PATH
+case ${cmd%% *} in
+
+    1.fullscreen) scrot -d 3 '%Y-%m-%d-@%H-%M-%S-scrot.png' && notify-send -u low -t $TIME 'scrot' 'Full Screen Shot'  ;;
+    2.section) scrot -d 3 -s '%Y-%m-%d-@%H-%M-%S-scrot.png' && notify-send -u low -t $TIME 'scrot' 'Section Screen Shot'  ;;
+    *)  exec "${cmd}" ;;
+esac
