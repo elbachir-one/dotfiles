@@ -1,0 +1,102 @@
+From f22071dcfa3cd01d4fee25ea6fe3441780a11387 Mon Sep 17 00:00:00 2001
+From: mortezadadgar <mortezadadgar97@gmail.com>
+Date: Thu, 11 May 2023 16:24:49 +0330
+Subject: [PATCH]: Added restricted version of support for RTL
+ languages
+
+Only applied fribi where is needed the title
+also improved the code quality based on suckless guidelines.
+---
+ config.mk |  8 ++++++--
+ dwm.c     | 21 ++++++++++++++++++++-
+ 2 files changed, 26 insertions(+), 3 deletions(-)
+
+diff --git a/config.mk b/config.mk
+index 681e059..1dd9bb5 100644
+--- a/config.mk
++++ b/config.mk
+@@ -10,6 +10,8 @@ MANPREFIX = ${PREFIX}/share/man
+ X11INC = /usr/X11R6/include
+ X11LIB = /usr/X11R6/lib
+
++BDINC = /usr/include/fribidi
++
+ # Xinerama, comment if you don't want it
+ XINERAMALIBS  = -lXinerama
+ XINERAMAFLAGS = -DXINERAMA
+@@ -21,9 +23,11 @@ FREETYPEINC = /usr/include/freetype2
+ #FREETYPEINC = ${X11INC}/freetype2
+ #MANPREFIX = ${PREFIX}/man
+
++BDLIBS = -lfribidi
++
+ # includes and libs
+-INCS = -I${X11INC} -I${FREETYPEINC}
+-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS}
++INCS = -I${X11INC} -I${FREETYPEINC} -I$(BDINC)
++LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} $(BDLIBS)
+
+ # flags
+ CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+diff --git a/dwm.c b/dwm.c
+index 2f4cad9..5df8bdb 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -21,6 +21,7 @@
+  * To understand everything else, start reading main().
+  */
+ #include <errno.h>
++#include <fribidi.h>
+ #include <locale.h>
+ #include <signal.h>
+ #include <stdarg.h>
+@@ -168,6 +169,7 @@ typedef struct {
+ } Rule;
+
+ /* function declarations */
++static void apply_fribidi(char *str);
+ static void applyrules(Client *c);
+ static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
+ static void arrange(Monitor *m);
+@@ -267,6 +269,7 @@ static void zoom(const Arg *arg);
+ /* variables */
+ static const char broken[] = "broken";
+ static char stext[256];
++static char fribidi_text[256];
+ static int screen;
+ static int sw, sh;           /* X display screen geometry width, height */
+ static int bh;               /* bar height */
+@@ -312,6 +315,21 @@ struct Pertag {
+ struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
+
+ /* function implementations */
++void
++apply_fribidi(char *str)
++{
++	FriBidiStrIndex len = strlen(str);
++	FriBidiChar logical[256];
++	FriBidiChar visual[256];
++	FriBidiParType base = FRIBIDI_PAR_ON;
++	FriBidiCharSet charset;
++
++	charset = fribidi_parse_charset("UTF-8");
++	len = fribidi_charset_to_unicode(charset, str, len, logical);
++	fribidi_log2vis(logical, len, &base, visual, NULL, NULL, NULL);
++	fribidi_unicode_to_charset(charset, visual, len, fribidi_text);
++}
++
+ void
+ applyrules(Client *c)
+ {
+@@ -808,7 +826,8 @@ drawbar(Monitor *m)
+ 	if ((w = m->ww - tw - x) > bh) {
+ 		if (m->sel) {
+ 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
++			apply_fribidi(m->sel->name);
++			drw_text(drw, x, 0, w, bh, lrpad / 2, fribidi_text, 0);
+ 			if (m->sel->isfloating)
+ 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+ 		} else {
+--
+2.39.3
