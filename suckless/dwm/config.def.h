@@ -146,6 +146,7 @@ static const char *prev[]           = { "mpc", "prev", NULL };
 static const char *searchcmd[]      = { "search", NULL };
 static const char *dowcmd[]         = { "down", NULL };
 static const char *boomercmd[]      = { "boomer", NULL };
+static const char *screencmd[]      = { "screenshot", NULL };
 static const Key keys[] = {
 
     /* modifier                     key                         function                 argument */
@@ -171,7 +172,7 @@ static const Key keys[] = {
 	{MODKEY, 	            XK_p, 		        spawn, 		        {.v = dmenucmd}},
 	{MODKEY | ShiftMask, 	    XK_Return,                  spawn, 		        {.v = termcmd}},
 	{MODKEY,		    XK_n, 		        spawn, 		        {.v = clipcmd}},
-	{MODKEY | ShiftMask,        XK_s, 		        spawn, 		        {.v = clipcmd}},
+	{MODKEY | ShiftMask,        XK_s, 		        spawn, 		        {.v = screencmd}},
         {MODKEY,                    XK_agrave,                  view,                   {.ui = ~0 } },
 	{MODKEY|ShiftMask,          XK_agrave,                  tag,                    {.ui = ~0 } },
 	{MODKEY,                    XK_semicolon,               focusmon,               {.i = +1 } },
