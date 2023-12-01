@@ -18,7 +18,7 @@ static const char col_gray2[]          = "#444444";
 static const char col_gray3[]          = "#dddfff";
 static const char col_gray4[]          = "#ffffff";
 static const char col_gray5[]          = "#805f4e";
-static const char col_cyan1[]          = "#202020";
+static const char col_cyan1[]          = "#000000";
 static const char col_cyan2[]          = "#00ffff";
 static const unsigned int baralpha     = 0xd0;
 static const unsigned int borderalpha  = OPAQUE;
@@ -44,6 +44,7 @@ const char *spcmd3[] = {"st", "-n", "spncm", "-g", "120x30", "-e", "ncmpcpp", NU
 const char *spcmd4[] = {"st", "-n", "spclock", "-g", "80x20", "-e", "tty-clock", "-cC", "6", NULL };
 const char *spcmd5[] = {"st", "-n", "spcava", "-g", "120x30", "-e", "cava", NULL };
 const char *spcmd6[] = {"alpha", "-n", "spnnn", "-g", "110x28", "-e", "nnn", NULL };
+const char *spcmd7[] = {"st", "-n", "sptyp", "-g", "100x22", "-e", "typiskt", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -52,6 +53,7 @@ static Sp scratchpads[] = {
 	{"spclock",     spcmd4},
 	{"spcava",      spcmd5},
 	{"spnnn",       spcmd6},
+	{"sptyp",       spcmd7},
 };
 
 static const char *const autostart[] = {
@@ -96,6 +98,7 @@ static const Rule rules[] = {
     { NULL,	            "spclock",      NULL,	          SPTAG(3),         1,		     0,         0,        -1 },
     { NULL,	            "spcava",       NULL,	          SPTAG(4),         1,		     0,         0,        -1 },
     { NULL,	            "spnnn",        NULL,	          SPTAG(5),         1,		     0,         0,        -1 },
+    { NULL,	            "sptyp",        NULL,	          SPTAG(6),         1,		     0,         0,        -1 },
 };
 
 /* layout(s) */
@@ -157,6 +160,7 @@ static const Key keys[] = {
 	{MODKEY,                    XK_a,	                togglescratch,          {.ui = 3 } },
 	{MODKEY,                    XK_c,	                togglescratch,          {.ui = 4 } },
 	{MODKEY|ShiftMask,          XK_n,	                togglescratch,          {.ui = 5 } },
+	{MODKEY,                    XK_n,	                togglescratch,          {.ui = 6 } },
 	{MODKEY,                    XK_z,  	                spawn,                  {.v = boomercmd } },
     	{MODKEY,                    XK_x, 		        spawn, 		        {.v = dowcmd}},
 	{MODKEY,                    XK_y, 		        spawn, 		        {.v = ytcmd}},
@@ -173,8 +177,8 @@ static const Key keys[] = {
 	{MODKEY | ShiftMask, 	    XK_Return,                  spawn, 		        {.v = termcmd}},
 	{MODKEY,		    XK_n, 		        spawn, 		        {.v = clipcmd}},
 	{MODKEY | ShiftMask,        XK_s, 		        spawn, 		        {.v = screencmd}},
-        {MODKEY,                    XK_agrave,                  view,                   {.ui = ~0 } },
-	{MODKEY|ShiftMask,          XK_agrave,                  tag,                    {.ui = ~0 } },
+    //  {MODKEY,                    XK_agrave,                  view,                   {.ui = ~0 } },
+    //  {MODKEY|ShiftMask,          XK_agrave,                  tag,                    {.ui = ~0 } },
 	{MODKEY,                    XK_semicolon,               focusmon,               {.i = +1 } },
 	{MODKEY|ShiftMask,          XK_semicolon,               tagmon,                 {.i = +1 } },
 	{MODKEY | ControlMask,      XK_f,                       togglefullscr,          {0} },
