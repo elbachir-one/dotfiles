@@ -44,7 +44,7 @@ const char *spcmd3[] = {"st", "-n", "spncm", "-g", "120x30", "-e", "ncmpcpp", NU
 const char *spcmd4[] = {"st", "-n", "spclock", "-g", "80x20", "-e", "tty-clock", "-cC", "6", NULL };
 const char *spcmd5[] = {"st", "-n", "spcava", "-g", "120x30", "-e", "cava", NULL };
 const char *spcmd6[] = {"alpha", "-n", "spnnn", "-g", "110x28", "-e", "nnn", NULL };
-const char *spcmd7[] = {"st", "-n", "sptyp", "-g", "100x22", "-e", "typiskt", NULL };
+const char *spcmd7[] = {"st", "-n", "sptyp", "-g", "90x20", "-e", "typiskt", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -160,7 +160,7 @@ static const Key keys[] = {
 	{MODKEY,                    XK_a,	                togglescratch,          {.ui = 3 } },
 	{MODKEY,                    XK_c,	                togglescratch,          {.ui = 4 } },
 	{MODKEY|ShiftMask,          XK_n,	                togglescratch,          {.ui = 5 } },
-	{MODKEY,                    XK_n,	                togglescratch,          {.ui = 6 } },
+	{MODKEY,                    XK_t,	                togglescratch,          {.ui = 6 } },
 	{MODKEY,                    XK_z,  	                spawn,                  {.v = boomercmd } },
     	{MODKEY,                    XK_x, 		        spawn, 		        {.v = dowcmd}},
 	{MODKEY,                    XK_y, 		        spawn, 		        {.v = ytcmd}},
