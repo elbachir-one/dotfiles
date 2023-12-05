@@ -1,0 +1,140 @@
+commit 3ec7bf9dc4fbf2404cf9a21bc0b65c3b137a70c6
+Author: Nicola Ferru Aka NFVblog <ask.nfvblog@outlook.it>
+Date:   Thu Nov 30 15:12:19 2023 +0100
+
+    autostart patch
+
+diff --git a/config.def.h b/config.def.h
+index db0babc..416f5da 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -13,6 +13,12 @@ static const float urgentcolor[]           = COLOR(0xff0000ff);
+ /* To conform the xdg-protocol, set the alpha to zero to restore the old behavior */
+ static const float fullscreen_bg[]         = {0.1, 0.1, 0.1, 1.0}; /* You can also use glsl colors */
+ 
++/* Autostart */
++static const char *const autostart[] = {
++        "wbg", "/path/to/your/image", NULL,
++        NULL /* terminate */
++};
++
+ /* tagging - TAGCOUNT must be no greater than 31 */
+ #define TAGCOUNT (9)
+ 
+diff --git a/dwl.c b/dwl.c
+index ef27a1d..70c4f61 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -228,6 +228,7 @@ typedef struct {
+ 
+ /* function declarations */
+ static void applybounds(Client *c, struct wlr_box *bbox);
++static void autostartexec(void);
+ static void applyrules(Client *c);
+ static void arrange(Monitor *m);
+ static void arrangelayer(Monitor *m, struct wl_list *list,
+@@ -396,6 +397,9 @@ static xcb_atom_t netatom[NetLast];
+ /* attempt to encapsulate suck into one file */
+ #include "client.h"
+ 
++static pid_t *autostart_pids;
++static size_t autostart_len;
++
+ /* function implementations */
+ void
+ applybounds(Client *c, struct wlr_box *bbox)
+@@ -414,6 +418,27 @@ applybounds(Client *c, struct wlr_box *bbox)
+ 		c->geom.y = bbox->y;
+ }
+ 
++void
++autostartexec(void) {
++	const char *const *p;
++	size_t i = 0;
++
++	/* count entries */
++	for (p = autostart; *p; autostart_len++, p++)
++		while (*++p);
++
++	autostart_pids = calloc(autostart_len, sizeof(pid_t));
++	for (p = autostart; *p; i++, p++) {
++	        if ((autostart_pids[i] = fork()) == 0) {
++			setsid();
++			execvp(*p, (char *const *)p);
++			die("dwl: execvp %s:", *p);
++		}
++		/* skip arguments */
++		while (*++p);
++	}
++}
++
+ void
+ applyrules(Client *c)
+ {
+@@ -624,11 +649,21 @@ checkidleinhibitor(struct wlr_surface *exclude)
+ void
+ cleanup(void)
+ {
++  size_t i;
+ #ifdef XWAYLAND
+ 	wlr_xwayland_destroy(xwayland);
+ 	xwayland = NULL;
+ #endif
+ 	wl_display_destroy_clients(dpy);
++
++	/* kill child processes */
++	for (i = 0; i < autostart_len; i++) {
++		if (0 < autostart_pids[i]) {
++			kill(autostart_pids[i], SIGTERM);
++			waitpid(autostart_pids[i], NULL, 0);
++		}
++	}
++	
+ 	if (child_pid > 0) {
+ 		kill(child_pid, SIGTERM);
+ 		waitpid(child_pid, NULL, 0);
+@@ -1306,18 +1341,31 @@ void
+ handlesig(int signo)
+ {
+ 	if (signo == SIGCHLD) {
+-#ifdef XWAYLAND
+ 		siginfo_t in;
+ 		/* wlroots expects to reap the XWayland process itself, so we
+ 		 * use WNOWAIT to keep the child waitable until we know it's not
+ 		 * XWayland.
+ 		 */
+ 		while (!waitid(P_ALL, 0, &in, WEXITED|WNOHANG|WNOWAIT) && in.si_pid
+-				&& (!xwayland || in.si_pid != xwayland->server->pid))
+-			waitpid(in.si_pid, NULL, 0);
+-#else
+-		while (waitpid(-1, NULL, WNOHANG) > 0);
++			        #ifdef XWAYLAND
++			   && (!xwayland || in.si_pid != xwayland->server->pid)
+ #endif
++		       ) {
++			pid_t *p, *lim;
++			waitpid(in.si_pid, NULL, 0);
++			if (in.si_pid == child_pid)
++				child_pid = -1;
++			if (!(p = autostart_pids))
++				continue;
++			lim = &p[autostart_len];
++
++			for (; p < lim; p++) {
++				if (*p == in.si_pid) {
++					*p = -1;
++					break;
++				}
++			}
++		}
+ 	} else if (signo == SIGINT || signo == SIGTERM) {
+ 		quit(NULL);
+ 	}
+@@ -1973,6 +2021,7 @@ run(char *startup_cmd)
+ 		die("startup: backend_start");
+ 
+ 	/* Now that the socket exists and the backend is started, run the startup command */
++	autostartexec();
+ 	if (startup_cmd) {
+ 		int piperw[2];
+ 		if (pipe(piperw) < 0)

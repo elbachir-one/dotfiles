@@ -1,0 +1,26 @@
+From 396531c8e7905cb226be0a4c3cddc60726fa2794 Mon Sep 17 00:00:00 2001
+From: Dmitry Zakharchenko <dmitz@disroot.org>
+Date: Tue, 3 Jan 2023 20:01:34 +0200
+Subject: [PATCH] attachbottom: sync with 0.4
+
+---
+ dwl.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/dwl.c b/dwl.c
+index 19bb6ce34..7f940c45f 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -1511,7 +1511,11 @@ mapnotify(struct wl_listener *listener, void *data)
+ 	c->geom.height += 2 * c->bw;
+ 
+ 	/* Insert this client into client lists. */
+-	wl_list_insert(&clients, &c->link);
++	if (clients.prev)
++		// tile at the bottom
++		wl_list_insert(clients.prev, &c->link);
++	else
++		wl_list_insert(&clients, &c->link);
+ 	wl_list_insert(&fstack, &c->flink);
+ 
+ 	/* Set initial monitor, tags, floating status, and focus

@@ -1,0 +1,252 @@
+From d448938b9eb0e062f98b79138c26d7ace4b7619b Mon Sep 17 00:00:00 2001
+From: choc <97781427+youbitchoc@users.noreply.github.com>
+Date: Fri, 15 Sep 2023 10:36:21 +0800
+Subject: [PATCH] swallow patch with x support
+
+fixed to work after commit 4567979
+---
+ client.h     |  12 ++++++
+ config.def.h |   7 ++--
+ config.mk    |   4 +-
+ dwl.c        | 112 ++++++++++++++++++++++++++++++++++++++++++++++++---
+ 4 files changed, 125 insertions(+), 10 deletions(-)
+
+diff --git a/client.h b/client.h
+index cf1ed85dd..6dc643cf8 100644
+--- a/client.h
++++ b/client.h
+@@ -167,6 +167,18 @@ client_get_appid(Client *c)
+ 	return c->surface.xdg->toplevel->app_id;
+ }
+ 
++static inline int
++client_get_pid(Client *c)
++{
++	pid_t pid;
++#ifdef XWAYLAND
++	if (client_is_x11(c))
++		return c->surface.xwayland->pid;
++#endif
++	wl_client_get_credentials(c->surface.xdg->client->client, &pid, NULL, NULL);
++	return pid;
++}
++
+ static inline void
+ client_get_geometry(Client *c, struct wlr_box *geom)
+ {
+diff --git a/config.def.h b/config.def.h
+index 4e30885b7..23bdf10e5 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -20,11 +20,12 @@ static const float fullscreen_bg[]         = {0.1, 0.1, 0.1, 1.0}; /* You can al
+ static int log_level = WLR_ERROR;
+ 
+ static const Rule rules[] = {
+-	/* app_id     title       tags mask     isfloating   monitor */
++	/* app_id     title       tags mask     isfloating  isterm  noswallow  monitor */
+ 	/* examples:
+-	{ "Gimp",     NULL,       0,            1,           -1 },
++	{ "Gimp",     NULL,       0,            1,          0,      1,         -1 },
+ 	*/
+-	{ "firefox",  NULL,       1 << 8,       0,           -1 },
++	{ "firefox",  NULL,       1 << 8,       0,          0,      1,         -1 },
++	{ "foot",     NULL,       0,            0,          1,      1,         -1 },
+ };
+ 
+ /* layout(s) */
+diff --git a/config.mk b/config.mk
+index 4bc9b9d65..1277d1b1e 100644
+--- a/config.mk
++++ b/config.mk
+@@ -11,5 +11,5 @@ DATADIR = $(PREFIX)/share
+ XWAYLAND =
+ XLIBS =
+ # Uncomment to build XWayland support
+-#XWAYLAND = -DXWAYLAND
+-#XLIBS = xcb xcb-icccm
++XWAYLAND = -DXWAYLAND
++XLIBS = xcb xcb-icccm
+diff --git a/dwl.c b/dwl.c
+index a7d41b085..a526b6906 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -95,7 +95,8 @@ typedef struct {
+ } Button;
+ 
+ typedef struct Monitor Monitor;
+-typedef struct {
++typedef struct Client Client;
++struct Client {
+ 	/* Must keep these three elements in this order */
+ 	unsigned int type; /* XDGShell or X11* */
+ 	struct wlr_box geom; /* layout-relative, includes border */
+@@ -124,9 +125,11 @@ typedef struct {
+ #endif
+ 	unsigned int bw;
+ 	uint32_t tags;
+-	int isfloating, isurgent, isfullscreen;
++	int isfloating, isurgent, isfullscreen, isterm, noswallow;
+ 	uint32_t resize; /* configure serial of a pending resize */
+-} Client;
++	pid_t pid;
++	Client *swallowing, *swallowedby;
++};
+ 
+ typedef struct {
+ 	uint32_t mod;
+@@ -208,6 +211,8 @@ typedef struct {
+ 	const char *title;
+ 	uint32_t tags;
+ 	int isfloating;
++	int isterm;
++	int noswallow;
+ 	int monitor;
+ } Rule;
+ 
+@@ -318,6 +323,10 @@ static Monitor *xytomon(double x, double y);
+ static void xytonode(double x, double y, struct wlr_surface **psurface,
+ 		Client **pc, LayerSurface **pl, double *nx, double *ny);
+ static void zoom(const Arg *arg);
++static pid_t getparentprocess(pid_t p);
++static int isdescprocess(pid_t p, pid_t c);
++static Client *termforwin(Client *w);
++static void swallow(Client *c, Client *w);
+ 
+ /* variables */
+ static const char broken[] = "broken";
+@@ -456,10 +465,14 @@ applyrules(Client *c)
+ 	if (!(title = client_get_title(c)))
+ 		title = broken;
+ 
++	c->pid = client_get_pid(c);
++
+ 	for (r = rules; r < END(rules); r++) {
+ 		if ((!r->title || strstr(title, r->title))
+ 				&& (!r->id || strstr(appid, r->id))) {
+ 			c->isfloating = r->isfloating;
++			c->isterm     = r->isterm;
++			c->noswallow  = r->noswallow;
+ 			newtags |= r->tags;
+ 			i = 0;
+ 			wl_list_for_each(m, &mons, link)
+@@ -468,6 +481,20 @@ applyrules(Client *c)
+ 		}
+ 	}
+ 	wlr_scene_node_reparent(&c->scene->node, layers[c->isfloating ? LyrFloat : LyrTile]);
++	if (!c->noswallow && !client_is_float_type(c)) {
++		Client *p = termforwin(c);
++		if (p) {
++			c->swallowedby = p;
++			p->swallowing  = c;
++			wl_list_remove(&c->link);
++			wl_list_remove(&c->flink);
++			swallow(c,p);
++			wl_list_remove(&p->link);
++			wl_list_remove(&p->flink);
++			mon = p->mon;
++			newtags = p->tags;
++		}
++	}
+ 	setmon(c, mon, newtags);
+ }
+ 
+@@ -1348,6 +1375,63 @@ handlesig(int signo)
+ 	}
+ }
+ 
++pid_t
++getparentprocess(pid_t p)
++{
++	unsigned int v = 0;
++
++	FILE *f;
++	char buf[256];
++	snprintf(buf, sizeof(buf) - 1, "/proc/%u/stat", (unsigned)p);
++
++	if (!(f = fopen(buf, "r")))
++		return 0;
++
++	fscanf(f, "%*u %*s %*c %u", &v);
++	fclose(f);
++
++	return (pid_t)v;
++}
++
++int
++isdescprocess(pid_t p, pid_t c)
++{
++	while (p != c && c != 0)
++		c = getparentprocess(c);
++
++	return (int)c;
++}
++
++Client *
++termforwin(Client *w)
++{
++	Client *c;
++
++	if (!w->pid || w->isterm || w->noswallow)
++		return NULL;
++
++	wl_list_for_each(c, &fstack, flink)
++		if (c->isterm && !c->swallowing && c->pid && isdescprocess(c->pid, w->pid))
++			return c;
++
++	return NULL;
++}
++
++void
++swallow(Client *c, Client *w)
++{
++	c->bw = w->bw;
++	c->isfloating = w->isfloating;
++	c->isurgent = w->isurgent;
++	c->isfullscreen = w->isfullscreen;
++	c->tags = w->tags;
++	c->geom = w->geom;
++	wl_list_insert(&w->link, &c->link);
++	wl_list_insert(&w->flink, &c->flink);
++	wlr_scene_node_set_enabled(&w->scene->node, 0);
++	wlr_scene_node_set_enabled(&c->scene->node, 1);
++}
++
+ void
+ incnmaster(const Arg *arg)
+ {
+@@ -2472,15 +2556,33 @@ unmapnotify(struct wl_listener *listener, void *data)
+ 		grabc = NULL;
+ 	}
+ 
++	if (c->swallowedby) {
++		swallow(c->swallowedby, c);
++	}
++
+ 	if (client_is_unmanaged(c)) {
+ 		if (c == exclusive_focus)
+ 			exclusive_focus = NULL;
+ 		if (client_surface(c) == seat->keyboard_state.focused_surface)
+ 			focusclient(focustop(selmon), 1);
+ 	} else {
+-		wl_list_remove(&c->link);
++		if (!c->swallowing)
++			wl_list_remove(&c->link);
+ 		setmon(c, NULL, 0);
+-		wl_list_remove(&c->flink);
++		if (!c->swallowing)
++			wl_list_remove(&c->flink);
++	}
++
++	if (c->swallowedby) {
++		c->swallowedby->prev = c->geom;
++		setfullscreen(c->swallowedby, c->isfullscreen);
++		c->swallowedby->swallowing = NULL;
++		c->swallowedby = NULL;
++	}
++
++	if (c->swallowing) {
++		c->swallowing->swallowedby = NULL;
++		c->swallowing = NULL;
+ 	}
+ 
+ 	wl_list_remove(&c->commit.link);
