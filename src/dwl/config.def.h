@@ -8,10 +8,10 @@ static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
 static const int smartgaps                 = 0;  /* 1 means no outer gap when there is only one window */
 static const int monoclegaps               = 0;  /* 1 means outer gaps in monocle layout */
-static const unsigned int gappih           = 8; /* horiz inner gap between windows */
-static const unsigned int gappiv           = 8; /* vert inner gap between windows */
-static const unsigned int gappoh           = 8; /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov           = 8; /* vert outer gap between windows and screen edge */
+static const unsigned int gappih           = 2; /* horiz inner gap between windows */
+static const unsigned int gappiv           = 2; /* vert inner gap between windows */
+static const unsigned int gappoh           = 2; /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov           = 2; /* vert outer gap between windows and screen edge */
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
 static const int center_relative_to_monitor = 0; /* 0 means center floating relative to the window area */
 static const float bordercolor[]           = COLOR(0x444444ff);
@@ -21,8 +21,11 @@ static const float urgentcolor[]           = COLOR(0xff0000ff);
 static const float fullscreen_bg[]         = {0.1, 0.1, 0.1, 1.0}; /* You can also use glsl colors */
 
 /* Autostart */
+
 static const char *const autostart[] = {
-        "wbg", "/path/to/your/image", NULL,
+	"swaybg", "-i", "/home/sh/wall/city.jpeg", NULL,
+	"sakura", NULL,
+	"wlr-randr", "--output", "Virtual-1", "--mode", "1366x768", NULL,
         NULL /* terminate */
 };
 
@@ -36,8 +39,8 @@ static const Rule rules[] = {
 	/* app_id          title      tags mask     isfloating   isterm  noswallow    monitor */
 	/* examples:
 	*/
-	{ "firefox",       NULL,       1 << 8,          0,          0,       0,         -1 },
-	{ "alacritty",     NULL,       0,               0,          1,       1,         -1 },
+	{ "qutebrowser",       NULL,       1 << 1,          0,          0,       1,         -1 },
+	{ "sakura",            NULL,       0,               0,          1,       0,         -1 },
 };
 
 /* layout(s) */
@@ -64,7 +67,8 @@ static const struct xkb_rule_names xkb_rules = {
 	/* example:
 	.options = "ctrl:nocaps",
 	*/
-	.options = NULL,
+	.layout = "fr",
+	.options = "caps:escape",
 };
 
 static const int repeat_rate = 25;
@@ -125,8 +129,8 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", NULL };
-static const char *menucmd[] = { "bemenu-run", NULL };
+static const char *termcmd[] = { "sakura", NULL };
+static const char *menucmd[] = { "dmenu-wl_run", "-fn", "Mono", "-nb", "#080808", "-nf", "#f9f5d7", "-sb", "#202020", "-sf", "#f9f5d7", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -171,16 +175,16 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_period,     focusmon,       {.i = WLR_DIRECTION_RIGHT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_less,       tagmon,         {.i = WLR_DIRECTION_LEFT} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_greater,    tagmon,         {.i = WLR_DIRECTION_RIGHT} },
-	TAGKEYS(          XKB_KEY_1, XKB_KEY_exclam,                     0),
-	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
-	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                 2),
-	TAGKEYS(          XKB_KEY_4, XKB_KEY_dollar,                     3),
-	TAGKEYS(          XKB_KEY_5, XKB_KEY_percent,                    4),
-	TAGKEYS(          XKB_KEY_6, XKB_KEY_asciicircum,                5),
-	TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                  6),
-	TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),
-	TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          quit,           {0} },
+	TAGKEYS(          XKB_KEY_ampersand,  XKB_KEY_exclam,                     0),
+	TAGKEYS(          XKB_KEY_eacute,     XKB_KEY_at,                         1),
+	TAGKEYS(          XKB_KEY_quotedbl,   XKB_KEY_numbersign,                 2),
+	TAGKEYS(          XKB_KEY_apostrophe, XKB_KEY_dollar,                     3),
+	TAGKEYS(          XKB_KEY_parenleft,  XKB_KEY_percent,                    4),
+	TAGKEYS(          XKB_KEY_minus,      XKB_KEY_asciicircum,                5),
+	TAGKEYS(          XKB_KEY_egrave,     XKB_KEY_ampersand,                  6),
+	TAGKEYS(          XKB_KEY_underscore, XKB_KEY_asterisk,                   7),
+	TAGKEYS(          XKB_KEY_ccedilla,   XKB_KEY_parenleft,                  8),
+	{ MODKEY|WLR_MODIFIER_SHIFT,          XKB_KEY_Q,          quit,           {0} },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
