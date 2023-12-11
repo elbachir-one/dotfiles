@@ -6,12 +6,13 @@
 GRC_ALIASES=true
 [[ -s "/etc/profile.d/grc.sh" ]] && source /etc/grc.sh
 
+# Cursor shape:
 echo -e -n "\x1b[\x35 q"
 
+# Uprcase and lowercase are the same:
 bind 'set completion-ignore-case on'
 
 # Exports:
-
 export TERMINAL='sakura'
 export BROWSER='chromium'
 export EDITOR='nvim'
@@ -22,9 +23,9 @@ export GOPATH="$HOME/.local/go"
 export NNN_PLUG='f:finder;o:fzopen;p:mocq;d:diffs;v:imgview;u:imgur'
 export NNN_FIFO='/tmp/nnn.fifo'
 export IMGVIEWER='feh'
-
 #export PATH="/usr/bin:$PATH"
 
+# Prompt:
 #PS1='[\u@\h \W]\$ '
 # get current branch in git repo
 # get current branch in git repo
@@ -80,16 +81,14 @@ export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 
 alias qu="quickemu --public-dir /home/sh/Public --vm"
 
-# XBPS:
-
+# XBPS
 alias q='xbps-query -Rs'
 alias u='sudo xbps-install -Su'
 alias i='sudo xbps-install -S'
 alias c='sudo xbps-remove -o && sudo xbps-remove -O'
 alias d='sudo xbps-remove'
 
-# Other:
-
+# Other
 alias ls='lsd --color=auto'
 alias lh='lsd -hl'
 alias s='source ~/.bashrc'
@@ -111,14 +110,14 @@ alias htop='htop -t'
 alias d='diff -u'
 alias t='tty-clock -cC 5'
 alias vim='nvim'
-#alias neofetch='neofetch --ascii ascii.txt | lolcat'
 alias feh='feh -B dark'
 alias ufetch='ufetch | lolcat'
 alias cmatrix='cmatrix | lolcat'
 alias grep='ugrep'
+#alias neofetch='neofetch --ascii ascii.txt | lolcat'
 #alias insta='instaloader --login one_to_mini :saved --no-metadata-json --no-video-thumbnail'
-# Git Stuff:
 
+# Git Stuff
 alias gt='git clone --depth=1'
 alias gs='git status'
 alias gm='git commit -m'
@@ -127,28 +126,27 @@ alias gr='git restore'
 alias ga='git add .'
 alias gp='git push'
 
-# Download:
-
+# Download
 alias yl='yt-dlp -F'
 alias y='yt-dlp'
 alias ya='yt-dlp -f 140'
 alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --merge-output-format mp4'
 alias yt='yt-dlp yt-dlp --skip-download --write-thumbnail'
 
-# For recording.
-#
+# For recording
 alias ff="ffmpeg -framerate 16 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
 alias rec="ffmpeg -framerate 24 -f x11grab -video_size 1920x1080 -i :0.0+1366,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
 alias f="ffmpeg -framerate 24 -f x11grab -video_size 1366x768 -i :0.0+0,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
 alias cam="ffplay -f v4l2 -framerate 29 -video_size 1280x720 /dev/video0"
-#
-#
+
+# FZF:
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-#figlet -c -f ANSI_Shadow.flf "Void/runit" -t | lolcat
 export FZF_DEFAULT_OPTS="
 	--color=fg:#908caa,bg:#191724,hl:#ebbcba
 	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
 	--color=border:#403d52,header:#31748f,gutter:#191724
 	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
+#figlet -c -f ANSI_Shadow.flf "Void/runit" -t | lolcat
