@@ -40,26 +40,25 @@ cmake bash-completion noto-fonts-emoji
 doas pkg install nerd-fonts feh xorg mpv neovim vim git picom tmux chromium \
 yt-dlp terminus-font bash noto-fonts-emoji
 ```
+
 ### Note 1
-The main thing about my dotfiles is the use of Suckless utils.
-Keybinding used in my build of dwm
 
-| MODKEY -> ALT |
-| Open ST terminal -> MODKEY + Shift + Return |
-| Launch Dmenu -> MODKEY + p |
-| Tiling to Floating -> MODKEY + Space |
-| Restart or Quit DWM -> MODKEY + q |
-| Close any Window -> MODKEY + Shift + c |
-| Scratchpad -> MODKEY + s |
+The main focus of my dotfiles is the use of Suckless utilities.
+Keybindings used in my build of dwm:
+MODKEY=ALT
 
-### Note
+- Open ST terminal: MODKEY + Shift + Return
+- Launch Dmenu: MODKEY + p
+- Tiling to Floating: MODKEY + Space
+- Restart or Quit DWM: MODKEY + q
+- Close any Window: MODKEY + Shift + c
+- Scratchpad: MODKEY + s
 
-The src directory contains some wayland stuff, like dwl or dmenu for wayland.
-If you are looking to use my build of DWL,
-you first need to see what version of Wlroots is available for your system.
+### Note 2
+
+The src directory contains some Wayland stuff, like dwl or dmenu for Wayland.
+If you want to use my build of DWL, first check the version of Wlroots available for your system.
 This build is specific to Wlroots. 17
-
-Dwl has some patches added to it:
 
 - always center
 - attachbottom
@@ -68,6 +67,8 @@ Dwl has some patches added to it:
 - pertag
 - swallow
 - vanity gaps
+
+![Void DWL](assets/dwl.jpg)
 
 ```bash
 cd dwl/
@@ -85,7 +86,10 @@ ninja -C build
 sudo ninja -C build install
 ```
 
-dwl-bar does have some patches added to it like ipc and hide vacant tags.
+dwl-bar does have some patches added to it like.
+
+- ipc
+- hide vacant tags
 
 ```bash
 cd dwl-bar/
