@@ -142,6 +142,7 @@ alias cam="ffplay -f v4l2 -framerate 29 -video_size 1280x720 /dev/video0"
 # FZF:
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 export FZF_DEFAULT_OPTS="
 	--color=fg:#908caa,bg:#191724,hl:#ebbcba
 	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba

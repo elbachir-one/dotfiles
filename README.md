@@ -41,7 +41,7 @@ doas pkg install nerd-fonts feh xorg mpv neovim vim git picom tmux chromium \
 yt-dlp terminus-font bash noto-fonts-emoji
 ```
 
-### Note 1
+### DWM
 
 The main focus of my dotfiles is the use of Suckless utilities.
 Keybindings used in my build of dwm:
@@ -54,11 +54,12 @@ MODKEY=ALT
 - Close any Window: MODKEY + Shift + c
 - Scratchpad: MODKEY + s
 
-### Note 2
+### DWL
 
 The src directory contains some Wayland stuff, like dwl or dmenu for Wayland.
-If you want to use my build of DWL, first check the version of Wlroots available for your system.
-This build is specific to Wlroots. 17
+If you want to use my build of DWL,
+first check the version of Wlroots available for your system.
+This build is specific to Wlroots 17.
 
 - always center
 - attachbottom

@@ -2,6 +2,7 @@
 # M = ALT 4 = Mod4 S = Shift C = Control
 
 unbind-key all
+sticky yes
 
 # Theme
 
@@ -35,6 +36,8 @@ bind-key M-p          "dmenu_run"
 bind-key M-w          chromium
 bind-key M-r          "st -g 110x34 -e ranger"
 bind-key M-n          "clipmenu"
+bind-key MS-s         scrot
+bind-key MS-f         "flameshot gui"
 
 
 bind-mouse M-1        window-move
