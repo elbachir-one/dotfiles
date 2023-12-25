@@ -23,6 +23,8 @@ chmod +x install.sh
 ./install.sh
 ```
 
+Note: The install script only work on Void Linux.
+
 ### Option 2
 
 ```bash
