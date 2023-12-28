@@ -5,14 +5,9 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char *fonts[] = {"TerminessTTF Nerd Font:style=Medium:pixelsize=18",
-    "Consolas Nerd Font:style=Regular:pixelsize=18",
-    "JetBrains Mono:style=Regular:pixelsize=18",
-    "MesloLGS NF:style=Regular:pixelsize=18" };
+static char *fonts[] = {"TerminessTTF Nerd Font:style=Medium:pixelsize=18", "Consolas Nerd Font:style=Regular:pixelsize=18", "JetBrains Mono:style=Regular:pixelsize=18", "MesloLGS NF:style=Regular:pixelsize=18" };
 
-static char *font2[] = {"feather:pixelsize=18",
-    "Material Design Icons Desktop:style=Regular:pixelsize=18",
-    "JoyPixels:pixelsize=18:antialias=true:autohint=true" };
+static char *font2[] = {"feather:pixelsize=18", "Material Design Icons Desktop:style=Regular:pixelsize=18", "JoyPixels:pixelsize=18:antialias=true:autohint=true" };
 
 static int borderpx = 0;
 static int fonts_current = 0;
@@ -116,7 +111,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 4;
 
 /* bg opacity */
-float alpha = 0.8;
+float alpha = 0.9;
 
 // Change the color scheme to what ever you like.
 
@@ -125,9 +120,9 @@ float alpha = 0.8;
 //#include "colors/dracula.h"
 //#include "colors/dusk.h"
 //#include "colors/brigh_blue.h"
-//#include "colors/sunset.h"
+#include "colors/sunset.h"
 //#include "colors/half_light.h"
-#include "colors/solarized_dark.h"
+//#include "colors/solarized_dark.h"
 //#include "colors/material_dark.h"
 //#include "colors/paper_dark.h"
 //#include "colors/synthwave_alpha.h"
@@ -160,43 +155,6 @@ static unsigned int mousebg = 0;
  * doesn't match the ones requested.
  */
 static unsigned int defaultattr = 11;
-
-/*
- * Xresources preferences to load at startup
- */
-ResourcePref resources[] = {
-    { "font",         STRING,  &fonts[0] },
-    { "fontalt0",     STRING,  &font2[0] },
-    { "color0",       STRING,  &colorname[0] },
-    { "color1",       STRING,  &colorname[1] },
-    { "color2",       STRING,  &colorname[2] },
-    { "color3",       STRING,  &colorname[3] },
-    { "color4",       STRING,  &colorname[4] },
-    { "color5",       STRING,  &colorname[5] },
-    { "color6",       STRING,  &colorname[6] },
-    { "color7",       STRING,  &colorname[7] },
-    { "color8",       STRING,  &colorname[8] },
-    { "color9",       STRING,  &colorname[9] },
-    { "color10",      STRING,  &colorname[10] },
-    { "color11",      STRING,  &colorname[11] },
-    { "color12",      STRING,  &colorname[12] },
-    { "color13",      STRING,  &colorname[13] },
-    { "color14",      STRING,  &colorname[14] },
-    { "color15",      STRING,  &colorname[15] },
-    { "background",   STRING,  &colorname[258] },
-    { "foreground",   STRING,  &colorname[259] },
-    { "cursorColor",  STRING,  &colorname[256] },
-    { "termname",     STRING,  &termname },
-    { "shell",        STRING,  &shell },
-    { "blinktimeout", INTEGER, &blinktimeout },
-    { "bellvolume",   INTEGER, &bellvolume },
-    { "tabspaces",    INTEGER, &tabspaces },
-    { "borderpx",     INTEGER, &borderpx },
-    { "cwscale",      FLOAT,   &cwscale },
-    { "chscale",      FLOAT,   &chscale },
-    { "alpha",        FLOAT,   &alpha },
-    { "ximspot_update_interval", INTEGER, &ximspot_update_interval },
-};
 
 /*
  * Internal mouse shortcuts.

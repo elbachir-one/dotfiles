@@ -33,7 +33,7 @@ alpha: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f alpha $(OBJ) alpha-$(VERSION).tar.gz *.o *.orig *.rej
+	rm -f alpha $(OBJ) alpha-$(VERSION).tar.gz *.o *.orig *.rej config.h
 
 dist: clean
 	mkdir -p alpha-$(VERSION)
