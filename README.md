@@ -48,30 +48,29 @@ yt-dlp terminus-font bash noto-fonts-emoji
 The main focus of my dotfiles is the use of Suckless utilities.
 
 ![DWM](assets/dwm.jpg)
-![DWM](assets/dwm.webm)
 
 **Patches included:**
 
-- [alpha](https://dwm.suckless.org/patches/alpha/)
-- [always center](https://dwm.suckless.org/patches/alwayscenter/)
-- [attach bottom](https://dwm.suckless.org/patches/attachbottom/)
-- [azerty](https://dwm.suckless.org/patches/azerty/) (Specific to my keyboard layout)
-- [bar height](https://dwm.suckless.org/patches/bar_height/)
-- [bar padding](https://dwm.suckless.org/patches/barpadding/)
-- [bidi](https://dwm.suckless.org/patches/bidi/)
-- [cool auto start](https://dwm.suckless.org/patches/cool_autostart/)
-- [cursor wrap](https://dwm.suckless.org/patches/cursorwarp/)
-- [floating border colors](https://dwm.suckless.org/patches/float_border_color/)
-- [full screen](https://dwm.suckless.org/patches/fullscreen/)
-- [functional gaps](https://dwm.suckless.org/patches/functionalgaps/)
-- [hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
-- [preserv on restart](https://dwm.suckless.org/patches/preserveonrestart/)
+- [Alpha](https://dwm.suckless.org/patches/alpha/)
+- [Always center](https://dwm.suckless.org/patches/alwayscenter/)
+- [Attach bottom](https://dwm.suckless.org/patches/attachbottom/)
+- [Azerty](https://dwm.suckless.org/patches/azerty/) (Specific to my keyboard layout)
+- [Bar height](https://dwm.suckless.org/patches/bar_height/)
+- [Bar padding](https://dwm.suckless.org/patches/barpadding/)
+- [Bidi](https://dwm.suckless.org/patches/bidi/)
+- [Cool auto start](https://dwm.suckless.org/patches/cool_autostart/)
+- [Cursor wrap](https://dwm.suckless.org/patches/cursorwarp/)
+- [Floating border colors](https://dwm.suckless.org/patches/float_border_color/)
+- [Full screen](https://dwm.suckless.org/patches/fullscreen/)
+- [Functional gaps](https://dwm.suckless.org/patches/functionalgaps/)
+- [Hide vacant tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
+- [Preserv on restart](https://dwm.suckless.org/patches/preserveonrestart/)
 - [Scratch pads](https://dwm.suckless.org/patches/scratchpads/)
-- [swallow](https://dwm.suckless.org/patches/swallow/)
-- [true centered title](https://dwm.suckless.org/patches/truecenteredtitle/)
+- [Swallow](https://dwm.suckless.org/patches/swallow/)
+- [True centered title](https://dwm.suckless.org/patches/truecenteredtitle/)
 - [Window map](https://dwm.suckless.org/patches/windowmap/)
 
-Keybindings used in my build of DWM:
+**Keybindings used in my build of DWM:**
 
 MODKEY=ALT
 
@@ -92,6 +91,19 @@ sudo make clean install
 
 ![ST](assets/st.jpg)
 
+**Patches included:**
+
+- [Alpha](https://st.suckless.org/patches/alpha/)
+- [Any size](https://st.suckless.org/patches/anysize/)
+- [Box draw](https://st.suckless.org/patches/boxdraw/)
+- [Clipboard](https://st.suckless.org/patches/clipboard/)
+- [Copy URL](https://st.suckless.org/patches/copyurl/)
+- [Desktop entry](https://st.suckless.org/patches/desktopentry/)
+- [Font 2](https://st.suckless.org/patches/font2/)
+- [Glyph](https://st.suckless.org/patches/glyph_wide_support/)
+- [Ligatures box draw](https://st.suckless.org/patches/ligatures/)
+- [Scroll + Mouse + Inc](https://st.suckless.org/patches/scrollback/)
+
 ```bash
 cd ~/dotfiles/suckless/st/
 make
@@ -100,7 +112,17 @@ sudo make clean install
 
 ### Dmenu
 
-![Dmenu](assets/Dmenu.jpg)
+![Dmenu](assets/dmenu.jpg)
+
+**Patches included:**
+
+- [Alpha](https://tools.suckless.org/dmenu/patches/alpha/)
+- [Bidi](https://tools.suckless.org/dmenu/patches/bidi/)
+- [Border](https://tools.suckless.org/dmenu/patches/border/)
+- [Case Insensitive](https://tools.suckless.org/dmenu/patches/case-insensitive/)
+- [Center](https://tools.suckless.org/dmenu/patches/center/)
+- [Highlight](https://tools.suckless.org/dmenu/patches/highlight/)
+- [High priority](https://tools.suckless.org/dmenu/patches/highpriority/)
 
 ```bash
 cd ~/dotfiles/suckless/dmenu/
@@ -110,10 +132,14 @@ sudo make clean install
 
 ### DWL
 
+![Void DWL](assets/dwl.jpg)
+
 The src directory contains some Wayland stuff, like dwl or dmenu for Wayland.
 If you want to use my build of DWL,
 first check the version of Wlroots available for your system.
 This build is specific to Wlroots 17.
+
+**Patches included:**
 
 - always center
 - attachbottom
@@ -123,8 +149,6 @@ This build is specific to Wlroots 17.
 - swallow
 - vanity gaps
 
-![Void DWL](assets/dwl.jpg)
-
 ```bash
 cd ~/dotfiles/src/dwl/
 make
@@ -133,7 +157,7 @@ sudo make clean install
 
 Note: Keybindings are the same as my DWM.
 
-As for Dmenu-wayland
+### Dmenu-wayland
 
 ```bash
 cd ~/dotfiles/src/dmenu-wayland/
@@ -143,7 +167,9 @@ ninja -C build
 sudo ninja -C build install
 ```
 
-dwl-bar does have some patches added to it like.
+### Dwl-bar
+
+**Patches included:**
 
 - ipc
 - hide vacant tags
