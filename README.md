@@ -149,6 +149,20 @@ This build is specific to Wlroots 17.
 - swallow
 - vanity gaps
 
+Install all dependences:
+
+#### Void
+
+```bash
+sudo xbps-install wlroots wlroots-devel wayland-protocols wbg wlr-randr xdg-desktop-portal-wlr
+```
+
+#### Artix / Arch
+
+```bash
+sudo pacman -S wlroots wayland-protocols xdg-desktop-portal-wlr
+```
+
 ```bash
 cd ~/dotfiles/src/dwl/
 make
@@ -158,6 +172,8 @@ sudo make clean install
 Note: Keybindings are the same as my DWM.
 
 ### Dmenu-wayland
+
+Install dependences: meson, ninja.
 
 ```bash
 cd ~/dotfiles/src/dmenu-wayland/
@@ -179,3 +195,5 @@ cd ~/dotfiles/src/dwl-bar/
 make
 sudo make clean install
 ```
+
+Thank You
