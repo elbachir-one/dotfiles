@@ -37,7 +37,7 @@ config.h:
 	${CC} -o $@ $< ${TABBED_LDFLAGS}
 
 clean:
-	rm -f ${BIN} ${OBJ} "${NAME}-${VERSION}.tar.gz"
+	rm -f ${BIN} ${OBJ} "${NAME}-${VERSION}.tar.gz" config.h
 
 dist: clean
 	mkdir -p "${NAME}-${VERSION}"
