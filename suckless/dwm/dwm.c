@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <time.h>
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
 #include <X11/Xatom.h>
@@ -18,6 +19,8 @@
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
+#include <X11/extensions/Xfixes.h>
+#include <X11/extensions/XInput2.h>
 #include <X11/Xft/Xft.h>
 #include <X11/Xlib-xcb.h>
 #include <xcb/res.h>
@@ -33,6 +36,8 @@
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
 #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
                                * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
+#define INTERSECTC(X,Y,W,H,Z)   (MAX(0, MIN((X)+(W),(Z)->x+(Z)->w) - MAX((X),(Z)->x)) \
+                               * MAX(0, MIN((Y)+(H),(Z)->y+(Z)->h) - MAX((Y),(Z)->y)))
 #define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
 #define LENGTH(X)               (sizeof X / sizeof X[0])
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
@@ -168,12 +173,14 @@ static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
+static void genericevent(XEvent *e);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
+static void hidecursor(const Arg *arg);
 static void incnmaster(const Arg *arg);
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
@@ -184,9 +191,11 @@ static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
+static unsigned long long now(void);
 static void pop(Client *c);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
+static Client *recttoclient(int x, int y, int w, int h, int include_floating);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizeclient(Client *c, int x, int y, int w, int h);
@@ -205,6 +214,7 @@ static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
 static void seturgent(Client *c, int urg);
+static void showcursor(const Arg *arg);
 static void showhide(Client *c);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
@@ -259,6 +269,14 @@ static int vp;               /* vertical padding for bar */
 static int sp;               /* side padding for bar */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
 static unsigned int numlockmask = 0;
+static int cursor_hidden = 0;
+/* mouse_x and mouse_y are used to store the actual co-ordinates of the mouse cursor when
+ * hidden. These can be manipulated freely, e.g. when using the warp patch, to set a new
+ * cursor position for when the cursor is to be revealed again. */
+static int mouse_x = 0;
+static int mouse_y = 0;
+static int xi_opcode;
+static unsigned long long last_button_press = 0;
 static void (*handler[LASTEvent]) (XEvent *) = {
 	[ButtonPress] = buttonpress,
 	[ClientMessage] = clientmessage,
@@ -267,6 +285,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[DestroyNotify] = destroynotify,
 	[EnterNotify] = enternotify,
 	[Expose] = expose,
+	[GenericEvent] = genericevent,
 	[FocusIn] = focusin,
 	[KeyPress] = keypress,
 	[MappingNotify] = mappingnotify,
@@ -558,7 +577,20 @@ buttonpress(XEvent *e)
 		selmon = m;
 		focus(NULL);
 	}
-	if (ev->window == selmon->barwin) {
+
+	c = wintoclient(ev->window);
+
+	if (!c && cursor_hidden) {
+		c = recttoclient(mouse_x, mouse_y, 1, 1, 1);
+		showcursor(NULL);
+	}
+
+	if (c) {
+		focus(c);
+		restack(selmon);
+		XAllowEvents(dpy, ReplayPointer, CurrentTime);
+		click = ClkClientWin;
+	} else if (ev->window == selmon->barwin) {
 		i = x = 0;
 		unsigned int occ = 0;
 		for(c = m->clients; c; c=c->next)
@@ -577,16 +609,14 @@ buttonpress(XEvent *e)
 			click = ClkStatusText;
 		else
 			click = ClkWinTitle;
-	} else if ((c = wintoclient(ev->window))) {
-		focus(c);
-		restack(selmon);
-		XAllowEvents(dpy, ReplayPointer, CurrentTime);
-		click = ClkClientWin;
 	}
+
 	for (i = 0; i < LENGTH(buttons); i++)
 		if (click == buttons[i].click && buttons[i].func && buttons[i].button == ev->button
 		&& CLEANMASK(buttons[i].mask) == CLEANMASK(ev->state))
 			buttons[i].func(click == ClkTagBar && buttons[i].arg.i == 0 ? &arg : &buttons[i].arg);
+
+	last_button_press = now();
 }
 
 void
@@ -920,6 +950,9 @@ enternotify(XEvent *e)
 	Monitor *m;
 	XCrossingEvent *ev = &e->xcrossing;
 
+	if (cursor_hidden)
+		return;
+
 	if ((ev->mode != NotifyNormal || ev->detail == NotifyInferior) && ev->window != root)
 		return;
 	c = wintoclient(ev->window);
@@ -1028,6 +1061,36 @@ focusstack(const Arg *arg)
 	}
 }
 
+void
+genericevent(XEvent *e)
+{
+	if (e->xcookie.extension != xi_opcode)
+		return;
+
+	if (!XGetEventData(dpy, &e->xcookie))
+		return;
+
+	switch (e->xcookie.evtype) {
+	case XI_RawMotion:
+		if (cursor_hidden)
+			showcursor(NULL);
+		break;
+	case XI_RawTouchBegin:
+	case XI_RawTouchEnd:
+	case XI_RawTouchUpdate:
+		if (!cursor_hidden)
+			hidecursor(NULL);
+		break;
+	case XI_RawKeyRelease:
+		if (now() - last_button_press > 2000 && !cursor_hidden) {
+			hidecursor(NULL);
+		}
+		break;
+	}
+
+	XFreeEventData(dpy, &e->xcookie);
+}
+
 Atom
 getatomprop(Client *c, Atom prop)
 {
@@ -1050,6 +1113,12 @@ getrootptr(int *x, int *y)
 	int di;
 	unsigned int dui;
 	Window dummy;
+
+	if (cursor_hidden) {
+		*x = mouse_x;
+		*y = mouse_y;
+		return 1;
+	}
 
 	return XQueryPointer(dpy, root, &dummy, &dummy, x, y, &di, &di, &dui);
 }
@@ -1141,6 +1210,20 @@ grabkeys(void)
 							 GrabModeAsync, GrabModeAsync);
 		XFree(syms);
 	}
+}
+
+void
+hidecursor(const Arg *arg)
+{
+	if (cursor_hidden)
+		return;
+
+	XFixesHideCursor(dpy, root);
+	if (getrootptr(&mouse_x, &mouse_y)) {
+		XWarpPointer(dpy, None, root, 0, 0, 0, 0, selmon->mx + selmon->mw, selmon->my);
+	}
+
+	cursor_hidden = 1;
 }
 
 void
@@ -1408,6 +1491,13 @@ nexttiled(Client *c)
 	return c;
 }
 
+unsigned long long
+now(void) {
+	struct timespec currentTime;
+	clock_gettime(CLOCK_REALTIME, &currentTime);
+	return currentTime.tv_sec * 1000LL + currentTime.tv_nsec / 1000000LL;
+}
+
 void
 pop(Client *c)
 {
@@ -1468,6 +1558,23 @@ quit(const Arg *arg)
 	}
 
 	running = 0;
+}
+
+Client *
+recttoclient(int x, int y, int w, int h, int include_floating)
+{
+	Client *c, *r = NULL;
+	int a, area = 1;
+
+	for (c = selmon->stack; c; c = c->snext) {
+		if (!ISVISIBLE(c) || (c->isfloating && !include_floating))
+			continue;
+		if ((a = INTERSECTC(x, y, w, h, c)) >= area) {
+			area = a;
+			r = c;
+		}
+	}
+	return r;
 }
 
 Monitor *
@@ -1845,6 +1952,25 @@ setup(void)
 		|LeaveWindowMask|StructureNotifyMask|PropertyChangeMask;
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
+
+	if (!XQueryExtension(dpy, "XInputExtension", &xi_opcode, &i, &i)) {
+		fprintf(stderr, "Warning: XInput is not available.");
+	}
+	/* Tell XInput to send us all RawMotion events. */
+	unsigned char mask_bytes[XIMaskLen(XI_LASTEVENT)];
+	memset(mask_bytes, 0, sizeof(mask_bytes));
+	XISetMask(mask_bytes, XI_RawMotion);
+	XISetMask(mask_bytes, XI_RawKeyRelease);
+	XISetMask(mask_bytes, XI_RawTouchBegin);
+	XISetMask(mask_bytes, XI_RawTouchEnd);
+	XISetMask(mask_bytes, XI_RawTouchUpdate);
+
+	XIEventMask mask;
+	mask.deviceid = XIAllMasterDevices;
+	mask.mask_len = sizeof(mask_bytes);
+	mask.mask = mask_bytes;
+	XISelectEvents(dpy, root, &mask, 1);
+
 	grabkeys();
 	focus(NULL);
 }
@@ -1860,6 +1986,18 @@ seturgent(Client *c, int urg)
 	wmh->flags = urg ? (wmh->flags | XUrgencyHint) : (wmh->flags & ~XUrgencyHint);
 	XSetWMHints(dpy, c->win, wmh);
 	XFree(wmh);
+}
+
+void
+showcursor(const Arg *arg)
+{
+	if (!cursor_hidden)
+		return;
+
+	XWarpPointer(dpy, None, root, 0, 0, 0, 0, mouse_x, mouse_y);
+	XFixesShowCursor(dpy, root);
+
+	cursor_hidden = 0;
 }
 
 void
