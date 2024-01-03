@@ -1,0 +1,49 @@
+From 215ec30d6b5fe3319f88f1c9d16a37b6e14e5a53 Mon Sep 17 00:00:00 2001
+From: Bakkeby <bakkeby@gmail.com>
+Date: Mon, 19 Dec 2022 10:20:47 +0100
+Subject: [PATCH] dynamic cursor color: cursor color taken from current
+ character
+
+---
+ x.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/x.c b/x.c
+index 2a3bd38..21aadce 100644
+--- a/x.c
++++ b/x.c
+@@ -1520,6 +1520,7 @@ void
+ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
+ {
+ 	Color drawcol;
++	XRenderColor colbg;
+
+ 	/* remove the old cursor */
+ 	if (selected(ox, oy))
+@@ -1548,11 +1549,21 @@ xdrawcursor(int cx, int cy, Glyph g, int ox, int oy, Glyph og)
+ 		if (selected(cx, cy)) {
+ 			g.fg = defaultfg;
+ 			g.bg = defaultrcs;
++		} else if (!(og.mode & ATTR_REVERSE)) {
++			unsigned long col = g.bg;
++			g.bg = g.fg;
++			g.fg = col;
++		}
++
++		if (IS_TRUECOL(g.bg)) {
++			colbg.alpha = 0xffff;
++			colbg.red = TRUERED(g.bg);
++			colbg.green = TRUEGREEN(g.bg);
++			colbg.blue = TRUEBLUE(g.bg);
++			XftColorAllocValue(xw.dpy, xw.vis, xw.cmap, &colbg, &drawcol);
+ 		} else {
+-			g.fg = defaultbg;
+-			g.bg = defaultcs;
++			drawcol = dc.col[g.bg];
+ 		}
+-		drawcol = dc.col[g.bg];
+ 	}
+
+ 	/* draw the new one */
+--
+2.38.1
