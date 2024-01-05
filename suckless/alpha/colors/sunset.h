@@ -2,22 +2,22 @@
 
 static const char *colorname[] = {
 
-    "#000000", /* black   */
-    "#0f110b", /* red     */
-    "#21241b", /* green   */
-    "#383e30", /* yellow  */
-    "#565f4a", /* blue    */
-    "#7b866a", /* magenta */
-    "#a5b490", /* cyan    */
-    "#d6e9bb", /* white   */
-    "#c8a0ef", /* black   */
-    "#c697f2", /* red     */
-    "#2fb0d7", /* green   */
-    "#d39758", /* yellow  */
-    "#c990fc", /* blue    */
-    "#f7c4d7", /* magenta */
-    "#fba5c8", /* cyan    */
-    "#e0931e", /* white   */
+    "#000000",
+    "#ffffff",
+    "#c990fc",
+    "#383e30",
+    "#565f4a",
+    "#7b866a",
+    "#a5b490",
+    "#d6e9bb",
+    "#c8a0ef",
+    "#c697f2",
+    "#2fb0d7",
+    "#d39758",
+    "#c990fc",
+    "#f7c4d7",
+    "#fba5c8",
+    "#e0931e",
     [255] = 0,
 
     "#add8e6", /* 256 -> cursor */
