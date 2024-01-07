@@ -11,7 +11,7 @@ static const int topbar                = 1;        /* 0 means bottom bar */
 static const int user_bh               = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int vertpad               = 2;       /* vertical padding of bar */
 static const int sidepad               = 4;       /* horizontal padding of bar */
-static const char *fonts[]             = { "terminus:style=Bold:size=14" };
+static const char *fonts[]             = { "TerminessTTF Nerd Font:style=Bold:pixelsize=18:antialias=true:autohint=true", "JoyPixels:style=Bold:pixelsize=16:antialias=true:autohint=true" };
 static const char dmenufont[]          = "monospace:size=10";
 static const char col_gray1[]          = "#000000";
 static const char col_gray2[]          = "#444444";
@@ -58,7 +58,7 @@ static Sp scratchpads[] = {
 
 static const char *const autostart[] = {
 	"st", NULL,
-	"~/.fehbg", NULL,
+	"$HOME/.fehbg", NULL,
 	"picom", NULL,
 	"slstatus", NULL,
 	"mpd", NULL,
@@ -69,7 +69,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = {"", "", "", "", "", "", "󰧔", "", ""};
+static const char *tags[] = {"", "", "", " ", "", "󰇧", "", "󰣠", ""};
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -110,9 +110,9 @@ static const int lockfullscreen = 1;    /* 1 will force focus on the fullscreen 
 
 static const Layout layouts[]   = {
 	/* symbol     arrange function */
-	{ "|󱃢|",      tile },    /* first entry is default */
-	{ "|󰉧|",      NULL },    /* no layout function means floating behavior */
-	{ "|󰨇|",      monocle },
+	{ " |󱃢 |",      tile },    /* first entry is default */
+	{ " |󰉧 |",      NULL },    /* no layout function means floating behavior */
+	{ " |󰨇 |",      monocle },
 };
 
 /* key definitions */
