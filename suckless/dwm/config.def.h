@@ -58,13 +58,13 @@ static Sp scratchpads[] = {
 
 static const char *const autostart[] = {
 	"st", NULL,
-	"sf", NULL, // this is a personal bash script
 	"picom", NULL,
 	"slstatus", NULL,
 	"mpd", NULL,
 	"dunst", NULL,
 	"clipmenud", NULL,
 	"xrdb", ".Xresources", NULL,
+	"feh", "--bg-fill", "/home/sh/wall/city.jpg", NULL,
 	NULL /* terminate */
 };
 
