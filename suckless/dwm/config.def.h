@@ -58,7 +58,7 @@ static Sp scratchpads[] = {
 
 static const char *const autostart[] = {
 	"st", NULL,
-	"$HOME/.fehbg", NULL,
+	"sf", NULL, // this is a personal bash script
 	"picom", NULL,
 	"slstatus", NULL,
 	"mpd", NULL,
@@ -69,7 +69,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = {"", "", "", " ", "", "󰇧", "", "󰣠", ""};
+static const char *tags[] = {"", "", " ", " ", "", "󰇧 ", " ", "󰣠 ", ""};
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class

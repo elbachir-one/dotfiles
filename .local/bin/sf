@@ -1,0 +1,2 @@
+#!/bin/sh
+$HOME/.screenlayout/d.sh && $HOME/.fehbg
