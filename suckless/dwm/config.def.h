@@ -1,5 +1,4 @@
 /* See LICENSE file for copyright and license details. */
-
 /* appearance */
 static const unsigned int borderpx     = 0;        /* border pixel of windows */
 static const int startwithgaps[]       = { 1 };	/* 1 means gaps are used by default, this can be customized for each tag */
@@ -28,9 +27,9 @@ static const char *colors[][4]         = {
 	[SchemeSel]  = { col_gray4, col_cyan1, col_cyan1, col_cyan2 },
 };
 static const unsigned int alphas[][3]  = {
-    /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-    [SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+        /*               fg      bg        border*/
+        [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
+        [SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 typedef struct {
@@ -77,7 +76,7 @@ static const Rule rules[] = {
 	 */
     /* class              instance          title                 tags mask       isfloating     isterminal   noswallow    monitor */
 
-    {"discord",             NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
+    {"discord",             NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
     {"Surf", 	            NULL,           NULL, 	          1 << 3, 	    False, 	     0,          0,       -1},
     {"firefox",             NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
     {"obs",                 NULL,           NULL, 	          1 << 7, 	    False, 	     0,         -1,       -1},
