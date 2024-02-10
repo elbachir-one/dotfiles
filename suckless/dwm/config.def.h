@@ -133,7 +133,7 @@ static const char *termcmd[]        = { "st", NULL };
 static const char *clipcmd[]        = { "clipmenu", NULL };
 static const char *rancmd[]         = { "st", "-e", "ranger", NULL };
 static const char *lockcmd[]        = { "slock", NULL };
-static const char *screcmd[]        = { "scrot", "/home/sh/Images/ScreenShots/shot-%Y-%m-%d-%H-%M-%S.jpg", NULL };
+//static const char *screcmd[]        = { "scrot", "/home/sh/Images/ScreenShots/shot-%Y-%m-%d-%H-%M-%S.jpg", NULL };
 static const char *virtcmd[]        = { "virt-manager", NULL };
 static const char *chrocmd[]        = { "chromium", NULL };
 static const char *boatcmd[]        = { "st", "-e", "newsboat", NULL };
@@ -169,7 +169,6 @@ static const Key keys[] = {
 	{MODKEY | ShiftMask,        XK_f, 		        spawn, 		        {.v = flamcmd}},
 	{MODKEY | ShiftMask,        XK_p, 		        spawn, 		        {.v = boatcmd}},
 	{MODKEY | ShiftMask,        XK_l, 		        spawn, 		        {.v = lockcmd}},
-	{MODKEY | ControlMask,      XK_s, 		        spawn, 		        {.v = screcmd}},
 	{MODKEY, 	            XK_w, 		        spawn, 		        {.v = chrocmd}},
 	{MODKEY,   	            XK_v, 		        spawn, 		        {.v = virtcmd}},
 	{MODKEY, 	            XK_r, 		        spawn, 		        {.v = rancmd}},
@@ -181,8 +180,9 @@ static const Key keys[] = {
     //  {MODKEY|ShiftMask,          XK_agrave,                  tag,                    {.ui = ~0 } },
 	{MODKEY,                    XK_semicolon,               focusmon,               {.i = +1 } },
 	{MODKEY|ShiftMask,          XK_semicolon,               tagmon,                 {.i = +1 } },
-	{MODKEY | ControlMask,      XK_f,                       togglefullscr,          {0} },
+	{MODKEY | ControlMask,      XK_f,                       togglefullscr,          {0}},
 	{MODKEY,		    XK_b, 		        togglebar, 	        {0}},
+	{MODKEY | ControlMask,      XK_s, 		        togglesticky, 		{0}},
 	{MODKEY,		    XK_k, 		        focusstack, 	        {.i = +1}},
 	{MODKEY,		    XK_l, 		        focusstack,             {.i = -1}},
 	{MODKEY,		    XK_i, 		        incnmaster, 	        {.i = +1}},
