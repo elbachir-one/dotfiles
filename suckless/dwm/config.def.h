@@ -150,6 +150,7 @@ static const char *searchcmd[]      = { "search", NULL };
 static const char *dowcmd[]         = { "down", NULL };
 static const char *boomercmd[]      = { "boomer", NULL };
 static const char *screencmd[]      = { "screenshot", NULL };
+static const char *reccmd[]         = { "recording", NULL };
 static const Key keys[] = {
 
     /* modifier                     key                         function                 argument */
@@ -176,6 +177,9 @@ static const Key keys[] = {
 	{MODKEY | ShiftMask, 	    XK_Return,                  spawn, 		        {.v = termcmd}},
 	{MODKEY,		    XK_n, 		        spawn, 		        {.v = clipcmd}},
 	{MODKEY | ShiftMask,        XK_s, 		        spawn, 		        {.v = screencmd}},
+// Keys for recording
+	{MODKEY | ControlMask | ShiftMask,        XK_r, 	spawn, 		{.v = reccmd}},
+	{MODKEY | ControlMask | ShiftMask,        XK_x, 	spawn, 		{.v = (const char*[]){ "pkill", "-STGINT", "ffmpeg", NULL }}},
     //  {MODKEY,                    XK_agrave,                  view,                   {.ui = ~0 } },
     //  {MODKEY|ShiftMask,          XK_agrave,                  tag,                    {.ui = ~0 } },
 	{MODKEY,                    XK_semicolon,               focusmon,               {.i = +1 } },
