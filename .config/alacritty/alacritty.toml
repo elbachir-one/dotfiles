@@ -1,0 +1,55 @@
+# Cursor style
+[cursor.style]
+shape = "Beam"
+
+# Font settings
+[font]
+size = 10
+
+[font.bold]
+family = "Press Start 2P"
+style = "Bold"
+
+[font.italic]
+family = "Press Start 2P"
+style = "Italic"
+
+[font.normal]
+family = "Press Start 2P"
+style = "Regular"
+
+# Window settings
+[window]
+opacity = 0.95
+
+# theme
+# Default colors
+[colors.primary]
+background = '#000000'
+foreground = '#ffffff'
+
+[colors.cursor]
+text = '#F81CE5'
+cursor = '#ffffff'
+
+# Normal colors
+[colors.normal]
+black   = '#000000'
+red     = '#fe0100'
+green   = '#33ff00'
+yellow  = '#feff00'
+blue    = '#0066ff'
+magenta = '#cc00ff'
+cyan    = '#00ffff'
+white   = '#d0d0d0'
+
+# Bright colors
+[colors.bright]
+black   = '#808080'
+red     = '#fe0100'
+green   = '#33ff00'
+yellow  = '#feff00'
+blue    = '#0066ff'
+magenta = '#cc00ff'
+cyan    = '#00ffff'
+white   = '#FFFFFF'
