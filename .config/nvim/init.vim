@@ -9,6 +9,9 @@ nnoremap <C-o> 		:vertical resize +2<CR>
 nnoremap <C-h>	<C-w>h
 nnoremap <C-l>	<C-w>l
 
+"map <leader>c :!pdflatex % && !zathura %:p:r.pdf &<CR>
+nnoremap <leader>c :w<CR>:!pdflatex % && zathura %:r.pdf & disown<CR>
+
 inoremap jk <Esc>
 inoremap kj <Esc>
 "
@@ -41,6 +44,9 @@ set backupcopy=yes
 set bg=dark
 set shiftwidth=4
 set diffopt+=iwhite " Ignore whitespace whilst diffing
+set autoindent
+set smartindent
+
 nnoremap <silent> <F5> :%s/\s\+$//<cr>
 
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
@@ -49,6 +55,8 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :Files<CR>
 nnoremap <TAB> :bnext<CR>
 nnoremap <C-s> :vsplit<CR>
+nnoremap <C-m> :make<CR>
+
 
 set undofile
 set undodir=/tmp
@@ -66,6 +74,10 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
+
+Plug 'MunifTanjim/nui.nvim'
+Plug 'VonHeikemen/fine-cmdline.nvim'
+Plug 'lervag/vimtex'
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
@@ -103,6 +115,7 @@ lua require("toggleterm").setup()
 nnoremap <C-v> :ToggleTerm<CR>
 nnoremap <C-x> :vsp term://go run %<CR>
 nnoremap <C-g> :vsp term://gcc -o main main.c %<CR>
+"nnoremap : <cmd>FineCmdline<CR>
 
 set go=a
 set mouse=a
@@ -110,22 +123,22 @@ set nohlsearch
 set clipboard+=unnamedplus
 
 " Some basics:
-    set nocompatible
-    set encoding=utf-8
-    set number relativenumber
+set nocompatible
+set encoding=utf-8
+set number relativenumber
 " Enable autocompletion:
-    set wildmode=longest,list,full
+set wildmode=longest,list,full
 " Disables automatic commenting on newline:
-    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Goyo plugin makes text more readable when writing prose:
-    map <leader>g :Goyo \| set bg=light \| set linebreak<CR>
+map <leader>g :Goyo \| set bg=light \| set linebreak<CR>
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
-    map <leader>o :setlocal spell! spelllang=en_us<CR>
+map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 " Nerd tree
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 if has('nvim')
     let NERDTreeBookmarksFile = stdpath('data') . '/NERDTreeBookmarks'
 else
@@ -133,68 +146,69 @@ else
 endif
 
 " vimling:
-    nm <leader>d :call ToggleDeadKeys()<CR>
-    imap <leader>d <esc>:call ToggleDeadKeys()<CR>a
-    nm <leader>i :call ToggleIPA()<CR>
-    imap <leader>i <esc>:call ToggleIPA()<CR>a
-    nm <leader>q :call ToggleProse()<CR>
+nm <leader>d :call ToggleDeadKeys()<CR>
+imap <leader>d <esc>:call ToggleDeadKeys()<CR>a
+nm <leader>i :call ToggleIPA()<CR>
+imap <leader>i <esc>:call ToggleIPA()<CR>a
+nm <leader>q :call ToggleProse()<CR>
 
-    map Q gq
+map Q gq
 
 " Check file in shellcheck:
-    "map <leader>s :!clear && shellcheck %<CR>
+"map <leader>s :!clear && shellcheck %<CR>
 
 " Open my bibliography file in split
-    map <leader>b :vsp<space>$BIB<CR>
-    map <leader>r :vsp<space>$REFER<CR>
+map <leader>b :vsp<space>$BIB<CR>
+map <leader>r :vsp<space>$REFER<CR>
 
 " Replace all is aliased to S.
-    "nnoremap S :%s//g<Left><Left>
+"nnoremap S :%s//g<Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-    map <leader>c :w! \| !compiler <c-r>%<CR>
+map <leader>c :w! \| !compiler <c-r>%<CR>
 
 " Open corresponding .pdf/.html or preview
-    map <leader>p :!opout <c-r>%<CR><CR>
+map <leader>p :!opout <c-r>%<CR><CR>
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
-    autocmd VimLeave *.tex !texclear %
+autocmd VimLeave *.tex !texclear %
 
 " Ensure files are read as what I want:
-    let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-    map <leader>v :VimwikiIndex
-    let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-    autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-    autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-    autocmd BufRead,BufNewFile *.tex set filetype=tex
+let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+map <leader>v :VimwikiIndex
+let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Save file as sudo on files that require root permission
-    cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Enable Goyo by default for mutt writing
-    autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-    autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=light
-    autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
-    autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
+autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo | set bg=light
+autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
+autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
-    autocmd BufWritePre * %s/\s\+$//e
-    autocmd BufWritepre * %s/\n\+\%$//e
+autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritepre * %s/\n\+\%$//e
 
-    autocmd BufWritePost files,directories !shortcuts
-    autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
-    autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+autocmd BufWritePost files,directories !shortcuts
+autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
 if &diff
-highlight! link DiffText MatchParen
+    highlight! link DiffText MatchParen
 endif
 "tab stuff
-    nnoremap tn :tabnew<Space>
-    nnoremap tk :tabnext<cr>
-    nnoremap tj :tabprev<cr>
-    nnoremap th :tabfirst<cr>
-    nnoremap tl :tablast<cr>
+nnoremap tn :tabnew<Space>
+nnoremap tk :tabnext<cr>
+nnoremap tj :tabprev<cr>
+nnoremap th :tabfirst<cr>
+nnoremap tl :tablast<cr>
 "Themes
 colorscheme fahrenheit
+"colorscheme orbital
 "colorscheme gruvbox
 "colorscheme tokyonight-storm
 "colorscheme tokyonight-night
@@ -222,7 +236,7 @@ let g:airline_left_sep = ''
 " air-line
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
-let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 " unicode symbols
 let g:airline_left_sep = '»'
@@ -256,7 +270,7 @@ function SetVimPresentationMode()
     nnoremap <buffer> <Left> :N<CR>
 
     if !exists('#goyo')
-	    Goyo
+	Goyo
     endif
 endfunction
 
@@ -267,24 +281,24 @@ set nowritebackup
 set updatetime=300
 set signcolumn=yes
 let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-clangd'
-  \  ]
+	    \ 'coc-tsserver',
+	    \ 'coc-clangd'
+	    \  ]
 inoremap <silent><expr> <TAB>
-  \ coc#pum#visible() ? coc#pum#next(1):
-  \ CheckBackspace() ? "\<Tab>" :
-  \ coc#refresh()
+	    \ coc#pum#visible() ? coc#pum#next(1):
+	    \ CheckBackspace() ? "\<Tab>" :
+	    \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-			  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+	    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 function! CheckBackspace() abort
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 if has('nvim')
-inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-space> coc#refresh()
 else
-inoremap <silent><expr> <c-@> coc#refresh()
+    inoremap <silent><expr> <c-@> coc#refresh()
 endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -294,20 +308,20 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call ShowDocumentation()<CR>
 function! ShowDocumentation()
-if CocAction('hasProvider', 'hover')
-call CocActionAsync('doHover')
-else
-call feedkeys('K', 'in')
-endif
+    if CocAction('hasProvider', 'hover')
+	call CocActionAsync('doHover')
+    else
+	call feedkeys('K', 'in')
+    endif
 endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
-autocmd!
-autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -327,12 +341,12 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 nmap <silent> <C-d> <Plug>(coc-range-select)
