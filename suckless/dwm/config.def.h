@@ -179,7 +179,7 @@ static const Key keys[] = {
 	{MODKEY | ShiftMask,        XK_s, 		        spawn, 		        {.v = screencmd}},
 // Keys for recording
 	{MODKEY | ControlMask | ShiftMask,        XK_r, 	spawn, 		{.v = reccmd}},
-	{MODKEY | ControlMask | ShiftMask,        XK_x, 	spawn, 		{.v = (const char*[]){ "pkill", "-STGINT", "ffmpeg", NULL }}},
+	{MODKEY | ControlMask | ShiftMask,        XK_x, 	spawn, 		{.v = (const char*[]){ "pkill", "-SIGINT", "ffmpeg", NULL }}},
     //  {MODKEY,                    XK_agrave,                  view,                   {.ui = ~0 } },
     //  {MODKEY|ShiftMask,          XK_agrave,                  tag,                    {.ui = ~0 } },
 	{MODKEY,                    XK_semicolon,               focusmon,               {.i = +1 } },
@@ -197,7 +197,7 @@ static const Key keys[] = {
 	{MODKEY,		    XK_Tab, 	      	        view, 		        {0}},
 	{MODKEY,		    XK_space,     		setlayout, 	        {0}},
 	{MODKEY | ShiftMask, 	    XK_space,                   togglefloating,         {0}},
-	{MODKEY | ShiftMask, 	    XK_x, 		        view, 		        {.ui = ~0}},
+	{MODKEY | ShiftMask | ControlMask, 	XK_z, 		view, 		        {.ui = ~0}},
 	{MODKEY | ShiftMask,        XK_z, 		        tag, 		        {.ui = ~0}},
 	{MODKEY,                    XK_g,                       setgaps,                {.i = -5 } },
 	{MODKEY,                    XK_h,                       setgaps,                {.i = +5 } },
