@@ -38,9 +38,9 @@ sudo ln -s /etc/sv/NetworkManager /var/service/
 sudo ln -s /etc/sv/dbus /var/service/
 sudo ln -s /etc/sv/libvirtd /var/service/
 sudo ln -s /etc/sv/virtlogd /var/service/
-sudo usermod -a -G libvirt sh
+sudo usermod -a -G libvirt sh # Change the username (sh) to your username than run the script.
 modprobe kvm-intel
-sudo usermod -aG kvm sh # sh is the my username
+sudo usermod -aG kvm sh # Change the username (sh) to your username than run the script.
 sudo rm /var/service/agetty-tty3
 sudo rm /var/service/agetty-tty4
 sudo rm /var/service/agetty-tty5
@@ -48,6 +48,6 @@ sudo rm /var/service/agetty-tty6
 sudo rm /var/service/wpa_supplicant
 sudo rm /var/service/dhcpcd
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
-sudo sed -i 's/GETTY_ARGS="--noclear"/GETTY_ARGS="--noclear --autologin sh"/' /etc/runit/runsvdir/current/agetty-tty1/conf
+sudo sed -i 's/GETTY_ARGS="--noclear"/GETTY_ARGS="--noclear --autologin sh"/' /etc/runit/runsvdir/current/agetty-tty1/conf # Change the username (sh) to your username than run the script.
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo reboot

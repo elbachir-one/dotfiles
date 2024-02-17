@@ -22,7 +22,8 @@ chmod +x install.sh
 ./install.sh
 ```
 
-Note: The install script only work on Void Linux and it's a personal script.
+Note: Don't forget to change the username to your username.
+The install script only works on Void Linux, and it's a personal script.
 
 ### Option 2: Manual installation
 
