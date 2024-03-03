@@ -9,7 +9,7 @@ git submodule update --init --recursive
 meson --buildtype=release . build
 sudo ninja -C build install
 cd
-git clone https://github.com/elbachir-one/dotfiles
+git clone --depth =1 https://github.com/elbachir-one/dotfiles
 cd ~/dotfiles/
 cp -r .config/ .fonts/ .icons/ .local/ .themes/ .bashrc .xinitrc .tmux.conf .bash_profile ~/
 sudo cp -r xorg.conf.d/ /etc/X11/
@@ -22,7 +22,7 @@ cd ../farbfeld/ && make && sudo make clean install
 cd ../sent/ && make && sudo make clean install
 cd ../surf/ && make && sudo make clean install
 cd
-git clone https://github.com/elbachir-one/wall
+git clone --depth=1 https://github.com/elbachir-one/wall
 cd /tmp/
 git clone https://github.com/garabik/grc.git
 cd grc/
