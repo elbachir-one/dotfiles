@@ -22,7 +22,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-Note: Don't forget to change the username to your username.
+Note: Don't forget to change the username to your username and the cpu (amd or intel)
 The install script only works on Void Linux, and it's a personal script.
 
 ### Option 2: Manual installation
