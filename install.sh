@@ -39,7 +39,7 @@ sudo ln -s /etc/sv/dbus /var/service/
 sudo ln -s /etc/sv/libvirtd /var/service/
 sudo ln -s /etc/sv/virtlogd /var/service/
 sudo usermod -a -G libvirt sh # Change the username (sh) to your username than run the script.
-modprobe kvm-intel
+modprobe kvm-intel # Change this if you are using something else that intel cpu "kvm-amd"
 sudo usermod -aG kvm sh # Change the username (sh) to your username than run the script.
 sudo rm /var/service/agetty-tty3
 sudo rm /var/service/agetty-tty4
