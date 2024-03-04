@@ -1,10 +1,10 @@
-![Void_DWM](assets/Void_DWM.jpg)
-![Void_DWM](assets/Void_DWM2.jpg)
-![FreeBSD_DWM](assets/freebsd.jpg)
-
 # My dotfiles
 
 ## This is my personal configuration, feel free to change it as you see fit your needs.
+
+![Void_DWM](assets/Void_DWM.jpg)
+![Void_DWM](assets/Void_DWM2.jpg)
+![FreeBSD_DWM](assets/freebsd.jpg)
 
 ## Installation
 
@@ -143,13 +143,13 @@ This build is specific to Wlroots 17.
 
 **Patches included:**
 
-- always center
-- attachbottom
-- autostart
-- ipc
-- pertag
-- swallow
-- vanity gaps
+- [Always Center](https://github.com/djpohly/dwl/wiki/alwayscenter)
+- [Atatch Bottom](https://github.com/djpohly/dwl/wiki/attachbottom)
+- [Auto Start](https://github.com/djpohly/dwl/wiki/autostart)
+- [Ipc](https://github.com/djpohly/dwl/wiki/ipc)
+- [Pertag](https://github.com/djpohly/dwl/wiki/pertag)
+- [Swallow](https://github.com/djpohly/dwl/wiki/swallow)
+- [Vanity Gaps](https://github.com/djpohly/dwl/wiki/vanitygaps)
 
 Install all dependences:
 
@@ -189,8 +189,8 @@ sudo ninja -C build install
 
 **Patches included:**
 
-- ipc
-- hide vacant tags
+- [Ipc](https://github.com/MadcowOG/dwl-bar/wiki/ipc)
+- [Hide Vacant Tags](https://github.com/MadcowOG/dwl-bar/wiki/hide-vacant-tags)
 
 ```bash
 cd ~/dotfiles/src/dwl-bar/
