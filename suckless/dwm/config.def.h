@@ -77,6 +77,7 @@ static const Rule rules[] = {
     /* class              instance          title                 tags mask       isfloating     isterminal   noswallow    monitor */
 
     {"discord",             NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
+    {"qemu",                NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
     {"Surf", 	            NULL,           NULL, 	          1 << 3, 	    False, 	     0,          0,       -1},
     {"firefox",             NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
     {"obs",                 NULL,           NULL, 	          1 << 7, 	    False, 	     0,         -1,       -1},
