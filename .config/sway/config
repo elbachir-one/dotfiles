@@ -23,7 +23,7 @@ set $menu dmenu-wl_path | dmenu-wl_run | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/sh/wall/city_blue.png fill
+output * bg /home/sh/wall/city.jpg fill
 #
 # Example configuration:
 #
