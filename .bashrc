@@ -15,7 +15,6 @@ bind 'set completion-ignore-case on'
 export TERMINAL='sakura'
 export BROWSER='chromium'
 export EDITOR='nvim'
-export XDG_RUNTIME_DIR='/tmp/runtime-dir/'
 export PATH="$HOME/.local/bin:$PATH"
 export PAGER=most
 export GOPATH="$HOME/.local/go"
