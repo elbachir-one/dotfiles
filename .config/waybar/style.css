@@ -1,0 +1,88 @@
+@import "colors.css";
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 14px;
+  min-height: 0px;
+}
+
+window#waybar {
+  background: @bg0;
+  color: #cdd6f4;
+}
+
+#workspaces button {
+  padding: 5px;
+  color: #505050;
+  margin: 3px;
+  border-radius: 30px;
+}
+
+#workspaces button.active {
+  background: @accent;
+  color: @bg0;
+}
+
+#workspaces button:hover {
+  background: @bg0;
+  color: @bg1;
+}
+
+tooltip {
+  background: @tip;
+  border-radius: 10px;
+  border: 3px solid @bg1;
+}
+
+#custom-language, #custom-updates, #custom-caffeine, #clock, #battery, #pulseaudio, #network, #tray, #backlight, #custom-wl-gammarelay-brightness, #custom-wl-gammarelay-temperature, #workspaces {
+  background: @bg1;
+  padding: 0px 10px;
+  margin: 7px 0px;
+  border-radius: 5px;
+}
+
+#custom-menu, #custom-power {
+  background: @accent;
+  color: @bg1;
+  padding: 0px 10px;
+  margin: 7px 0px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+#custom-power {
+    font-weight: normal;
+}
+
+#tray {
+	margin-left: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	transition: none;
+}
+
+#workspaces {
+  background: @bg1;
+  padding-right: 10px;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
+#clock {
+  color: @text;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+#network {
+  color: @text;
+  margin-right: 5px;
+}
+
+#pulseaudio, #battery, #custom-wl-gammarelay-brightness, #custom-wl-gammarelay-temperature {
+  color: @text;
+  margin-right: 5px;
+}
