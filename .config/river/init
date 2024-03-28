@@ -12,7 +12,7 @@
 
 # Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
 riverctl map normal Alt+Shift Return spawn foot
-riverctl map normal Alt P spawn dmenu-wl_run
+riverctl map normal Alt P spawn 'dmenu-wl_run -fn "TerminessTTF Nerd Font 18" -nb "#000000" -nf "#ffffff" -sb "#202020" -sf "#ffa500"'
 
 # Super+Q to close the focused view
 riverctl map normal Alt+Shift C close
@@ -21,8 +21,8 @@ riverctl map normal Alt+Shift C close
 riverctl map normal Alt+Shift E exit
 
 # Super+J and Super+K to focus the next/previous view in the layout stack
-riverctl map normal Alt J focus-view next
-riverctl map normal Alt M focus-view previous
+riverctl map normal Alt K focus-view next
+riverctl map normal Alt L focus-view previous
 
 # Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
@@ -41,30 +41,30 @@ riverctl map normal Alt+Shift Comma send-to-output previous
 riverctl map normal Alt Return zoom
 
 # Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
-riverctl map normal Alt H send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal Alt L send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map normal Alt J send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Alt M send-layout-cmd rivertile "main-ratio +0.05"
 
 # Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
 riverctl map normal Alt+Shift H send-layout-cmd rivertile "main-count +1"
 riverctl map normal Alt+Shift L send-layout-cmd rivertile "main-count -1"
 
 # Super+Alt+{H,J,K,L} to move views
-riverctl map normal Alt+Shift H move left 100
-riverctl map normal Alt+Shift J move down 100
-riverctl map normal Alt+Shift K move up 100
-riverctl map normal Alt+Shift L move right 100
+#riverctl map normal Alt+Shift H move left 100
+#riverctl map normal Alt+Shift J move down 100
+#riverctl map normal Alt+Shift K move up 100
+#riverctl map normal Alt+Shift L move right 100
 
 # Super+Alt+Control+{H,J,K,L} to snap views to screen edges
-riverctl map normal Alt+Control H snap left
-riverctl map normal Alt+Control J snap down
-riverctl map normal Alt+Control K snap up
-riverctl map normal Alt+Control L snap right
+#riverctl map normal Alt+Control H snap left
+#riverctl map normal Alt+Control J snap down
+#riverctl map normal Alt+Control K snap up
+#riverctl map normal Alt+Control L snap right
 
 # Super+Alt+Shift+{H,J,K,L} to resize views
-riverctl map normal Super+Alt+Shift H resize horizontal -100
-riverctl map normal Super+Alt+Shift J resize vertical 100
-riverctl map normal Super+Alt+Shift K resize vertical -100
-riverctl map normal Super+Alt+Shift L resize horizontal 100
+#riverctl map normal Super+Alt+Shift H resize horizontal -100
+#riverctl map normal Super+Alt+Shift J resize vertical 100
+#riverctl map normal Super+Alt+Shift K resize vertical -100
+#riverctl map normal Super+Alt+Shift L resize horizontal 100
 
 # Super + Left Mouse Button to move views
 riverctl map-pointer normal Alt BTN_LEFT move-view
@@ -146,6 +146,7 @@ done
 # Set the resolution
 #riverctl spawn "wlr-randr --output Virtual-1 --mode 1920x1080"
 riverctl spawn "wbg wall/city.jpg"
+riverctl spawn "foot"
 
 # Set background and border color
 #riverctl background-color 0x93a1a1

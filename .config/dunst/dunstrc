@@ -4,8 +4,8 @@
     frame_width = 0
     monitor = 0
     follow = keyboard
-    transparency = 40
-    font = "Symbols Nerd Font, Monofur Nerd Font"
+    transparency = 18
+    font = "Symbols Nerd Font, Monofur Nerd Font 18"
     format = "<b>%s</b>\n%b"
     alignment = center
 	indicate_hidden = yes
@@ -26,7 +26,7 @@
 
 [base16_normal]
     msg_urgency = normal
-    background = "#26233a"
+    background = "#202020"
     foreground = "#ffffff"
     timeout = 5
 

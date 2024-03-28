@@ -9,25 +9,31 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod1
 # Home row direction keys, like vim
-set $left j
-set $down k
-set $up l
-set $right m
+set $left k
+set $down j
+set $up m
+set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu-wl_path | dmenu-wl_run | xargs swaymsg exec --
+set $menu dmenu-wl_path | dmenu-wl_run -fn "TerminessTTF Nerd Font 18" -nb "#000000" -nf "#ffffff" -sb "#202020" -sf "#ffa500" | xargs swaymsg exec --
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+
 output * bg /home/sh/wall/city.jpg fill
+
 #
 # Example configuration:
 #
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+output LVDS1 resolution 1366x768 position 0,0
+output HDMI1 resolution 1920x1080 position 1366,0
+
+# focus output HDMI1
+
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -108,43 +114,52 @@ output * bg /home/sh/wall/city.jpg fill
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
 #
-# Workspaces:
+# Workspaces: are configured to my keyboard layout
 #
     # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
+    bindsym $mod+ampersand  workspace number 1
+    bindsym $mod+eacute     workspace number 2
+    bindsym $mod+quotedbl   workspace number 3
+    bindsym $mod+apostrophe workspace number 4
+    bindsym $mod+parenleft  workspace number 5
+    bindsym $mod+minus      workspace number 6
+    bindsym $mod+egrave     workspace number 7
+    bindsym $mod+underscore workspace number 8
+    bindsym $mod+ccedilla   workspace number 9
     bindsym $mod+0 workspace number 10
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+ampersand  move container to workspace number 1
+    bindsym $mod+Shift+eacute     move container to workspace number 2
+    bindsym $mod+Shift+quotedbl   move container to workspace number 3
+    bindsym $mod+Shift+apostrophe move container to workspace number 4
+    bindsym $mod+Shift+parenleft  move container to workspace number 5
+    bindsym $mod+Shift+minus      move container to workspace number 6
+    bindsym $mod+Shift+egrave     move container to workspace number 7
+    bindsym $mod+Shift+underscore move container to workspace number 8
+    bindsym $mod+Shift+ccedilla   move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+	workspace 1 output LVDS1
+	workspace 2 output LVDS1
+	workspace 3 output LVDS1
+	workspace 4 output LVDS1
+	workspace 5 output LVDS1
+	workspace 6 output HDMI1
+	workspace 7 output HDMI1
+	workspace 8 output HDMI1
+	workspace 9 output HDMI1
 #
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    bindsym $mod+h splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
+    bindsym $mod+t layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
@@ -152,10 +167,10 @@ output * bg /home/sh/wall/city.jpg fill
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Shift+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -166,11 +181,11 @@ output * bg /home/sh/wall/city.jpg fill
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+s move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+s scratchpad show
 #
 # Resizing containers:
 #
@@ -200,19 +215,24 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+#bar {
+#    position top
+#
+#    # When the status_command prints a new line to stdout, swaybar updates.
+#    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+#
+#    colors {
+#        statusline #ffffff
+#        background #000000
+#        inactive_workspace #00000000 #00000000 #938ed8
+#    }
+#}
+
 bar {
-    position top
+     swaybar_command waybar
+	 }
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #000000
-        inactive_workspace #00000000 #00000000 #938ed8
-    }
-}
 default_border pixel 1
 gaps outer 2
 gaps inner 2
@@ -222,6 +242,6 @@ input * {
 	xkb_options "caps:escape"
 	}
 
-# exec_always --no-startup-id wlr-randr --output Virtual-1 --mode 1920x1080 &
+exec_always --no-startup-id foot &
 
 include /etc/sway/config.d/*
