@@ -5,7 +5,7 @@
     monitor = 0
     follow = keyboard
     transparency = 18
-    font = "Symbols Nerd Font, Monofur Nerd Font 18"
+    font = "Symbols Nerd Font, Monofur Nerd Font 16"
     format = "<b>%s</b>\n%b"
     alignment = center
 	indicate_hidden = yes
