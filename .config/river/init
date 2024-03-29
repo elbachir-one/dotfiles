@@ -14,6 +14,9 @@
 riverctl map normal Alt+Shift Return spawn foot
 riverctl map normal Alt P spawn 'dmenu-wl_run -fn "TerminessTTF Nerd Font 18" -nb "#000000" -nf "#ffffff" -sb "#202020" -sf "#ffa500"'
 
+# Option to use tofi like dmenu or rofi.
+#riverctl map normal Alt P spawn tofi-drun
+
 # Super+Q to close the focused view
 riverctl map normal Alt+Shift C close
 

@@ -20,6 +20,9 @@ set $term foot
 # on the original workspace that the command was run on.
 set $menu dmenu-wl_path | dmenu-wl_run -fn "TerminessTTF Nerd Font 18" -nb "#000000" -nf "#ffffff" -sb "#202020" -sf "#ffa500" | xargs swaymsg exec --
 
+# Option to use tofi like dmenu.
+# set $menu tofi-drun | xargs swaymsg exec --
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
