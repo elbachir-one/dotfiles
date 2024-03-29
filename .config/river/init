@@ -78,23 +78,48 @@ riverctl map-pointer normal Alt BTN_RIGHT resize-view
 # Super + Middle Mouse Button to toggle float
 riverctl map-pointer normal Alt BTN_MIDDLE toggle-float
 
-for i in $(seq 1 9)
+
+# This is fo qwerty keyboard layout
+#for i in $(seq 1 9)
+#do
+#    tags=$((1 << ($i - 1)))
+#
+#    # Super+[1-9] to focus tag [0-8]
+#    riverctl map normal Alt $i set-focused-tags $tags
+#
+#    # Super+Shift+[1-9] to tag focused view with tag [0-8]
+#    riverctl map normal Alt+Shift $i set-view-tags $tags
+#
+#    # Super+Ctrl+[1-9] to toggle focus of tag [0-8]
+#    riverctl map normal Alt+Control $i toggle-focused-tags $tags
+#
+#    # Super+Shift+Ctrl+[1-9] to toggle tag [0-8] of focused view
+#    riverctl map normal Alt+Shift+Control $i toggle-view-tags $tags
+#done
+
+# This for my keyboard layout (fr)
+# Define an array of keys to use instead of numbers
+
+keys=("ampersand" "eacute" "quotedbl" "apostrophe" "parenleft" "minus" "egrave" "underscore" "ccedilla")
+
+for ((i=0; i<${#keys[@]}; i++))
 do
-    tags=$((1 << ($i - 1)))
+    tags=$((1 << $i))
 
-    # Super+[1-9] to focus tag [0-8]
-    riverctl map normal Alt $i set-focused-tags $tags
+    # Super+<key> to focus tag [0-8]
+    riverctl map normal Alt ${keys[i]} set-focused-tags $tags
 
-    # Super+Shift+[1-9] to tag focused view with tag [0-8]
-    riverctl map normal Alt+Shift $i set-view-tags $tags
+    # Super+Shift+<key> to tag focused view with tag [0-8]
+    riverctl map normal Alt+Shift ${keys[i]} set-view-tags $tags
 
-    # Super+Ctrl+[1-9] to toggle focus of tag [0-8]
-    riverctl map normal Alt+Control $i toggle-focused-tags $tags
+    # Super+Ctrl+<key> to toggle focus of tag [0-8]
+    riverctl map normal Alt+Control ${keys[i]} toggle-focused-tags $tags
 
-    # Super+Shift+Ctrl+[1-9] to toggle tag [0-8] of focused view
-    riverctl map normal Alt+Shift+Control $i toggle-view-tags $tags
+    # Super+Shift+Ctrl+<key> to toggle tag [0-8] of focused view
+    riverctl map normal Alt+Shift+Control ${keys[i]} toggle-view-tags $tags
 done
 
+#
 # Super+0 to focus all tags
 # Super+Shift+0 to tag focused view with all tags
 all_tags=$(((1 << 32) - 1))
@@ -148,13 +173,14 @@ done
 
 # Set the resolution
 #riverctl spawn "wlr-randr --output Virtual-1 --mode 1920x1080"
+#riverctl spawn "wlr-randr --output LVDS1 --primary --mode 1366x768 --pos 0x312 --rotate normal --output HDMI1 --mode 1920x1080 --pos 1366x0 --rotate normal"
 riverctl spawn "wbg wall/city.jpg"
 riverctl spawn "foot"
 
 # Set background and border color
 #riverctl background-color 0x93a1a1
 riverctl border-color-focused 0x002b36
-riverctl border-color-unfocused 0x586e75
+riverctl border-color-unfocused 0x000000
 
 # Set keyboard repeat rate
 riverctl keyboard-layout -options "caps:escape" fr
