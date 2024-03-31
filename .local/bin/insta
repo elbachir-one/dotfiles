@@ -1,4 +1,4 @@
 #!/bin/bash
 python ~/Projects/615_import_firefox_session.py
 sleep 1s
-instaloader --login one_to_mini :saved --no-metadata-json --no-video-thumbnail
+instaloader :saved --no-metadata-json --no-video-thumbnail

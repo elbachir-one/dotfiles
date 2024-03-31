@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wshowkeys -F "TerminessTTF Nerd Font 42" -b "#00000050" -f "#FFFFFFFF" -s "#cc330099" -m 20 -a right -a bottom &

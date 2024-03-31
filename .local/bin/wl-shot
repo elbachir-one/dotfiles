@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Check if image dir is there and if it's not it does create one
+shots_dir=~/Images/Shots
+
+if [ ! -d "$shots_dir" ]; then
+	mkdir -p "$shots_dir"
+fi
+
+# Prompt the user to choose an option
+choice=$(echo "all\nregion\noutput" | tofi --prompt-text 'Take Screenshot:')
+
+# Take action based on the user's choice
+case $choice in
+    all)
+        # Capture entire screen and save screenshot
+        grim "$shots_dir/$(date +'%s_grim.png')"
+        ;;
+    region)
+        # Capture a region and save screenshot
+        grim -g "$(slurp)" "$shots_dir/$(date +'%s_grim.png')"
+        ;;
+    output)
+        # Capture an output and save screenshot
+        grim -g "$(slurp -o)" "$shots_dir/$(date +'%s_grim.png')"
+        ;;
+    *)
+        echo "Invalid option."
+        ;;
+esac

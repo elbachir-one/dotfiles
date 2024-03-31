@@ -1,12 +1,30 @@
 #!/bin/bash
+
+# Function to check if directory exists
+check_directory() {
+    if [ ! -d "$1" ]; then
+        echo "Directory $1 does not exist."
+        return 1
+    fi
+    return 0
+}
+
+# Check if directories exist, if not, create them
+if ! check_directory ~/Videos/ || ! check_directory ~/Music/ || ! check_directory ~/Images/Thumbnails/; then
+    echo "Creating necessary directories..."
+    mkdir -p ~/Videos/
+    mkdir -p ~/Music/
+    mkdir -p ~/Images/Thumbnails/
+fi
+
 # Get the download option using dmenu
-DOWNLOAD_OPTION=$(echo -e "Video\nAudio\nVideo_Thumbnail" | dmenu -p "🌍")
+DOWNLOAD_OPTION=$(echo -e "Video\nAudio\nThumbnail" | dmenu -p "🌍")
 
 if [ "$DOWNLOAD_OPTION" == "Video" ]; then
     DOWNLOAD_CMD="cd ~/Videos/ && yt-dlp -f \"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\" --merge-output-format mp4"
 elif [ "$DOWNLOAD_OPTION" == "Audio" ]; then
     DOWNLOAD_CMD="cd ~/Music/ && yt-dlp -f 140"
-elif [ "$DOWNLOAD_OPTION" == "Video_Thumbnail" ]; then
+elif [ "$DOWNLOAD_OPTION" == "Thumbnail" ]; then
     DOWNLOAD_CMD="cd ~/Images/Thumbnails/ && yt-dlp --skip-download --write-thumbnail"
 fi
 

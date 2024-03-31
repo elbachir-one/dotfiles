@@ -1,0 +1,35 @@
+* {
+    border-radius: 4px;
+    border: none;
+ }
+window {
+	font-size: 28px;
+  font-family: "TerminessTTF Nerd Font";
+  font-style: bold;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+
+#entry{
+  padding: 0.30em;
+}
+
+#entry:selected {
+  background-color: #bbccdd;
+  background: linear-gradient(90deg, #000, #dd77ff);
+}
+
+#text:selected {
+  color: #333333:
+}
+
+#input{
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 0.25em;
+}
+
+image{
+  margin-left: .50em;
+  margin-right: .90em;
+}

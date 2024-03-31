@@ -11,11 +11,17 @@
 # Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
 
 # Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal Alt+Shift Return spawn foot
+riverctl map normal Alt+Shift Return spawn footclient
 riverctl map normal Alt P spawn 'dmenu-wl_run -fn "TerminessTTF Nerd Font 18" -nb "#000000" -nf "#ffffff" -sb "#202020" -sf "#ffa500"'
+riverctl map normal Alt W spawn qutebrowser
+riverclt map normal Alt N spawn "clipman pick -t wofi"
+riverctl map normal Alt S spawn 'grim -g "$(slurp)" ~/Images/Shots/$(date +"%s_grim.png")'
 
 # Option to use tofi like dmenu or rofi.
 #riverctl map normal Alt P spawn tofi-drun
+
+# Option to use wofi like dmenu or rofi.
+riverctl map normal Alt D spawn 'wofi --show'
 
 # Super+Q to close the focused view
 riverctl map normal Alt+Shift C close
@@ -33,12 +39,12 @@ riverctl map normal Alt+Shift K swap next
 riverctl map normal Alt+Shift L swap previous
 
 # Super+Period and Super+Comma to focus the next/previous output
-riverctl map normal Alt Period focus-output next
-riverctl map normal Alt Comma focus-output previous
+riverctl map normal Alt Semicolon focus-output next
+riverctl map normal Alt Period focus-output previous
 
 # Super+Shift+{Period,Comma} to send the focused view to the next/previous output
-riverctl map normal Alt+Shift Period send-to-output next
-riverctl map normal Alt+Shift Comma send-to-output previous
+riverctl map normal Alt+Shift Semicolon send-to-output next
+riverctl map normal Alt+Shift Period send-to-output previous
 
 # Super+Return to bump the focused view to the top of the layout stack
 riverctl map normal Alt Return zoom
@@ -120,6 +126,7 @@ do
 done
 
 #
+#
 # Super+0 to focus all tags
 # Super+Shift+0 to tag focused view with all tags
 all_tags=$(((1 << 32) - 1))
@@ -173,14 +180,16 @@ done
 
 # Set the resolution
 #riverctl spawn "wlr-randr --output Virtual-1 --mode 1920x1080"
-#riverctl spawn "wlr-randr --output LVDS1 --primary --mode 1366x768 --pos 0x312 --rotate normal --output HDMI1 --mode 1920x1080 --pos 1366x0 --rotate normal"
+riverctl spawn "wlr-randr --output LVDS1 --primary --mode 1366x768 --pos 0x312 --rotate normal --output HDMI1 --mode 1920x1080 --pos 1366x0 --rotate normal"
 riverctl spawn "wbg wall/city.jpg"
-riverctl spawn "foot"
+riverctl spawn "foot --server"
+riverctl spawn "wl-paste -t text --watch clipman store"
 
 # Set background and border color
 #riverctl background-color 0x93a1a1
-riverctl border-color-focused 0x002b36
-riverctl border-color-unfocused 0x000000
+riverctl border-color-focused 0x1e90ff
+riverctl border-color-unfocused 0x202020
+riverctl border-width 1
 
 # Set keyboard repeat rate
 riverctl keyboard-layout -options "caps:escape" fr
