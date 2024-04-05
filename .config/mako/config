@@ -1,0 +1,13 @@
+font=TerminessTTF Nerd Font 18
+background-color=#20202000
+text-color=#FFFFFFFF
+width=400
+height=210
+margin=20
+padding=18
+border-size=1
+border-color=#1e90ff
+border-radius=4
+icons=1
+max-icon-size=64
+text-alignment=center
