@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-terminal" version="1.0">
+  <property name="scrolling-bar" type="string" value="TERMINAL_SCROLLBAR_NONE"/>
+  <property name="misc-cursor-shape" type="string" value="TERMINAL_CURSOR_SHAPE_UNDERLINE"/>
+  <property name="misc-copy-on-select" type="bool" value="true"/>
+  <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
+  <property name="misc-default-geometry" type="string" value="86x26"/>
+  <property name="background-mode" type="string" value="TERMINAL_BACKGROUND_TRANSPARENT"/>
+  <property name="background-darkness" type="double" value="0.90000000000000002"/>
+</channel>
