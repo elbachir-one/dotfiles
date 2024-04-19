@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This is the example configuration file for river.
 #
@@ -194,6 +194,14 @@ riverctl border-width 1
 # Set keyboard repeat rate
 riverctl keyboard-layout -options "caps:escape" fr
 riverctl set-repeat 50 300
+
+# Touchpad
+riverctl input pointer-2-7-SynPS/2_Synaptics_TouchPad tap enabled
+riverctl focus-follows-cursor normal
+
+# Sand Bar
+riverctl spawn "$HOME/.config/river/status"
+riverctl spawn "$HOME/.config/river/bar"
 
 # Make certain views start floating
 riverctl float-filter-add app-id float
