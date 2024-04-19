@@ -64,6 +64,7 @@ static const char *const autostart[] = {
 	"clipmenud", NULL,
 	"xrdb", ".Xresources", NULL,
 	"feh", "--bg-fill", "/home/sh/wall/city.jpg", NULL,
+	"xhidecursor", NULL,
 	NULL /* terminate */
 };
 
