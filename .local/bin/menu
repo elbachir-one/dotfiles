@@ -1,0 +1,4 @@
+#!/bin/bash
+# A dmenu for Hyprland because i don't know how to make dmenu-wl work with more than on flag with Hyprland.
+
+dmenu-wl_run -fn "TerminessTTF Nerd Font 18" -nb "#000000" -nf "#ffffff" -sb "#202020" -sf "#33ccff"
