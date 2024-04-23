@@ -83,7 +83,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'ray-x/go.nvim'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mattn/emmet-vim'
@@ -102,10 +101,8 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 "Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neoclide/coc.nvim'
 Plug 'tpope/vim-markdown'
-Plug 'fcpg/vim-farout'
 Plug 'fcpg/vim-fahrenheit'
 
 call plug#end()
