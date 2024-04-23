@@ -498,3 +498,12 @@ c.colors.webpage.darkmode.enabled = True
 
 # Bindings for normal mode
 config.bind('<Ctrl+x>', 'set-cmd-text :')
+config.bind('H', 'bookmark-add')
+config.bind('J', 'tab-prev')
+config.bind('K', 'back')
+config.bind('L', 'forward')
+config.bind('M', 'tab-next')
+config.bind('j', 'scroll left')
+config.bind('k', 'scroll down')
+config.bind('l', 'scroll up')
+config.bind('m', 'scroll right')
