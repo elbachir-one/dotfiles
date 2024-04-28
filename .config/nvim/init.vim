@@ -6,8 +6,14 @@ nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
 nnoremap <C-k> 		:vertical resize -2<CR>
 nnoremap <C-o> 		:vertical resize +2<CR>
-nnoremap <C-h>	<C-w>h
-nnoremap <C-l>	<C-w>l
+
+nmap J <C-w>h
+nmap M <C-w>l
+
+noremap <silent> l k
+noremap <silent> k j
+noremap <silent> m l
+noremap <silent> j h
 
 "map <leader>c :!pdflatex % && !zathura %:p:r.pdf &<CR>
 nnoremap <leader>c :w<CR>:!pdflatex % && zathura %:r.pdf & disown<CR>

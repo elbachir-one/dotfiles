@@ -61,4 +61,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 call plug#end()
 
+noremap m l
+noremap j h
+noremap k j
+noremap l k
 
+autocmd FileType gitdiff noremap m l
+autocmd FileType gitdiff noremap j h
+autocmd FileType gitdiff noremap k j
+autocmd FileType gitdiff noremap l k
