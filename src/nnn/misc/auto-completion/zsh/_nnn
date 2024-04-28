@@ -1,0 +1,47 @@
+#compdef nnn
+#
+# Completion definition for nnn.
+#
+# Author:
+#   Arun Prakash Jana <engineerarun@gmail.com>
+#
+
+setopt localoptions noshwordsplit noksharrays
+local -a args
+args=(
+    '(-a)-a[auto-create NNN_FIFO]'
+    '(-A)-A[disable dir auto-enter]'
+    '(-b)-b[bookmark key to open]:key char'
+    '(-B)-B[use bsdtar for archives]'
+    '(-c)-c[cli-only opener]'
+    '(-C)-C[color by context]'
+    '(-d)-d[start in detail mode]'
+    '(-D)-D[dirs in context color]'
+    '(-e)-e[open text files in $VISUAL/$EDITOR/vi]'
+    '(-E)-E[use EDITOR for undetached edits]'
+    '(-f)-f[use readline history file]'
+    '(-g)-g[regex filters]'
+    '(-H)-H[show hidden files]'
+    '(-i)-i[show current file info]'
+    '(-J)-J[no auto-advance on selection]'
+    '(-K)-K[detect key collision and exit]'
+    '(-l)-l[lines to move per scroll]:val'
+    '(-n)-n[start in type-to-nav mode]'
+    '(-o)-o[open files only on Enter]'
+    '(-p)-p[copy selection to file]:file name'
+    '(-P)-P[plugin key to run]:key char'
+    '(-Q)-Q[disable quit confirmation]'
+    '(-r)-r[show cp, mv progress (Linux-only)]'
+    '(-R)-R[disable rollover at edges]'
+    '(-s)-s[load session]:session name'
+    '(-S)-S[persistent session]'
+    '(-t)-t[timeout to lock]:seconds'
+    '(-T)-T[a d e r s t v]:key'
+    '(-u)-u[use selection (no prompt)]'
+    '(-U)-U[show user and group]'
+    '(-V)-V[show program version and exit]'
+    '(-x)-x[notis, sel to system clipboard, xterm title]'
+    '(-h)-h[show program help]'
+    '*:filename:_files'
+)
+_arguments -S -s $args

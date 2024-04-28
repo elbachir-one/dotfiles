@@ -33,6 +33,10 @@ git clone https://github.com/garabik/grc.git
 cd grc/
 sudo ./install.sh
 cd
+# cd dotfiles/src/nnn/
+# make O_NERD=1
+# sudo cp nnn /usr/bin/
+cd
 sudo cp /etc/profile.d/grc.sh /etc/
 sudo xbps-remove -Oy && sudo xbps-remove -oy
 #sudo xbps-reconfigure -f linux-lts

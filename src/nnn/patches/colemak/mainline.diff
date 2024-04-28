@@ -1,0 +1,117 @@
+diff --git a/src/nnn.c b/src/nnn.c
+index 6792d503..0a59e8e3 100644
+--- a/src/nnn.c
++++ b/src/nnn.c
+@@ -5148,12 +5148,12 @@ static void show_help(const char *path)
+ 	"2(___n))\n"
+ 	"0\n"
+ 	"1NAVIGATION\n"
+-	       "9Up k  Up%16PgUp ^U  Page up\n"
+-	       "9Dn j  Down%14PgDn ^D  Page down\n"
++	       "9Up e  Up%16PgUp ^U  Page up\n"
++	       "9Dn n  Down%14PgDn ^D  Page down\n"
+ 	       "9Lt h  Parent%12~ ` @ -  ~, /, start, prev\n"
+-	   "5Ret Rt l  Open%20'  First file/match\n"
+-	       "9g ^A  Top%21J  Jump to entry/offset\n"
+-	       "9G ^E  End%20^J  Toggle auto-advance on open\n"
++	   "5Ret Rt i  Open%20'  First file/match\n"
++	       "9g ^E  Top%21J  Jump to entry/offset\n"
++	       "9G ^N  End%20^J  Toggle auto-advance on open\n"
+ 	      "8B (,)  Book(mark)%11b ^/  Select bookmark\n"
+ 		"a1-4  Context%11(Sh)Tab  Cycle/new context\n"
+ 	    "62Esc ^Q  Quit%19^y  Next young\n"
+@@ -5161,20 +5161,20 @@ static void show_help(const char *path)
+ 		  "cq  Quit context\n"
+ 	"0\n"
+ 	"1FILTER & PROMPT\n"
+-		  "c/  Filter%17^N  Toggle type-to-nav\n"
++		  "c/  Filter%17^M  Toggle type-to-nav\n"
+ 		"aEsc  Exit prompt%12^L  Toggle last filter\n"
+ 		  "c.  Toggle hidden%05Alt+Esc  Unfilter, quit context\n"
+ 	"0\n"
+ 	"1FILES\n"
+-	       "9o ^O  Open with%15n  Create new/link\n"
++	       "9o ^O  Open with%15c  Create new/link\n"
+ 	       "9f ^F  File stats%14d  Detail mode toggle\n"
+ 		 "b^R  Rename/dup%14r  Batch rename\n"
+-		  "cz  Archive%17e  Edit file\n"
++		  "cz  Archive%17y  Edit file\n"
+ 		  "c*  Toggle exe%14>  Export list\n"
+ 	    "6Space +  (Un)select%12m-m  Select range/clear\n"
+ 	          "ca  Select all%14A  Invert sel\n"
+ 	       "9p ^P  Copy here%12w ^W  Cp/mv sel as\n"
+-	       "9v ^V  Move here%15E  Edit sel list\n"
++	       "9v ^V  Move here%15l  Edit sel list\n"
+ 	       "9x ^X  Delete or trash%09S  Listed sel size\n"
+ 		  "cX  Delete (rm -rf)%07Esc  Send to FIFO\n"
+ 	"0\n"
+diff --git a/src/nnn.h b/src/nnn.h
+index bd500244..b12df5c0 100644
+--- a/src/nnn.h
++++ b/src/nnn.h
+@@ -139,12 +139,12 @@ static struct key bindings[] = {
+ 	{ '\r',           SEL_OPEN },
+ 	/* Pure navigate inside */
+ 	{ KEY_RIGHT,      SEL_NAV_IN },
+-	{ 'l',            SEL_NAV_IN },
++	{ 'i',            SEL_NAV_IN },
+ 	/* Next */
+-	{ 'j',            SEL_NEXT },
++	{ 'n',            SEL_NEXT },
+ 	{ KEY_DOWN,       SEL_NEXT },
+ 	/* Previous */
+-	{ 'k',            SEL_PREV },
++	{ 'e',            SEL_PREV },
+ 	{ KEY_UP,         SEL_PREV },
+ 	/* Page down */
+ 	{ KEY_NPAGE,      SEL_PGDN },
+@@ -157,11 +157,11 @@ static struct key bindings[] = {
+ 	/* First entry */
+ 	{ KEY_HOME,       SEL_HOME },
+ 	{ 'g',            SEL_HOME },
+-	{ CONTROL('A'),   SEL_HOME },
++	{ CONTROL('E'),   SEL_HOME },
+ 	/* Last entry */
+ 	{ KEY_END,        SEL_END },
+ 	{ 'G',            SEL_END },
+-	{ CONTROL('E'),   SEL_END },
++	{ CONTROL('N'),   SEL_END },
+ 	/* Go to first file */
+ 	{ '\'',           SEL_FIRST },
+ 	/* Jump to an entry number/offset */
+@@ -202,7 +202,7 @@ static struct key bindings[] = {
+ 	/* Filter */
+ 	{ '/',            SEL_FLTR },
+ 	/* Toggle filter mode */
+-	{ CONTROL('N'),   SEL_MFLTR },
++	{ CONTROL('M'),   SEL_MFLTR },
+ 	/* Toggle hide .dot files */
+ 	{ '.',            SEL_HIDDEN },
+ 	/* Detailed listing */
+@@ -229,7 +229,7 @@ static struct key bindings[] = {
+ 	/* Invert selection in current dir */
+ 	{ 'A',            SEL_SELINV },
+ 	/* List, edit selection */
+-	{ 'E',            SEL_SELEDIT },
++	{ 'l',            SEL_SELEDIT },
+ 	/* Copy from selection buffer */
+ 	{ 'p',            SEL_CP },
+ 	{ CONTROL('P'),   SEL_CP },
+@@ -247,7 +247,7 @@ static struct key bindings[] = {
+ 	{ 'o',            SEL_OPENWITH },
+ 	{ CONTROL('O'),   SEL_OPENWITH },
+ 	/* Create a new file */
+-	{ 'n',            SEL_NEW },
++	{ 'c',            SEL_NEW },
+ 	/* Show rename prompt */
+ 	{ CONTROL('R'),   SEL_RENAME },
+ 	/* Rename contents of current dir */
+@@ -259,7 +259,7 @@ static struct key bindings[] = {
+ 	/* Toggle auto-advance on file open */
+ 	{ CONTROL('J'),   SEL_AUTONEXT },
+ 	/* Edit in EDITOR */
+-	{ 'e',            SEL_EDIT },
++	{ 'y',            SEL_EDIT },
+ 	/* Run a plugin */
+ 	{ ';',            SEL_PLUGIN },
+ 	/* Show total size of listed selection */

@@ -1,0 +1,122 @@
+version: 2
+
+jobs:
+  compile:
+    docker:
+      - image: ubuntu:22.04
+        working_directory: ~/nnn
+        environment:
+          CI_FORCE_TEST: 1
+    parallelism: 4
+    steps:
+      - run:
+          command: |
+            apt update -qq
+            DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get -y install tzdata
+            apt install -y --no-install-recommends software-properties-common wget gpg-agent shellcheck
+            apt install -y --no-install-recommends git make pkg-config libncurses-dev libreadline-dev
+            apt install -y --no-install-recommends gcc-9 gcc-10 gcc-11 gcc-12
+            apt install -y --no-install-recommends clang-11 clang-12 clang-13 clang-14 clang-15 clang-tidy-15
+      - checkout
+      - run:
+          command: |
+            export CFLAGS=-Werror
+            make clean
+            echo
+            echo "########## gcc-9 ##########"
+            CC=gcc-9 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## gcc-10 ##########"
+            CC=gcc-10 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## gcc-11 ##########"
+            CC=gcc-11 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## gcc-12 ##########"
+            CC=gcc-12 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## clang-11 ##########"
+            CC=clang-11 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## clang-12 ##########"
+            CC=clang-12 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## clang-13 ##########"
+            CC=clang-13 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## clang-14 ##########"
+            CC=clang-14 make strip
+            ls -l nnn
+            make clean
+            echo
+            echo "########## clang-tidy-15 ##########"
+            clang-tidy-15 src/* -- -I/usr/include -I/usr/include/ncursesw
+            echo "########## shellcheck ##########"
+            find plugins/ -type f ! \( -name "*.md" -o -name "*-mac" \) -exec shellcheck {} +
+
+  package-and-publish:
+    machine: true
+    working_directory: ~/nnn
+    steps:
+      - checkout
+      - run:
+          name: "auto-generate packages"
+          command: |
+            # Create dist directory if it doesn't exist
+            mkdir ./dist
+            # Clean up
+            rm -rf ./dist/*
+            # Pack source
+            git archive -o ../${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG}.tar.gz --format tar.gz --prefix=${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG#v}/ ${CIRCLE_TAG}
+            # Use latest installed python3 from pyenv
+            export PYENV_VERSION="$(pyenv versions | grep -Po '\b3\.\d+\.\d+' | tail -1)"
+            #pip install packagecore
+            #packagecore -c misc/packagecore/packagecore.yaml -o ./dist/ ${CIRCLE_TAG#v}
+            # Move source pack to dist
+            mv ../${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG}.tar.gz ./dist/
+
+      - run:
+          name: "publish to GitHub"
+          command: |
+            go install github.com/tcnksm/ghr@latest
+            ghr -t ${GITHUB_API_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -replace ${CIRCLE_TAG} ./dist/
+
+workflows:
+  version: 2
+
+  CircleCI:
+    jobs: &all-tests
+      - compile
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 6"
+          filters:
+            branches:
+              only:
+                - master
+    jobs: *all-tests
+
+  publish-github-release:
+    jobs:
+      - package-and-publish:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
