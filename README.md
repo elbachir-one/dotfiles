@@ -197,5 +197,12 @@ cd ~/dotfiles/src/dwl-bar/
 make
 sudo make clean install
 ```
+## Support
 
-Thank You
+- Share the dots if you find them interesting.
+
+- Subscribe to my Youtube Channel [YouTube](https://www.youtube.com/@alphab91) 
+
+- You can also buy me Coffee
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/alphab91)
