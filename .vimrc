@@ -49,8 +49,20 @@ nnoremap <C-f>      :Files<CR>
 nnoremap <TAB>      :bnext<CR>
 nnoremap <C-s>      :vs<CR>
 
+noremap m l
+noremap j h
+noremap k j
+noremap l k
+
 " PUG
-call plug#begin()
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+    echo "Downloading junegunn/vim-plug to manage plugins..."
+    silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+    autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
@@ -58,15 +70,31 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'img-paste-devs/img-paste.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'SirVer/ultisnips'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'preservim/vim-pencil'
 
 call plug#end()
-
-noremap m l
-noremap j h
-noremap k j
-noremap l k
 
 autocmd FileType gitdiff noremap m l
 autocmd FileType gitdiff noremap j h
 autocmd FileType gitdiff noremap k j
 autocmd FileType gitdiff noremap l k
+
+let g:mkdp_browser = 'qutebrowser'
+
+autocmd FileType markdown nmap <buffer><silent> <C-a> :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+" let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
+
+autocmd FileType markdown normal zR
+
+augroup pencil
+autocmd!
+autocmd FileType markdown,mkd call pencil#init()
+autocmd FileType text         call pencil#init()
+augroup END
