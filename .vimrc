@@ -24,9 +24,10 @@ set undodir=/tmp
 set noswapfile
 set ignorecase
 set clipboard+=unnamedplus
-set paste
+set nopaste
 set ai
 set colorcolumn=80
+set autoindent
 
 "
 hi CursorLine term=bold cterm=bold ctermbg=238
