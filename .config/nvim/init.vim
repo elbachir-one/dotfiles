@@ -4,9 +4,8 @@ highlight CursorLineNr ctermbg=Black cterm=bold ctermfg=Green
 
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
-nnoremap <C-k> 		:vertical resize -2<CR>
-nnoremap <C-o> 		:vertical resize +2<CR>
-
+nnoremap <C-l> 		:vertical resize -2<CR>
+nnoremap <C-k> 		:vertical resize +2<CR>
 nmap J <C-w>h
 nmap M <C-w>l
 
@@ -15,12 +14,18 @@ noremap <silent> k j
 noremap <silent> m l
 noremap <silent> j h
 
+" Tab Stuff
+nnoremap tn :tabnew<Space>
+nnoremap tk :tabnext<cr>
+nnoremap tj :tabprev<cr>
+nnoremap th :tabfirst<cr>
+nnoremap tl :tablast<cr>
+
 "map <leader>c :!pdflatex % && !zathura %:p:r.pdf &<CR>
 nnoremap <leader>c :w<CR>:!pdflatex % && zathura %:r.pdf & disown<CR>
 
 inoremap jk <Esc>
 inoremap kj <Esc>
-"
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 vnoremap < <gv
@@ -28,9 +33,6 @@ vnoremap > >gv
 
 :vmap <Tab> >
 :vmap <S-Tab> <
-
-let g:user_emmet_mode='n'
-let g:user_emmet_leader_key=','
 
 map <F8> :setlocal spell! spelllang=en_gb<CR>
 
@@ -49,29 +51,43 @@ set cursorcolumn
 set backupcopy=yes
 set bg=dark
 set shiftwidth=4
-set diffopt+=iwhite " Ignore whitespace whilst diffing
+set diffopt+=iwhite
 set autoindent
 set smartindent
+set go=a
+set mouse=a
+set nohlsearch
+set clipboard+=unnamedplus
+set nocompatible
+set encoding=utf-8
+set number relativenumber
+set wildmode=longest,list,full
+set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
+set undofile
+set undodir=/tmp
+set nobackup
+set nowritebackup
+set updatetime=300
+set signcolumn=yes
 
 nnoremap <silent> <F5> :%s/\s\+$//<cr>
-
-set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
-
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :Files<CR>
 nnoremap <TAB> :bnext<CR>
 nnoremap <C-s> :vsplit<CR>
-nnoremap <C-m> :make<CR>
-
-
-set undofile
-set undodir=/tmp
+nnoremap <C-b> :make<CR>
+nnoremap <C-m> :MarkdownPreview<CR>
+nnoremap <C-v> :ToggleTerm<CR>
+nnoremap <C-x> :vsp term://go run %<CR>
+nnoremap <C-g> :vsp term://gcc -o main main.c %<CR>
+"nnoremap : <cmd>FineCmdline<CR>
 
 vnoremap <C-c> "+y
 map <C-v> "+v
 
 let mapleader ="!"
 
+" Auto Install Vim Plug
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
     echo "Downloading junegunn/vim-plug to manage plugins..."
     silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
@@ -79,15 +95,14 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
     autocmd VimEnter * PlugInstall
 endif
 
+" Plugins
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 
-Plug 'MunifTanjim/nui.nvim'
-Plug 'VonHeikemen/fine-cmdline.nvim'
 Plug 'lervag/vimtex'
-
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'img-paste-devs/img-paste.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'ray-x/go.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -105,32 +120,20 @@ Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-"Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'neoclide/coc.nvim'
-Plug 'tpope/vim-markdown'
+"Plug 'tpope/vim-markdown'
 Plug 'fcpg/vim-fahrenheit'
+
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'preservim/vim-pencil'
 
 call plug#end()
 
 lua require("toggleterm").setup()
 
-nnoremap <C-v> :ToggleTerm<CR>
-nnoremap <C-x> :vsp term://go run %<CR>
-nnoremap <C-g> :vsp term://gcc -o main main.c %<CR>
-"nnoremap : <cmd>FineCmdline<CR>
-
-set go=a
-set mouse=a
-set nohlsearch
-set clipboard+=unnamedplus
-
-" Some basics:
-set nocompatible
-set encoding=utf-8
-set number relativenumber
-" Enable autocompletion:
-set wildmode=longest,list,full
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -155,31 +158,11 @@ nm <leader>i :call ToggleIPA()<CR>
 imap <leader>i <esc>:call ToggleIPA()<CR>a
 nm <leader>q :call ToggleProse()<CR>
 
-map Q gq
-
-" Check file in shellcheck:
-"map <leader>s :!clear && shellcheck %<CR>
-
-" Open my bibliography file in split
-map <leader>b :vsp<space>$BIB<CR>
-map <leader>r :vsp<space>$REFER<CR>
-
-" Replace all is aliased to S.
-"nnoremap S :%s//g<Left><Left>
-
-" Compile document, be it groff/LaTeX/markdown/etc.
-map <leader>c :w! \| !compiler <c-r>%<CR>
-
-" Open corresponding .pdf/.html or preview
-map <leader>p :!opout <c-r>%<CR><CR>
-
-" Runs a script that cleans out tex build files whenever I close out of a .tex file.
-autocmd VimLeave *.tex !texclear %
-
 " Ensure files are read as what I want:
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 map <leader>v :VimwikiIndex
 let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 autocmd BufRead,BufNewFile *.tex set filetype=tex
@@ -195,7 +178,6 @@ autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritepre * %s/\n\+\%$//e
-
 autocmd BufWritePost files,directories !shortcuts
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
@@ -203,13 +185,8 @@ autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 if &diff
     highlight! link DiffText MatchParen
 endif
-"tab stuff
-nnoremap tn :tabnew<Space>
-nnoremap tk :tabnext<cr>
-nnoremap tj :tabprev<cr>
-nnoremap th :tabfirst<cr>
-nnoremap tl :tablast<cr>
-"Themes
+
+" Themes
 colorscheme fahrenheit
 "colorscheme orbital
 "colorscheme gruvbox
@@ -218,12 +195,13 @@ colorscheme fahrenheit
 "colorscheme farout
 "colorscheme PaperColor
 "colorscheme github_*
-" colorscheme ayu
+"colorscheme ayu
 "colorscheme molokai
 "colorscheme kolor
 "colorscheme codeblocks_dark
 "colorscheme skittles_dark
 
+" Vim Airline
 let g:conoline_color_normal_light = "ctermbg=240"
 let g:conoline_color_normal_nr_light = "ctermbg=240 ctermfg=white"
 let g:conoline_color_insert_light = "ctermbg=black"
@@ -236,12 +214,13 @@ let g:airline_right_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_left_alt_sep= ''
 let g:airline_left_sep = ''
-" air-line
+
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-" unicode symbols
+
+" Unicode Symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
@@ -255,6 +234,7 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
+" Airline Themes
 "let g:airline_theme='kolor'
 "let g:airline_theme='dark'
 "let g:airline_theme='badwolf'
@@ -265,7 +245,7 @@ let g:airline_theme='ravenpower'
 "let g:airline_theme='laederon'
 "let g:airline_theme='molokai'
 "let g:airline_theme='powerlineish'
-"
+
 " Goyo setup
 autocmd BufNewFile, BufRead *.vpm call SetVimPresentationMode()
 function SetVimPresentationMode()
@@ -277,12 +257,8 @@ function SetVimPresentationMode()
     endif
 endfunction
 
-
 " Coc
-set nobackup
-set nowritebackup
-set updatetime=300
-set signcolumn=yes
+
 let g:coc_global_extensions = [
 	    \ 'coc-tsserver',
 	    \ 'coc-clangd'
@@ -371,3 +347,22 @@ nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Markdown Preview
+autocmd FileType markdown nmap <buffer><silent> <C-a> :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+" let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
+let g:mkdp_browser = 'qutebrowser'
+
+" Emmet Stuff
+let g:user_emmet_mode='n'
+let g:user_emmet_leader_key=','
+
+autocmd FileType markdown normal zR
+
+augroup pencil
+autocmd!
+autocmd FileType markdown,mkd call pencil#init()
+autocmd FileType text         call pencil#init()
+augroup END
