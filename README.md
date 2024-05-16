@@ -8,7 +8,7 @@
 
 ## Installation
 
-If you want to install my stuff, there are some dependences needed for everting to work.
+If you want to install my stuff, there are some dependences needed for everything to work.
 
 ## Void Linux
 
