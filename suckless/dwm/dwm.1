@@ -153,6 +153,9 @@ Add/remove all windows with nth tag to/from the view.
 .TP
 .B Mod1\-Shift\-q
 Quit dwm.
+.TP
+.B Mod1\-Control\-Shift\-q
+Restart dwm.
 .SS Mouse commands
 .TP
 .B Mod1\-Button1
@@ -181,6 +184,13 @@ This file is started before any autostart.sh; dwm waits for its termination.
 .SH CUSTOMIZATION
 dwm is customized by creating a custom config.h and (re)compiling the source
 code. This keeps it fast, secure and simple.
+.SH SIGNALS
+.TP
+.B SIGHUP - 1
+Restart the dwm process.
+.TP
+.B SIGTERM - 15
+Cleanly terminate the dwm process.
 .SH SEE ALSO
 .BR dmenu (1),
 .BR st (1)

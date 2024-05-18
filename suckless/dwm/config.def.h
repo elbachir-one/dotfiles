@@ -44,6 +44,7 @@ const char *spcmd4[] = {"st", "-n", "spclock", "-g", "80x20", "-e", "tty-clock",
 const char *spcmd5[] = {"st", "-n", "spcava", "-g", "120x30", "-e", "cava", NULL };
 const char *spcmd6[] = {"alpha", "-n", "spnnn", "-g", "110x28", "-e", "nnn", NULL };
 const char *spcmd7[] = {"st", "-n", "sptyp", "-g", "90x20", "-e", "typiskt", NULL };
+const char *spcmd8[] = {"st", "-n", "spvim", "-g", "120x30", "-e", "vim", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -53,6 +54,7 @@ static Sp scratchpads[] = {
 	{"spcava",      spcmd5},
 	{"spnnn",       spcmd6},
 	{"sptyp",       spcmd7},
+	{"spvim",       spcmd8},
 };
 
 static const char *const autostart[] = {
@@ -84,23 +86,24 @@ static const Rule rules[] = {
     {"obs",                 NULL,           NULL, 	          1 << 7, 	    False, 	     0,         -1,       -1},
     {"Surf",                NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
     {"Virt-manager", 	    NULL,           NULL, 	          1 << 8, 	    False, 	     0,         -1,       -1},
-    {"Chromium", 	    NULL,           NULL, 	          1 << 1, 	    False, 	     0,         -1,       -1},
+    {"Chromium", 	        NULL,           NULL, 	          1 << 1, 	    False, 	     0,         -1,       -1},
     {"Transmission-gtk",    NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
     {"Gimp", 	            NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
-    {"kdenlive", 	    NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
-    {"st",                  NULL,           "ranger",             1 << 6, 	    False,           0,         -1,       -1},
-    {"qutebrowser", 	    NULL,           NULL, 	          1 << 3, 	    False,           0,         -1,       -1},
-    {"st",                  NULL,           NULL, 	          0,                0,               1,         1,        -1},
-    {"Alacritty", 	    NULL,           NULL, 	          0,                0,               1,         1,        -1},
-    {"Sakura", 	            NULL,           NULL, 	          0,                0,               1,         1,        -1},
-    { NULL, 	            NULL,           "Event Tester",       0,                0,               0,         1,        -1},
-    { NULL,	            "spterm",	    NULL,	          SPTAG(0),         1,		     0,         0,        -1 },
-    { NULL,	            "spfm",         NULL,	          SPTAG(1),         1,		     0,         0,        -1 },
-    { NULL,	            "spncm",        NULL,	          SPTAG(2),         1,		     0,         0,        -1 },
-    { NULL,	            "spclock",      NULL,	          SPTAG(3),         1,		     0,         0,        -1 },
-    { NULL,	            "spcava",       NULL,	          SPTAG(4),         1,		     0,         0,        -1 },
-    { NULL,	            "spnnn",        NULL,	          SPTAG(5),         1,		     0,         0,        -1 },
-    { NULL,	            "sptyp",        NULL,	          SPTAG(6),         1,		     0,         0,        -1 },
+    {"kdenlive", 	        NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
+    {"st",                  NULL,           "ranger",         1 << 6, 	    False,       0,         -1,       -1},
+    {"qutebrowser", 	    NULL,           NULL, 	          1 << 3, 	    False,       0,         -1,       -1},
+    {"st",                  NULL,           NULL, 	          0,                0,       1,          1,       -1},
+    {"Alacritty", 	        NULL,           NULL, 	          0,                0,       1,          1,       -1},
+    {"Sakura", 	            NULL,           NULL, 	          0,                0,       1,          1,       -1},
+    { NULL, 	            NULL,           "Event Tester",   0,                0,       0,          1,       -1},
+    { NULL,	                "spterm",	    NULL,	          SPTAG(0),         1,		 0,          0,       -1},
+    { NULL,	                "spfm",         NULL,	          SPTAG(1),         1,		 0,          0,       -1},
+    { NULL,	                "spncm",        NULL,	          SPTAG(2),         1,	     0,          0,       -1},
+    { NULL,	                "spclock",      NULL,	          SPTAG(3),         1,	     0,          0,       -1},
+    { NULL,	                "spcava",       NULL,	          SPTAG(4),         1,	     0,          0,       -1},
+    { NULL,	                "spnnn",        NULL,	          SPTAG(5),         1,	     0,          0,       -1},
+    { NULL,	                "sptyp",        NULL,	          SPTAG(6),         1,	     0,          0,       -1},
+    { NULL,	                "spvim",        NULL,	          SPTAG(7),         1,	     0,          0,       -1},
 };
 
 /* layout(s) */
@@ -125,6 +128,7 @@ static const Layout layouts[]   = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
+
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
@@ -153,77 +157,76 @@ static const char *dowcmd[]         = { "down", NULL };
 static const char *boomercmd[]      = { "boomer", NULL };
 static const char *screencmd[]      = { "screenshot", NULL };
 static const char *reccmd[]         = { "recording", NULL };
+
 static const Key keys[] = {
-
-    /* modifier                     key                         function                 argument */
-
-	{MODKEY,                    XK_s,  	                togglescratch,          {.ui = 0 } },
-	{MODKEY|ShiftMask,          XK_r,	                togglescratch,          {.ui = 1 } },
-	{MODKEY,                    XK_e,	                togglescratch,          {.ui = 2 } },
-	{MODKEY,                    XK_a,	                togglescratch,          {.ui = 3 } },
-	{MODKEY,                    XK_c,	                togglescratch,          {.ui = 4 } },
-	{MODKEY|ShiftMask,          XK_n,	                togglescratch,          {.ui = 5 } },
-	{MODKEY,                    XK_t,	                togglescratch,          {.ui = 6 } },
-	{MODKEY,                    XK_z,  	                spawn,                  {.v = boomercmd } },
-    	{MODKEY,                    XK_x, 		        spawn, 		        {.v = dowcmd}},
-	{MODKEY,                    XK_y, 		        spawn, 		        {.v = ytcmd}},
-	{MODKEY,                    XK_d, 		        spawn, 		        {.v = ytdcmd}},
-	{MODKEY,                    XK_f, 		        spawn, 		        {.v = searchcmd}},
-	{MODKEY | ShiftMask,        XK_f, 		        spawn, 		        {.v = flamcmd}},
-	{MODKEY | ShiftMask,        XK_p, 		        spawn, 		        {.v = boatcmd}},
-	{MODKEY | ShiftMask,        XK_l, 		        spawn, 		        {.v = lockcmd}},
-	{MODKEY, 	            XK_w, 		        spawn, 		        {.v = chrocmd}},
-	{MODKEY,   	            XK_v, 		        spawn, 		        {.v = virtcmd}},
-	{MODKEY, 	            XK_r, 		        spawn, 		        {.v = rancmd}},
-	{MODKEY, 	            XK_p, 		        spawn, 		        {.v = dmenucmd}},
-	{MODKEY | ShiftMask, 	    XK_Return,                  spawn, 		        {.v = termcmd}},
-	{MODKEY,		    XK_n, 		        spawn, 		        {.v = clipcmd}},
-	{MODKEY | ShiftMask,        XK_s, 		        spawn, 		        {.v = screencmd}},
-// Keys for recording
-	{MODKEY | ControlMask | ShiftMask,        XK_r, 	spawn, 		{.v = reccmd}},
-	{MODKEY | ControlMask | ShiftMask,        XK_x, 	spawn, 		{.v = (const char*[]){ "pkill", "-SIGINT", "ffmpeg", NULL }}},
-    //  {MODKEY,                    XK_agrave,                  view,                   {.ui = ~0 } },
-    //  {MODKEY|ShiftMask,          XK_agrave,                  tag,                    {.ui = ~0 } },
-	{MODKEY,                    XK_semicolon,               focusmon,               {.i = +1 } },
-	{MODKEY|ShiftMask,          XK_semicolon,               tagmon,                 {.i = +1 } },
-	{MODKEY | ControlMask,      XK_f,                       togglefullscr,          {0}},
-	{MODKEY,		    XK_b, 		        togglebar, 	        {0}},
-	{MODKEY | ControlMask,      XK_s, 		        togglesticky, 		{0}},
-	{MODKEY,		    XK_k, 		        focusstack, 	        {.i = +1}},
-	{MODKEY,		    XK_l, 		        focusstack,             {.i = -1}},
-	{MODKEY,		    XK_i, 		        incnmaster, 	        {.i = +1}},
-	{MODKEY,		    XK_o, 		        incnmaster,             {.i = -1}},
-	{MODKEY,		    XK_j, 		        setmfact, 	        {.f = -0.03}},
-	{MODKEY,		    XK_m, 		        setmfact, 	        {.f = +0.03}},
-	{MODKEY,		    XK_Return, 	    	        zoom, 		        {0}},
-	{MODKEY,		    XK_Tab, 	      	        view, 		        {0}},
-	{MODKEY,		    XK_space,     		setlayout, 	        {0}},
-	{MODKEY | ShiftMask, 	    XK_space,                   togglefloating,         {0}},
-	{MODKEY | ShiftMask | ControlMask, 	XK_z, 		view, 		        {.ui = ~0}},
-	{MODKEY | ShiftMask,        XK_z, 		        tag, 		        {.ui = ~0}},
-	{MODKEY,                    XK_g,                       setgaps,                {.i = -5 } },
-	{MODKEY,                    XK_h,                       setgaps,                {.i = +5 } },
-	{MODKEY|ShiftMask,          XK_g,                       setgaps,                {.i = GAP_RESET } },
-	{MODKEY|ShiftMask,          XK_h,                       setgaps,                {.i = GAP_TOGGLE} },
-	{MODKEY | ShiftMask, 	    XK_c, 		        killclient, 	        {0}},
-	{0, 		            XK_F3, 		        spawn, 		        {.v = up}},
-	{0, 		            XK_F2, 		        spawn, 		        {.v = down}},
-	{0, 		            XK_F4, 		        spawn, 		        {.v = mut}},
-	{0, 		            XK_F6, 		        spawn, 		        {.v = toggle}},
-	{0, 		            XK_F8, 		        spawn, 		        {.v = next}},
-	{0, 		            XK_F7, 		        spawn, 		        {.v = prev}},
-	{MODKEY|ShiftMask,          XK_q,                       quit,                   {0} },
-	TAGKEYS(                    XK_ampersand,                       0)
-	TAGKEYS(                    XK_eacute,                          1)
-	TAGKEYS(                    XK_quotedbl,                        2)
-	TAGKEYS(                    XK_apostrophe,                      3)
-	TAGKEYS(                    XK_parenleft,                       4)
-	TAGKEYS(                    XK_minus,                           5)
-	TAGKEYS(                    XK_egrave,                          6)
-	TAGKEYS(                    XK_underscore,                      7)
-	TAGKEYS(                    XK_ccedilla,                        8)
+    /* modifier                      key                function               argument */
+	{MODKEY,                         XK_s,  	      togglescratch,          {.ui = 0 }},
+	{MODKEY|ShiftMask,               XK_r,	          togglescratch,          {.ui = 1 }},
+	{MODKEY,                         XK_e,	          togglescratch,          {.ui = 2 }},
+	{MODKEY,                         XK_a,	          togglescratch,          {.ui = 3 }},
+	{MODKEY,                         XK_c,	          togglescratch,          {.ui = 4 }},
+	{MODKEY|ShiftMask,               XK_n,	          togglescratch,          {.ui = 5 }},
+	{MODKEY,                         XK_t,	          togglescratch,          {.ui = 6 }},
+	{MODKEY|ShiftMask,               XK_v,	          togglescratch,          {.ui = 7 }},
+	{MODKEY,                         XK_z,  	      spawn,                  {.v = boomercmd }},
+    {MODKEY,                         XK_x, 		      spawn, 		          {.v = dowcmd}},
+	{MODKEY,                         XK_y, 		      spawn, 		          {.v = ytcmd}},
+	{MODKEY,                         XK_d, 		      spawn, 		          {.v = ytdcmd}},
+	{MODKEY,                         XK_f, 		      spawn, 		          {.v = searchcmd}},
+	{MODKEY|ShiftMask,               XK_f, 		      spawn, 		          {.v = flamcmd}},
+	{MODKEY|ShiftMask,               XK_p, 		      spawn, 		          {.v = boatcmd}},
+	{MODKEY|ShiftMask,               XK_l, 		      spawn, 		          {.v = lockcmd}},
+	{MODKEY, 	                     XK_w, 		      spawn, 		          {.v = chrocmd}},
+	{MODKEY,   	                     XK_v, 		      spawn, 		          {.v = virtcmd}},
+	{MODKEY, 	                     XK_r, 		      spawn, 		          {.v = rancmd}},
+	{MODKEY, 	                     XK_p, 		      spawn, 		          {.v = dmenucmd}},
+	{MODKEY|ShiftMask, 	             XK_Return,       spawn, 		          {.v = termcmd}},
+	{MODKEY,		                 XK_n, 		      spawn, 		          {.v = clipcmd}},
+	{MODKEY|ShiftMask,               XK_s, 		      spawn, 		          {.v = screencmd}},
+	{MODKEY|ControlMask|ShiftMask,   XK_r,      	  spawn, 		          {.v = reccmd}},
+	{MODKEY|ControlMask|ShiftMask,   XK_x,      	  spawn, 		          {.v = (const char*[]){ "pkill", "-SIGINT", "ffmpeg", NULL }}},
+//  {MODKEY,                         XK_agrave,       view,                   {.ui = ~0 } },
+//  {MODKEY|ShiftMask,               XK_agrave,       tag,                    {.ui = ~0 } },
+	{MODKEY,                         XK_semicolon,    focusmon,               {.i = +1 } },
+	{MODKEY|ShiftMask,               XK_semicolon,    tagmon,                 {.i = +1 } },
+	{MODKEY|ControlMask,             XK_f,            togglefullscr,          {0}},
+	{MODKEY,		                 XK_b, 		      togglebar, 	          {0}},
+	{MODKEY|ControlMask,             XK_s, 		      togglesticky, 	      {0}},
+	{MODKEY,		                 XK_k, 		      focusstack, 	          {.i = +1}},
+	{MODKEY,		                 XK_l, 		      focusstack,             {.i = -1}},
+	{MODKEY,		                 XK_i, 		      incnmaster, 	          {.i = +1}},
+	{MODKEY,		                 XK_o, 		      incnmaster,             {.i = -1}},
+	{MODKEY,		                 XK_j, 		      setmfact, 	          {.f = -0.03}},
+	{MODKEY,		                 XK_m, 		      setmfact, 	          {.f = +0.03}},
+	{MODKEY,		                 XK_Return,       zoom, 		          {0}},
+	{MODKEY,		                 XK_Tab,          view, 		          {0}},
+	{MODKEY,		                 XK_space,     	  setlayout, 	          {0}},
+	{MODKEY|ShiftMask, 	             XK_space,        togglefloating,         {0}},
+	{MODKEY|ShiftMask|ControlMask, 	 XK_z, 		      view, 		          {.ui = ~0}},
+	{MODKEY|ShiftMask,               XK_z, 		      tag, 		              {.ui = ~0}},
+	{MODKEY,                         XK_g,            setgaps,                {.i = -5 } },
+	{MODKEY,                         XK_h,            setgaps,                {.i = +5 } },
+	{MODKEY|ShiftMask,               XK_g,            setgaps,                {.i = GAP_RESET } },
+	{MODKEY|ShiftMask,               XK_h,            setgaps,                {.i = GAP_TOGGLE} },
+	{MODKEY | ShiftMask, 	         XK_c, 	          killclient, 	          {0}},
+	{0, 		                     XK_F3, 		  spawn, 		          {.v = up}},
+	{0, 		                     XK_F2, 		  spawn, 		          {.v = down}},
+	{0, 		                     XK_F4, 		  spawn, 		          {.v = mut}},
+	{0, 		                     XK_F6, 		  spawn, 		          {.v = toggle}},
+	{0, 		                     XK_F8, 		  spawn, 		          {.v = next}},
+	{0, 		                     XK_F7, 		  spawn, 		          {.v = prev}},
+	{MODKEY|ShiftMask,               XK_q,            quit,                   {0} },
+	{MODKEY,                         XK_q,            quit,                   {1} }, 
+	TAGKEYS(                         XK_ampersand,                            0)
+	TAGKEYS(                         XK_eacute,                               1)
+	TAGKEYS(                         XK_quotedbl,                             2)
+	TAGKEYS(                         XK_apostrophe,                           3)
+	TAGKEYS(                         XK_parenleft,                            4)
+	TAGKEYS(                         XK_minus,                                5)
+	TAGKEYS(                         XK_egrave,                               6)
+	TAGKEYS(                         XK_underscore,                           7)
+	TAGKEYS(                         XK_ccedilla,                             8)
 };
-
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
