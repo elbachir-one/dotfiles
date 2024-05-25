@@ -1,4 +1,7 @@
+This file is just for things that I use from different sources.
+
 - Screenkey for wayland
 https://github.com/ammgws/wshowkeys.git 
+
 - Countdown timer
 go install github.com/antonmedv/countdown@latest
