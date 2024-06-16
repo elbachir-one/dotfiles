@@ -10,8 +10,12 @@ static const int topbar                = 1;        /* 0 means bottom bar */
 static const int user_bh               = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int vertpad               = 2;       /* vertical padding of bar */
 static const int sidepad               = 4;       /* horizontal padding of bar */
-static const char *fonts[]             = { "TerminessTTF Nerd Font:style=Bold:pixelsize=18:antialias=true:autohint=true", "JoyPixels:style=Bold:pixelsize=16:antialias=true:autohint=true" };
-static const char dmenufont[]          = "monospace:size=10";
+
+static const char *fonts[]             = {
+    "TerminessTTF Nerd Font:style=Bold:pixelsize=18:antialias=true:autohint=true",
+    "JoyPixels:style=Bold:pixelsize=16:antialias=true:autohint=true"
+};
+//static const char dmenufont[]          = "monospace:size=10";
 static const char col_gray1[]          = "#000000";
 static const char col_gray2[]          = "#444444";
 static const char col_gray3[]          = "#dddfff";
@@ -21,11 +25,13 @@ static const char col_cyan1[]          = "#000000";
 static const char col_cyan2[]          = "#00ffff";
 static const unsigned int baralpha     = 0xd0;
 static const unsigned int borderalpha  = OPAQUE;
+
 static const char *colors[][4]         = {
 	/*                   fg         bg       border     float    */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2, col_gray5 },
 	[SchemeSel]  = { col_gray4, col_cyan1, col_cyan1, col_cyan2 },
 };
+
 static const unsigned int alphas[][3]  = {
         /*               fg      bg        border*/
         [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
@@ -45,6 +51,7 @@ const char *spcmd5[] = {"st", "-n", "spcava", "-g", "120x30", "-e", "cava", NULL
 const char *spcmd6[] = {"alpha", "-n", "spnnn", "-g", "110x28", "-e", "nnn", NULL };
 const char *spcmd7[] = {"st", "-n", "sptyp", "-g", "90x20", "-e", "typiskt", NULL };
 const char *spcmd8[] = {"st", "-n", "spvim", "-g", "120x30", "-e", "vim", NULL };
+
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -71,30 +78,31 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = {"", "", " ", " ", "", "󰇧 ", " ", "󰣠 ", ""};
+static const char *tags[] = {"", "", " ", " ", "󰑈", "󰙯", " ", "󰣠 ", "", ""};
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-    /* class              instance          title                 tags mask       isfloating     isterminal   noswallow    monitor */
+    /* class              instance          title           tags mask     isfloating isterminal noswallow    monitor */
 
     {"discord",             NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
-    {"qemu",                NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
+    {"qemu",                NULL,           NULL, 	          1 << 9, 	    False, 	     0,         -1,       -1},
     {"Surf", 	            NULL,           NULL, 	          1 << 3, 	    False, 	     0,          0,       -1},
-    {"firefox",             NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
+    {"Firefox",             NULL,           NULL, 	          1 << 9, 	    False, 	     0,         -1,       -1},
     {"obs",                 NULL,           NULL, 	          1 << 7, 	    False, 	     0,         -1,       -1},
     {"Surf",                NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
     {"Virt-manager", 	    NULL,           NULL, 	          1 << 8, 	    False, 	     0,         -1,       -1},
     {"Chromium", 	        NULL,           NULL, 	          1 << 1, 	    False, 	     0,         -1,       -1},
-    {"Transmission-gtk",    NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
+    {"transmission-gtk",    NULL,           NULL, 	          1 << 9, 	    False, 	     0,         -1,       -1},
     {"Gimp", 	            NULL,           NULL, 	          1 << 5, 	    False, 	     0,         -1,       -1},
     {"kdenlive", 	        NULL,           NULL, 	          1 << 3, 	    False, 	     0,         -1,       -1},
     {"st",                  NULL,           "ranger",         1 << 6, 	    False,       0,         -1,       -1},
+    {"st",                  NULL,           "newsboat",       1 << 7, 	    False,       0,         -1,       -1},
     {"qutebrowser", 	    NULL,           NULL, 	          1 << 3, 	    False,       0,         -1,       -1},
     {"st",                  NULL,           NULL, 	          0,                0,       1,          1,       -1},
     {"Alacritty", 	        NULL,           NULL, 	          0,                0,       1,          1,       -1},
-    {"Sakura", 	            NULL,           NULL, 	          0,                0,       1,          1,       -1},
+    {"Sakura", 	            NULL,           NULL, 	          1 << 2,           0,       1,          1,       -1},
     { NULL, 	            NULL,           "Event Tester",   0,                0,       0,          1,       -1},
     { NULL,	                "spterm",	    NULL,	          SPTAG(0),         1,		 0,          0,       -1},
     { NULL,	                "spfm",         NULL,	          SPTAG(1),         1,		 0,          0,       -1},
@@ -185,8 +193,6 @@ static const Key keys[] = {
 	{MODKEY|ShiftMask,               XK_s, 		      spawn, 		          {.v = screencmd}},
 	{MODKEY|ControlMask|ShiftMask,   XK_r,      	  spawn, 		          {.v = reccmd}},
 	{MODKEY|ControlMask|ShiftMask,   XK_x,      	  spawn, 		          {.v = (const char*[]){ "pkill", "-SIGINT", "ffmpeg", NULL }}},
-//  {MODKEY,                         XK_agrave,       view,                   {.ui = ~0 } },
-//  {MODKEY|ShiftMask,               XK_agrave,       tag,                    {.ui = ~0 } },
 	{MODKEY,                         XK_semicolon,    focusmon,               {.i = +1 } },
 	{MODKEY|ShiftMask,               XK_semicolon,    tagmon,                 {.i = +1 } },
 	{MODKEY|ControlMask,             XK_f,            togglefullscr,          {0}},
@@ -209,14 +215,15 @@ static const Key keys[] = {
 	{MODKEY|ShiftMask,               XK_g,            setgaps,                {.i = GAP_RESET } },
 	{MODKEY|ShiftMask,               XK_h,            setgaps,                {.i = GAP_TOGGLE} },
 	{MODKEY | ShiftMask, 	         XK_c, 	          killclient, 	          {0}},
-	{0, 		                     XK_F3, 		  spawn, 		          {.v = up}},
+	{MODKEY|ShiftMask,               XK_q,            quit,                   {1} },
+
+    {0, 		                     XK_F3, 		  spawn, 		          {.v = up}},
 	{0, 		                     XK_F2, 		  spawn, 		          {.v = down}},
 	{0, 		                     XK_F4, 		  spawn, 		          {.v = mut}},
 	{0, 		                     XK_F6, 		  spawn, 		          {.v = toggle}},
 	{0, 		                     XK_F8, 		  spawn, 		          {.v = next}},
 	{0, 		                     XK_F7, 		  spawn, 		          {.v = prev}},
-	{MODKEY|ShiftMask,               XK_q,            quit,                   {0} },
-	{MODKEY,                         XK_q,            quit,                   {1} }, 
+
 	TAGKEYS(                         XK_ampersand,                            0)
 	TAGKEYS(                         XK_eacute,                               1)
 	TAGKEYS(                         XK_quotedbl,                             2)
@@ -226,6 +233,7 @@ static const Key keys[] = {
 	TAGKEYS(                         XK_egrave,                               6)
 	TAGKEYS(                         XK_underscore,                           7)
 	TAGKEYS(                         XK_ccedilla,                             8)
+	TAGKEYS(                         XK_agrave,                               9)
 };
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
