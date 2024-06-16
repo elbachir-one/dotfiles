@@ -72,4 +72,7 @@ static const struct arg args[] = {
     { disk_perc, "[ %.5s%%]", "/" },
     /* Recording status */
     { run_command, "[REC %.20s]", "$HOME/.local/bin/reco.sh" },
+    /* Battery status and percentage */
+    { battery_perc, "[ %.5s%%]", "BAT1" },  // Adjust "BAT0" to your actual battery name
+
 };
