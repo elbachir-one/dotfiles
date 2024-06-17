@@ -1,15 +1,21 @@
 /* user and group to drop privileges to */
-static const char *user  = "sh";
+static const char *user  = "elbachir";
 static const char *group = "wheel";
 
 static const char *colorname[NUMCOLS] = {
 	[INIT] =   "black",     /* after initialization */
-	[INPUT] =  "#005577",   /* during input */
+	[INPUT] =  "#202020",   /* during input */
 	[FAILED] = "#CC3333",   /* wrong password */
 };
 
 /* treat a cleared input like a wrong password (color) */
 static const int failonclear = 1;
 
-/* Background image path, should be available to the user above */
-static const char* background_image = "/home/sh/dotfiles/Images/lockScreenImage.jpg";
+/* default message */
+static const char * message = "Unauthorized access detected. Initiating self-destruct sequence in 10... 9... 8... Just kidding! But seriously.";
+
+/* text color */
+static const char * text_color = "#ffffff";
+
+/* text size (must be a valid size) */
+static const char * font_name = "10x20";

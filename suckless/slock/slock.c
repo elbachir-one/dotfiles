@@ -15,15 +15,18 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <X11/extensions/Xrandr.h>
+#include <X11/extensions/Xinerama.h>
 #include <X11/keysym.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include <Imlib2.h>
 
 #include "arg.h"
 #include "util.h"
 
 char *argv0;
+
+/* global count to prevent repeated error messages */
+int count_error = 0;
 
 enum {
 	INIT,
@@ -36,7 +39,6 @@ struct lock {
 	int screen;
 	Window root, win;
 	Pixmap pmap;
-	Pixmap bgmap;
 	unsigned long colors[NUMCOLS];
 };
 
@@ -47,8 +49,6 @@ struct xrandr {
 };
 
 #include "config.h"
-
-Imlib_Image image;
 
 static void
 die(const char *errstr, ...)
@@ -86,6 +86,98 @@ dontkillme(void)
 	}
 }
 #endif
+
+static void
+writemessage(Display *dpy, Window win, int screen)
+{
+	int len, line_len, width, height, s_width, s_height, i, j, k, tab_replace, tab_size;
+	XGCValues gr_values;
+	XFontStruct *fontinfo;
+	XColor color, dummy;
+	XineramaScreenInfo *xsi;
+	GC gc;
+	fontinfo = XLoadQueryFont(dpy, font_name);
+
+	if (fontinfo == NULL) {
+		if (count_error == 0) {
+			fprintf(stderr, "slock: Unable to load font \"%s\"\n", font_name);
+			fprintf(stderr, "slock: Try listing fonts with 'slock -f'\n");
+			count_error++;
+		}
+		return;
+	}
+
+	tab_size = 8 * XTextWidth(fontinfo, " ", 1);
+
+	XAllocNamedColor(dpy, DefaultColormap(dpy, screen),
+		 text_color, &color, &dummy);
+
+	gr_values.font = fontinfo->fid;
+	gr_values.foreground = color.pixel;
+	gc=XCreateGC(dpy,win,GCFont+GCForeground, &gr_values);
+
+	/*  To prevent "Uninitialized" warnings. */
+	xsi = NULL;
+
+	/*
+	 * Start formatting and drawing text
+	 */
+
+	len = strlen(message);
+
+	/* Max max line length (cut at '\n') */
+	line_len = 0;
+	k = 0;
+	for (i = j = 0; i < len; i++) {
+		if (message[i] == '\n') {
+			if (i - j > line_len)
+				line_len = i - j;
+			k++;
+			i++;
+			j = i;
+		}
+	}
+	/* If there is only one line */
+	if (line_len == 0)
+		line_len = len;
+
+	if (XineramaIsActive(dpy)) {
+		xsi = XineramaQueryScreens(dpy, &i);
+		s_width = xsi[0].width;
+		s_height = xsi[0].height;
+	} else {
+		s_width = DisplayWidth(dpy, screen);
+		s_height = DisplayHeight(dpy, screen);
+	}
+
+	height = s_height*3/7 - (k*20)/3;
+	width  = (s_width - XTextWidth(fontinfo, message, line_len))/2;
+
+	/* Look for '\n' and print the text between them. */
+	for (i = j = k = 0; i <= len; i++) {
+		/* i == len is the special case for the last line */
+		if (i == len || message[i] == '\n') {
+			tab_replace = 0;
+			while (message[j] == '\t' && j < i) {
+				tab_replace++;
+				j++;
+			}
+
+			XDrawString(dpy, win, gc, width + tab_size*tab_replace, height + 20*k, message + j, i - j);
+			while (i < len && message[i] == '\n') {
+				i++;
+				j = i;
+				k++;
+			}
+		}
+	}
+
+	/* xsi should not be NULL anyway if Xinerama is active, but to be safe */
+	if (XineramaIsActive(dpy) && xsi != NULL)
+			XFree(xsi);
+}
+
+
 
 static const char *
 gethash(void)
@@ -194,11 +286,11 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 			color = len ? INPUT : ((failure || failonclear) ? FAILED : INIT);
 			if (running && oldc != color) {
 				for (screen = 0; screen < nscreens; screen++) {
-                                        if (locks[screen]->bgmap)
-                                                XSetWindowBackgroundPixmap(dpy, locks[screen]->win, locks[screen]->bgmap);
-                                        else
-                                                XSetWindowBackground(dpy, locks[screen]->win, locks[screen]->colors[0]);
+					XSetWindowBackground(dpy,
+					                     locks[screen]->win,
+					                     locks[screen]->colors[color]);
 					XClearWindow(dpy, locks[screen]->win);
+					writemessage(dpy, locks[screen]->win, screen);
 				}
 				oldc = color;
 			}
@@ -240,17 +332,6 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
 	lock->screen = screen;
 	lock->root = RootWindow(dpy, lock->screen);
 
-        if(image)
-        {
-            lock->bgmap = XCreatePixmap(dpy, lock->root, DisplayWidth(dpy, lock->screen), DisplayHeight(dpy, lock->screen), DefaultDepth(dpy, lock->screen));
-            imlib_context_set_display(dpy);
-            imlib_context_set_visual(DefaultVisual(dpy, lock->screen));
-            imlib_context_set_colormap(DefaultColormap(dpy, lock->screen));
-            imlib_context_set_drawable(lock->bgmap);
-            imlib_render_image_on_drawable(0, 0);
-            imlib_free_image();
-        }
-
 	for (i = 0; i < NUMCOLS; i++) {
 		XAllocNamedColor(dpy, DefaultColormap(dpy, lock->screen),
 		                 colorname[i], &color, &dummy);
@@ -267,8 +348,6 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
 	                          CopyFromParent,
 	                          DefaultVisual(dpy, lock->screen),
 	                          CWOverrideRedirect | CWBackPixel, &wa);
-        if(lock->bgmap)
-          XSetWindowBackgroundPixmap(dpy, lock->win, lock->bgmap);
 	lock->pmap = XCreateBitmapFromData(dpy, lock->win, curs, 8, 8);
 	invisible = XCreatePixmapCursor(dpy, lock->pmap, lock->pmap,
 	                                &color, &color, 0, 0);
@@ -318,7 +397,7 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
 static void
 usage(void)
 {
-	die("usage: slock [-v] [cmd [arg ...]]\n");
+	die("usage: slock [-v] [-f] [-m message] [cmd [arg ...]]\n");
 }
 
 int
@@ -331,11 +410,24 @@ main(int argc, char **argv) {
 	gid_t dgid;
 	const char *hash;
 	Display *dpy;
-	int s, nlocks, nscreens;
+	int i, s, nlocks, nscreens;
+	int count_fonts;
+	char **font_names;
 
 	ARGBEGIN {
 	case 'v':
-		fprintf(stderr, "slock-"VERSION"\n");
+		puts("slock-"VERSION);
+		return 0;
+	case 'm':
+		message = EARGF(usage());
+		break;
+	case 'f':
+		if (!(dpy = XOpenDisplay(NULL)))
+			die("slock: cannot open display\n");
+		font_names = XListFonts(dpy, "*", 10000 /* list 10000 fonts*/, &count_fonts);
+		for (i=0; i<count_fonts; i++) {
+			fprintf(stderr, "%s\n", *(font_names+i));
+		}
 		return 0;
 	default:
 		usage();
@@ -373,32 +465,6 @@ main(int argc, char **argv) {
 	if (setuid(duid) < 0)
 		die("slock: setuid: %s\n", strerror(errno));
 
-	/* Load picture */
-        Imlib_Image buffer = imlib_load_image(background_image);
-	imlib_context_set_image(buffer);
-        int background_image_width = imlib_image_get_width();
-        int background_image_height = imlib_image_get_height();
-
-        /* Create an image to be rendered */
-	Screen *scr = ScreenOfDisplay(dpy, DefaultScreen(dpy));
-	image = imlib_create_image(scr->width, scr->height);
-        imlib_context_set_image(image);
-
-        /* Fill the image for every X monitor */
-        XRRMonitorInfo	*monitors;
-        int number_of_monitors;
-        monitors = XRRGetMonitors(dpy, RootWindow(dpy, XScreenNumberOfScreen(scr)), True, &number_of_monitors);
-
-        int i;
-        for (i = 0; i < number_of_monitors; i++) {
-            imlib_blend_image_onto_image(buffer, 0, 0, 0, background_image_width, background_image_height, monitors[i].x, monitors[i].y, monitors[i].width, monitors[i].height);
-        }
-
-        /* Clean up */
-        imlib_context_set_image(buffer);
-        imlib_free_image();
-        imlib_context_set_image(image);
-
 	/* check for Xrandr support */
 	rr.active = XRRQueryExtension(dpy, &rr.evbase, &rr.errbase);
 
@@ -407,10 +473,12 @@ main(int argc, char **argv) {
 	if (!(locks = calloc(nscreens, sizeof(struct lock *))))
 		die("slock: out of memory\n");
 	for (nlocks = 0, s = 0; s < nscreens; s++) {
-		if ((locks[s] = lockscreen(dpy, &rr, s)) != NULL)
+		if ((locks[s] = lockscreen(dpy, &rr, s)) != NULL) {
+			writemessage(dpy, locks[s]->win, s);
 			nlocks++;
-		else
+		} else {
 			break;
+		}
 	}
 	XSync(dpy, 0);
 
