@@ -1,28 +1,28 @@
-From df8227f0e015474f1af448ee57696b618f10051d Mon Sep 17 00:00:00 2001
+From 998d35ed8bc4b328e164a5bd365aea3f768503ba Mon Sep 17 00:00:00 2001
 From: elbachir-one <bachiralfa@gmail.com>
-Date: Mon, 24 Jun 2024 19:11:39 +0100
+Date: Mon, 24 Jun 2024 19:28:14 +0100
 Subject: [PATCH] This patch is inspired by a Reddit post from
  u/PawarShubham3007, aiming to make dwm focus on windows of the same program.
 
 ---
  config.def.h |  1 +
- dwm.c        | 64 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 65 insertions(+)
+ dwm.c        | 65 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 66 insertions(+)
 
 diff --git a/config.def.h b/config.def.h
-index 9efa774..674b065 100644
+index 9efa774..58eeef3 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -85,6 +85,7 @@ static const Key keys[] = {
  	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
  	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
  	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-+   { MODKEY,                       XK_v,      focussame,      {0} },
++   { MODKEY,                       XK_v,     focussame,      {0} },
  	TAGKEYS(                        XK_1,                      0)
  	TAGKEYS(                        XK_2,                      1)
  	TAGKEYS(                        XK_3,                      2)
 diff --git a/dwm.c b/dwm.c
-index 67c6b2b..3664e4f 100644
+index 67c6b2b..d87d846 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -233,6 +233,8 @@ static int xerror(Display *dpy, XErrorEvent *ee);
@@ -34,11 +34,12 @@ index 67c6b2b..3664e4f 100644
  
  /* variables */
  static const char broken[] = "broken";
-@@ -786,6 +788,68 @@ expose(XEvent *e)
+@@ -786,6 +788,69 @@ expose(XEvent *e)
  		drawbar(m);
  }
  
-+void focussame(const Arg *arg) {
++void
++focussame(const Arg *arg) {
 +    Client *c;
 +    XClassHint ch = { NULL, NULL };
 +    char *class_name = NULL;
