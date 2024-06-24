@@ -1,18 +1,28 @@
-From f2a2af99c263a7a0e81cb7c926aff3ee26a5389c Mon Sep 17 00:00:00 2001
+From 56f643120f082c9fd609f25e3ad9db6eb435fb89 Mon Sep 17 00:00:00 2001
 From: elbachir-one <bachiralfa@gmail.com>
-Date: Mon, 24 Jun 2024 20:41:56 +0100
+Date: Mon, 24 Jun 2024 22:15:50 +0100
 Subject: [PATCH] This patch is inspired by a Reddit post from
- u/PawarShubham3007, aiming to make dwm focus on windows of the same program.
+ u/PawarShubham3007 shubham-cpp on github, aiming to make dwm focus on windows
+ of the same program.
 
 ---
- config.def.h |  2 ++
- dwm.c        | 71 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 73 insertions(+)
+ config.def.h |  4 +++-
+ dwm.c        | 55 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+), 1 deletion(-)
 
 diff --git a/config.def.h b/config.def.h
-index 9efa774..92fb897 100644
+index 9efa774..fd0dda6 100644
 --- a/config.def.h
 +++ b/config.def.h
+@@ -45,7 +45,7 @@ static const Layout layouts[] = {
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 @@ -85,6 +85,8 @@ static const Key keys[] = {
  	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
  	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
@@ -23,7 +33,7 @@ index 9efa774..92fb897 100644
  	TAGKEYS(                        XK_2,                      1)
  	TAGKEYS(                        XK_3,                      2)
 diff --git a/dwm.c b/dwm.c
-index 67c6b2b..68d9f2c 100644
+index 67c6b2b..c657315 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -233,6 +233,8 @@ static int xerror(Display *dpy, XErrorEvent *ee);
@@ -35,7 +45,7 @@ index 67c6b2b..68d9f2c 100644
  
  /* variables */
  static const char broken[] = "broken";
-@@ -786,6 +788,75 @@ expose(XEvent *e)
+@@ -786,6 +788,59 @@ expose(XEvent *e)
  		drawbar(m);
  }
  
@@ -44,67 +54,51 @@ index 67c6b2b..68d9f2c 100644
 +    Client *c;
 +    XClassHint ch = { NULL, NULL };
 +    char *class_name = NULL;
-+    int direction = arg->i; // +1 for forward, -1 for backward
++    int direction = arg->i;
 +
-+    if (!selmon->sel) {
-+        printf("No selected window\n");
++    if (!selmon->sel)
 +        return;
-+    }
 +
-+    if (XGetClassHint(dpy, selmon->sel->win, &ch)) {
-+        class_name = ch.res_class;
-+        printf("Class name: %s\n", class_name);
-+    }
-+
-+    if (!class_name) {
-+        printf("No class name\n");
++    if (!XGetClassHint(dpy, selmon->sel->win, &ch))
 +        return;
-+    }
++    class_name = ch.res_class;
 +
-+    // Try to find all windows of the same class
-+    Client *clients[32]; // Assuming a maximum of 32 clients
++    Client *clients[32];
 +    int num_clients = 0;
 +    for (c = selmon->clients; c && num_clients < 32; c = c->next) {
 +        if (c->tags & selmon->tagset[selmon->seltags] && XGetClassHint(dpy, c->win, &ch)) {
-+            if (strcmp(class_name, ch.res_class) == 0) {
++            if (strcmp(class_name, ch.res_class) == 0)
 +                clients[num_clients++] = c;
-+            }
 +            XFree(ch.res_class);
 +            XFree(ch.res_name);
 +        }
 +    }
 +
-+    // Determine the target client based on direction
 +    Client *target_client = NULL;
 +    if (direction == +1) {
 +        for (int i = 0; i < num_clients; ++i) {
 +            if (clients[i]->win == lastfocusedwin) {
-+                target_client = clients[(i + 1) % num_clients]; // Wrap around to start
++                target_client = clients[(i + 1) % num_clients];
 +                break;
 +            }
 +        }
-+        if (!target_client) {
-+            target_client = clients[0]; // Wrap to the first client
-+        }
++        if (!target_client)
++            target_client = clients[0];
 +    } else if (direction == -1) {
 +        for (int i = 0; i < num_clients; ++i) {
 +            if (clients[i]->win == lastfocusedwin) {
-+                target_client = clients[(i - 1 + num_clients) % num_clients]; // Wrap around to end
++                target_client = clients[(i - 1 + num_clients) % num_clients];
 +                break;
 +            }
 +        }
-+        if (!target_client) {
-+            target_client = clients[num_clients - 1]; // Wrap to the last client
-+        }
++        if (!target_client)
++            target_client = clients[num_clients - 1];
 +    }
 +
-+    // Focus the target client if found
 +    if (target_client) {
 +        focus(target_client);
 +        restack(selmon);
 +        lastfocusedwin = target_client->win;
-+    } else {
-+        printf("No window found to focus\n");
 +    }
 +}
 +
