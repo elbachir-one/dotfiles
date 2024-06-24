@@ -17,7 +17,7 @@ index 9efa774..58eeef3 100644
  	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
  	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
  	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-+   { MODKEY,                       XK_v,     focussame,      {0} },
++   { MODKEY,                       XK_n,     focussame,      {0} },
  	TAGKEYS(                        XK_1,                      0)
  	TAGKEYS(                        XK_2,                      1)
  	TAGKEYS(                        XK_3,                      2)
