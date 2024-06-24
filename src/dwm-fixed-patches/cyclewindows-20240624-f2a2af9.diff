@@ -1,0 +1,116 @@
+From f2a2af99c263a7a0e81cb7c926aff3ee26a5389c Mon Sep 17 00:00:00 2001
+From: elbachir-one <bachiralfa@gmail.com>
+Date: Mon, 24 Jun 2024 20:41:56 +0100
+Subject: [PATCH] This patch is inspired by a Reddit post from
+ u/PawarShubham3007, aiming to make dwm focus on windows of the same program.
+
+---
+ config.def.h |  2 ++
+ dwm.c        | 71 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index 9efa774..92fb897 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -85,6 +85,8 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+ 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+ 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
++   { MODKEY,                       XK_n,      focussame,      {.i = +1 } },
++   { MODKEY|ShiftMask,             XK_n,      focussame,      {.i = -1 } },
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+diff --git a/dwm.c b/dwm.c
+index 67c6b2b..68d9f2c 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -233,6 +233,8 @@ static int xerror(Display *dpy, XErrorEvent *ee);
+ static int xerrordummy(Display *dpy, XErrorEvent *ee);
+ static int xerrorstart(Display *dpy, XErrorEvent *ee);
+ static void zoom(const Arg *arg);
++static void focussame(const Arg *arg);
++static Window lastfocusedwin = None;
+ 
+ /* variables */
+ static const char broken[] = "broken";
+@@ -786,6 +788,75 @@ expose(XEvent *e)
+ 		drawbar(m);
+ }
+ 
++void
++focussame(const Arg *arg) {
++    Client *c;
++    XClassHint ch = { NULL, NULL };
++    char *class_name = NULL;
++    int direction = arg->i; // +1 for forward, -1 for backward
++
++    if (!selmon->sel) {
++        printf("No selected window\n");
++        return;
++    }
++
++    if (XGetClassHint(dpy, selmon->sel->win, &ch)) {
++        class_name = ch.res_class;
++        printf("Class name: %s\n", class_name);
++    }
++
++    if (!class_name) {
++        printf("No class name\n");
++        return;
++    }
++
++    // Try to find all windows of the same class
++    Client *clients[32]; // Assuming a maximum of 32 clients
++    int num_clients = 0;
++    for (c = selmon->clients; c && num_clients < 32; c = c->next) {
++        if (c->tags & selmon->tagset[selmon->seltags] && XGetClassHint(dpy, c->win, &ch)) {
++            if (strcmp(class_name, ch.res_class) == 0) {
++                clients[num_clients++] = c;
++            }
++            XFree(ch.res_class);
++            XFree(ch.res_name);
++        }
++    }
++
++    // Determine the target client based on direction
++    Client *target_client = NULL;
++    if (direction == +1) {
++        for (int i = 0; i < num_clients; ++i) {
++            if (clients[i]->win == lastfocusedwin) {
++                target_client = clients[(i + 1) % num_clients]; // Wrap around to start
++                break;
++            }
++        }
++        if (!target_client) {
++            target_client = clients[0]; // Wrap to the first client
++        }
++    } else if (direction == -1) {
++        for (int i = 0; i < num_clients; ++i) {
++            if (clients[i]->win == lastfocusedwin) {
++                target_client = clients[(i - 1 + num_clients) % num_clients]; // Wrap around to end
++                break;
++            }
++        }
++        if (!target_client) {
++            target_client = clients[num_clients - 1]; // Wrap to the last client
++        }
++    }
++
++    // Focus the target client if found
++    if (target_client) {
++        focus(target_client);
++        restack(selmon);
++        lastfocusedwin = target_client->win;
++    } else {
++        printf("No window found to focus\n");
++    }
++}
++
+ void
+ focus(Client *c)
+ {
+-- 
+2.45.2
+
