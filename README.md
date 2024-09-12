@@ -83,6 +83,8 @@ MODKEY=ALT
 - Close any Window: MODKEY + Shift + c
 - Scratchpad: MODKEY + s
 
+**For more deatals see the [web page](https://elbachir-one.github.io/README/src/my_dwm_config.html).**
+
 ```bash
 cd ~/dotfiles/suckless/dwm/
 make
