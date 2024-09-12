@@ -1,35 +1,39 @@
 " General Settings
 syntax on
-set nu                      " Show line numbers
-set rnu                     " Show relative line numbers
-set tabstop=4               " Number of spaces that a <Tab> in the file counts for
-set softtabstop=4           " Number of spaces that a <Tab> counts for while editing
-set shiftwidth=4            " Number of spaces to use for each step of (auto)indent
-set expandtab               " Use spaces instead of tabs
-set smarttab                " Insert tabs on the start of a line according to shiftwidth
-set incsearch               " Incremental search
-set hlsearch                " Highlight search results
-set nohlsearch              " Disable persistent search highlight
-set cursorline              " Highlight the current line
-" set cursorcolumn          " Highlight the current column (uncomment if needed)
-set scrolloff=10            " Keep 10 lines visible above and below the cursor
-set mouse=a                 " Enable mouse support
-set encoding=utf-8          " Set default encoding to UTF-8
-set t_Co=256                " Use 256 colors
-set timeoutlen=50           " Time to wait for a mapped sequence to complete
-set signcolumn=yes          " Always show the sign column
-set lazyredraw              " Redraw only when we need to
-set ignorecase              " Ignore case when searching
-set cb=unnamedplus          " Use the clipboard for all operations
-set autoindent              " Copy indent from current line when starting a new line
-set ai                      " Auto-indent new lines
-set colorcolumn=80          " Highlight column 80
-set updatetime=300          " Faster completion
-set nobackup                " Do not create backup files
-set nowritebackup           " Do not create a backup before overwriting a file
-set noswapfile              " Do not use swap files
-set undofile                " Enable persistent undo
-set undodir=/tmp            " Directory for undo files
+set nu
+
+set rnu
+set noexpandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+" set expandtab
+" set smarttab
+set incsearch
+set hlsearch
+set nohlsearch
+set cursorline
+set scrolloff=10
+set mouse=a
+set encoding=utf-8
+set t_Co=256
+set timeoutlen=50
+set signcolumn=yes
+set lazyredraw
+set ignorecase
+set cb=unnamedplus
+set autoindent
+set ai
+set colorcolumn=80
+set updatetime=300
+set nobackup
+set nowritebackup
+set noswapfile
+set undofile
+set undodir=/tmp
+set smartcase
+set list
+set listchars=nbsp:¬,tab:»·,trail:·,extends:>
 
 " Visual Enhancements
 hi CursorLine term=bold cterm=bold ctermbg=238
@@ -48,13 +52,18 @@ map <C-v> "+v               " Paste from clipboard
 let mapleader ="!"
 nnoremap <C-n> :tabnew<Space>
 nnoremap <C-k> :vertical resize -2<CR>
-nnoremap <C-o> :vertical resize +2<CR>
+nnoremap <C-l> :vertical resize +2<CR>
 nnoremap <C-f> :Files<CR>
 nnoremap <TAB> :bnext<CR>
 nnoremap <C-s> :vs<CR>
 nnoremap <C-c> :ba<CR>
-nnoremap <C-t> :term<CR>
-nnoremap <C-m> :MarkdownPreview<CR>
+nnoremap <C-t> :bel vert term<CR>
+nnoremap <C-p> :MarkdownPreview<CR>
+nnoremap <C-x> :NERDTreeToggle<CR>
+nnoremap J :bprev<CR>
+nnoremap M :bnext<CR>
+nnoremap L <C-u>
+nnoremap K <C-d>
 
 " Vim Movement Customization
 noremap m l
@@ -74,8 +83,8 @@ Plug 'img-paste-devs/img-paste.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'preservim/vim-pencil'
 Plug 'neoclide/coc.nvim'
+Plug 'preservim/nerdtree'
 call plug#end()
 
 " Markdown and Gitdiff Specific Settings
@@ -88,101 +97,39 @@ let g:mkdp_browser = 'qutebrowser'
 autocmd FileType markdown nmap <buffer><silent> <C-a> :call mdip#MarkdownClipboardImage()<CR>
 autocmd FileType markdown normal zR
 
-augroup pencil
-    autocmd!
-    autocmd FileType markdown,mkd call pencil#init()
-    autocmd FileType text call pencil#init()
-augroup END
-
 " CoC (Conqueror of Completion) Configuration
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : CheckBackspace() ? "\<Tab>" : coc#refresh()
+let g:coc_global_extensions = [
+			\ 'coc-tsserver',
+			\ 'coc-clangd',
+			\ 'coc-html',
+			\ 'coc-css',
+			\ 'coc-yaml',
+			\ 'coc-toml',
+			\ 'coc-go',
+			\ 'coc-pyright',
+			\ 'coc-zig',
+			\ 'coc-emmet',
+			\ 'coc-lua',
+			\ 'coc-texlab',
+			\ 'coc-json',
+			\ 'coc-sh',
+			\ 'coc-eslint',
+			\ 'coc-markdownlint'
+			\  ]
+
+inoremap <silent><expr> <TAB>
+			\ coc#pum#visible() ? coc#pum#next(1) :
+			\ CheckBackspace() ? "\<Tab>" :
+			\ coc#refresh()
+
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+			\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-else
-    inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Show documentation in preview window
-nnoremap <silent> K :call ShowDocumentation()<CR>
-function! ShowDocumentation()
-    if CocAction('hasProvider', 'hover')
-        call CocActionAsync('doHover')
-    else
-        call feedkeys('K', 'in')
-    endif
-endfunction
-
-" Highlight symbol and references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-    autocmd!
-    " Setup formatexpr for specific file types
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying code actions to the selected code block
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying code actions at the cursor position
-nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-nmap <leader>as  <Plug>(coc-codeaction-source)
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Remap keys for applying refactor code actions
-nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
-xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
-
-" Run the Code Lens action on the current line
-nmap <leader>cl  <Plug>(coc-codelens-action)
-
-" Map function and class text objects
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Use native statusline support
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
-nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
-nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
-nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr>
-nnoremap <silent><nowait> <space>j :<C-u>CocNext<CR>
-nnoremap <silent><nowait> <space>k :<C-u>CocPrev<CR>
-nnoremap <silent><nowait> <space>p :<C-u>CocListResume<CR>
+inoremap <silent><expr> <c-space> coc#refresh()
