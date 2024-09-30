@@ -60,6 +60,7 @@ nnoremap <C-c> :ba<CR>
 nnoremap <C-t> :bel vert term<CR>
 nnoremap <C-p> :MarkdownPreview<CR>
 nnoremap <C-x> :NERDTreeToggle<CR>
+nnoremap <C-g> :0Gclog<CR>
 nnoremap J :bprev<CR>
 nnoremap M :bnext<CR>
 nnoremap L <C-u>
@@ -85,6 +86,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " Markdown and Gitdiff Specific Settings

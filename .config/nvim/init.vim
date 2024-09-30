@@ -31,7 +31,6 @@ set nobackup
 set nowritebackup
 set updatetime=300
 set signcolumn=yes
-" set smartcase
 set noexpandtab
 set tabstop=4
 set softtabstop=4
@@ -65,6 +64,7 @@ nnoremap <C-c> :ba<CR>
 nnoremap <C-b> :make<CR>
 nnoremap <C-p> :MarkdownPreview<CR>
 nnoremap <C-t> :ToggleTerm<CR>
+nnoremap <C-g> :0Gclog<CR>
 nnoremap J :bprev<CR>
 nnoremap M :bnext<CR>
 nnoremap L <C-u>
@@ -123,6 +123,7 @@ Plug 'fcpg/vim-fahrenheit'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'preservim/vim-pencil'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
