@@ -3,8 +3,6 @@
 ## This is my personal configuration, feel free to change it as you see fit your needs.
 
 ![Void_DWM](assets/Void_DWM.jpg)
-![Void_DWM](assets/Void_DWM2.jpg)
-![FreeBSD_DWM](assets/freebsd.jpg)
 
 ## Installation
 
@@ -12,42 +10,32 @@ If you want to install my stuff, there are some dependences needed for everythin
 
 ## Void Linux
 
-### Option 1: Using the install script
+![Void_DWM](assets/Void_DWM2.jpg)
+
+### Using the install script
 
 ```bash
 wget https://raw.githubusercontent.com/elbachir-one/dotfiles/main/install.sh
-
 chmod +x install.sh
-
 ./install.sh
 ```
 
 Note: Don't forget to change the username to your username and the cpu (amd or intel)
 The install script only works on Void Linux, and it's a personal script.
 
-### Option 2: Manual installation
-
-```bash
-sudo xbps-install -Sy nerd-fonts-ttf feh xorg libXft-devel libX11-devel \
-libXinerama-devel lsd mpv mpd ncmpcpp zathura neovim vim gvim newsboat picom \
-alacritty lxappearance alsa-utils htop tmux ranger qutebrowser chromium ffmpeg \
-rsync ueberzug mediainfo base-devel clang yt-dlp clipmenu wget curl tree nodejs \
-jq fzf terminus-font scrot ninja networkmanager linux-lts harfbuzz-devel git \
-cmake bash-completion noto-fonts-emoji
-```
-
 Note: Install dependences and copy what you need from the dotfiles.
 
 ## FreeBSD
 
+![FreeBSD_DWM](assets/freebsd.jpg)
+
 ```bash
-doas pkg install nerd-fonts feh xorg mpv neovim vim git picom tmux chromium \
-yt-dlp terminus-font bash noto-fonts-emoji
+doas pkg install nerd-fonts feh xorg mpv neovim vim git picom tmux chromium yt-dlp
 ```
+Note: Copy anything from my dots and use it.
+
 
 ### DWM
-
-The main focus of my dotfiles is the use of Suckless utilities.
 
 ![DWM](assets/dwm.jpg)
 
@@ -183,7 +171,6 @@ Install dependences: meson, ninja.
 cd ~/dotfiles/src/dmenu-wayland/
 mkdir build
 meson build
-ninja -C build
 sudo ninja -C build install
 ```
 
@@ -202,9 +189,8 @@ sudo make clean install
 ## Support
 
 - Share the dots if you find them interesting.
-
 - Subscribe to my Youtube Channel [YouTube](https://www.youtube.com/@alphab91) 
-
 - You can also buy me Coffee
+
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/alphab91)
