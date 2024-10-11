@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# Linux Recall
+
 # Storing screenshots temporarily
 SCREENSHOT_DIR="/tmp/shots"
 
-SERVER_USER="sh"
-SERVER_IP="192.168.1.15"
-SERVER_DIR="/media/Shots"
+SERVER_USER="the username for the server"
+SERVER_IP="the server ip"
+SERVER_DIR="where to store the shots after the upload"
 
 mkdir -p "$SCREENSHOT_DIR"
 
