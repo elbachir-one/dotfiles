@@ -27,8 +27,8 @@
 #define INTERSECT(x,y,w,h,r)  (MAX(0, MIN((x)+(w),(r).x_org+(r).width)  - MAX((x),(r).x_org)) \
                              * MAX(0, MIN((y)+(h),(r).y_org+(r).height) - MAX((y),(r).y_org)))
 #define LENGTH(X)             (sizeof X / sizeof X[0])
-#define TEXTW(X)              (drw_fontset_getwidth(drw, (X)) + lrpad)
-
+#define TEXTW(X)              (min_width)
+#define TEXTWP(X)              (drw_fontset_getwidth(drw, (X)) + lrpad)
 #define OPAQUE                0xffu
 
 /* enums */
@@ -125,7 +125,7 @@ calcoffsets(void)
 	if (lines > 0)
 		n = lines * bh;
 	else
-		n = mw - (promptw + inputw + TEXTW("<") + TEXTW(">"));
+		n = mw - (promptw + inputw + TEXTWP("<") + TEXTWP(">"));
 	/* calculate which items will begin the next page and previous page */
 	for (i = 0, next = curr; next; next = next->right)
 		if ((i += (lines > 0) ? bh : textw_clamp(next->text, n)) > n)
@@ -179,24 +179,17 @@ cistrstr(const char *h, const char *n)
 	return NULL;
 }
 
-static void
-apply_fribidi(char *str)
+void apply_fribidi(char *str)
 {
-  FriBidiStrIndex len = strlen(str);
-  FriBidiChar logical[BUFSIZ];
-  FriBidiChar visual[BUFSIZ];
-  FriBidiParType base = FRIBIDI_PAR_ON;
-  FriBidiCharSet charset;
-  fribidi_boolean result;
-
-  fribidi_text[0] = 0;
-  if (len>0)
-  {
-    charset = fribidi_parse_charset("UTF-8");
-    len = fribidi_charset_to_unicode(charset, str, len, logical);
-    result = fribidi_log2vis(logical, len, &base, visual, NULL, NULL, NULL);
-    len = fribidi_unicode_to_charset(charset, visual, len, fribidi_text);
-  }
+	FriBidiStrIndex len = strlen(str);
+	FriBidiChar logical[256];
+	FriBidiChar visual[256];
+	FriBidiParType base = FRIBIDI_PAR_ON;
+	FriBidiCharSet charset;
+	charset = fribidi_parse_charset("UTF-8");
+	len = fribidi_charset_to_unicode(charset, str, len, logical);
+	fribidi_log2vis(logical, len, &base, visual, NULL, NULL, NULL);
+	fribidi_unicode_to_charset(charset, visual, len, fribidi_text);
 }
 
 static void
@@ -214,7 +207,7 @@ drawhighlights(struct item *item, int x, int y, int maxw)
 			highlightlen = highlight - item->text;
 			restorechar = *highlight;
 			item->text[highlightlen] = '\0';
-			indentx = TEXTW(item->text);
+			indentx = TEXTWP(item->text);
 			item->text[highlightlen] = restorechar;
 
 			// Move highlight str end, draw highlight, & restore
@@ -225,7 +218,7 @@ drawhighlights(struct item *item, int x, int y, int maxw)
 					drw,
 					x + indentx - (lrpad / 2) - 1,
 					y,
-					MIN(maxw - indentx, TEXTW(highlight) - lrpad),
+					MIN(maxw - indentx, TEXTWP(highlight) - lrpad),
 					bh, 0, highlight, 0
 				);
 			highlight[strlen(token)] = restorechar;
@@ -274,7 +267,7 @@ drawmenu(void)
 	apply_fribidi(text);
 	drw_text(drw, x, 0, w, bh, lrpad / 2, fribidi_text, 0);
 
-	curpos = TEXTW(text) - TEXTW(&text[cursor]);
+	curpos = TEXTWP(text) - TEXTWP(&text[cursor]);
 	if ((curpos += lrpad / 2 - 1) < w) {
 		drw_setscheme(drw, scheme[SchemeNorm]);
 		drw_rect(drw, x + curpos, 2, 2, bh - 4, 1, 0);
@@ -294,7 +287,7 @@ drawmenu(void)
 		}
 		x += w;
 		for (item = curr; item != next; item = item->right)
-			x = drawitem(item, x, 0, textw_clamp(item->text, mw - x - TEXTW(">")));
+			x = drawitem(item, x, 0, textw_clamp(item->text, mw - x - TEXTWP(">")));
 		if (next) {
 			w = TEXTW(">");
 			drw_setscheme(drw, scheme[SchemeNorm]);
@@ -768,7 +761,7 @@ setup(void)
 	bh = drw->fonts->h + 2;
 	lines = MAX(lines, 0);
 	mh = (lines + 1) * bh;
-	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
+	promptw = (prompt && *prompt) ? TEXTWP(prompt) - lrpad / 4 : 0;
 #ifdef XINERAMA
 	i = 0;
 	if (parentwin == root && (info = XineramaQueryScreens(dpy, &n))) {
@@ -796,7 +789,7 @@ setup(void)
 					break;
 
 		if (centered) {
-			mw = MIN(MAX(max_textw() + promptw, min_width), info[i].width);
+			mw = MIN(MAX(max_textw() + promptw, min_width), MIN(max_width, info[i].width));
 			x = info[i].x_org + ((info[i].width  - mw) / 2);
 			y = info[i].y_org + ((info[i].height - mh) / 4);
 		} else {
@@ -814,7 +807,7 @@ setup(void)
 			    parentwin);
 
 		if (centered) {
-			mw = MIN(MAX(max_textw() + promptw, min_width), wa.width);
+			mw = MIN(MAX(max_textw() + promptw, min_width), MIN(max_width, wa.width));
 			x = (wa.width  - mw) / 2;
 			y = (wa.height - mh) / 2;
 		} else {

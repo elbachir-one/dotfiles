@@ -5,6 +5,7 @@ static int topbar = 1;                      /* -b  option; if 0, dmenu appears a
 static const unsigned int alpha = 0xc0;     /* Amount of opacity. 0xff is opaque             */
 static int centered = 1;                    /* -c option; centers dmenu on screen */
 static int min_width = 700;                    /* minimum width when centered */
+static int max_width = 800;  // Adjust this value as needed
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
 	"Monofur Nerd Font:style=Bold:size=14",
@@ -29,7 +30,7 @@ static const unsigned int alphas[SchemeLast][2] = {
 	[SchemeOut] = { OPAQUE, alpha },
 };
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
-static unsigned int lines      = 4;
+static unsigned int lines      = 6;
 
 /*
  * Characters not considered part of a word while deleting words
