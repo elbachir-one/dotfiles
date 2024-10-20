@@ -71,7 +71,7 @@ MODKEY=ALT
 - Close any Window: MODKEY + Shift + c
 - Scratchpad: MODKEY + s
 
-**For more details see the [web page](https://elbachir-one.github.io/README/src/my_dwm_config.html).**
+**Note:** For more things about my config check my website [dwm config stuff](https://elbachir.org/src/my_dwm_config.html)
 
 ```bash
 cd ~/dotfiles/suckless/dwm/
