@@ -1,14 +1,12 @@
 " General Settings
 syntax on
-set nu
 
+set nu
 set rnu
 set noexpandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-" set expandtab
-" set smarttab
 set incsearch
 set hlsearch
 set nohlsearch
@@ -65,6 +63,7 @@ nnoremap J :bprev<CR>
 nnoremap M :bnext<CR>
 nnoremap L <C-u>
 nnoremap K <C-d>
+nnoremap <silent> <C-o> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Vim Movement Customization
 noremap m l
@@ -73,7 +72,14 @@ noremap k j
 noremap l k
 
 " Plugin Management with vim-plug
-call plug#begin()
+if !filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/plug.vim"'))
+    echo "Downloading junegunn/vim-plug to manage plugins..."
+    silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/
+    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/plug.vim
+    autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.vim}/plugged"'))
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
