@@ -1,0 +1,79 @@
+From fb8569b193cc063ad53388e8e2009fb6682092d2 Mon Sep 17 00:00:00 2001
+From: elbachir-one <bachiralfa@gmail.com>
+Date: Tue, 19 Nov 2024 15:39:16 +0100
+Subject: [PATCH] Added columnredraw
+
+---
+ st.c | 25 +++++++++++++++++--------
+ 1 file changed, 17 insertions(+), 8 deletions(-)
+
+diff --git a/st.c b/st.c
+index 57c6e96..7371554 100644
+--- a/st.c
++++ b/st.c
+@@ -113,6 +113,7 @@ typedef struct {
+ typedef struct {
+ 	int row;      /* nb row */
+ 	int col;      /* nb col */
++	int maxcol;   /* Maximum number of columns */
+ 	Line *line;   /* screen */
+ 	Line *alt;    /* alternate screen */
+ 	int *dirty;   /* dirtyness of lines */
+@@ -1231,8 +1232,8 @@ tclearregion(int x1, int y1, int x2, int y2)
+ 	if (y1 > y2)
+ 		temp = y1, y1 = y2, y2 = temp;
+ 
+-	LIMIT(x1, 0, term.col-1);
+-	LIMIT(x2, 0, term.col-1);
++	LIMIT(x1, 0, term.maxcol-1);
++	LIMIT(x2, 0, term.maxcol-1);
+ 	LIMIT(y1, 0, term.row-1);
+ 	LIMIT(y2, 0, term.row-1);
+ 
+@@ -2546,11 +2547,18 @@ void
+ tresize(int col, int row)
+ {
+ 	int i;
+-	int minrow = MIN(row, term.row);
+-	int mincol = MIN(col, term.col);
++	int tmp;
++	int minrow, mincol;
+ 	int *bp;
+ 	TCursor c;
+ 
++	tmp = col;
++	if (!term.maxcol)
++		term.maxcol = term.col;
++	col = MAX(col, term.maxcol);
++	minrow = MIN(row, term.row);
++	mincol = MIN(col, term.maxcol);
++
+ 	if (col < 1 || row < 1) {
+ 		fprintf(stderr,
+ 		        "tresize: error resizing to %dx%d\n", col, row);
+@@ -2593,17 +2601,18 @@ tresize(int col, int row)
+ 		term.line[i] = xmalloc(col * sizeof(Glyph));
+ 		term.alt[i] = xmalloc(col * sizeof(Glyph));
+ 	}
+-	if (col > term.col) {
+-		bp = term.tabs + term.col;
++	if (col > term.maxcol) {
++		bp = term.tabs + term.maxcol;
+ 
+-		memset(bp, 0, sizeof(*term.tabs) * (col - term.col));
++		memset(bp, 0, sizeof(*term.tabs) * (col - term.maxcol));
+ 		while (--bp > term.tabs && !*bp)
+ 			/* nothing */ ;
+ 		for (bp += tabspaces; bp < term.tabs + col; bp += tabspaces)
+ 			*bp = 1;
+ 	}
+ 	/* update terminal size */
+-	term.col = col;
++	term.col = tmp;
++	term.maxcol = col;
+ 	term.row = row;
+ 	/* reset scrolling region */
+ 	tsetscroll(0, row-1);
+-- 
+2.46.2
+
