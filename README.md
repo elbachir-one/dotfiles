@@ -20,19 +20,19 @@ chmod +x install.sh
 ./install.sh
 ```
 
-Note: Don't forget to change the username to your username and the cpu (amd or intel)
+**Note:** Don't forget to change the username to your username and the cpu (amd or intel)
 The install script only works on Void Linux, and it's a personal script.
 
-Note: Install dependences and copy what you need from the dotfiles.
+**Note:** Install dependences and copy what you need from the dotfiles.
 
 ## FreeBSD
 
 ![FreeBSD_DWM](assets/freebsd.jpg)
 
 ```bash
-doas pkg install nerd-fonts feh xorg mpv neovim vim git picom tmux chromium yt-dlp
+doas pkg install nerd-fonts feh xorg mpv vim git picom tmux chromium yt-dlp
 ```
-Note: Copy anything from my dots and use it.
+**Note:** Copy anything from my dots and use it.
 
 
 ### DWM
@@ -67,7 +67,8 @@ MODKEY=ALT
 - Open ST terminal: MODKEY + Shift + Return
 - Launch Dmenu: MODKEY + p
 - Tiling to Floating: MODKEY + Space
-- Restart or Quit DWM: MODKEY + q
+- Restart DWM: MODKEY + q
+- Quit DWM: MODKEY + Shift + q
 - Close any Window: MODKEY + Shift + c
 - Scratchpad: MODKEY + s
 
@@ -161,7 +162,7 @@ make
 sudo make clean install
 ```
 
-Note: Keybindings are the same as my DWM.
+**Note:** Keybindings are the same as my DWM.
 
 ### Dmenu-wayland
 
