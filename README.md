@@ -15,7 +15,7 @@ If you want to install my stuff, there are some dependences needed for everythin
 ### Using the install script
 
 ```bash
-wget https://raw.githubusercontent.com/elbachir-one/dotfiles/main/install.sh
+xbps-fetch https://raw.githubusercontent.com/elbachir-one/dotfiles/main/install.sh
 chmod +x install.sh
 ./install.sh
 ```
