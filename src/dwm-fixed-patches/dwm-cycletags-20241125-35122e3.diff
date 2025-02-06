@@ -1,0 +1,65 @@
+From 35122e308e096073fc1c0c3470e413acc32b84f8 Mon Sep 17 00:00:00 2001
+From: elbachir-one <bachiralfa@gmail.com>
+Date: Mon, 25 Nov 2024 21:00:29 +0100
+Subject: [PATCH] Added cycletags patch (cycle through tags)
+
+---
+ config.def.h |  4 +++-
+ dwm.c        | 19 +++++++++++++++++++
+ 2 files changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/config.def.h b/config.def.h
+index 4412cb1..eb44c8b 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -72,7 +72,9 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+ 	{ MODKEY,                       XK_Return, zoom,           {0} },
+-	{ MODKEY,                       XK_Tab,    view,           {0} },
++	{ MODKEY,                       XK_q,      view,           {0} },
++	{ MODKEY,                       XK_Tab,    cycletags,      {.i = +1 } },
++	{ MODKEY|ShiftMask,             XK_Tab,    cycletags,      {.i = -1 } },
+ 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+diff --git a/dwm.c b/dwm.c
+index 1443802..e28ce88 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -155,6 +155,7 @@ static void clientmessage(XEvent *e);
+ static void configure(Client *c);
+ static void configurenotify(XEvent *e);
+ static void configurerequest(XEvent *e);
++static void cycletags(const Arg *arg);
+ static Monitor *createmon(void);
+ static void destroynotify(XEvent *e);
+ static void detach(Client *c);
+@@ -629,6 +630,24 @@ configurerequest(XEvent *e)
+ 	XSync(dpy, False);
+ }
+ 
++void
++cycletags(const Arg *arg) {
++	unsigned int newtag;
++
++	if (arg->i > 0) {
++		newtag = selmon->tagset[selmon->seltags] << 1;
++		if (newtag > (1 << (LENGTH(tags) - 1)))
++			newtag = 1;
++	} else {
++		newtag = selmon->tagset[selmon->seltags] >> 1;
++		if (newtag == 0)
++			newtag = (1 << (LENGTH(tags) - 1));
++	}
++
++	Arg a = { .ui = newtag };
++	view(&a);
++}
++
+ Monitor *
+ createmon(void)
+ {
+-- 
+2.46.2
+
