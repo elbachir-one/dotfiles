@@ -1,7 +1,20 @@
 #!/bin/bash
 sudo sed -i 's/%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers.d/wheel
 sudo xbps-install -Suy
-sudo xbps-install -Sy xorg base-devel libX11-devel libXft-devel libXinerama-devel chromium ffmpeg ntfs-3g ugrep noto-fonts-emoji noto-fonts-cjk feh lsd webkit2gtk-devel gcr-devel gstreamer1-devel lxappearance neovim clipmenu mpv mpd alsa-utils ncmpcpp cava newsboat zathura mupdf ranger ueberzug qutebrowser sakura w3m alacritty nodejs gimp bash-completion yt-dlp aria2 obs neofetch flameshot cmake ninja meson curl ImageMagick NetworkManager arandr bat breeze clang cmatrix lolcat-c figlet colordiff timeshift flac fzf git gstreamer-vaapi harfbuzz-devel htop imlib2-devel jq kdenlive libev-devel libjpeg-turbo-devel libmpc-devel linux-headers man-db mpc papirus-folders papirus-icon-theme pcre-devel pkgconf-devel python3-adblock python3-pip rsync simple-mtpfs terminus-font v4l2loopback void-docs-browse xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf tmux xcb-util-renderutil-devel xcb-util-image-devel pkgconf uthash pcre-devel libconfig-devel firefox figlet-fonts dunst noto-fonts-ttf pass wkhtmltopdf audacity readline-devel readline file-devel plata-theme img2pdf pcmanfm cups cups-pdf libinput-gestures
+sudo xbps-install -Sy xorg base-devel libX11-devel libXft-devel libXinerama-devel\
+chromium ffmpeg ntfs-3g ugrep noto-fonts-emoji noto-fonts-cjk feh lsd\
+webkit2gtk-devel gcr-devel gstreamer1-devel lxappearance neovim clipmenu mpv mpd\
+alsa-utils ncmpcpp cava newsboat zathura mupdf ranger ueberzug qutebrowser sakura\
+w3m nodejs gimp bash-completion yt-dlp aria2 neofetch flameshot cmake ninja meson\
+curl ImageMagick NetworkManager arandr bat breeze clang cmatrix lolcat-c figlet\
+colordiff timeshift flac fzf git gstreamer-vaapi harfbuzz-devel htop imlib2-devel\
+jq kdenlive libev-devel libjpeg-turbo-devel libmpc-devel linux-headers man-db mpc\
+papirus-folders papirus-icon-theme pcre-devel pkgconf-devel python3-adblock\
+python3-pip rsync simple-mtpfs terminus-font v4l2loopback void-docs-browse\
+xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf tmux xcb-util-renderutil-devel\
+xcb-util-image-devel pkgconf uthash pcre-devel libconfig-devel figlet-fonts dunst\
+noto-fonts-ttf pass wkhtmltopdf audacity readline-devel readline file-devel\
+plata-theme img2pdf pcmanfm cups cups-pdf libinput-gestures
 
 # This for doing testing on different stuff
 # sudo xbps-install -Sy river sway Waybar sandbar foot pamixer fcft-devel droidcam asciinema polybar bspwm sxhkd grim slop slurp tor tint2 openbox xfce4 obmenu-generator obconf hplip-gui clipman nerd-fonts wireshark-qt wireshark nim passmenu cvs unbound poppler-utils lf i3-gaps i3lock vim mupdf linux-lts scrot qemu virt-manager libvirt vte3 vde2 bridge-utils time screenkey clang-analyzer cmatrix emacs ffplay gdb go zig gvim hugo inkscape instaloader intel-media-driver linux-lts-headers pandoc pdftag rnnoise slop stow tcc texlive texlive-core wofi wbg Mousai NoiseTorch SDL2_gfx-devel SDL2_image-devel SDL2_ttf-devel SDL-devel aircrack-ng WoeUSB alsa-rnnoise alsa-plugins-ffmpeg android-tools alsa-plugins-jack barrier-gui bluez-alsa catimg clang-tools-extra cloc cool-retro-term cwm docker docbook dotool droidcam droidcam-obs-plugin farbfeld fff ffmpegthumbs ffscreencast figlet-fonts flashrom font-iosevka github-cli glade3 giflib-tools glances groff-doc hyperfine joe libmagick-devel linux-lts most mpv-mpris mutt nemo newsraft nginx openvpn pass-import pass-otp patchutils progress python3-adblock qt5ct rnnoise rofi-emoji rtkit spice-vdagent termrec tigervnc tty-clock typespeed unclutter virt-viewer waydroid weechat wf-recorder wine wlr-randr wlroots0.17-devel wlroots0.17 wayvnc xdg-desktop-portal-wlr xorg-server-xephyr xtools zig ack valgrind time linuxwave mako resynthesizer
@@ -32,10 +45,6 @@ cd /tmp/
 git clone https://github.com/garabik/grc.git
 cd grc/
 sudo ./install.sh
-cd
-# cd dotfiles/src/nnn/
-# make O_NERD=1
-# sudo cp nnn /usr/bin/
 cd
 sudo cp /etc/profile.d/grc.sh /etc/
 sudo xbps-remove -Oy && sudo xbps-remove -oy
