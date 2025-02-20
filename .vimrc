@@ -64,6 +64,7 @@ nnoremap M :bnext<CR>
 nnoremap L <C-u>
 nnoremap K <C-d>
 nnoremap <silent> <C-o> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+nnoremap <C-o> :G<CR>
 
 " Vim Movement Customization
 noremap m l
