@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# Downloading videos from anywhere
+
+# Ensure a URL or a file is provided as an argument
+if [ $# -ne 1 ]; then
+	echo "Usage: $0 <YouTube/Twitch_URL_or_list.txt>"
+	exit 1
+fi
+
+# Path to cookies.txt
+cookies_path="$HOME/.config/yt-dlp/cookies.txt"
+
+# If the argument is a file, read URLs from it
+if [[ -f "$1" ]]; then
+	url_list="$1"
+else
+	url_list="$1"
+fi
+
+# Function to clean and download each video/playlist
+download_video () {
+	url="$1"
+
+	# Extract and clean the URL if it's a YouTube link
+	if [[ "$url" == *"youtube.com"* || "$url" == *"youtu.be"* || "$url" == *"shorts"* ]]; then
+		# Extract the 11-character video ID for YouTube links
+		if [[ "$url" == *"v="* ]]; then
+			video_id=$(echo "$url" | sed -n 's/.*v=\([a-zA-Z0-9_-]\{11\}\).*/\1/p')
+		elif [[ "$url" == *"shorts/"* ]]; then
+			video_id=$(echo "$url" | sed -n 's/.*shorts\/\([a-zA-Z0-9_-]\{11\}\).*/\1/p')
+		fi
+
+		# Check if a valid video ID was extracted
+		if [ -n "$video_id" ]; then
+			# Construct the clean YouTube URL
+			url="https://www.youtube.com/watch?v=$video_id"
+			echo "Clean YouTube URL: $url"
+		elif [[ "$url" == *"playlist"* || "$url" == *"channel"* ]]; then
+			echo "Handling playlist/channel: $url"
+		else
+			echo "Invalid YouTube URL"
+			return
+		fi
+	fi
+
+	# For YouTube, select specific formats (137 or 299 for video, 140 for audio)
+	if [[ "$url" == *"youtube.com"* || "$url" == *"youtu.be"* ]]; then
+		echo "Downloading from YouTube: $url"
+
+		# If it's a playlist or a channel, download all videos
+		if [[ "$url" == *"playlist"* || "$url" == *"channel"* ]]; then
+			echo "Downloading entire playlist/channel: $url"
+			yt-dlp --cookies "$cookies_path" --no-keep-video -f "137+bestaudio[ext=m4a]/299+bestaudio[ext=m4a]/bestvideo[height<=1080]+bestaudio[ext=m4a]" "$url" -o "%(playlist)s/%(title)s.%(ext)s"
+		else
+			# Use yt-dlp to check available formats for a single video
+			yt-dlp --cookies "$cookies_path" --rm-cache-dir -F "$url"
+
+			# Try to download video with format 137 or 299 and audio 140, fallback to best 1080p
+			yt-dlp --cookies "$cookies_path" --no-keep-video -f "137+bestaudio[ext=m4a]/299+bestaudio[ext=m4a]/bestvideo[height<=1080]+bestaudio[ext=m4a]" "$url" -o "%(title)s.%(ext)s"
+		fi
+
+		# Get the downloaded filename
+		downloaded_file=$(yt-dlp --cookies "$cookies_path" --get-filename -f "137+bestaudio[ext=m4a]/299+bestaudio[ext=m4a]/bestvideo[height<=1080]+bestaudio[ext=m4a]" "$url" -o "%(title)s.%(ext)s")
+
+		# Check the extension and only convert if it's not mp4 or mkv
+		file_extension="${downloaded_file##*.}"
+		if [[ "$file_extension" != "mp4" && "$file_extension" != "mkv" ]]; then
+			echo "Converting $downloaded_file to MP4..."
+			ffmpeg -loglevel quiet -i "$downloaded_file" -c:v copy -c:a copy "${downloaded_file%.*}.mp4"
+		else
+			echo "No conversion needed for $downloaded_file (already MP4 or MKV)."
+		fi
+
+	# For Twitch, download the default video
+elif [[ "$url" == *"twitch.tv"* ]]; then
+	echo "Downloading from Twitch: $url"
+	yt-dlp --rm-cache-dir "$url" -o "%(title)s.%(ext)s"
+
+		# Get the downloaded filename
+		downloaded_file=$(yt-dlp --get-filename "$url" -o "%(title)s.%(ext)s")
+
+		# Check the extension and only convert if it's not mp4 or mkv
+		file_extension="${downloaded_file##*.}"
+		if [[ "$file_extension" != "mp4" && "$file_extension" != "mkv" ]]; then
+			echo "Converting $downloaded_file to MP4..."
+			ffmpeg -loglevel quiet -i "$downloaded_file" -c:v copy -c:a copy "${downloaded_file%.*}.mp4"
+		else
+			echo "No conversion needed for $downloaded_file (already MP4 or MKV)."
+		fi
+
+	# For other sites, download the best 1080p video or lower
+else
+	echo "Downloading from other site: $url"
+
+		# Attempt to download the best 1920x1080 or best available video
+		yt-dlp --no-keep-video -f "bestvideo[height<=1080]+bestaudio/best" "$url" -o "%(title)s.%(ext)s"
+
+		# Get the downloaded filename
+		downloaded_file=$(yt-dlp --get-filename -f "bestvideo[height<=1080]+bestaudio/best" "$url" -o "%(title)s.%(ext)s")
+
+		# Check the extension and only convert if it's not mp4 or mkv
+		file_extension="${downloaded_file##*.}"
+		if [[ "$file_extension" != "mp4" && "$file_extension" != "mkv" ]]; then
+			echo "Converting $downloaded_file to MP4..."
+			ffmpeg -loglevel quiet -i "$downloaded_file" -c:v copy -c:a copy "${downloaded_file%.*}.mp4"
+		else
+			echo "No conversion needed for $downloaded_file (already MP4 or MKV)."
+		fi
+	fi
+}
+
+# Process each URL in the list if it's a file
+if [[ -f "$url_list" ]]; then
+	while IFS= read -r url; do
+		download_video "$url"
+	done < "$url_list"
+else
+	# If not a file, treat it as a single URL
+	download_video "$url_list"
+fi
