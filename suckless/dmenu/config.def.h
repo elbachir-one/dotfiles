@@ -40,3 +40,8 @@ static const char worddelimiters[] = " ";
 
 /* Size of the window border */
 static unsigned int border_width = 2;
+
+/* Nav histroy */
+static unsigned int maxhist    = 64;
+static int histnodup           = 1; /* if 0, record repeated histories */
+
