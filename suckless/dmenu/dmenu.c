@@ -49,7 +49,7 @@ static int bh, mw, mh;
 static int inputw = 0, promptw;
 static int lrpad; /* sum of left and right padding */
 static size_t cursor;
-static struct item *items = NULL;
+static struct item *items = NULL, *backup_items;
 static struct item *matches, *matchend;
 static struct item *prev, *curr, *next, *sel;
 static int mon = -1, screen;
@@ -183,7 +183,8 @@ cistrstr(const char *h, const char *n)
 	return NULL;
 }
 
-void apply_fribidi(char *str)
+static void
+apply_fribidi(char *str)
 {
 	FriBidiStrIndex len = strlen(str);
 	FriBidiChar logical[256];
@@ -527,47 +528,40 @@ navhistory(int dir)
 }
 
 static void
-savehistory(char *input)
-{
+savehistory(char *input) {
 	unsigned int i;
 	FILE *fp;
 
-	if (!histfile ||
-	    0 == maxhist ||
-	    0 == strlen(input)) {
-		goto out;
+	if (!histfile || maxhist == 0 || strlen(input) == 0)
+		return;
+
+	for (i = 0; i < histsz; i++) {
+		if (strcmp(input, history[i]) == 0)
+			return;
 	}
 
 	fp = fopen(histfile, "w");
 	if (!fp) {
 		die("failed to open %s", histfile);
 	}
-	for (i = histsz < maxhist ? 0 : histsz - maxhist; i < histsz; i++) {
-		if (0 >= fprintf(fp, "%s\n", history[i])) {
+
+	for (i = (histsz < maxhist) ? 0 : (histsz - maxhist); i < histsz; i++) {
+		if (fprintf(fp, "%s\n", history[i]) <= 0)
 			die("failed to write to %s", histfile);
-		}
-	}
-	if (histsz == 0 || !histnodup || (histsz > 0 && strcmp(input, history[histsz-1]) != 0)) { /* TODO */
-		if (0 >= fputs(input, fp)) {
-			die("failed to write to %s", histfile);
-		}
-	}
-	if (fclose(fp)) {
-		die("failed to close file %s", histfile);
 	}
 
-out:
-	for (i = 0; i < histsz; i++) {
-		free(history[i]);
-	}
-	free(history);
+	if (fprintf(fp, "%s\n", input) <= 0)
+		die("failed to write to %s", histfile);
+
+	if (fclose(fp))
+		die("failed to close file %s", histfile);
 }
 
 static void
 keypress(XKeyEvent *ev)
 {
 	char buf[64];
-	int len;
+	int len, i;
 	KeySym ksym = NoSymbol;
 	Status status;
 
@@ -618,6 +612,26 @@ keypress(XKeyEvent *ev)
 			XConvertSelection(dpy, (ev->state & ShiftMask) ? clip : XA_PRIMARY,
 			                  utf8, utf8, win, CurrentTime);
 			return;
+		case XK_r:
+			if (histfile) {
+				if (!backup_items) {
+					backup_items = items;
+					items = calloc(histsz + 1, sizeof(struct item));
+					if (!items) {
+						die("cannot allocate memory");
+					}
+
+					for (i = 0; i < histsz; i++) {
+						items[i].text = history[i];
+					}
+				} else {
+					free(items);
+					items = backup_items;
+					backup_items = NULL;
+				}
+			}
+			match();
+			goto draw;
 		case XK_Left:
 		case XK_KP_Left:
 			movewordedge(-1);
