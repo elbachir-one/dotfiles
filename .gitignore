@@ -1,4 +1,5 @@
 suckless/dwm/config.h
+suckless/dwm/tags
 suckless/dwm/dwm
 suckless/dwm/*.o
 suckless/dmenu/*.o
