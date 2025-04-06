@@ -1158,8 +1158,10 @@ void manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
-//	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
-//	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
+	if (c->isfloating && (c->x == c->mon->wx || c->y == c->mon->wy)) {
+		c->x = c->mon->wx + (c->mon->ww - WIDTH(c)) / 2;
+		c->y = c->mon->wy + (c->mon->wh - HEIGHT(c)) / 2;
+	}
 	{
 		int format;
 		unsigned long *data, n, extra;
