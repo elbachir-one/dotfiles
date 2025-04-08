@@ -75,7 +75,6 @@ static const Rule rules[] = {
 	 */
 
 	/* class               instance         title            tags mask    isfloating  isterminal  noswallow   monitor   float x,y,w,h   floatborderpx */
-	{"discord",             NULL,           NULL,             1 << 5,       False,       0,         -1,       -1},
 	{"Surf",                NULL,           NULL,             1 << 3,       False,       0,         -1,       -1},
 	{"Firefox",             NULL,           NULL,             1 << 9,       False,       0,         -1,       -1},
 	{"obs",                 NULL,           NULL,             1 << 7,       False,       0,         -1,       -1},
@@ -89,13 +88,13 @@ static const Rule rules[] = {
 	{"st",                  NULL,       "ranger",             1 << 6,       False,       0,         -1,       -1},
 	{"st",                  NULL,     "newsboat",             1 << 6,       False,       0,         -1,       -1},
 	{"st",                  NULL,      "ncmpcpp",             1 << 9,       False,       0,         -1,       -1},
+	{"vlc",                 NULL,           NULL,             1 << 9,       False,       0,         -1,       -1},
 	{"qutebrowser",         NULL,           NULL,             1 << 3,       False,       0,         -1,       -1},
+	{"Sakura",              NULL,           NULL,             1 << 2,           0,       1,          1,       -1},
 	{"st",                  NULL,           NULL,                  0,           0,       1,          1,       -1},
 	{"Zathura",             NULL,           NULL,                  0,           1,       0,         -1,       -1,         1080,40,802,1015,   1},
 	{"feh",                 NULL,           NULL,                  0,           1,       0,         -1,       -1,         720,334,1046,646,   1},
 	{ NULL,                 NULL, "Event Tester",                  0,           0,       0,          1,       -1},
-	{"Alacritty",           NULL,           NULL,             1 << 9,           0,       1,          1,       -1},
-	{"Sakura",              NULL,           NULL,             1 << 2,           0,       1,          1,       -1},
 	{"Qemu-system-x86_64",  NULL,           NULL,             1 << 9,           1,       0,         -1,       -1},
 };
 
@@ -151,13 +150,12 @@ static const char *reccmd[]         = { "recording", NULL };
 static const char *wallcmd[]        = { "wall", NULL };
 static const char *mandcmd[]        = { "mand", NULL };
 static const char *mojocmd[]        = { "mojo", NULL };
-static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "114x30", NULL };
+static const char scratchpadname[]  = "scratchpad";
+static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "114x30", NULL };
 
 #include "exitdwm.c"
 
 static const Key keys[] = {
-
 	/* modifier                      key                function               argument */
 	{MODKEY,                         XK_z,            spawn,                  {.v = boomercmd}},
 	{MODKEY,                         XK_x,            spawn,                  {.v = dowcmd}},
@@ -234,7 +232,6 @@ static const Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
-
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
