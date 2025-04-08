@@ -1,0 +1,5 @@
+$include /etc/inputrc
+
+# Remap Ctrl+b and Ctrl+f to move by word
+"\C-b": backward-word
+"\C-f": forward-word
