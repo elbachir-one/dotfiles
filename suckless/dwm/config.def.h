@@ -90,9 +90,9 @@ static const Rule rules[] = {
 	{"st",                  NULL,     "newsboat",             1 << 6,       False,       0,         -1,       -1},
 	{"st",                  NULL,      "ncmpcpp",             1 << 9,       False,       0,         -1,       -1},
 	{"qutebrowser",         NULL,           NULL,             1 << 3,       False,       0,         -1,       -1},
-	{"feh",                 NULL,           NULL,             1 << 9,       False,       0,         -1,       -1},
 	{"st",                  NULL,           NULL,                  0,           0,       1,          1,       -1},
 	{"Zathura",             NULL,           NULL,                  0,           1,       0,         -1,       -1,         1080,40,802,1015,   1},
+	{"feh",                 NULL,           NULL,                  0,           1,       0,         -1,       -1,         720,334,1046,646,   1},
 	{ NULL,                 NULL, "Event Tester",                  0,           0,       0,          1,       -1},
 	{"Alacritty",           NULL,           NULL,             1 << 9,           0,       1,          1,       -1},
 	{"Sakura",              NULL,           NULL,             1 << 2,           0,       1,          1,       -1},
@@ -154,6 +154,8 @@ static const char *mojocmd[]        = { "mojo", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "114x30", NULL };
 
+#include "exitdwm.c"
+
 static const Key keys[] = {
 
 	/* modifier                      key                function               argument */
@@ -178,8 +180,8 @@ static const Key keys[] = {
 	{MODKEY,                         XK_d,            spawn,                  {.v = mandcmd}},
 	{MODKEY|ShiftMask,               XK_m,            spawn,                  {.v = mojocmd}},
 	{MODKEY|ControlMask|ShiftMask,   XK_x,            spawn,                  {.v = (const char*[]){ "pkill", "-SIGINT", "ffmpeg", NULL }}},
-	{MODKEY,                         XK_semicolon,    focusmon,               {.i = +1 } },
-	{MODKEY|ShiftMask,               XK_semicolon,    tagmon,                 {.i = +1 } },
+	{MODKEY,                         XK_semicolon,    focusmon,               {.i = +1 }},
+	{MODKEY|ShiftMask,               XK_semicolon,    tagmon,                 {.i = +1 }},
 	{MODKEY|ControlMask,             XK_f,            togglefullscr,          {0}},
 	{MODKEY,                         XK_b,            togglebar,              {0}},
 	{MODKEY|ControlMask,             XK_s,            togglesticky,           {0}},
@@ -196,10 +198,10 @@ static const Key keys[] = {
 	{MODKEY,                         XK_s,            togglescratch,          {.v = scratchpadcmd}},
 	{MODKEY|ShiftMask|ControlMask,   XK_z,            view,                   {.ui = ~0}},
 	{MODKEY|ShiftMask,               XK_z,            tag,                    {.ui = ~0}},
-	{MODKEY,                         XK_g,            setgaps,                {.i = -5 } },
-	{MODKEY,                         XK_h,            setgaps,                {.i = +5 } },
-	{MODKEY|ShiftMask,               XK_g,            setgaps,                {.i = GAP_RESET } },
-	{MODKEY|ShiftMask,               XK_h,            setgaps,                {.i = GAP_TOGGLE} },
+	{MODKEY,                         XK_g,            setgaps,                {.i = -5 }},
+	{MODKEY,                         XK_h,            setgaps,                {.i = +5 }},
+	{MODKEY|ShiftMask,               XK_g,            setgaps,                {.i = GAP_RESET }},
+	{MODKEY|ShiftMask,               XK_h,            setgaps,                {.i = GAP_TOGGLE}},
 	{MODKEY|ShiftMask,               XK_c,            killclient,             {0}},
 
 	{0,                              XK_F3,           spawn,                  {.v = up}},
@@ -209,11 +211,13 @@ static const Key keys[] = {
 	{0,                              XK_F8,           spawn,                  {.v = next}},
 	{0,                              XK_F7,           spawn,                  {.v = prev}},
 
-	{MODKEY|ShiftMask,               XK_q,            quit,                   {1} },
+	{MODKEY|ShiftMask,               XK_q,            quit,                   {1}},
+	{MODKEY|ShiftMask,               XK_e,            exitdwm,                {0}},
 
-	{MODKEY|ControlMask,             XK_t,            setlayout,              {.v = &layouts[0]} },
-	{MODKEY|ControlMask,             XK_y,            setlayout,              {.v = &layouts[1]} },
-	{MODKEY|ControlMask,             XK_u,            setlayout,              {.v = &layouts[2]} },
+
+	{MODKEY|ControlMask,             XK_t,            setlayout,              {.v = &layouts[0]}},
+	{MODKEY|ControlMask,             XK_y,            setlayout,              {.v = &layouts[1]}},
+	{MODKEY|ControlMask,             XK_u,            setlayout,              {.v = &layouts[2]}},
 
 	TAGKEYS(                         XK_ampersand,                            0)
 	TAGKEYS(                         XK_eacute,                               1)
