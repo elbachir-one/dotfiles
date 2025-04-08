@@ -1,11 +1,11 @@
 /* See LICENSE file for copyright and license details. */
 /* Default settings; can be overriden by command line. */
 
-static int topbar = 1;                      /* -b  option; if 0, dmenu appears at bottom     */
-static const unsigned int alpha = 0xc0;     /* Amount of opacity. 0xff is opaque             */
-static int centered = 1;                    /* -c option; centers dmenu on screen */
-static int min_width = 700;                    /* minimum width when centered */
-static int max_width = 800;  // Adjust this value as needed
+static int topbar               = 1;        /* -b  option; if 0, dmenu appears at bottom */
+static const unsigned int alpha = 0xc0;     /* Amount of opacity. 0xff is opaque */
+static int centered             = 1;        /* -c option; centers dmenu on screen */
+static int min_width            = 700;      /* minimum width when centered */
+static int max_width            = 800;      /* Adjust this value as needed */
 
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
