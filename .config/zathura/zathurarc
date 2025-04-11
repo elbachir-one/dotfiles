@@ -1,4 +1,8 @@
-include catppuccin-mocha
+#include catppuccin-mocha
+#set recolor-lightcolor rgba(0,0,0,0)
+set default-bg rgba(0,0,0,0.7)
+set recolor-lightcolor rgba(255,255,255,0)
+set recolor true
 set selection-clipboard clipboard
 map D set "first-page-column 1:2"
 map i zoom in
@@ -6,4 +10,11 @@ map o zoom out
 set scroll-step 100
 map l scroll up
 map k scroll down
+map n scroll full-down
+map p scroll full-up
+map L goto top
+map K goto bottom
+set font "TerminessTTF Nerd Font bold 12"
+set zoom-step 1
+map F toggle_fullscreen
 unmap j
