@@ -51,8 +51,9 @@ let mapleader ="!"
 nnoremap <C-n> :tabnew<Space>
 nnoremap <C-k> :vertical resize -2<CR>
 nnoremap <C-l> :vertical resize +2<CR>
-nnoremap <C-f> :Files<CR>
 nnoremap <TAB> :bnext<CR>
+nnoremap <C-f> :Files<CR>
+nnoremap <C-d> :Tags<CR>
 nnoremap <C-s> :vs<CR>
 nnoremap <C-c> :ba<CR>
 nnoremap <C-t> :bel vert term<CR>
@@ -65,6 +66,7 @@ nnoremap L <C-u>
 nnoremap K <C-d>
 nnoremap <silent> <C-o> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <C-o> :G<CR>
+nnoremap <C-b> :bd<CR>
 
 " Vim Movement Customization
 noremap m l
@@ -74,19 +76,19 @@ noremap l k
 
 " Plugin Management with vim-plug
 if !filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/plug.vim"'))
-    echo "Downloading junegunn/vim-plug to manage plugins..."
-    silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/
-    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/plug.vim
-    autocmd VimEnter * PlugInstall
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.vim}/plugged"'))
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'img-paste-devs/img-paste.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 Plug 'godlygeek/tabular'
@@ -94,6 +96,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 " Markdown and Gitdiff Specific Settings
