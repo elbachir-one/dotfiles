@@ -1,7 +1,7 @@
-From f47690aafdbe4ee63ff4abfd55f8555d7fbec79b Mon Sep 17 00:00:00 2001
+From 496a34cc758ebbb4de34080a18663c204e4c2769 Mon Sep 17 00:00:00 2001
 From: elbachir-one <bachiralfa@gmail.com>
-Date: Sun, 16 Jun 2024 00:28:19 +0100
-Subject: [PATCH] Center dmenu and change the width and the height
+Date: Mon, 7 Apr 2025 00:46:18 +0100
+Subject: [PATCH] Updated dmenuheight things
 
 ---
  config.def.h |  3 +++
@@ -10,7 +10,7 @@ Subject: [PATCH] Center dmenu and change the width and the height
  3 files changed, 38 insertions(+), 6 deletions(-)
 
 diff --git a/config.def.h b/config.def.h
-index 1edb647..832896f 100644
+index 1edb647..bd26ba1 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -2,6 +2,9 @@
@@ -18,8 +18,8 @@ index 1edb647..832896f 100644
  
  static int topbar = 1;                      /* -b  option; if 0, dmenu appears at bottom     */
 +static int centered = 1;                    /* -c option; centers dmenu on screen */
-+static int min_width = 500;                    /* minimum width when centered */
-+static const float menu_height_ratio = 4.0f;  /* This is the ratio used in the original calculation */
++static int minwidth = 500;                  /* minimum width when centered */
++static const float dmenuheight = 2.0f;      /* 2.0f is the default 1.0f is at the bottom */
  /* -fn option overrides fonts[0]; default X11 font or font set */
  static const char *fonts[] = {
  	"monospace:size=10"
@@ -38,7 +38,7 @@ index 323f93c..c036baa 100644
  dmenu grabs the keyboard before reading stdin if not reading from a tty. This
  is faster, but will lock up X until stdin reaches end\-of\-file.
 diff --git a/dmenu.c b/dmenu.c
-index 40f93e0..32d6a9d 100644
+index fd49549..7ed38e1 100644
 --- a/dmenu.c
 +++ b/dmenu.c
 @@ -95,6 +95,15 @@ calcoffsets(void)
@@ -46,7 +46,7 @@ index 40f93e0..32d6a9d 100644
  }
  
 +static int
-+max_textw(void)
++maxtextw(void)
 +{
 +	int len = 0;
 +	for (struct item *item = items; item && item->text; item++)
@@ -73,9 +73,9 @@ index 40f93e0..32d6a9d 100644
 -		y = info[i].y_org + (topbar ? 0 : info[i].height - mh);
 -		mw = info[i].width;
 +		if (centered) {
-+			mw = MIN(MAX(max_textw() + promptw, min_width), info[i].width);
++			mw = MIN(MAX(maxtextw() + promptw, minwidth), info[i].width);
 +			x = info[i].x_org + ((info[i].width  - mw) / 2);
-+			y = info[i].y_org + ((info[i].height - mh) / menu_height_ratio);
++			y = info[i].y_org + ((info[i].height - mh) / dmenuheight);
 +		} else {
 +			x = info[i].x_org;
 +			y = info[i].y_org + (topbar ? 0 : info[i].height - mh);
@@ -94,7 +94,7 @@ index 40f93e0..32d6a9d 100644
 -		mw = wa.width;
 +
 +		if (centered) {
-+			mw = MIN(MAX(max_textw() + promptw, min_width), wa.width);
++			mw = MIN(MAX(maxtextw() + promptw, minwidth), wa.width);
 +			x = (wa.width  - mw) / 2;
 +			y = (wa.height - mh) / 2;
 +		} else {
@@ -105,7 +105,7 @@ index 40f93e0..32d6a9d 100644
  	}
  	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
  	inputw = mw / 3; /* input width: ~33% of monitor width */
-@@ -734,6 +758,8 @@ main(int argc, char *argv[])
+@@ -733,6 +757,8 @@ main(int argc, char *argv[])
  			topbar = 0;
  		else if (!strcmp(argv[i], "-f"))   /* grabs keyboard before reading stdin */
  			fast = 1;
@@ -115,5 +115,5 @@ index 40f93e0..32d6a9d 100644
  			fstrncmp = strncasecmp;
  			fstrstr = cistrstr;
 -- 
-2.45.2
+2.48.1
 
