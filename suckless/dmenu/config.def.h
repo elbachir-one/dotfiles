@@ -9,8 +9,8 @@ static int max_width = 800;  // Adjust this value as needed
 
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
-	"Monofur Nerd Font:style=Bold:size=14",
-	"NotoColorEmoji:size=14"
+	"TerminessTTF Nerd Font:style=Bold:size=18:antialias=true:autohint=true",
+	"JoyPixels:style=Bold:pixelsize=18:antialias=true:autohint=true"
 };
 
 static const char *prompt = NULL;      /* -p  option; prompt to the left of input field */
@@ -50,4 +50,3 @@ static unsigned int border_width = 2;
 
 /* Nav history and search it */
 static unsigned int maxhist = 64;
-
