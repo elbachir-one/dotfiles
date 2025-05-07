@@ -32,6 +32,7 @@ set undodir=/tmp
 set smartcase
 set list
 set listchars=nbsp:¬,tab:»·,trail:·,extends:>
+"set bg=dark
 
 " Visual Enhancements
 hi CursorLine term=bold cterm=bold ctermbg=238
@@ -66,7 +67,7 @@ nnoremap L <C-u>
 nnoremap K <C-d>
 nnoremap <silent> <C-o> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <C-o> :G<CR>
-nnoremap <C-b> :bd<CR>
+nnoremap <C-d> :bd<CR>
 
 " Vim Movement Customization
 noremap m l
@@ -83,7 +84,7 @@ if !filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.vim}/autoload/plug.v
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.vim}/plugged"'))
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
