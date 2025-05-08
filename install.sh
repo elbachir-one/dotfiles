@@ -45,10 +45,18 @@ cp -r .config .fonts .icons .local .themes .bashrc .xinitrc .tmux.conf .bash_pro
 sudo cp -r xorg.conf.d/ /etc/X11/
 
 # Build suckless programs
+SUCKLESS_DIR="$HOME/dotfiles/suckless"
+
 for prog in dwm dmenu st slstatus slock farbfeld sent surf; do
-	cd ~/dotfiles/suckless/$prog
-	make
-	sudo make install
+	PROG_PATH="$SUCKLESS_DIR/$prog"
+	if [ -d "$PROG_PATH" ]; then
+		echo "Building $prog..."
+		cd "$PROG_PATH"
+		make
+		sudo make clean install
+	else
+		echo "Warning: $PROG_PATH does not exist, skipping."
+	fi
 done
 
 # Clone wallpapers
