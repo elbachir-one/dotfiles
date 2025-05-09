@@ -15,15 +15,17 @@ If you want to install my stuff, there are some dependences needed for everythin
 
 ### Using The Install Script
 
+**Note:** This script only works on **Void Linux**
+
 ```bash
 xbps-fetch https://raw.githubusercontent.com/elbachir-one/dotfiles/main/install.sh
 chmod +x install.sh
 ./install.sh
 ```
 
-**Note:** Install dependences and copy what you need from the dotfiles.
-
 ### Manual Installation
+
+**Note:** Install dependences and copy what you need from the dotfiles.
 
 ### DWM
 
