@@ -75,7 +75,6 @@ static const Rule rules[] = {
 	 */
 
 	/* class               instance         title            tags mask    isfloating  isterminal  noswallow   monitor   float x,y,w,h   floatborderpx */
-	{"Surf",                NULL,           NULL,             1 << 3,       False,       0,         -1,       -1},
 	{"Firefox",             NULL,           NULL,             1 << 9,       False,       0,         -1,       -1},
 	{"obs",                 NULL,           NULL,             1 << 7,       False,       0,         -1,       -1},
 	{"Virt-manager",        NULL,           NULL,             1 << 8,       False,       0,         -1,       -1},
@@ -90,8 +89,9 @@ static const Rule rules[] = {
 	{"st",                  NULL,      "ncmpcpp",             1 << 9,       False,       0,         -1,       -1},
 	{"vlc",                 NULL,           NULL,             1 << 9,       False,       0,         -1,       -1},
 	{"qutebrowser",         NULL,           NULL,             1 << 3,       False,       0,         -1,       -1},
+	{"Surf",                NULL,           NULL,                  0,           1,       0,         -1,       -1,         964,38,940,1028,    1},
 	{"Sakura",              NULL,           NULL,             1 << 2,           0,       1,          1,       -1},
-	{"Alacritty",           NULL,           NULL,                  0,           1,       1,          1,       -1,         1036,30,850,1028,    1},
+	{"Alacritty",           NULL,           NULL,                  0,           1,       1,          1,       -1,         1036,30,850,1028,   1},
 	{"st",                  NULL,           NULL,                  0,           0,       1,          1,       -1},
 	{"Zathura",             NULL,           NULL,                  0,           1,       0,         -1,       -1,         1080,40,802,1015,   1},
 	{"feh",                 NULL,           NULL,                  0,           1,       0,         -1,       -1,         720,334,1046,646,   1},
