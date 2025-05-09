@@ -3,6 +3,7 @@
 ## This is my personal configuration, feel free to change it as you see fit your needs.
 
 ![Void_DWM](assets/Void_DWM.jpg)
+![FreeBSD_DWM](assets/freebsd.jpg)
 
 ## Installation
 
@@ -12,7 +13,7 @@ If you want to install my stuff, there are some dependences needed for everythin
 
 ![Void_DWM](assets/Void_DWM2.jpg)
 
-### Using the install script
+### Using The Install Script
 
 ```bash
 xbps-fetch https://raw.githubusercontent.com/elbachir-one/dotfiles/main/install.sh
@@ -20,20 +21,9 @@ chmod +x install.sh
 ./install.sh
 ```
 
-**Note:** Don't forget to change the username to your username and the cpu (amd or intel)
-The install script only works on Void Linux, and it's a personal script.
-
 **Note:** Install dependences and copy what you need from the dotfiles.
 
-## FreeBSD
-
-![FreeBSD_DWM](assets/freebsd.jpg)
-
-```bash
-doas pkg install nerd-fonts feh xorg mpv vim git picom tmux chromium yt-dlp
-```
-**Note:** Copy anything from my dots and use it.
-
+### Manual Installation
 
 ### DWM
 
@@ -142,38 +132,12 @@ This build is specific to Wlroots 17.
 - [Swallow](https://github.com/djpohly/dwl/wiki/swallow)
 - [Vanity Gaps](https://github.com/djpohly/dwl/wiki/vanitygaps)
 
-Install all dependences:
-
-#### Void
-
-```bash
-sudo xbps-install wlroots wlroots-devel wayland-protocols wbg wlr-randr xdg-desktop-portal-wlr
-```
-
-#### Artix / Arch
-
-```bash
-sudo pacman -S wlroots wayland-protocols xdg-desktop-portal-wlr
-```
-
 ```bash
 cd ~/dotfiles/src/dwl/
 make
 sudo make clean install
 ```
-
 **Note:** Keybindings are the same as my DWM.
-
-### Dmenu-wayland
-
-Install dependences: meson, ninja.
-
-```bash
-cd ~/dotfiles/src/dmenu-wayland/
-mkdir build
-meson build
-sudo ninja -C build install
-```
 
 ### Dwl-bar
 
@@ -187,8 +151,38 @@ cd ~/dotfiles/src/dwl-bar/
 make
 sudo make clean install
 ```
-## Support
 
+### Dmenu-wayland
+
+```bash
+cd ~/dotfiles/src/dmenu-wayland/
+mkdir build
+meson build
+sudo ninja -C build install
+```
+
+## FreeBSD
+```bash
+doas pkg install xorg mpv vim git picom chromium yt-dlp \
+    meson ninja feh picom dunst curl
+```
+
+#### Void Linux
+```bash
+sudo xbps-install xorg base-devel ninja meson yt-dlp chromium noto-fonts-cjk \
+    noto-fonts-emoji libX11-devel libXinerama-devel libXft-devel sakura clipmenu \
+    picom dunst feh wlroots wlroots-devel wayland-protocols wbg wlr-randr \
+    xdg-desktop-portal-wlr git vim
+```
+
+#### Artix Linux / Arch Linux
+```bash
+sudo pacman -S xorg xorg-xinit base-devel meson ninja chromium noto-fonts-cjk \
+    noto-fonts-emoji sakura picom dunst feh git vim wlroots wayland-protocols \
+    seatd xdg-desktop-portal-wlr
+```
+
+## Support
 - Share the dots if you find them interesting.
 - Subscribe to my Youtube Channel [YouTube](https://www.youtube.com/@alphab91) 
 - You can also buy me Coffee
