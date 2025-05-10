@@ -15,8 +15,8 @@ sudo xbps-install -Sy \
 	xorg base-devel libX11-devel libXft-devel libXinerama-devel chromium ffmpeg ntfs-3g \
 	ugrep noto-fonts-emoji noto-fonts-cjk feh lsd webkit2gtk-devel gcr-devel gstreamer1-devel \
 	lxappearance neovim clipmenu mpv mpd alsa-utils ncmpcpp cava newsboat zathura mupdf \
-	ranger ueberzug sakura nodejs bash-completion yt-dlp aria2 neofetch stow \
-	flameshot cmake ninja meson curl ImageMagick NetworkManager arandr bat breeze clang \
+	ranger ueberzug sakura nodejs bash-completion yt-dlp aria2 wget neofetch stow \
+	flameshot cmake ninja meson curl ImageMagick NetworkManager bat breeze clang \
 	cmatrix lolcat-c figlet colordiff timeshift flac fzf git gstreamer-vaapi harfbuzz-devel \
 	htop imlib2-devel jq libev-devel libjpeg-turbo-devel libmpc-devel linux-headers \
 	man-db mpc papirus-folders papirus-icon-theme pcre-devel pkgconf-devel python3-adblock \
