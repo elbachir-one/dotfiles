@@ -38,7 +38,7 @@ cd ~
 # Install packages
 echo "Installing software packages..."
 yay -Sy --noconfirm \
-	xorg chromium vim ffmpeg ntfs-3g ugrep noto-fonts-emoji noto-fonts-cjk \
+	xorg xorg-xinit chromium vim ffmpeg ntfs-3g ugrep noto-fonts-emoji noto-fonts-cjk \
 	feh lsd webkit2gtk gcr gstreamer lxappearance clipmenu mpv mpd alsa-utils \
 	ncmpcpp cava newsboat zathura ranger ueberzug sakura nodejs npm bash-completion \
 	yt-dlp stow flameshot cmake ninja meson curl imagemagick bat breeze cmatrix \
@@ -105,6 +105,10 @@ yay -Sc --noconfirm
 # Update font cache
 echo "Updating font cache..."
 fc-cache -fv
+
+# Auto start DWM
+echo "startx" | tee -a ~/.bash_profile
+echo "exec dwm" | tee -a ~/.xinitrc
 
 # Optional service link
 echo "Adding $USERNAME to seat group..."
