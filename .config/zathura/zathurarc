@@ -15,6 +15,6 @@ map p scroll full-up
 map L goto top
 map K goto bottom
 set font "TerminessTTF Nerd Font bold 12"
-set zoom-step 1
+set zoom-step 1.2
 map F toggle_fullscreen
 unmap j
