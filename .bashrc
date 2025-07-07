@@ -17,7 +17,6 @@ export TERMINAL='sakura'
 export BROWSER='chromium'
 export EDITOR='vim-huge'
 export PATH="$HOME/.local/bin:$PATH"
-export PAGER=most
 export GOPATH="$HOME/.local/go"
 export IMGVIEWER='feh'
 export MAKEFLAGS="-j4"
@@ -29,7 +28,7 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
-# Get current branch in git repo
+# Get current branch in git repo:
 function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${BRANCH}" == "" ]
@@ -41,7 +40,7 @@ function parse_git_branch() {
 	fi
 }
 
-# Get current status of git repo
+# Get current status of git repo:
 function parse_git_dirty {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
@@ -85,7 +84,7 @@ alias u='sudo xbps-install -Su'
 alias i='sudo xbps-install -S'
 alias c='sudo xbps-remove -o && sudo xbps-remove -O'
 alias d='sudo xbps-remove'
-alias ls='lsd --color=auto'
+alias ls='lsd'
 alias lh='lsd -hl'
 alias s='source ~/.bashrc'
 alias cat='bat --style=plain --theme=GitHub'
@@ -100,8 +99,6 @@ alias m='mpv'
 alias htop='htop -t'
 alias patch='patch -p1 <'
 alias feh='feh -B dark'
-alias ufetch='ufetch | lolcat'
-alias cmatrix='cmatrix | lolcat'
 alias grep='ugrep'
 alias gt='git clone --depth=1'
 alias gs='git status'
