@@ -97,7 +97,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 call plug#end()
 

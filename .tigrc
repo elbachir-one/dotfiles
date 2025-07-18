@@ -1,0 +1,1 @@
+bind generic V !sh -c 'git show $1:$2' -- %(commit) %(fileargs)

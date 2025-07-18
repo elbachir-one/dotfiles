@@ -35,7 +35,7 @@ bind ^[[5~ ed-move-to-beg
 bind ^[[6~ ed-move-to-end
 
 # set prompt: ``username@hostname:directory $ ''
-PS1="\u@\h:\w \\$ "
+PS1="\h:\w \\$ "
 
 # search path for cd(1)
 # CDPATH=:$HOME

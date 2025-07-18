@@ -1,6 +1,5 @@
 # .bash_profile
 
-# Get the aliases and functions
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
 
 if [ -z "$XDG_RUNTIME_DIR" ]; then

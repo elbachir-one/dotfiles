@@ -1,6 +1,5 @@
 # .bashrc
 
-# If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 GRC_ALIASES=true
@@ -19,7 +18,7 @@ export EDITOR='vim-huge'
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.local/go"
 export IMGVIEWER='feh'
-export MAKEFLAGS="-j4"
+export MAKEFLAGS="-j3"
 
 export FZF_DEFAULT_OPTS="
 	--color=fg:#908caa,bg:#191724,hl:#ebbcba
@@ -76,7 +75,7 @@ function parse_git_dirty {
 }
 
 # Prompt:
-export PS1="[\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
+export PS1="[\[\e[36m\]\h\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 
 # Aliases:
 alias q='xbps-query -Rs'
@@ -86,27 +85,28 @@ alias c='sudo xbps-remove -o && sudo xbps-remove -O'
 alias d='sudo xbps-remove'
 alias ls='lsd'
 alias lh='lsd -hl'
+alias l='lsd -al'
+alias ll='lsd -a'
 alias s='source ~/.bashrc'
 alias cat='bat --style=plain --theme=GitHub'
 alias p='sudo poweroff'
 alias r='sudo reboot'
 alias mi='sudo make install'
 alias mc='make clean'
-alias l='lsd -al'
-alias ll='lsd -a'
 alias lb='lsblk'
 alias m='mpv'
 alias htop='htop -t'
 alias patch='patch -p1 <'
 alias feh='feh -B dark'
 alias grep='ugrep'
-alias gt='git clone --depth=1'
+alias gc='git clone --depth=1'
 alias gs='git status'
 alias gm='git commit -m'
-alias gc='git clean'
 alias gr='git restore'
 alias ga='git add .'
 alias gp='git push'
+alias gl='git log'
+alias gf='git diff'
 alias yl='yt-dlp -F'
 alias y='yt-dlp'
 alias ya='yt-dlp -f 140'
