@@ -15,7 +15,7 @@ set bg=dark
 set diffopt+=iwhite
 set autoindent
 set smartindent
-set go=a
+"set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
@@ -124,6 +124,8 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'preservim/vim-pencil'
 Plug 'tpope/vim-fugitive'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
 
@@ -278,3 +280,5 @@ augroup pencil
 	autocmd FileType markdown,mkd call pencil#init()
 	autocmd FileType text         call pencil#init()
 augroup END
+
+autocmd BufWritePre *.c,*.cpp,*.h silent! execute '!clang-format -i %' | edit!
