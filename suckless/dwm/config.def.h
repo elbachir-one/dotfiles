@@ -152,6 +152,8 @@ static const char *wallcmd[]        = { "wall", NULL };
 static const char *mandcmd[]        = { "mand", NULL };
 static const char *mantermcmd[]     = { "manterm", NULL };
 static const char *mojocmd[]        = { "mojo", NULL };
+static const char *bkmarkscmd[]     = { "bookmarks_store", NULL };
+static const char *bkmarkpcmd[]     = { "bookmarks_past", NULL };
 static const char scratchpadname[]  = "scratchpad";
 static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "114x30", NULL };
 
@@ -160,6 +162,8 @@ static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "114x3
 static const Key keys[] = {
 	/* modifier                      key                function               argument */
 	{MODKEY,                         XK_z,            spawn,                  {.v = boomercmd}},
+	{MODKEY,                         XK_b,            spawn,                  {.v = bkmarkscmd}},
+	{MODKEY,                         XK_Insert,       spawn,                  {.v = bkmarkpcmd}},
 	{MODKEY,                         XK_x,            spawn,                  {.v = dowcmd}},
 	{MODKEY,                         XK_y,            spawn,                  {.v = ytcmd}},
 	{MODKEY|ControlMask,             XK_d,            spawn,                  {.v = ytdcmd}},
@@ -184,7 +188,7 @@ static const Key keys[] = {
 	{MODKEY,                         XK_semicolon,    focusmon,               {.i = +1 }},
 	{MODKEY|ShiftMask,               XK_semicolon,    tagmon,                 {.i = +1 }},
 	{MODKEY|ControlMask,             XK_f,            togglefullscr,          {0}},
-	{MODKEY,                         XK_b,            togglebar,              {0}},
+	{MODKEY|ShiftMask,               XK_b,            togglebar,              {0}},
 	{MODKEY|ControlMask,             XK_s,            togglesticky,           {0}},
 	{MODKEY,                         XK_k,            focusstack,             {.i = +1}},
 	{MODKEY,                         XK_l,            focusstack,             {.i = -1}},
