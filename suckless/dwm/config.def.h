@@ -59,9 +59,10 @@ static const char *const autostart[] = {
 	"mpd", NULL,
 	"dunst", NULL,
 	"clipmenud", NULL,
+//	"monitor", NULL,
 //	"xrdb", ".Xresources", NULL,
 //	"barrier", NULL,
-	"/home/elbachir/.fehbg", NULL,
+	"fehbg", NULL,
 	"xhidecursor", NULL,
 	NULL
 };
@@ -96,7 +97,7 @@ static const Rule rules[] = {
 	{"Alacritty",           NULL,           NULL,                  0,           1,       1,          1,       -1,         700,32,646,712,   1},
 	{"feh",                 NULL,           NULL,                  0,           1,       0,         -1,       -1,         466,217,878,534, 1},
 	{ NULL,                 NULL, "Event Tester",                  0,           0,       0,          1,       -1},
-	{"Qemu-system-x86_64",  NULL,           NULL,             1 << 9,           1,       0,         -1,       -1},
+	//{"Qemu-system-x86_64",  NULL,           NULL,             1 << 9,           1,       0,         -1,       -1},
 };
 
 /* layout(s) */
@@ -155,7 +156,7 @@ static const char *mojocmd[]        = { "mojo", NULL };
 static const char *bkmarkscmd[]     = { "bookmarks_store", NULL };
 static const char *bkmarkpcmd[]     = { "bookmarks_past", NULL };
 static const char scratchpadname[]  = "scratchpad";
-static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "114x30", NULL };
+static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "106x26", NULL };
 
 #include "exitdwm.c"
 
