@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#
+# This is for connecting to a server and run tmux save sessions.
+#
+
+SERVER="myserver"
+
+ssh -t "$SERVER" '
+if tmux has-session -t main 2>/dev/null; then
+	tmux attach -t main
+else
+	tmux new -s main
+fi
+'
