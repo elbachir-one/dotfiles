@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Opening websites in Chromium app mode using dmenu with icons.
+
+options=(
+" 🤖  ChatGPT|https://chatgpt.com"
+" 💬  Discord|https://discord.com"
+" ♟️  Chess|https://chess.com"
+" ▶️  YouTube|https://youtube.com"
+" ✉️  Gmail|https://mail.google.com"
+" 👽  Reddit|https://reddit.com"
+" 📚  Wikipedia|https://wikipedia.org"
+)
+
+menu=$(printf "%s\n" "${options[@]}" | cut -d'|' -f1)
+choice=$(echo "$menu" | dmenu -i -p "Open sites as apps in Chromium:")
+[[ -z "$choice" ]] && exit
+url=$(printf "%s\n" "${options[@]}" | grep "^$choice|" | cut -d'|' -f2)
+chromium --app="$url"
