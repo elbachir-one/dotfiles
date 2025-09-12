@@ -1041,6 +1041,10 @@ main(int argc, char *argv[])
 			histfile = argv[++i];
 		else if (!strcmp(argv[i], "-l"))   /* number of lines in vertical list */
 			lines = atoi(argv[++i]);
+		else if (!strcmp(argv[i], "-i")) { /* case-insensitive */
+			fstrncmp = strncasecmp;
+			fstrstr  = strcasestr;
+		}
 		else if (!strcmp(argv[i], "-m"))
 			mon = atoi(argv[++i]);
 		else if (!strcmp(argv[i], "-p"))   /* adds prompt to left of input field */
