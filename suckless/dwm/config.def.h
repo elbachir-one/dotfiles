@@ -153,6 +153,8 @@ static const char *wallcmd[]        = { "wall", NULL };
 static const char *mandcmd[]        = { "mand", NULL };
 static const char *mantermcmd[]     = { "manterm", NULL };
 static const char *mojocmd[]        = { "mojo", NULL };
+static const char *appcmd[]         = { "app", NULL };
+static const char *mntcmd[]         = { "mnt", NULL };
 static const char *bkmarkscmd[]     = { "bookmarks_store", NULL };
 static const char *bkmarkpcmd[]     = { "bookmarks_past", NULL };
 static const char scratchpadname[]  = "scratchpad";
@@ -163,6 +165,8 @@ static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "106x2
 static const Key keys[] = {
 	/* modifier                      key                function               argument */
 	{MODKEY,                         XK_z,            spawn,                  {.v = boomercmd}},
+	{MODKEY|ControlMask,             XK_w,            spawn,                  {.v = appcmd}},
+	{MODKEY|ControlMask,             XK_m,            spawn,                  {.v = mntcmd}},
 	{MODKEY,                         XK_b,            spawn,                  {.v = bkmarkscmd}},
 	{MODKEY,                         XK_Insert,       spawn,                  {.v = bkmarkpcmd}},
 	{MODKEY,                         XK_x,            spawn,                  {.v = dowcmd}},
