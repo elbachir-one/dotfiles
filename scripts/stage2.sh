@@ -113,18 +113,28 @@ EOF
 	echo
 	sudo rm /var/cache/xbps/*
 
+	echo
 	# Dracut
-	sudo tee /etc/dracut.conf.d/99-nocrypt.conf > /dev/null <<EOF
-	omit_dracutmodules+=" crypt "
+	sudo tee /etc/dracut.conf.d/omit.conf > /dev/null <<EOF
+	omit_dracutmodules+=" resume kernel-modules-extra crypt hwdb nvdimm usrmount terminfo shell-interpreter i18n "
 EOF
-	sudo dracut --force
+	sudo dracut -f
+	echo
+
+	sudo chmod -x /etc/grub.d/30_os-prober
+	echo
+
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+	echo
+
+	sudo vkpurge rm all
 	echo
 
 	PKG_ALIASES=$(cat <<'EOF'
 alias q='xbps-query -Rs'
-alias u='sudo xbps-install -Su'
+alias u='sudo xbps-install -Suy'
 alias i='sudo xbps-install -S'
-alias c='sudo xbps-remove -o && sudo xbps-remove -O'
+alias c='sudo xbps-remove -oy && sudo xbps-remove -Oy'
 alias d='sudo xbps-remove -R'
 alias dmesg='dmesg --color=always'
 EOF
