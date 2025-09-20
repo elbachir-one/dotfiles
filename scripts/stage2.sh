@@ -45,7 +45,7 @@ EOF
 		xdotool awesome-terminal-fonts libxkbcommon-x11 python-zstandard time \
 		python-h2 ffmpeg aria2 rtmpdump libpulse imagemagick chafa dconf tree \
 		ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} xterm alsa-utils python3 \
-		harfbuzz dnsmasq
+		harfbuzz dnsmasq sakura st
 
 	echo
 	sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect modconf block filesystems fsck)/' /etc/mkinitcpio.conf
@@ -107,7 +107,7 @@ EOF
 		libxkbcommon-tools ffmpeg aria2 rtmpdump ImageMagick chafa tree time \
 		dconf ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} linux-lts alsa-utils \
 		linux-lts-headers terminus-font vim chrony nodejs clang llvm python3 \
-		libXinerama-devel harfbuzz-devel dnsmasq
+		libXinerama-devel harfbuzz-devel dnsmasq sakura st
 	echo
 
 	sudo xbps-reconfigure -fa
@@ -126,8 +126,10 @@ GRUB_TIMEOUT=0
 GRUB_DISTRIBUTOR="Void"
 GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS0,115200"
 EOF
+
 	echo
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
+	sudo chmod -x /etc/grub.d/30_os-prober
+
 	echo
 	sudo rm /var/cache/xbps/*
 
@@ -137,9 +139,6 @@ EOF
 	omit_dracutmodules+=" resume kernel-modules-extra crypt hwdb nvdimm usrmount terminfo shell-interpreter i18n btrfs qemu "
 EOF
 	sudo dracut -f
-	echo
-
-	sudo chmod -x /etc/grub.d/30_os-prober
 	echo
 
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
@@ -172,7 +171,7 @@ elif [[ "$HOSTNAME" == *"DEB"* ]]; then
 		fonts-font-awesome libxkbcommon-dev ffmpeg aria2 rtmpdump tree time \
 		libpulse0 imagemagick chafa dconf-cli ddcutil rrdtool alsa-utils npm \
 		fonts-noto-cjk fonts-noto-color-emoji fonts-terminus python3 clang \
-		llvm dnsmasq
+		llvm dnsmasq sakura st
 
 	PKG_ALIASES=$(cat <<'EOF'
 alias q='apt search'
@@ -192,18 +191,24 @@ GRUB_DISABLE_SUBMENU=y
 GRUB_DISABLE_RECOVERY=true
 GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS0,115200 modules=sd-mod,usb-storage,ext4 rootfstype=ext4"
 EOF
-	echo
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
-	echo
 
+	echo
+	sudo chmod -x /etc/grub.d/30_os-prober
+
+	echo
 	sudo apk update && sudo apk upgrade
+
 	echo
 	sudo apk add git bash go bat lsd yt-dlp fzf tmux fontconfig curl fastfetch \
 		xclip xdotool build-base ffmpeg aria2 rtmpdump pulseaudio imagemagick \
 		chafa dconf ddcutil rrdtool font-noto-cjk font-noto-emoji tree time \
-		alsa-utils dnsmasq clang llvm python3 htop bash-completion agetty vim
-	echo
+		alsa-utils dnsmasq clang llvm python3 htop bash-completion agetty vim \
+		sakura st
 
+	echo
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+	echo
 	sudo tee /usr/sbin/autologin > /dev/null <<EOF
 #!/bin/sh
 exec login -f sh
@@ -250,7 +255,8 @@ elif [[ "$HOSTNAME" == *"FREE_BSD"* ]]; then
 	sudo pkg install -y bash bash-completion git go bat lsd yt-dlp fzf tmux \
 		fontconfig htop fastfetch xclip xdotool libXft curl xterm font-awesome \
 		libXkbcommon ffmpeg aria2 tree Imagemagick7 chafa rrdtool alsa-utils \
-		npm noto-extra noto-emoji terminus-font python3 llvm dnsmasq vim curl
+		npm noto-extra noto-emoji terminus-font python3 llvm dnsmasq vim curl \
+		sakura st
 
 	echo
 
