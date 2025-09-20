@@ -17,6 +17,13 @@ if [[ "$HOSTNAME" == *"ARCH"* ]]; then
 
 	sudo reflector --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
+	echo
+	sudo tee /etc/resolv.conf > /dev/null <<EOF
+	nameserver 1.1.1.1
+	nameserver 8.8.8.8
+EOF
+
+	echo
 	sudo pacman -Syu --noconfirm
 	sudo pacman -S --noconfirm git go base-devel
 
@@ -30,13 +37,24 @@ if [[ "$HOSTNAME" == *"ARCH"* ]]; then
 	cd yay && makepkg -si --noconfirm
 	cd ~
 
+	echo
 	yay -Syu --noconfirm
+
 	echo
 	yay -S --noconfirm bat lsd yt-dlp fzf tmux fontconfig htop fastfetch xclip \
 		xdotool awesome-terminal-fonts libxkbcommon-x11 python-zstandard time \
 		python-h2 ffmpeg aria2 rtmpdump libpulse imagemagick chafa dconf tree \
 		ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} xterm alsa-utils python3 \
 		harfbuzz dnsmasq
+
+	echo
+	sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect modconf block filesystems fsck)/' /etc/mkinitcpio.conf
+
+	echo
+	sudo mkinitcpio -P
+
+	echo
+	yay -Sc --noconfirm
 
 	PKG_ALIASES=$(cat <<'EOF'
 alias q='yay -Ss'
@@ -116,7 +134,7 @@ EOF
 	echo
 	# Dracut
 	sudo tee /etc/dracut.conf.d/omit.conf > /dev/null <<EOF
-	omit_dracutmodules+=" resume kernel-modules-extra crypt hwdb nvdimm usrmount terminfo shell-interpreter i18n "
+	omit_dracutmodules+=" resume kernel-modules-extra crypt hwdb nvdimm usrmount terminfo shell-interpreter i18n btrfs qemu "
 EOF
 	sudo dracut -f
 	echo
