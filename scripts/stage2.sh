@@ -45,7 +45,7 @@ EOF
 		xdotool awesome-terminal-fonts libxkbcommon-x11 python-zstandard time \
 		python-h2 ffmpeg aria2 rtmpdump libpulse imagemagick chafa dconf tree \
 		ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} xterm alsa-utils python3 \
-		harfbuzz dnsmasq sakura st terminfo
+		harfbuzz dnsmasq sakura st terminfo nginx nodejs jq
 
 	echo
 	sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect modconf block filesystems fsck)/' /etc/mkinitcpio.conf
@@ -107,7 +107,7 @@ EOF
 		libxkbcommon-tools ffmpeg aria2 rtmpdump ImageMagick chafa tree time \
 		dconf ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} linux-lts alsa-utils \
 		linux-lts-headers terminus-font vim chrony nodejs clang llvm python3 \
-		libXinerama-devel harfbuzz-devel dnsmasq sakura st
+		libXinerama-devel harfbuzz-devel dnsmasq sakura st nodejs jq
 	echo
 
 	sudo xbps-reconfigure -fa
@@ -171,7 +171,7 @@ elif [[ "$HOSTNAME" == *"DEB"* ]]; then
 		fonts-font-awesome libxkbcommon-dev ffmpeg aria2 rtmpdump tree time \
 		libpulse0 imagemagick chafa dconf-cli ddcutil rrdtool alsa-utils npm \
 		fonts-noto-cjk fonts-noto-color-emoji fonts-terminus python3 clang \
-		llvm dnsmasq sakura stterm terminfo
+		llvm dnsmasq sakura stterm terminfo jq
 
 	PKG_ALIASES=$(cat <<'EOF'
 alias q='apt search'
@@ -203,7 +203,7 @@ EOF
 		xclip xdotool build-base ffmpeg aria2 rtmpdump pulseaudio imagemagick \
 		chafa dconf ddcutil rrdtool font-noto-cjk font-noto-emoji tree time \
 		alsa-utils dnsmasq clang llvm python3 htop bash-completion agetty vim \
-		sakura st
+		sakura st jq nodejs
 
 	echo
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
@@ -256,7 +256,7 @@ elif [[ "$HOSTNAME" == *"FREE_BSD"* ]]; then
 		fontconfig htop fastfetch xclip xdotool libXft curl xterm font-awesome \
 		libXkbcommon ffmpeg aria2 tree Imagemagick7 chafa rrdtool alsa-utils \
 		npm noto-extra noto-emoji terminus-font python3 llvm dnsmasq vim curl \
-		sakura st terminfo-db
+		sakura st terminfo-db jq node
 
 	echo
 
@@ -303,6 +303,13 @@ fi
 cat > ~/.bash_profile <<EOF
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
 
+if [ -z "$XDG_RUNTIME_DIR" ]; then
+	XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir"
+
+	mkdir -pm 0700 "$XDG_RUNTIME_DIR"
+	export XDG_RUNTIME_DIR
+fi
+
 if [ -t 0 ]; then
 	if command -v resize >/dev/null; then
 		eval "$(resize)"
@@ -316,6 +323,8 @@ cat > ~/.bashrc <<EOF
 GRC_ALIASES=true
 [[ -s "/etc/profile.d/grc.sh" ]] && source /etc/grc.sh
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 bind 'set completion-ignore-case on'
 
 export TERM=xterm-256color
@@ -325,6 +334,22 @@ export EDITOR='vim'
 export PATH="\$HOME/.local/bin:\$PATH"
 export GOPATH="\$HOME/.local/go"
 export MAKEFLAGS="-j2"
+
+export FZF_DEFAULT_OPTS="
+	--color=fg:#ffffff,bg:#000000,hl:#ff0000
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#1be6ee
+	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
+export LESS='-R -M -I'
+export LESSPROMPT='%{?f%f:}  %{G[Line: %l/%L]}%{M[Col: %c]} (%p%%)'
+export LESS_TERMCAP_md=$'\e[01;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[04;35m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;44;33m'
+export LESS_TERMCAP_se=$'\e[0m'
 
 $PKG_ALIASES
 
