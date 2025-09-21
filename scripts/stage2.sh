@@ -45,7 +45,7 @@ EOF
 		xdotool awesome-terminal-fonts libxkbcommon-x11 python-zstandard time \
 		python-h2 ffmpeg aria2 rtmpdump libpulse imagemagick chafa dconf tree \
 		ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} xterm alsa-utils python3 \
-		harfbuzz dnsmasq sakura st
+		harfbuzz dnsmasq sakura st terminfo
 
 	echo
 	sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect modconf block filesystems fsck)/' /etc/mkinitcpio.conf
@@ -171,7 +171,7 @@ elif [[ "$HOSTNAME" == *"DEB"* ]]; then
 		fonts-font-awesome libxkbcommon-dev ffmpeg aria2 rtmpdump tree time \
 		libpulse0 imagemagick chafa dconf-cli ddcutil rrdtool alsa-utils npm \
 		fonts-noto-cjk fonts-noto-color-emoji fonts-terminus python3 clang \
-		llvm dnsmasq sakura st
+		llvm dnsmasq sakura stterm terminfo
 
 	PKG_ALIASES=$(cat <<'EOF'
 alias q='apt search'
@@ -256,7 +256,7 @@ elif [[ "$HOSTNAME" == *"FREE_BSD"* ]]; then
 		fontconfig htop fastfetch xclip xdotool libXft curl xterm font-awesome \
 		libXkbcommon ffmpeg aria2 tree Imagemagick7 chafa rrdtool alsa-utils \
 		npm noto-extra noto-emoji terminus-font python3 llvm dnsmasq vim curl \
-		sakura st
+		sakura st terminfo-db
 
 	echo
 
