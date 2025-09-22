@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-# Get the Hostname
+# Get the Hostname (DEB, FREE_BSD, ARCH, VOID, ALPINE)
 if command -v hostnamectl >/dev/null 2>&1; then
 	HOSTNAME=$(hostnamectl --static)
 else
@@ -72,7 +72,6 @@ elif [[ "$HOSTNAME" == *"VOID"* ]]; then
 	echo
 	cat /etc/runit/runsvdir/current/agetty-ttyS0/conf
 
-	# Ignore unnecessary packages
 	sudo tee /etc/xbps.d/ignore.conf > /dev/null <<EOF
 ignorepkg=linux-firmware-amd
 ignorepkg=linux-firmware-nvidia
@@ -85,7 +84,6 @@ ignorepkg=linux-headers
 ignorepkg=btrfs-progs
 EOF
 
-	# Removing uneeded things
 	sudo xbps-remove -Ry linux-firmware-{amd,nvidia,intel,network,broadcom} \
 		wpa_supplicant linux6.12 linux-headers
 
@@ -96,12 +94,10 @@ EOF
 
 	echo "Updating the System"
 	echo
-	# Updating the system
 	sudo xbps-install -S
 	sudo xbps-install -uy xbps
 	sudo xbps-install -Suy
 
-	# Installing some packages
 	sudo xbps-install -Sy git go bat lsd yt-dlp fzf curl tmux fontconfig \
 		htop ufetch xclip xdotool base-devel libXft-devel font-awesome xterm \
 		libxkbcommon-tools ffmpeg aria2 rtmpdump ImageMagick chafa tree time \
@@ -114,9 +110,9 @@ EOF
 	echo
 	sudo rm /boot/vmlinuz-6.12.*
 	sudo rm /boot/config-6.12.*
+
 	echo
 	echo
-	# Clean up the grub config file
 	sudo tee /etc/default/grub > /dev/null <<EOF
 #
 # Configuration file for GRUB.
@@ -134,7 +130,6 @@ EOF
 	sudo rm /var/cache/xbps/*
 
 	echo
-	# Dracut
 	sudo tee /etc/dracut.conf.d/omit.conf > /dev/null <<EOF
 	omit_dracutmodules+=" resume kernel-modules-extra crypt hwdb nvdimm usrmount terminfo shell-interpreter i18n btrfs qemu "
 EOF
@@ -559,6 +554,8 @@ EOF
 source ~/.bashrc
 
 echo
+echo
 echo "Setup complete for $HOSTNAME. You can reboot now, or the system will automatically reboot in 30 seconds."
+echo
 sleep 30
 sudo reboot
