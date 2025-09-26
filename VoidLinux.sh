@@ -29,7 +29,7 @@ sudo xbps-install -Sy \
 	xdotool zathura-pdf-mupdf tmux xcb-util-renderutil-devel xcb-util-image-devel \
 	pkgconf uthash pcre-devel libconfig-devel figlet-fonts dunst pass wkhtmltopdf \
 	audacity readline-devel readline file-devel plata-theme img2pdf cups cups-pdf \
-	libinput-gestures
+	libinput-gestures xwallpaper
 
 # Compile and install picom
 cd /tmp/

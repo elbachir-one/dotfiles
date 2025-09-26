@@ -30,6 +30,7 @@ sudo pacman -S --noconfirm go git base-devel
 # Setup yay
 echo "Cloning and building yay..."
 cd /tmp/
+[ -d yay ] && rm -rf yay
 git clone --depth=1 https://aur.archlinux.org/yay
 cd yay
 makepkg -si --noconfirm
@@ -42,33 +43,29 @@ yay -Sy --noconfirm \
 	feh lsd webkit2gtk gcr gstreamer lxappearance clipmenu mpv mpd alsa-utils \
 	ncmpcpp cava newsboat zathura ranger ueberzug sakura nodejs npm bash-completion \
 	yt-dlp stow flameshot cmake ninja meson curl imagemagick bat breeze cmatrix \
-	lolcat figlet colordiff timeshift flac fzf gstreamer-vaapi harfbuzz \
+	lolcat figlet colordiff timeshift flac fzf gstreamer-vaapi harfbuzz fastfetch \
 	htop imlib2 jq libev libjpeg-turbo libmpc linux-headers man-db mpc papirus-folders \
 	papirus-icon-theme pcre pkgconf python-pip rsync simple-mtpfs terminus-font \
 	v4l2loopback-dkms v4l2loopback-utils xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf \
-	tmux xcb-util-renderutil xcb-util-image uthash libconfig dunst pass \
-	readline file seatd img2pdf cups cups-pdf libinput-gestures
+	tmux xcb-util-renderutil xcb-util-image uthash libconfig dunst pass readline \
+	file seatd img2pdf cups cups-pdf libinput-gestures xwallpaper
 
 # Compile and install picom
 echo "Cloning and building picom..."
 cd /tmp/
+[ -d picom ] && rm -rf picom
 git clone --depth=1 https://github.com/pijulius/picom.git
 cd picom
 git submodule update --init --recursive
 meson --buildtype=release . build
 sudo ninja -C build install
 
-# Create user directories
-echo "Creating user directories..."
+# Clone dotfiles
 cd ~
-mkdir -p Videos Images Downloads Documents Music
-
-# Clone and copy dotfiles (non-overwriting)
-echo "Cloning and applying dotfiles..."
+[ -d dotfiles ] && rm -rf dotfiles
 git clone --depth=1 https://github.com/elbachir-one/dotfiles
 cd dotfiles
 cp -rn .config .fonts .icons .local .themes .bashrc .xinitrc .tmux.conf .bash_profile ~/
-sudo cp -r xorg.conf.d/ /etc/X11/
 
 # Build suckless programs
 SUCKLESS_DIR="$HOME/dotfiles/suckless"
@@ -88,11 +85,13 @@ done
 # Clone wallpapers
 echo "Cloning wallpapers..."
 cd ~
+[ -d wall ] && rm -rf wall
 git clone --depth=1 https://github.com/elbachir-one/wall
 
 # Install grc
 echo "Installing grc..."
 cd /tmp/
+[ -d grc ] && rm -rf grc
 git clone https://github.com/garabik/grc.git
 cd grc
 sudo ./install.sh
@@ -106,14 +105,7 @@ yay -Sc --noconfirm
 echo "Updating font cache..."
 fc-cache -fv
 
-# Auto start DWM
-echo "startx" | tee -a ~/.bash_profile
-echo "exec dwm" | tee -a ~/.xinitrc
-
-# Optional service link
-echo "Adding $USERNAME to seat group..."
-sudo usermod -aG seat "$USERNAME"
-
 # Final reboot
 echo "Setup complete. Rebooting..."
+sleep 2s
 sudo reboot
