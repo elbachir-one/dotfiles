@@ -1,0 +1,49 @@
+! xterm and urxvt configuration
+
+*scrollBar: false
+*internalBorder: 2
+*font: xft:TerminessTTF Nerd Font:style=Bold:size=16
+*transparent: true
+*shading: 8
+
+! special
+*.foreground:   #ffffff
+*.background:   #000000
+*.cursorColor:  #dae
+
+! black
+*.color0:       #000000
+*.color8:       #67d9c7
+
+! red
+*.color1:       #0c1115
+*.color9:       #78ead8
+
+! green
+*.color2:       #1c242a
+*.color10:      #efb4c3
+
+! yellow
+*.color3:       #313d47
+*.color11:      #86d925
+
+! blue
+*.color4:       #4d5e6b
+*.color12:      #efb4c3
+
+! magenta
+*.color5:       #6e8597
+*.color13:      #3dc4b1
+
+! cyan
+*.color6:       #95b3cb
+*.color14:      #b4dcfc
+
+! white
+*.color7:       #dae4ec
+*.color15:      #8ad545
+
+! Key bindings for copy and paste
+*VT100.Translations: #override \n\
+	Shift Ctrl <Key>V:    insert-selection(CLIPBOARD) \n\
+	Shift Ctrl <Key>C:    copy-selection(CLIPBOARD)
