@@ -18,9 +18,9 @@ If you want to install my stuff, there are some dependences needed for everythin
 **Note:** This script only works on **Void Linux**
 
 ```bash
-xbps-fetch https://raw.githubusercontent.com/elbachir-one/dotfiles/main/install.sh
-chmod +x install.sh
-./install.sh
+xbps-fetch https://raw.githubusercontent.com/elbachir-one/dotfiles/main/VoidLinux.sh
+chmod +x VoidLinux.sh
+./VoidLinux.sh
 ```
 
 ### Manual Installation
