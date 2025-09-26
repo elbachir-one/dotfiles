@@ -82,9 +82,9 @@ sudo xbps-remove -oy
 sudo xbps-reconfigure -fa
 
 # Switch to NetworkManager
-sudo sv down dhcpcd
-sudo ln -sf /etc/sv/NetworkManager /var/service/
-sudo ln -sf /etc/sv/dbus /var/service/
+#sudo sv down dhcpcd
+#sudo ln -sf /etc/sv/NetworkManager /var/service/
+#sudo ln -sf /etc/sv/dbus /var/service/
 
 # Optional service links (uncomment if needed)
 # sudo ln -s /etc/sv/libvirtd /var/service/
@@ -96,20 +96,20 @@ sudo ln -sf /etc/sv/dbus /var/service/
 # sudo usermod -aG kvm "$USERNAME"
 
 # Remove unwanted ttys and services
-for tty in tty3 tty4 tty5 tty6; do
-	sudo rm -f /var/service/agetty-$tty
-done
+#for tty in tty3 tty4 tty5 tty6; do
+#	sudo rm -f /var/service/agetty-$tty
+#done
 
-sudo rm -f /var/service/wpa_supplicant
-sudo rm -f /var/service/dhcpcd
+#sudo rm -f /var/service/wpa_supplicant
+#sudo rm -f /var/service/dhcpcd
 
 # GRUB and auto-login config
-sudo sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
-sudo sed -i "s/GETTY_ARGS=\"--noclear\"/GETTY_ARGS=\"--noclear --autologin $USERNAME\"/" \
-	/etc/runit/runsvdir/current/agetty-tty1/conf
+#sudo sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
+#sudo sed -i "s/GETTY_ARGS=\"--noclear\"/GETTY_ARGS=\"--noclear --autologin $USERNAME\"/" \
+#	/etc/runit/runsvdir/current/agetty-tty1/conf
 
 # Update GRUB config
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+#sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Reboot system
 sudo reboot
