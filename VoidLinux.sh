@@ -65,12 +65,14 @@ done
 
 # Clone wallpapers
 cd ~
+[ -d wall ] && rm -rf wall
 git clone --depth=1 https://github.com/elbachir-one/wall
 
-# Install grc
+# Installing grc
 cd /tmp/
+[ -d grc ] && rm -rf grc
 git clone https://github.com/garabik/grc.git
-cd grc
+cd grc/
 sudo ./install.sh
 sudo cp /etc/profile.d/grc.sh /etc/
 
