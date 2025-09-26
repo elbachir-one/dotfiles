@@ -33,14 +33,16 @@ sudo xbps-install -Sy \
 
 # Compile and install picom
 cd /tmp/
+[ -d picom ] && rm -rf picom
 git clone --depth=1 https://github.com/pijulius/picom.git
 cd picom
 git submodule update --init --recursive
-meson --buildtype=release . build
+meson setup --buildtype=release . build
 sudo ninja -C build install
 
 # Clone and copy dotfiles
 cd ~
+[ -d dotfiles ] && rm -rf dotfiles
 git clone --depth=1 https://github.com/elbachir-one/dotfiles
 cd dotfiles/
 cp -r .config .fonts .icons .local .themes .bashrc .xinitrc .tmux.conf .bash_profile ~/
@@ -49,7 +51,7 @@ cp -r .config .fonts .icons .local .themes .bashrc .xinitrc .tmux.conf .bash_pro
 # Build suckless programs
 SUCKLESS_DIR="$HOME/dotfiles/suckless"
 
-for prog in dwm dmenu st slstatus slock farbfeld sent surf; do
+for prog in dwm dmenu st slstatus slock farbfeld sent; do
 	PROG_PATH="$SUCKLESS_DIR/$prog"
 	if [ -d "$PROG_PATH" ]; then
 		echo "Building $prog..."
