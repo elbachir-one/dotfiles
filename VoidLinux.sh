@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 set -e  # Exit on any error
 set -o pipefail
 
@@ -17,9 +18,9 @@ sudo xbps-install -Suy
 # Install packages
 sudo xbps-install -Sy \
 	xorg base-devel libX11-devel libXft-devel libXinerama-devel chromium ffmpeg ntfs-3g \
-	ugrep noto-fonts-emoji noto-fonts-cjk feh lsd webkit2gtk-devel gcr-devel gstreamer1-devel \
+	ugrep noto-fonts-emoji noto-fonts-cjk feh lsd libwebkit2gtk41-devel gcr-devel gstreamer1-devel \
 	lxappearance neovim clipmenu mpv mpd alsa-utils ncmpcpp cava newsboat zathura mupdf \
-	ranger ueberzug sakura nodejs bash-completion yt-dlp aria2 wget neofetch stow \
+	ranger ueberzug sakura nodejs bash-completion yt-dlp aria2 wget ufetch stow \
 	flameshot cmake ninja meson curl ImageMagick NetworkManager bat breeze clang \
 	cmatrix lolcat-c figlet colordiff timeshift flac fzf git gstreamer-vaapi harfbuzz-devel \
 	htop imlib2-devel jq libev-devel libjpeg-turbo-devel libmpc-devel linux-headers \
@@ -38,15 +39,12 @@ git submodule update --init --recursive
 meson --buildtype=release . build
 sudo ninja -C build install
 
-# Create user directories
-cd ~
-mkdir -p Videos Images Downloads Documents Music
-
 # Clone and copy dotfiles
+cd ~
 git clone --depth=1 https://github.com/elbachir-one/dotfiles
-cd dotfiles
+cd dotfiles/
 cp -r .config .fonts .icons .local .themes .bashrc .xinitrc .tmux.conf .bash_profile ~/
-sudo cp -r etc/X11/xorg.conf.d/ /etc/X11/
+#sudo cp -r etc/X11/xorg.conf.d/ /etc/X11/
 
 # Build suckless programs
 SUCKLESS_DIR="$HOME/dotfiles/suckless"
