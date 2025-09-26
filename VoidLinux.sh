@@ -20,11 +20,11 @@ sudo xbps-install -Sy \
 	cmatrix lolcat-c figlet colordiff timeshift flac fzf git gstreamer-vaapi harfbuzz-devel \
 	htop imlib2-devel jq libev-devel libjpeg-turbo-devel libmpc-devel linux-headers \
 	man-db mpc papirus-folders papirus-icon-theme pcre-devel pkgconf-devel python3-adblock \
-	python3-pip rsync simple-mtpfs terminus-font v4l2loopback \
-	xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf tmux xcb-util-renderutil-devel \
-	xcb-util-image-devel pkgconf uthash pcre-devel libconfig-devel figlet-fonts dunst \
-	pass wkhtmltopdf audacity readline-devel readline file-devel plata-theme \
-	img2pdf cups cups-pdf libinput-gestures
+	python3-pip rsync simple-mtpfs terminus-font v4l2loopback xdg-desktop-portal-wlr \
+	xdotool zathura-pdf-mupdf tmux xcb-util-renderutil-devel xcb-util-image-devel \
+	pkgconf uthash pcre-devel libconfig-devel figlet-fonts dunst pass wkhtmltopdf \
+	audacity readline-devel readline file-devel plata-theme img2pdf cups cups-pdf \
+	libinput-gestures
 
 # Compile and install picom
 cd /tmp/
@@ -42,7 +42,7 @@ mkdir -p Videos Images Downloads Documents Music
 git clone --depth=1 https://github.com/elbachir-one/dotfiles
 cd dotfiles
 cp -r .config .fonts .icons .local .themes .bashrc .xinitrc .tmux.conf .bash_profile ~/
-sudo cp -r xorg.conf.d/ /etc/X11/
+sudo cp -r etc/X11/xorg.conf.d/ /etc/X11/
 
 # Build suckless programs
 SUCKLESS_DIR="$HOME/dotfiles/suckless"
