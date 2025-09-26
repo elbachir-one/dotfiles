@@ -5,7 +5,11 @@ set -o pipefail
 USERNAME=$(logname)
 
 # Allow wheel group passwordless sudo
-sudo sed -i 's/^%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers.d/wheel
+echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
+sudo chmod 440 /etc/sudoers.d/wheel
+
+# Not working for some reason?
+#sudo sed -i 's/^%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers.d/wheel
 
 # System update
 sudo xbps-install -Suy
@@ -76,9 +80,6 @@ sudo xbps-remove -oy
 
 # Reconfigure all packages
 sudo xbps-reconfigure -fa
-
-# Update font cache
-fc-cache -fv
 
 # Switch to NetworkManager
 sudo sv down dhcpcd
