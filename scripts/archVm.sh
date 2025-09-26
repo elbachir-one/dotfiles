@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-# --- Arch Linux Auto Installer For Qemu Made by ALPHA ---
+# --- Arch Linux Auto Installer For Qemu Made by ALPHA --- #
+
+# This script automatically installs Arch Linux with some defaults:
+# - systemd-boot as the bootloader
+# - systemd-networkd for networking
+# - Default username, root password, and user password are all set to "arch"
 
 # ========================
 # part1: Base installation
@@ -47,11 +52,11 @@ getUUID=$(blkid -s UUID -o value "${device}2")
 echo "$getUUID" > /mnt/getuuid
 
 # Copy second stage of script into new system
-sed '1,/^#part2$/d' "$0" > /mnt/archMega.sh
-chmod +x /mnt/archMega.sh
+sed '1,/^#part2$/d' "$0" > /mnt/archvm.sh
+chmod +x /mnt/archvm.sh
 
 # Chroot into system
-arch-chroot /mnt ./archMega.sh
+arch-chroot /mnt ./archvm.sh
 
 exit
 
@@ -61,12 +66,6 @@ exit
 # ========================
 printf '\033c'
 
-# Prompt for bootloader
-echo "Which bootloader do you want to use?"
-echo "1) systemd-boot (default)"
-echo "2) GRUB"
-read -rp "Enter choice [1-2]: " boot_choice
-boot_choice=${boot_choice:-1}  # default to systemd-boot
 echo
 
 # Variables
@@ -133,12 +132,11 @@ sudo systemctl enable reflector.timer
 systemctl enable sshd
 
 # Bootloader installation
-if [ "$boot_choice" -eq 1 ]; then
-	bootctl install
+bootctl install
 
-	getUUID=$(cat getuuid)
+getUUID=$(cat getuuid)
 
-	tee > /boot/loader/loader.conf <<EOF
+tee > /boot/loader/loader.conf <<EOF
 default arch
 timeout 0
 console-mode max
@@ -151,18 +149,6 @@ initrd /initramfs-linux-lts.img
 options root=UUID=$getUUID rw console=ttyS0,115200n8
 EOF
 
-else
-	pacman -S --noconfirm grub
-
-	sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
-
-	sed -i 's|^GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS0,115200n8"|' /etc/default/grub
-
-	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
-
-	grub-mkconfig -o /boot/grub/grub.cfg
-fi
-
 # DNS
 tee > /etc/resolv.conf <<EOF
 nameserver 1.1.1.1
@@ -173,6 +159,7 @@ EOF
 echo "Rebuilding the Initramfs"
 mkinitcpio -P
 
+# End
 echo "Installation complete! Type reboot."
 echo "The User name is ($username) and the password is ($userpassword) also the root password is ($rootpassword)"
 exit

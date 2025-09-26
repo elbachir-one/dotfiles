@@ -23,40 +23,41 @@ if [[ "$HOSTNAME" == *"ARCH"* ]]; then
 	nameserver 8.8.8.8
 EOF
 
-	echo
-	sudo pacman -Syu --noconfirm
-	sudo pacman -S --noconfirm git go base-devel
+echo
+sudo pacman -Syu --noconfirm
+sudo pacman -S --noconfirm git go base-devel
 
-	printf "[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin %s --keep-baud 115200,38400,9600 %%I \$TERM\n" "$(whoami)" | sudo systemctl edit serial-getty@ttyS0.service --stdin
-	echo
-	cat /etc/systemd/system/serial-getty@ttyS0.service.d/override.conf
-	echo
+printf "[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin %s --keep-baud 115200,38400,9600 %%I \$TERM\n" "$(whoami)" | sudo systemctl edit serial-getty@ttyS0.service --stdin
+echo
+cat /etc/systemd/system/serial-getty@ttyS0.service.d/override.conf
+echo
 
-	cd /tmp/
-	git clone https://aur.archlinux.org/yay.git
-	cd yay && makepkg -si --noconfirm
-	cd ~
+cd /tmp/
+git clone https://aur.archlinux.org/yay.git
+cd yay && makepkg -si --noconfirm
+cd ~
 
-	echo
-	yay -Syu --noconfirm
+echo
+yay -Syu --noconfirm
 
-	echo
-	yay -S --noconfirm bat lsd yt-dlp fzf tmux fontconfig htop fastfetch xclip \
-		xdotool awesome-terminal-fonts libxkbcommon-x11 python-zstandard time \
-		python-h2 ffmpeg aria2 rtmpdump libpulse imagemagick chafa dconf tree \
-		ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} xterm alsa-utils python3 \
-		harfbuzz dnsmasq sakura st terminfo nginx nodejs jq
+echo
+yay -S --noconfirm bat lsd yt-dlp fzf tmux fontconfig htop fastfetch xclip \
+	xdotool awesome-terminal-fonts libxkbcommon-x11 python-zstandard time \
+	python-h2 ffmpeg aria2 rtmpdump libpulse imagemagick chafa dconf tree \
+	ddcutil rrdtool noto-fonts-{cjk,emoji,extra} noto-fonts xterm alsa-utils \
+	python3 harfbuzz dnsmasq sakura st nginx nodejs jq atool libcaca \
+	perl-image-exiftool mediainfo lynx highlight
 
-	echo
-	sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect modconf block filesystems fsck)/' /etc/mkinitcpio.conf
+echo
+sudo sed -i 's/HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)/HOOKS=(base udev autodetect modconf block filesystems fsck)/' /etc/mkinitcpio.conf
 
-	echo
-	sudo mkinitcpio -P
+echo
+sudo mkinitcpio -P
 
-	echo
-	yay -Sc --noconfirm
+echo
+yay -Sc --noconfirm
 
-	PKG_ALIASES=$(cat <<'EOF'
+PKG_ALIASES=$(cat <<'EOF'
 alias q='yay -Ss'
 alias u='yay -Syu --noconfirm'
 alias i='yay -S --noconfirm'
@@ -84,26 +85,27 @@ ignorepkg=linux-headers
 ignorepkg=btrfs-progs
 EOF
 
-	sudo xbps-remove -Ry linux-firmware-{amd,nvidia,intel,network,broadcom} \
-		wpa_supplicant linux6.12 linux-headers
+sudo xbps-remove -Ry linux-firmware-{amd,nvidia,intel,network,broadcom} \
+	wpa_supplicant linux6.12 linux-headers
 
-	sudo touch /etc/sv/agetty-tty{2,3,4,5,6}/down
+sudo touch /etc/sv/agetty-tty{2,3,4,5,6}/down
 
-	sudo rm /var/service/agetty-tty{2,3,4,5,6}
-	echo
+sudo rm /var/service/agetty-tty{2,3,4,5,6}
+echo
 
-	echo "Updating the System"
-	echo
-	sudo xbps-install -S
-	sudo xbps-install -uy xbps
-	sudo xbps-install -Suy
+echo "Updating the System"
+echo
+sudo xbps-install -S
+sudo xbps-install -uy xbps
+sudo xbps-install -Suy
 
-	sudo xbps-install -Sy git go bat lsd yt-dlp fzf curl tmux fontconfig \
-		htop ufetch xclip xdotool base-devel libXft-devel font-awesome xterm \
-		libxkbcommon-tools ffmpeg aria2 rtmpdump ImageMagick chafa tree time \
-		dconf ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} linux-lts alsa-utils \
-		linux-lts-headers terminus-font vim chrony nodejs clang llvm python3 \
-		libXinerama-devel harfbuzz-devel dnsmasq sakura st nodejs jq
+sudo xbps-install -Sy git go bat lsd yt-dlp fzf curl tmux fontconfig \
+	htop ufetch xclip xdotool base-devel libXft-devel font-awesome xterm \
+	libxkbcommon-tools ffmpeg aria2 rtmpdump ImageMagick chafa tree time \
+	dconf ddcutil rrdtool noto-fonts-{cjk,emoji,ttf} linux-lts alsa-utils \
+	linux-lts-headers terminus-font vim chrony nodejs clang llvm python3 \
+	libXinerama-devel harfbuzz-devel dnsmasq sakura st nodejs jq ranger \
+	xdg-utils xdg-user-dirs
 	echo
 
 	sudo xbps-reconfigure -fa
@@ -123,26 +125,26 @@ GRUB_DISTRIBUTOR="Void"
 GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS0,115200"
 EOF
 
-	echo
-	sudo chmod -x /etc/grub.d/30_os-prober
+echo
+sudo chmod -x /etc/grub.d/30_os-prober
 
-	echo
-	sudo rm /var/cache/xbps/*
+echo
+sudo rm /var/cache/xbps/*
 
-	echo
-	sudo tee /etc/dracut.conf.d/omit.conf > /dev/null <<EOF
+echo
+sudo tee /etc/dracut.conf.d/omit.conf > /dev/null <<EOF
 	omit_dracutmodules+=" resume kernel-modules-extra crypt hwdb nvdimm usrmount terminfo shell-interpreter i18n btrfs qemu "
 EOF
-	sudo dracut -f
-	echo
+sudo dracut -f
+echo
 
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
-	echo
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+echo
 
-	sudo vkpurge rm all
-	echo
+sudo vkpurge rm all
+echo
 
-	PKG_ALIASES=$(cat <<'EOF'
+PKG_ALIASES=$(cat <<'EOF'
 alias q='xbps-query -Rs'
 alias u='sudo xbps-install -Suy'
 alias i='sudo xbps-install -S'
@@ -187,31 +189,31 @@ GRUB_DISABLE_RECOVERY=true
 GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS0,115200 modules=sd-mod,usb-storage,ext4 rootfstype=ext4"
 EOF
 
-	echo
-	sudo chmod -x /etc/grub.d/30_os-prober
+echo
+sudo chmod -x /etc/grub.d/30_os-prober
 
-	echo
-	sudo apk update && sudo apk upgrade
+echo
+sudo apk update && sudo apk upgrade
 
-	echo
-	sudo apk add git bash go bat lsd yt-dlp fzf tmux fontconfig curl fastfetch \
-		xclip xdotool build-base ffmpeg aria2 rtmpdump pulseaudio imagemagick \
-		chafa dconf ddcutil rrdtool font-noto-cjk font-noto-emoji tree time \
-		alsa-utils dnsmasq clang llvm python3 htop bash-completion agetty vim \
-		sakura st jq nodejs
+echo
+sudo apk add git bash go bat lsd yt-dlp fzf tmux fontconfig curl fastfetch \
+	xclip xdotool build-base ffmpeg aria2 rtmpdump pulseaudio imagemagick \
+	chafa dconf ddcutil rrdtool font-noto-cjk font-noto-emoji tree time \
+	alsa-utils dnsmasq clang llvm python3 htop bash-completion agetty vim \
+	sakura st jq nodejs
 
-	echo
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
+echo
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-	echo
-	sudo tee /usr/sbin/autologin > /dev/null <<EOF
+echo
+sudo tee /usr/sbin/autologin > /dev/null <<EOF
 #!/bin/sh
 exec login -f sh
 EOF
-	echo
-	sudo chmod +x /usr/sbin/autologin
+echo
+sudo chmod +x /usr/sbin/autologin
 
-	sudo tee /etc/inittab > /dev/null <<EOF
+sudo tee /etc/inittab > /dev/null <<EOF
 ::sysinit:/sbin/openrc sysinit
 ::sysinit:/sbin/openrc boot
 ::wait:/sbin/openrc default
@@ -222,13 +224,13 @@ ttyS0::respawn:/sbin/getty -L 115200 -n -l /usr/sbin/autologin ttyS0 vt100
 ::ctrlaltdel:/sbin/reboot
 ::shutdown:/sbin/openrc shutdown
 EOF
-	echo
+echo
 
-	sudo sed -i 's|^root:x:0:0:root:/root:/bin/sh$|root:x:0:0:root:/root:/bin/bash|' /etc/passwd
-	sudo sed -i 's|^sh:x:1000:1000:sh:/home/sh:/bin/sh$|sh:x:1000:1000:sh:/home/sh:/bin/bash|' /etc/passwd
-	echo
+sudo sed -i 's|^root:x:0:0:root:/root:/bin/sh$|root:x:0:0:root:/root:/bin/bash|' /etc/passwd
+sudo sed -i 's|^sh:x:1000:1000:sh:/home/sh:/bin/sh$|sh:x:1000:1000:sh:/home/sh:/bin/bash|' /etc/passwd
+echo
 
-	PKG_ALIASES=$(cat <<'EOF'
+PKG_ALIASES=$(cat <<'EOF'
 alias q='apk search'
 alias u='sudo apk update && sudo apk upgrade'
 alias i='sudo apk add'
@@ -263,23 +265,23 @@ comconsole_speed="115200"
 console="comconsole,vidconsole"
 EOF
 
-	echo
-	sudo tee -a /etc/gettytab > /dev/null <<'EOF'
+echo
+sudo tee -a /etc/gettytab > /dev/null <<'EOF'
 al|Autologin over serial:\
-       :al=sh:tc=3wire.9600:
+	   :al=sh:tc=3wire.9600:
 EOF
 
-	echo
-	sudo tee /etc/ttys > /dev/null <<EOF
+echo
+sudo tee /etc/ttys > /dev/null <<EOF
 	ttyv0   "/usr/libexec/getty Pc"     xterm   onifexists secure
 	ttyu0   "/usr/libexec/getty al"     vt100   onifconsole secure
 EOF
 
-	echo
-	sudo chsh -s bash sh
-	echo
+echo
+sudo chsh -s bash sh
+echo
 
-	PKG_ALIASES=$(cat <<'EOF'
+PKG_ALIASES=$(cat <<'EOF'
 [[ $PS1 && -f /usr/local/share/bash-completion/bash_completion.sh ]] && \
 		source /usr/local/share/bash-completion/bash_completion.sh
 
@@ -295,15 +297,8 @@ else
 	exit 1
 fi
 
-cat > ~/.bash_profile <<EOF
+tee > ~/.bash_profile <<EOF
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
-
-if [ -z "$XDG_RUNTIME_DIR" ]; then
-	XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir"
-
-	mkdir -pm 0700 "$XDG_RUNTIME_DIR"
-	export XDG_RUNTIME_DIR
-fi
 
 if [ -t 0 ]; then
 	if command -v resize >/dev/null; then
@@ -312,7 +307,27 @@ if [ -t 0 ]; then
 fi
 EOF
 
-cat > ~/.bashrc <<EOF
+#cat > ~/.bash_profile <<EOF
+#
+#if [ -z "$XDG_RUNTIME_DIR" ]; then
+#	XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir"
+#
+#	mkdir -pm 0700 "$XDG_RUNTIME_DIR"
+#	export XDG_RUNTIME_DIR
+#fi
+#EOF
+
+tee > ~/.fzf.bash <<EOF
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+fi
+
+eval "$(fzf --bash)"
+EOF
+
+tee > ~/.bashrc <<EOF
 [[ \$- != *i* ]] && return
 
 GRC_ALIASES=true
@@ -377,26 +392,26 @@ alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -
 alias yt='yt-dlp --skip-download --write-thumbnail'
 
 function parse_git_branch() {
-	BRANCH=\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-	if [ -n "\$BRANCH" ]; then
-		STAT=\$(parse_git_dirty)
-		echo "[\${BRANCH}\${STAT}]"
+	BRANCH=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+	if [ -n "$BRANCH" ]; then
+		STAT=$(parse_git_dirty)
+		echo "[${BRANCH}${STAT}]"
 	fi
 }
 
 function parse_git_dirty() {
-	status=\$(git status 2>&1)
+	status=$(git status 2>&1)
 	bits=''
-	echo "\$status" | grep -q "renamed:" && bits=">\$bits"
-	echo "\$status" | grep -q "Your branch is ahead of" && bits="*\$bits"
-	echo "\$status" | grep -q "new file:" && bits="+\$bits"
-	echo "\$status" | grep -q "Untracked files" && bits="?\$bits"
-	echo "\$status" | grep -q "deleted:" && bits="x\$bits"
-	echo "\$status" | grep -q "modified:" && bits="!\$bits"
-	[ -n "\$bits" ] && echo " \$bits"
+	echo "$status" | grep -q "renamed:" && bits=">$bits"
+	echo "$status" | grep -q "Your branch is ahead of" && bits="*$bits"
+	echo "$status" | grep -q "new file:" && bits="+$bits"
+	echo "$status" | grep -q "Untracked files" && bits="?$bits"
+	echo "$status" | grep -q "deleted:" && bits="x$bits"
+	echo "$status" | grep -q "modified:" && bits="!$bits"
+	[ -n "$bits" ] && echo " $bits"
 }
 
-export PS1="[\[\e[36m\]\h \w\[\e[m\]\[\e[35m\]\$(parse_git_branch)\[\e[m\]] "
+export PS1="[\[\e[36m\]\h \w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 EOF
 
 cd /tmp/
