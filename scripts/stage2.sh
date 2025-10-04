@@ -33,6 +33,7 @@ cat /etc/systemd/system/serial-getty@ttyS0.service.d/override.conf
 echo
 
 cd /tmp/
+[ -d yay ] && rm -rf yay
 git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si --noconfirm
 cd ~
@@ -297,8 +298,15 @@ else
 	exit 1
 fi
 
-tee > ~/.bash_profile <<EOF
+cat > ~/.bash_profile <<'EOF'
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
+
+if [ -z "$XDG_RUNTIME_DIR" ]; then
+	XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir"
+
+	mkdir -pm 0700 "$XDG_RUNTIME_DIR"
+	export XDG_RUNTIME_DIR
+fi
 
 if [ -t 0 ]; then
 	if command -v resize >/dev/null; then
@@ -307,17 +315,7 @@ if [ -t 0 ]; then
 fi
 EOF
 
-#cat > ~/.bash_profile <<EOF
-#
-#if [ -z "$XDG_RUNTIME_DIR" ]; then
-#	XDG_RUNTIME_DIR="/tmp/$(id -u)-runtime-dir"
-#
-#	mkdir -pm 0700 "$XDG_RUNTIME_DIR"
-#	export XDG_RUNTIME_DIR
-#fi
-#EOF
-
-tee > ~/.fzf.bash <<EOF
+cat > ~/.fzf.bash <<'EOF'
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
@@ -327,7 +325,7 @@ fi
 eval "$(fzf --bash)"
 EOF
 
-tee > ~/.bashrc <<EOF
+cat > ~/.bashrc <<'EOF'
 [[ \$- != *i* ]] && return
 
 GRC_ALIASES=true
@@ -392,29 +390,55 @@ alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" -
 alias yt='yt-dlp --skip-download --write-thumbnail'
 
 function parse_git_branch() {
-	BRANCH=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-	if [ -n "$BRANCH" ]; then
-		STAT=$(parse_git_dirty)
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
 		echo "[${BRANCH}${STAT}]"
+	else
+		echo ""
 	fi
 }
 
-function parse_git_dirty() {
-	status=$(git status 2>&1)
+function parse_git_dirty {
+	status=`git status 2>&1 | tee`
+	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
 	bits=''
-	echo "$status" | grep -q "renamed:" && bits=">$bits"
-	echo "$status" | grep -q "Your branch is ahead of" && bits="*$bits"
-	echo "$status" | grep -q "new file:" && bits="+$bits"
-	echo "$status" | grep -q "Untracked files" && bits="?$bits"
-	echo "$status" | grep -q "deleted:" && bits="x$bits"
-	echo "$status" | grep -q "modified:" && bits="!$bits"
-	[ -n "$bits" ] && echo " $bits"
+	if [ "${renamed}" == "0" ]; then
+		bits=">${bits}"
+	fi
+	if [ "${ahead}" == "0" ]; then
+		bits="*${bits}"
+	fi
+	if [ "${newfile}" == "0" ]; then
+		bits="+${bits}"
+	fi
+	if [ "${untracked}" == "0" ]; then
+		bits="?${bits}"
+	fi
+	if [ "${deleted}" == "0" ]; then
+		bits="x${bits}"
+	fi
+	if [ "${dirty}" == "0" ]; then
+		bits="!${bits}"
+	fi
+	if [ ! "${bits}" == "" ]; then
+		echo " ${bits}"
+	else
+		echo ""
+	fi
 }
 
 export PS1="[\[\e[36m\]\h \w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 EOF
 
 cd /tmp/
+[ -d grc ] && rm -rf grc
 git clone --depth=1 https://github.com/garabik/grc.git && cd grc/
 sudo ./install.sh && sudo cp /etc/profile.d/grc.sh /etc/
 cd
