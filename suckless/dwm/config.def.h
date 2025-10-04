@@ -54,16 +54,18 @@ static const unsigned int alphas[][3]  = {
 
 static const char *const autostart[] = {
 	"st", NULL,
+	"sakura", NULL,
 	"picom", NULL,
 	"slstatus", NULL,
 	"mpd", NULL,
 	"dunst", NULL,
 	"clipmenud", NULL,
+	"fehbg", NULL,
+	"xhidecursor", NULL,
+	"chromium", NULL,
 //	"monitor", NULL,
 //	"xrdb", ".Xresources", NULL,
 //	"barrier", NULL,
-	"fehbg", NULL,
-	"xhidecursor", NULL,
 	NULL
 };
 
@@ -132,11 +134,7 @@ static const char *clipcmd[]        = { "clipmenu", NULL };
 static const char *rancmd[]         = { "st", "-e", "ranger", NULL };
 static const char *ncmcmd[]         = { "st", "-e", "ncmpcpp", NULL };
 static const char *lockcmd[]        = { "slock", NULL };
-static const char *virtcmd[]        = { "virt-manager", NULL };
-static const char *chrocmd[]        = { "chromium", NULL };
 static const char *boatcmd[]        = { "st", "-e", "newsboat", NULL };
-static const char *ytcmd[]          = { "ytfzf", "-D", NULL };
-static const char *ytdcmd[]         = { "ytfzf", "-d", "-D", NULL };
 static const char *flamcmd[]        = { "flameshot", "gui", NULL };
 static const char *up[]             = { "amixer", "set", "Master", "10%+", NULL };
 static const char *mut[]            = { "amixer", "set", "Master", "toggle", NULL };
@@ -160,24 +158,25 @@ static const char *bkmarkpcmd[]     = { "bookmarks_past", NULL };
 static const char scratchpadname[]  = "scratchpad";
 static const char *scratchpadcmd[]  = { "st", "-t", scratchpadname, "-g", "106x26", NULL };
 
+//static const char *chrocmd[]        = { "chromium", NULL };
+//static const char *ytcmd[]          = { "ytfzf", "-D", NULL };
+//static const char *virtcmd[]        = { "virt-manager", NULL };
+//static const char *ytdcmd[]         = { "ytfzf", "-d", "-D", NULL };
+
 #include "exitdwm.c"
 
 static const Key keys[] = {
-	/* modifier                      key                function               argument */
+	/* modifier                      key             function                   argument */
 	{MODKEY,                         XK_z,            spawn,                  {.v = boomercmd}},
 	{MODKEY|ControlMask,             XK_w,            spawn,                  {.v = appcmd}},
 	{MODKEY|ControlMask,             XK_m,            spawn,                  {.v = mntcmd}},
 	{MODKEY,                         XK_b,            spawn,                  {.v = bkmarkscmd}},
 	{MODKEY,                         XK_Insert,       spawn,                  {.v = bkmarkpcmd}},
 	{MODKEY,                         XK_x,            spawn,                  {.v = dowcmd}},
-	{MODKEY,                         XK_y,            spawn,                  {.v = ytcmd}},
-	{MODKEY|ControlMask,             XK_d,            spawn,                  {.v = ytdcmd}},
 	{MODKEY,                         XK_f,            spawn,                  {.v = searchcmd}},
 	{MODKEY|ShiftMask,               XK_f,            spawn,                  {.v = flamcmd}},
 	{MODKEY|ShiftMask,               XK_p,            spawn,                  {.v = boatcmd}},
 	{MODKEY|ShiftMask,               XK_l,            spawn,                  {.v = lockcmd}},
-	{MODKEY,                         XK_w,            spawn,                  {.v = chrocmd}},
-	{MODKEY,                         XK_v,            spawn,                  {.v = virtcmd}},
 	{MODKEY,                         XK_r,            spawn,                  {.v = rancmd}},
 	{MODKEY,                         XK_e,            spawn,                  {.v = ncmcmd}},
 	{MODKEY,                         XK_p,            spawn,                  {.v = dmenucmd}},
@@ -228,6 +227,11 @@ static const Key keys[] = {
 	{MODKEY|ControlMask,             XK_t,            setlayout,              {.v = &layouts[0]}},
 	{MODKEY|ControlMask,             XK_y,            setlayout,              {.v = &layouts[1]}},
 	{MODKEY|ControlMask,             XK_u,            setlayout,              {.v = &layouts[2]}},
+
+//	{MODKEY,                         XK_w,            spawn,                  {.v = chrocmd}},
+//	{MODKEY,                         XK_y,            spawn,                  {.v = ytcmd}},
+//	{MODKEY|ControlMask,             XK_d,            spawn,                  {.v = ytdcmd}},
+//	{MODKEY,                         XK_v,            spawn,                  {.v = virtcmd}},
 
 	TAGKEYS(                         XK_ampersand,                            0)
 	TAGKEYS(                         XK_eacute,                               1)
