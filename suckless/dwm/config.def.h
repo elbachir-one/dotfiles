@@ -243,6 +243,8 @@ static const Key keys[] = {
 	TAGKEYS(                         XK_underscore,                           7)
 	TAGKEYS(                         XK_ccedilla,                             8)
 	TAGKEYS(                         XK_agrave,                               9)
+	TAGKEYS(                         XK_parenright,                          10)
+	TAGKEYS(                         XK_equal,                               11)
 };
 
 /* button definitions */
