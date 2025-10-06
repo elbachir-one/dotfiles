@@ -233,18 +233,19 @@ static const Key keys[] = {
 //	{MODKEY|ControlMask,             XK_d,            spawn,                  {.v = ytdcmd}},
 //	{MODKEY,                         XK_v,            spawn,                  {.v = virtcmd}},
 
-	TAGKEYS(                         XK_ampersand,                            0)
-	TAGKEYS(                         XK_eacute,                               1)
-	TAGKEYS(                         XK_quotedbl,                             2)
-	TAGKEYS(                         XK_apostrophe,                           3)
-	TAGKEYS(                         XK_parenleft,                            4)
-	TAGKEYS(                         XK_minus,                                5)
-	TAGKEYS(                         XK_egrave,                               6)
-	TAGKEYS(                         XK_underscore,                           7)
-	TAGKEYS(                         XK_ccedilla,                             8)
-	TAGKEYS(                         XK_agrave,                               9)
-	TAGKEYS(                         XK_parenright,                          10)
-	TAGKEYS(                         XK_equal,                               11)
+	TAGKEYS(                         XK_twosuperior,                         0)
+	TAGKEYS(                         XK_ampersand,                           1)
+	TAGKEYS(                         XK_eacute,                              2)
+	TAGKEYS(                         XK_quotedbl,                            3)
+	TAGKEYS(                         XK_apostrophe,                          4)
+	TAGKEYS(                         XK_parenleft,                           5)
+	TAGKEYS(                         XK_minus,                               6)
+	TAGKEYS(                         XK_egrave,                              7)
+	TAGKEYS(                         XK_underscore,                          8)
+	TAGKEYS(                         XK_ccedilla,                            9)
+	TAGKEYS(                         XK_agrave,                             10)
+	TAGKEYS(                         XK_parenright,                         11)
+	TAGKEYS(                         XK_equal,                              12)
 };
 
 /* button definitions */
