@@ -1,35 +1,60 @@
 #!/bin/bash
 
+# This a script that uses dmenu and yt-dlp to download media files.
+
 # Function to check if directory exists
 check_directory() {
-    if [ ! -d "$1" ]; then
-        echo "Directory $1 does not exist."
-        return 1
-    fi
-    return 0
+	if [ ! -d "$1" ]; then
+		echo "Directory $1 does not exist."
+		return 1
+	fi
+	return 0
 }
 
 # Check if directories exist, if not, create them
-if ! check_directory ~/Videos/ || ! check_directory ~/Music/ || ! check_directory ~/Images/Thumbnails/; then
-    echo "Creating necessary directories..."
-    mkdir -p ~/Videos/
-    mkdir -p ~/Music/
-    mkdir -p ~/Images/Thumbnails/
+if ! check_directory ~/Videos/ || ! check_directory ~/Music/ || ! check_directory ~/Images/Thumbnails/ || ! check_directory ~/Downloads/; then
+	echo "Creating necessary directories..."
+	mkdir -p ~/Videos/
+	mkdir -p ~/Music/
+	mkdir -p ~/Images/Thumbnails/
+	mkdir -p ~/Downloads/
 fi
 
 # Get the download option using dmenu
-DOWNLOAD_OPTION=$(echo -e "Video\nAudio\nThumbnail" | dmenu -p "🌍")
+#
+DOWNLOAD_OPTION=$(echo -e "Video\nAudio\nThumbnail\nOther Files" | dmenu -p "🌍")
 
-if [ "$DOWNLOAD_OPTION" == "Video" ]; then
-    DOWNLOAD_CMD="cd ~/Videos/ && yt-dlp -f \"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\" --merge-output-format mp4"
-elif [ "$DOWNLOAD_OPTION" == "Audio" ]; then
-    DOWNLOAD_CMD="cd ~/Music/ && yt-dlp -f 140"
-elif [ "$DOWNLOAD_OPTION" == "Thumbnail" ]; then
-    DOWNLOAD_CMD="cd ~/Images/Thumbnails/ && yt-dlp --skip-download --write-thumbnail"
+case "$DOWNLOAD_OPTION" in
+	"Video")
+		DOWNLOAD_DIR=~/Videos
+		DOWNLOAD_CMD="tube"
+		;;
+	"Audio")
+		DOWNLOAD_DIR=~/Music
+		DOWNLOAD_CMD="yt-dlp -f 140"
+		;;
+	"Thumbnail")
+		DOWNLOAD_DIR=~/Images/Thumbnails
+		DOWNLOAD_CMD="yt-dlp --skip-download --write-thumbnail"
+		;;
+	"Other Files")
+		DOWNLOAD_DIR=~/Downloads
+		DOWNLOAD_CMD="wget -c"
+		;;
+	*)
+		echo "No valid option selected."
+		exit 1
+		;;
+esac
+
+VIDEO_URL=$(echo "" | dmenu -p "📡")
+if [ -z "$VIDEO_URL" ]; then
+	echo "No URL provided. Exiting."
+	exit 1
 fi
 
-# Get the video URL using dmenu
-VIDEO_URL=$(echo "" | dmenu -p "📡")
+# Clean the url before downloading it
+CLEAN_URL=$(echo "$VIDEO_URL" | cut -d'&' -f1)
 
-# Download the video using youtube-dl
-eval "$DOWNLOAD_CMD $VIDEO_URL"
+cd "$DOWNLOAD_DIR" || exit
+$DOWNLOAD_CMD "$VIDEO_URL"

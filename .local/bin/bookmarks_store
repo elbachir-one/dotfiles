@@ -5,7 +5,6 @@ file="$HOME/Documents/Bookmarks/bookmarks.txt"
 
 mkdir -p "$(dirname "$file")"
 
-# Check if clipboard is empty
 if [ -z "$bookmark" ]; then
 	notify-send "No bookmark found in clipboard."
 	exit 1

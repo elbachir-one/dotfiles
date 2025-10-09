@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-#
-# This is for connecting to a server and run tmux save sessions.
-#
-
 SERVER="myserver"
 
 ssh -t "$SERVER" '

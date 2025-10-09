@@ -39,7 +39,7 @@ OVMF_CODE="/usr/share/OVMF/x64/OVMF_CODE.fd"
 # Help
 show_usage() {
 	cat <<EOF
-Usage: $0 [OPTIONS]
+Usage: makevm [OPTIONS]
 
 Options:
   -l             List all installed VMs

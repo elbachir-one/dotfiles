@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+#
+# This script automatically cleans and saves URLs copied to the clipboard into files.
+#
+
+LIST_FILE="$HOME/Documents/Bookmarks/bookmarks.txt"
+TUBE_FILE="$HOME/Videos/list.txt"
+LAST=""
+LAST_DATE=""
+
+touch "$LIST_FILE" "$TUBE_FILE"
+
+while true; do
+	CLIP=$(xclip -o -selection clipboard 2>/dev/null)
+
+	for URL in $(echo "$CLIP" | grep -Eo 'https?://[^ ]+'); do
+		[[ -z "$URL" || "$URL" == "$LAST" ]] && continue
+
+		if [[ "$URL" =~ youtube\.com|youtu\.be ]]; then
+			CLEANED="${URL%%&*}"
+			TARGET_FILE="$TUBE_FILE"
+			MSG="YouTube URL Saved"
+		elif [[ "$URL" =~ twitch\.tv ]]; then
+			CLEANED="${URL%%[\#\&\?]*}"
+			TARGET_FILE="$TUBE_FILE"
+			MSG="Twitch URL Saved"
+		else
+			CLEANED="${URL%%[\#\&\?]*}"
+			TARGET_FILE="$LIST_FILE"
+			MSG="URL Saved"
+		fi
+
+		if ! grep -Fxq "$CLEANED" "$TARGET_FILE"; then
+			if [[ "$TARGET_FILE" == "$LIST_FILE" ]]; then
+				TODAY=$(date '+%Y-%m-%d')
+				if [[ "$TODAY" != "$LAST_DATE" ]]; then
+					echo "" >> "$LIST_FILE"
+					echo "$TODAY" >> "$LIST_FILE"
+					LAST_DATE="$TODAY"
+				fi
+			fi
+
+			echo "$CLEANED" >> "$TARGET_FILE"
+			notify-send "$MSG" "$CLEANED"
+		fi
+
+		LAST="$URL"
+	done
+
+	sleep 1
+done
