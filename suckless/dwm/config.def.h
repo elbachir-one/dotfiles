@@ -56,6 +56,7 @@ static const char *const autostart[] = {
 	"st", NULL,
 	"sakura", NULL,
 	"fileman", NULL,
+	"urlclip", NULL,
 	"picom", NULL,
 	"slstatus", NULL,
 	"mpd", NULL,
@@ -71,7 +72,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = {"", "", "", "", "󰑈", "󰛍", "", "󰣠", "", ""};
+static const char *tags[] = {"", "", "", "", "󰑈", "󰛍", "", "󰣠", "", "", "", "󰬈"};
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -244,6 +245,8 @@ static const Key keys[] = {
 	TAGKEYS(                         XK_underscore,                          7)
 	TAGKEYS(                         XK_ccedilla,                            8)
 	TAGKEYS(                         XK_agrave,                              9)
+	TAGKEYS(                         XK_parenright,                         10)
+	TAGKEYS(                         XK_equal,                              11)
 };
 
 /* button definitions */
