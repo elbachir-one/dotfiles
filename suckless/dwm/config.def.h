@@ -1,15 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 /* appearance */
 static const unsigned int borderpx     = 0;        /* border pixel of windows */
-static const int startwithgaps[]       = { 1 };	/* 1 means gaps are used by default, this can be customized for each tag */
+static const int startwithgaps[]       = { 1 };   /* 1 means gaps are used by default, this can be customized for each tag */
 static const unsigned int gappx[]      = { 2 };   /* default gap between windows in pixels, this can be customized for each tag */
-static const unsigned int snap         = 8;       /* snap pixel */
+static const unsigned int snap         = 8;        /* snap pixel */
 static const int swallowfloating       = 0;        /* 1 means swallow floating windows by default */
 static const int showbar               = 1;        /* 0 means no bar */
 static const int topbar                = 1;        /* 0 means bottom bar */
 static const int user_bh               = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
-static const int vertpad               = 2;       /* vertical padding of bar */
-static const int sidepad               = 4;       /* horizontal padding of bar */
+static const int vertpad               = 2;        /* vertical padding of bar */
+static const int sidepad               = 4;        /* horizontal padding of bar */
 
 static const char *fonts[]             = {
 	"TerminessTTF Nerd Font:style=Bold:pixelsize=18:antialias=true:autohint=true",
@@ -48,9 +48,6 @@ const char *spcmd2[] = {"st", "-n", "spfm", "-g", "124x30", "-e", "ranger", NULL
 const char *spcmd3[] = {"st", "-n", "spncm", "-g", "120x30", "-e", "ncmpcpp", NULL };
 const char *spcmd4[] = {"st", "-n", "spclock", "-g", "80x20", "-e", "tty-clock", "-cC", "6", NULL };
 const char *spcmd5[] = {"st", "-n", "spcava", "-g", "120x30", "-e", "cava", NULL };
-const char *spcmd6[] = {"alpha", "-n", "spnnn", "-g", "110x28", "-e", "nnn", NULL };
-const char *spcmd7[] = {"st", "-n", "sptyp", "-g", "90x20", "-e", "typiskt", NULL };
-const char *spcmd8[] = {"st", "-n", "spvim", "-g", "120x30", "-e", "vim", NULL };
 
 static Sp scratchpads[] = {
 	/* name          cmd  */
@@ -59,9 +56,6 @@ static Sp scratchpads[] = {
 	{"spncm",       spcmd3},
 	{"spclock",     spcmd4},
 	{"spcava",      spcmd5},
-	{"spnnn",       spcmd6},
-	{"sptyp",       spcmd7},
-	{"spvim",       spcmd8},
 };
 
 static const char *const autostart[] = {
@@ -147,8 +141,6 @@ static const char *lockcmd[]        = { "slock", NULL };
 static const char *virtcmd[]        = { "virt-manager", NULL };
 static const char *chrocmd[]        = { "chromium", NULL };
 static const char *boatcmd[]        = { "st", "-e", "newsboat", NULL };
-static const char *ytcmd[]          = { "ytfzf", "-D", NULL };
-static const char *ytdcmd[]         = { "ytfzf", "-d", "-D", NULL };
 static const char *flamcmd[]        = { "flameshot", "gui", NULL };
 static const char *up[]             = { "amixer", "set", "Master", "10%+", NULL };
 static const char *mut[]            = { "amixer", "set", "Master", "toggle", NULL };
@@ -156,11 +148,6 @@ static const char *down[]           = { "amixer", "set", "Master", "10%-", NULL 
 static const char *toggle[]         = { "mpc", "toggle", NULL };
 static const char *next[]           = { "mpc", "next", NULL };
 static const char *prev[]           = { "mpc", "prev", NULL };
-static const char *searchcmd[]      = { "search", NULL };
-static const char *dowcmd[]         = { "down", NULL };
-static const char *boomercmd[]      = { "boomer", NULL };
-static const char *screencmd[]      = { "screenshot", NULL };
-static const char *reccmd[]         = { "recording", NULL };
 
 static const Key keys[] = {
 	/* modifier                      key                function               argument */
@@ -172,11 +159,6 @@ static const Key keys[] = {
 	{MODKEY|ShiftMask,               XK_n,            togglescratch,          {.ui = 5 }},
 	{MODKEY,                         XK_t,            togglescratch,          {.ui = 6 }},
 	{MODKEY|ShiftMask,               XK_v,            togglescratch,          {.ui = 7 }},
-	{MODKEY,                         XK_z,            spawn,                  {.v = boomercmd }},
-	{MODKEY,                         XK_x,            spawn,                  {.v = dowcmd}},
-	{MODKEY,                         XK_y,            spawn,                  {.v = ytcmd}},
-	{MODKEY,                         XK_d,            spawn,                  {.v = ytdcmd}},
-	{MODKEY,                         XK_f,            spawn,                  {.v = searchcmd}},
 	{MODKEY|ShiftMask,               XK_f,            spawn,                  {.v = flamcmd}},
 	{MODKEY|ShiftMask,               XK_p,            spawn,                  {.v = boatcmd}},
 	{MODKEY|ShiftMask,               XK_l,            spawn,                  {.v = lockcmd}},
@@ -186,9 +168,6 @@ static const Key keys[] = {
 	{MODKEY,                         XK_p,            spawn,                  {.v = dmenucmd}},
 	{MODKEY|ShiftMask,               XK_Return,       spawn,                  {.v = termcmd}},
 	{MODKEY,                         XK_n,            spawn,                  {.v = clipcmd}},
-	{MODKEY|ShiftMask,               XK_s,            spawn,                  {.v = screencmd}},
-	{MODKEY|ControlMask|ShiftMask,   XK_r,            spawn,                  {.v = reccmd}},
-	{MODKEY|ControlMask|ShiftMask,   XK_x,            spawn,                  {.v = (const char*[]){ "pkill", "-SIGINT", "ffmpeg", NULL }}},
 	{MODKEY,                         XK_semicolon,    focusmon,               {.i = +1 } },
 	{MODKEY|ShiftMask,               XK_semicolon,    tagmon,                 {.i = +1 } },
 	{MODKEY|ControlMask,             XK_f,            togglefullscr,          {0}},
