@@ -55,6 +55,7 @@ static const unsigned int alphas[][3]  = {
 static const char *const autostart[] = {
 	"st", NULL,
 	"sakura", NULL,
+	"fileman", NULL,
 	"picom", NULL,
 	"slstatus", NULL,
 	"mpd", NULL,
