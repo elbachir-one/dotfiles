@@ -1,25 +1,19 @@
 #!/usr/bin/env bash
 
-set -e  # Exit on any error
+set -e
 set -o pipefail
-
-USERNAME=$(logname)
 
 # Allow wheel group passwordless sudo
 echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
 sudo chmod 440 /etc/sudoers.d/wheel
 
-# Not working for some reason?
-#sudo sed -i 's/^%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers.d/wheel
-
-# System update
+# System update/installing some packages
 sudo xbps-install -Suy
 
-# Install packages
-sudo xbps-install -Sy \
-	xorg base-devel libX11-devel libXft-devel libXinerama-devel chromium ffmpeg ntfs-3g \
-	ugrep noto-fonts-emoji noto-fonts-cjk feh lsd libwebkit2gtk41-devel gcr-devel gstreamer1-devel \
-	lxappearance neovim clipmenu mpv mpd alsa-utils ncmpcpp cava newsboat zathura mupdf \
+sudo xbps-install -Sy xorg base-devel libX11-devel libXft-devel libXinerama-devel \
+	chromium ffmpeg ntfs-3g ugrep noto-fonts-emoji noto-fonts-cjk feh lsd \
+	libwebkit2gtk41-devel gcr-devel gstreamer1-devel lxappearance neovim clipmenu \
+	mpv mpd alsa-utils ncmpcpp cava newsboat zathura mupdf libinput-gestures xwallpaper \
 	ranger ueberzug sakura nodejs bash-completion yt-dlp aria2 wget ufetch stow \
 	flameshot cmake ninja meson curl ImageMagick NetworkManager bat breeze clang \
 	cmatrix lolcat-c figlet colordiff timeshift flac fzf git gstreamer-vaapi harfbuzz-devel \
@@ -28,10 +22,9 @@ sudo xbps-install -Sy \
 	python3-pip rsync simple-mtpfs terminus-font v4l2loopback xdg-desktop-portal-wlr \
 	xdotool zathura-pdf-mupdf tmux xcb-util-renderutil-devel xcb-util-image-devel \
 	pkgconf uthash pcre-devel libconfig-devel figlet-fonts dunst pass wkhtmltopdf \
-	audacity readline-devel readline file-devel plata-theme img2pdf cups cups-pdf \
-	libinput-gestures xwallpaper
+	audacity readline-devel readline file-devel plata-theme img2pdf cups cups-pdf
 
-# Compile and install picom
+# Compile/Install Picom
 cd /tmp/
 [ -d picom ] && rm -rf picom
 git clone --depth=1 https://github.com/pijulius/picom.git
@@ -40,13 +33,12 @@ git submodule update --init --recursive
 meson setup --buildtype=release . build
 sudo ninja -C build install
 
-# Clone and copy dotfiles
+# Clone/Copy dotfiles
 cd ~
 [ -d dotfiles ] && rm -rf dotfiles
 git clone --depth=1 https://github.com/elbachir-one/dotfiles
 cd dotfiles/
 cp -r .config .fonts .icons .local .themes .bashrc .xinitrc .tmux.conf .bash_profile ~/
-#sudo cp -r etc/X11/xorg.conf.d/ /etc/X11/
 
 # Build suckless programs
 SUCKLESS_DIR="$HOME/dotfiles/suckless"
@@ -82,36 +74,6 @@ sudo xbps-remove -oy
 
 # Reconfigure all packages
 sudo xbps-reconfigure -fa
-
-# Switch to NetworkManager
-#sudo sv down dhcpcd
-#sudo ln -sf /etc/sv/NetworkManager /var/service/
-#sudo ln -sf /etc/sv/dbus /var/service/
-
-# Optional service links (uncomment if needed)
-# sudo ln -s /etc/sv/libvirtd /var/service/
-# sudo ln -s /etc/sv/virtlogd /var/service/
-# sudo ln -s /etc/sv/seatd /var/service/
-# sudo usermod -aG _seatd "$USERNAME"
-# sudo usermod -aG libvirt "$USERNAME"
-# sudo modprobe kvm-intel  # Use 'kvm-amd' for AMD CPUs
-# sudo usermod -aG kvm "$USERNAME"
-
-# Remove unwanted ttys and services
-#for tty in tty3 tty4 tty5 tty6; do
-#	sudo rm -f /var/service/agetty-$tty
-#done
-
-#sudo rm -f /var/service/wpa_supplicant
-#sudo rm -f /var/service/dhcpcd
-
-# GRUB and auto-login config
-#sudo sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=0/' /etc/default/grub
-#sudo sed -i "s/GETTY_ARGS=\"--noclear\"/GETTY_ARGS=\"--noclear --autologin $USERNAME\"/" \
-#	/etc/runit/runsvdir/current/agetty-tty1/conf
-
-# Update GRUB config
-#sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Reboot system
 sudo reboot
