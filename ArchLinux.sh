@@ -1,5 +1,6 @@
-#!/bin/bash
-set -e  # Exit on any error
+#!/usr/bin/env bash
+
+set -e
 set -o pipefail
 
 # Ensure script is not run as root
@@ -7,8 +8,6 @@ if [[ $EUID -eq 0 ]]; then
 	echo "Please run this script as a regular user, not root."
 	exit 1
 fi
-
-USERNAME=$(logname)
 
 # Allow wheel group passwordless sudo
 echo "Configuring sudoers for wheel group..."
@@ -27,7 +26,6 @@ echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
 echo "Installing base-devel, go, and git..."
 sudo pacman -S --noconfirm go git base-devel
 
-# Setup yay
 echo "Cloning and building yay..."
 cd /tmp/
 [ -d yay ] && rm -rf yay
