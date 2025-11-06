@@ -1,22 +1,43 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
-# This is for downloading 1080p videos from youtube no 2k or 4k
-# No Copyrights
+# Download 1080p YouTube videos (no 2K/4K), log failures to tube.log without duplicates
+
+LOGFILE="tube.log"
 
 if [ -z "$1" ]; then
 	echo "Usage: $0 <URL or file_with_urls>"
 	exit 1
 fi
 
+log_error() {
+	local VIDEO_URL="$1"
+	if ! grep -Fxq "$VIDEO_URL" "$LOGFILE" 2>/dev/null; then
+		echo "$VIDEO_URL" >> "$LOGFILE"
+		echo "  ↳ Logged: $VIDEO_URL"
+	fi
+}
+
 process_video() {
 	local VIDEO_URL="$1"
 
-	if echo "$VIDEO_URL" | grep -q "youtube.com\|youtu.be"; then
-		yt-dlp -f "137+bestaudio[ext=m4a]/299+bestaudio[ext=m4a]/bestvideo+bestaudio" \
-			-o "%(title)s.%(ext)s" --merge-output-format mp4 "$VIDEO_URL"
+	echo "Processing: $VIDEO_URL"
+
+	if echo "$VIDEO_URL" | grep -qE "youtube\.com|youtu\.be"; then
+		if ! yt-dlp -f "137+bestaudio[ext=m4a]/299+bestaudio[ext=m4a]/bestvideo+bestaudio" \
+			-o "%(title)s.%(ext)s" --merge-output-format mp4 "$VIDEO_URL" 2>yt_error.log; then
+					log_error "$VIDEO_URL"
+					echo "  ↳ Error detected — see $LOGFILE"
+					grep -E "ERROR|ERROR:" yt_error.log | sed 's/^/  /'
+		fi
 	else
-		yt-dlp "$VIDEO_URL"
+		if ! yt-dlp "$VIDEO_URL" 2>yt_error.log; then
+			log_error "$VIDEO_URL"
+			echo "  ↳ Error detected — see $LOGFILE"
+			grep -E "ERROR|ERROR:" yt_error.log | sed 's/^/  /'
+		fi
 	fi
+
+	rm -f yt_error.log
 }
 
 if [[ -f "$1" ]]; then
