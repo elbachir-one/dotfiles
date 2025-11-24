@@ -27,7 +27,7 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
-# Get current branch in git repo:
+# Get current branch in git repo
 function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${BRANCH}" == "" ]
@@ -39,7 +39,7 @@ function parse_git_branch() {
 	fi
 }
 
-# Get current status of git repo:
+# Get current status of git repo
 function parse_git_dirty {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
@@ -116,3 +116,20 @@ alias ff="ffmpeg -framerate 16 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
 alias rec="ffmpeg -framerate 24 -f x11grab -video_size 1920x1080 -i :0.0+1366,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
 alias f="ffmpeg -framerate 24 -f x11grab -video_size 1366x768 -i :0.0+0,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
 alias cam="ffplay -f v4l2 -framerate 29 -video_size 1280x720 /dev/video0"
+
+# Safe remove
+rm() {
+	for arg in "$@"; do
+		if [[ "$arg" == "*" || "$arg" == *\** || "$arg" == *\?* ]]; then
+			echo "You are using a wildcard ($arg) with rm!"
+			read -r -p "Are you sure you want to delete all matching files? [y/N]: " confirm
+			if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+				echo "Aborted."
+				return 1
+			fi
+			break
+		fi
+	done
+
+	command rm "$@"
+}
