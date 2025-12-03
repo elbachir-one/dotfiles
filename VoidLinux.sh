@@ -10,19 +10,19 @@ sudo chmod 440 /etc/sudoers.d/wheel
 # System update/installing some packages
 sudo xbps-install -Suy
 
-sudo xbps-install -Sy xorg base-devel libX11-devel libXft-devel libXinerama-devel \
-	chromium ffmpeg ntfs-3g ugrep noto-fonts-emoji noto-fonts-cjk feh lsd \
-	libwebkit2gtk41-devel gcr-devel gstreamer1-devel lxappearance neovim clipmenu \
-	mpv mpd alsa-utils ncmpcpp cava newsboat zathura mupdf libinput-gestures xwallpaper \
-	ranger ueberzug sakura nodejs bash-completion yt-dlp aria2 wget ufetch stow \
-	flameshot cmake ninja meson curl ImageMagick NetworkManager bat breeze clang \
-	cmatrix lolcat-c figlet colordiff timeshift flac fzf git gstreamer-vaapi harfbuzz-devel \
-	htop imlib2-devel jq libev-devel libjpeg-turbo-devel libmpc-devel linux-headers \
-	man-db mpc papirus-folders papirus-icon-theme pcre-devel pkgconf-devel python3-adblock \
-	python3-pip rsync simple-mtpfs terminus-font v4l2loopback xdg-desktop-portal-wlr \
-	xdotool zathura-pdf-mupdf tmux xcb-util-renderutil-devel xcb-util-image-devel \
-	pkgconf uthash pcre-devel libconfig-devel figlet-fonts dunst pass wkhtmltopdf \
-	audacity readline-devel readline file-devel plata-theme img2pdf cups cups-pdf
+sudo xbps-install -Sy \
+	xorg libX{11,Xft,Xinerama}-devel chromium ffmpeg ntfs-3g ugrep plata-theme \
+	noto-fonts-{emoji,cjk} feh lsd clipmenu cups{,-pdf} mupdf cava \
+	lxappearance neovim mp{v,d} alsa-utils ncmpcpp newsboat zathura \
+	libinput-gestures xwallpaper ranger ueberzug sakura nodejs bash-completion \
+	yt-dlp aria2 wget ufetch stow flameshot cmake ninja meson curl ImageMagick \
+	NetworkManager bat breeze clang cmatrix lolcat-c figlet colordiff timeshift \
+	flac fzf git gstreamer-vaapi htop jq man-db mpc rsync simple-mtpfs uthash \
+	{libwebkit2gtk41,gcr,gstreamer1,base,harfbuzz,pcre,libconfig,file,readline,}-devel \
+	imlib2-devel jq lib{ev,jpeg-turbo,mpc}-devel linux-headers tmux pass dunst \
+	papirus-{folders,icon-theme} python3-{adblock,pip} terminus-font img2pdf \
+	v4l2loopback xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf audacity \
+	xcb-util-{renderutil,image}-devel figlet-fonts wkhtmltopdf \
 
 # Compile/Install Picom
 cd /tmp/
