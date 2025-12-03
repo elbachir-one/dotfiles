@@ -17,7 +17,7 @@ sudo sed -i 's/^%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /e
 echo "Updating system..."
 sudo pacman -Syu --noconfirm
 
-# Configure DNS (fix redirection issue)
+# Configure DNS
 echo "Setting DNS servers..."
 echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf
 echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
@@ -37,7 +37,7 @@ cd ~
 # Install packages
 echo "Installing software packages..."
 yay -Sy --noconfirm \
-	xorg xorg-xinit chromium vim ffmpeg ntfs-3g ugrep noto-fonts-emoji noto-fonts-cjk \
+	xorg xorg-xinit chromium vim ffmpeg ntfs-3g ugrep noto-fonts-{emoji,cjk} \
 	feh lsd webkit2gtk gcr gstreamer lxappearance clipmenu mpv mpd alsa-utils \
 	ncmpcpp cava newsboat zathura ranger ueberzug sakura nodejs npm bash-completion \
 	yt-dlp stow flameshot cmake ninja meson curl imagemagick bat breeze cmatrix \
