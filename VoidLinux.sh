@@ -4,7 +4,7 @@ set -e
 set -o pipefail
 
 # Allow wheel group passwordless sudo
-echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
+echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" | sudo EDITOR='tee' visudo -f /etc/sudoers.d/wheel
 sudo chmod 440 /etc/sudoers.d/wheel
 
 # System update/installing some packages
@@ -12,8 +12,8 @@ sudo xbps-install -Suy
 
 sudo xbps-install -Sy \
 	xorg libX{11,Xft,Xinerama}-devel chromium ffmpeg ntfs-3g ugrep plata-theme \
-	noto-fonts-{emoji,cjk} feh lsd clipmenu cups{,-pdf} mupdf cava \
-	lxappearance neovim mp{v,d} alsa-utils ncmpcpp newsboat zathura \
+	noto-fonts-{emoji,cjk} feh lsd clipmenu cups{,-pdf} mupdf cava figlet-fonts \
+	lxappearance neovim mp{v,d} alsa-utils ncmpcpp newsboat zathura wkhtmltopdf \
 	libinput-gestures xwallpaper ranger ueberzug sakura nodejs bash-completion \
 	yt-dlp aria2 wget ufetch stow flameshot cmake ninja meson curl ImageMagick \
 	NetworkManager bat breeze clang cmatrix lolcat-c figlet colordiff timeshift \
@@ -22,7 +22,7 @@ sudo xbps-install -Sy \
 	imlib2-devel jq lib{ev,jpeg-turbo,mpc}-devel linux-headers tmux pass dunst \
 	papirus-{folders,icon-theme} python3-{adblock,pip} terminus-font img2pdf \
 	v4l2loopback xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf audacity \
-	xcb-util-{renderutil,image}-devel figlet-fonts wkhtmltopdf \
+	xcb-util-{renderutil,image}-devel
 
 # Compile/Install Picom
 cd /tmp/
@@ -48,8 +48,7 @@ for prog in dwm dmenu st slstatus slock farbfeld sent; do
 	if [ -d "$PROG_PATH" ]; then
 		echo "Building $prog..."
 		cd "$PROG_PATH"
-		make
-		sudo make clean install
+		make clean && make && sudo make install
 	else
 		echo "Warning: $PROG_PATH does not exist, skipping."
 	fi
@@ -76,13 +75,13 @@ sudo xbps-remove -oy
 sudo xbps-reconfigure -fa
 
 # Enable TRIM
-sudo mkdir /etc/cron.weekly
+sudo mkdir -p /etc/cron.weekly
 sudo tee /etc/cron.weekly/fstrim > /dev/null <<EOF
 #!/bin/sh
 
 fstrim /
 EOF
-
 sudo chmod u+x /etc/cron.weekly/fstrim
+
 # Reboot system
 sudo reboot
