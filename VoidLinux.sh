@@ -11,14 +11,14 @@ sudo chmod 440 /etc/sudoers.d/wheel
 sudo xbps-install -Suy
 
 sudo xbps-install -Sy \
-	xorg libX{11,Xft,Xinerama}-devel chromium ffmpeg ntfs-3g ugrep plata-theme \
+	xorg libX{11,ft,inerama}-devel chromium ffmpeg ntfs-3g ugrep plata-theme \
 	noto-fonts-{emoji,cjk} feh lsd clipmenu cups{,-pdf} mupdf cava figlet-fonts \
 	lxappearance neovim mp{v,d} alsa-utils ncmpcpp newsboat zathura wkhtmltopdf \
 	libinput-gestures xwallpaper ranger ueberzug sakura nodejs bash-completion \
 	yt-dlp aria2 wget ufetch stow flameshot cmake ninja meson curl ImageMagick \
 	NetworkManager bat breeze clang cmatrix lolcat-c figlet colordiff timeshift \
 	flac fzf git gstreamer-vaapi htop jq man-db mpc rsync simple-mtpfs uthash \
-	{libwebkit2gtk41,gcr,gstreamer1,base,harfbuzz,pcre,libconfig,file,readline,}-devel \
+	{libwebkit2gtk41,gcr,gstreamer1,base,harfbuzz,pcre,libconfig,file,readline}-devel \
 	imlib2-devel jq lib{ev,jpeg-turbo,mpc}-devel linux-headers tmux pass dunst \
 	papirus-{folders,icon-theme} python3-{adblock,pip} terminus-font img2pdf \
 	v4l2loopback xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf audacity \
