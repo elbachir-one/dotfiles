@@ -18,7 +18,7 @@ If you want to install my stuff, there are some dependences needed for everythin
 **Note:** This script only works on **Void Linux**
 
 ```bash
-xbps-fetch https://raw.githubusercontent.com/elbachir-one/dotfiles/main/VoidLinux.sh
+xbps-fetch https://raw.githubusercontent.com/elbachir-one/dotfiles/refs/heads/master/VoidLinux.sh
 chmod +x VoidLinux.sh
 ./VoidLinux.sh
 ```
