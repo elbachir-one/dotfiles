@@ -22,7 +22,7 @@ sudo xbps-install -Sy \
 	imlib2-devel jq lib{ev,jpeg-turbo,mpc}-devel linux-headers tmux pass dunst \
 	papirus-{folders,icon-theme} python3-{adblock,pip} terminus-font img2pdf \
 	v4l2loopback xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf audacity \
-	xcb-util-{renderutil,image}-devel
+	xcb-util-{renderutil,image}-devel fonts-roboto-ttf
 
 # Compile/Install Picom
 cd /tmp/
