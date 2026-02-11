@@ -2,23 +2,31 @@
 
 [[ $- != *i* ]] && return
 
+[ -f "$HOME"/.bash_aliases ] && . "$HOME"/.bash_aliases
+
 GRC_ALIASES=true
 [[ -s "/etc/profile.d/grc.sh" ]] && source /etc/grc.sh
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 echo -e -n "\x1b[\x35 q"
 
 bind 'set completion-ignore-case on'
 
-# Exports:
+complete -cf sudo
+
+HISTSIZE=HISTFILESIZE=
+
+# Exports
 export TERMINAL='sakura'
 export BROWSER='chromium'
-export EDITOR='vim-huge'
+export EDITOR='vim'
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/.local/go"
 export IMGVIEWER='feh'
 export MAKEFLAGS="-j3"
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+# FZF
+[ -f ~/.fzf.bash ] && source "$HOME"/.fzf.bash
 
 export FZF_DEFAULT_OPTS="
 	--color=fg:#908caa,bg:#191724,hl:#ebbcba
@@ -27,27 +35,26 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
-# Get current branch in git repo
+# Prompt stuff
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 	if [ ! "${BRANCH}" == "" ]
 	then
-		STAT=`parse_git_dirty`
+		STAT=$(parse_git_dirty)
 		echo "[${BRANCH}${STAT}]"
 	else
 		echo ""
 	fi
 }
 
-# Get current status of git repo
 function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	status=$(git status 2>&1 | tee)
+	dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
+	untracked=$(echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
+	ahead=$(echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
+	newfile=$(echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
+	renamed=$(echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
+	deleted=$(echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
 	bits=''
 	if [ "${renamed}" == "0" ]; then
 		bits=">${bits}"
@@ -74,50 +81,39 @@ function parse_git_dirty {
 	fi
 }
 
-# Prompt:
+# Prompt
 export PS1="[\[\e[36m\]\h\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]] "
 
-# Aliases:
-alias q='xbps-query -Rs'
-alias u='sudo xbps-install -Su'
-alias i='sudo xbps-install -S'
-alias c='sudo xbps-remove -o && sudo xbps-remove -O'
-alias d='sudo xbps-remove -R'
-alias ls='lsd'
-alias lh='lsd -hl'
-alias l='lsd -al'
-alias ll='lsd -a'
-alias s='source ~/.bashrc'
-alias cat='bat --style=plain --theme=GitHub'
-alias p='sudo poweroff'
-alias r='sudo reboot'
-alias mi='sudo make install'
-alias mc='make clean'
-alias lb='lsblk'
-alias m='mpv'
-alias htop='htop -t'
-alias patch='patch -p1 <'
-alias feh='feh -B dark'
-alias grep='ugrep'
-alias gc='git clone --depth=1'
-alias gs='git status'
-alias gm='git commit -m'
-alias gr='git restore'
-alias ga='git add .'
-alias gp='git push'
-alias gl='git log'
-alias gf='git diff'
-alias yl='yt-dlp -F'
-alias y='yt-dlp'
-alias ya='yt-dlp -f 140'
-alias yb='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" --merge-output-format mp4'
-alias yt='yt-dlp yt-dlp --skip-download --write-thumbnail'
-alias ff="ffmpeg -framerate 16 -f x11grab -s 1920x1080 -i :0.0+0,0 Output.mkv"
-alias rec="ffmpeg -framerate 24 -f x11grab -video_size 1920x1080 -i :0.0+1366,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
-alias f="ffmpeg -framerate 24 -f x11grab -video_size 1366x768 -i :0.0+0,0 -preset ultrafast -crf 8 ~/Recordings/Output.mkv"
-alias cam="ffplay -f v4l2 -framerate 29 -video_size 1280x720 /dev/video0"
+# Less Config
+export LESS='-R -M -I'
+export LESSPROMPT='%{?f%f:}  %{G[Line: %l/%L]}%{M[Col: %c]} (%p%%)'
+export LESS_TERMCAP_md=$'\e[01;32m'    # bold green for metadata
+export LESS_TERMCAP_me=$'\e[0m'        # reset
+export LESS_TERMCAP_us=$'\e[04;35m'    # underline magenta
+export LESS_TERMCAP_ue=$'\e[0m'        # reset
+export LESS_TERMCAP_so=$'\e[01;44;33m' # standout mode (e.g., highlighted text)
+export LESS_TERMCAP_se=$'\e[0m'        # reset
 
-# Safe remove
+# Yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+gcop () {
+	git log \
+		--reverse \
+		--color=always \
+		--format="%C(cyan)%h %C(blue)%ar%C(auto)%d %C(yellow)%s%+b %C(black)%ae" "$@" |
+	fzf -i -e +s \
+		--reverse \
+		--tiebreak=index \
+		--no-multi \
+		--ansi \
+		--preview="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs git show --color=always" \
+		--header="enter: view, C-c: copy hash" \
+		--bind "enter:execute:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xargs git show | less -R" \
+		--bind "ctrl-c:execute-silent:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | xclip -r -selection clipboard"
+}
+
+# Safe Remove
 rm() {
 	for arg in "$@"; do
 		if [[ "$arg" == "*" || "$arg" == *\** || "$arg" == *\?* ]]; then
@@ -133,3 +129,36 @@ rm() {
 
 	command rm "$@"
 }
+
+# Safe Copy
+cp_safe() {
+	dest="${!#}"
+	if [ ! -d "$dest" ]; then
+		echo "Destination $dest is not a directory"
+		return 1
+	fi
+
+	for src in "${@:1:$#-1}"; do
+		if [ ! -e "$src" ]; then
+			echo "Source $src does not exist, skipping"
+			continue
+		fi
+
+		base=$(basename "$src")
+		dst="$dest/$base"
+		n=1
+
+		while [ -e "$dst" ]; do
+			name="${base%.*}"
+			ext="${base##*.}"
+			if [ "$name" = "$ext" ]; then ext=""; else ext=".$ext"; fi
+			dst="$dest/${name}_$n$ext"
+			((n++))
+		done
+
+		cp "$src" "$dst"
+		echo "Copied $src → $dst"
+	done
+}
+
+#figlet -c -f ANSI_Shadow.flf "Void/runit" -t | lolcat
