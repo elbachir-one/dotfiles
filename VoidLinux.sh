@@ -71,9 +71,6 @@ sudo cp /etc/profile.d/grc.sh /etc/
 sudo xbps-remove -Oy
 sudo xbps-remove -oy
 
-# Reconfigure all packages
-sudo xbps-reconfigure -fa
-
 # Enable TRIM
 sudo mkdir -p /etc/cron.weekly
 sudo tee /etc/cron.weekly/fstrim > /dev/null <<EOF
@@ -81,7 +78,12 @@ sudo tee /etc/cron.weekly/fstrim > /dev/null <<EOF
 
 fstrim /
 EOF
+
 sudo chmod u+x /etc/cron.weekly/fstrim
 
+# Reconfigure all packages
+sudo xbps-reconfigure -fa
+
 # Reboot system
+sleep 2s
 sudo reboot
