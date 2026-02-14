@@ -103,6 +103,10 @@ yay -Sc --noconfirm
 echo "Updating font cache..."
 fc-cache -fv
 
+# Rebuild the initramfs
+echo "Re-building the Initramfs"
+sudo mkinitcpio -P -v
+
 # Final reboot
 echo "Setup complete. Rebooting..."
 sleep 2s
