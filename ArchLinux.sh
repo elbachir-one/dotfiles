@@ -24,29 +24,32 @@ echo "nameserver 8.8.8.8" | sudo tee -a /etc/resolv.conf
 
 # Install required base packages for yay
 echo "Installing base-devel, go, and git..."
-sudo pacman -S --noconfirm go git base-devel
-
-echo "Cloning and building yay..."
-cd /tmp/
-[ -d yay ] && rm -rf yay
-git clone --depth=1 https://aur.archlinux.org/yay
-cd yay
-makepkg -si --noconfirm
-cd ~
+sudo pacman -Sy --noconfirm go git base-devel
 
 # Install packages
 echo "Installing software packages..."
-yay -Sy --noconfirm \
+sudo pacman -Sy --noconfirm \
 	xorg xorg-xinit chromium vim ffmpeg ntfs-3g ugrep noto-fonts-{emoji,cjk} \
 	feh lsd webkit2gtk gcr gstreamer lxappearance clipmenu mpv mpd alsa-utils \
 	ncmpcpp cava newsboat zathura ranger ueberzug sakura nodejs npm bash-completion \
 	yt-dlp stow flameshot cmake ninja meson curl imagemagick bat breeze cmatrix \
-	lolcat figlet colordiff timeshift flac fzf gstreamer-vaapi harfbuzz fastfetch \
-	htop imlib2 jq libev libjpeg-turbo libmpc linux-headers man-db mpc papirus-folders \
-	papirus-icon-theme pcre pkgconf python-pip rsync simple-mtpfs terminus-font \
+	lolcat figlet colordiff timeshift flac fzf harfbuzz fastfetch xwallpaper \
+	htop imlib2 jq libev libjpeg-turbo libmpc linux-headers man-db mpc cups \
+	papirus-icon-theme pcre pkgconf python-pip rsync terminus-font cups-pdf \
 	v4l2loopback-dkms v4l2loopback-utils xdg-desktop-portal-wlr xdotool zathura-pdf-mupdf \
 	tmux xcb-util-renderutil xcb-util-image uthash libconfig dunst pass readline \
-	file seatd img2pdf cups cups-pdf libinput-gestures xwallpaper
+	file seatd img2pdf
+
+echo "Installing AUR packages..."
+if ! command -v yay &>/dev/null; then
+	echo "yay not found, installing..."
+	git clone https://aur.archlinux.org/yay.git /tmp/yay
+	cd /tmp/yay
+	makepkg -si --noconfirm
+fi
+
+yay -S --noconfirm \
+	simple-mtpfs libinput-gestures papirus-folders
 
 # Compile and install picom
 echo "Cloning and building picom..."
