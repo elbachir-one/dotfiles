@@ -65,6 +65,7 @@ static const char *const autostart[] = {
 	"fehbg", NULL,
 	"xhidecursor", NULL,
 	"chromium", NULL,
+	"virt-manager", NULL,
 //	"monitor", NULL,
 //	"xrdb", ".Xresources", NULL,
 //	"barrier", NULL,
