@@ -99,7 +99,7 @@ static const Rule rules[] = {
 	{"st",                  NULL,           NULL,                  0,           0,       1,          1,       -1},
 	{"Surf",                NULL,           NULL,                  0,           1,       0,         -1,       -1,         964,38,940,1028,  1},
 	{"Zathura",             NULL,           NULL,                  0,           1,       0,         -1,       -1,         202,32,646,712,   1},
-	{"Alacritty",           NULL,           NULL,                  0,           1,       1,          1,       -1,         700,32,646,712,   1},
+	//{"Alacritty",           NULL,           NULL,                  0,           1,       1,          1,       -1,         700,32,646,712,   1},
 	{"feh",                 NULL,           NULL,                  0,           1,       0,         -1,       -1,         466,217,878,534, 1},
 	{ NULL,                 NULL, "Event Tester",                  0,           0,       0,          1,       -1},
 	//{"Qemu-system-x86_64",  NULL,           NULL,             1 << 9,           1,       0,         -1,       -1},
